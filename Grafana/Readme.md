@@ -1,14 +1,14 @@
 # HCL Commerce Monitoring - Prometheus and Grafana Integration
 
-This document describes the HCL Commerce monitoring capabilities with Prometheus and Grafana, and how they provide real-time visibility into the health and performance of the application, to ensure SLAs are met and to aid with the troubleshooting and resolution of blottlenecks.
+This document describes the HCL Commerce monitoring capabilities with Prometheus and Grafana, and how they provide real-time visibility into the health and performance of the application, to ensure SLAs are met and to aid with the troubleshooting and resolution of bottlenecks.
 
 ## HCL Commerce 9.1 Monitoring Architecture
 
-HCL Commerce 9.1 introduced a monitoring framework based on Prometheus-style metrics. The HCL Commerce containers publish endpoints from which metrics can be read. This process is known as scraping. Prometheus discovers the pods to scrape by the use of annotations or ServiceMonitor definitions(CRD). The popularity of Prometheus and its metrics format has led to broad support, and today many 3rd-party monitoring tools can natively consume Prometheus-sytle metrics.
+HCL Commerce 9.1 introduced a monitoring framework based on Prometheus-style metrics. The HCL Commerce containers publish endpoints from which metrics can be read. This process is known as scraping. Prometheus discovers the pods to scrape by the use of annotations or ServiceMonitor definitions(CRD). The popularity of Prometheus and its metrics format has led to broad support, and today many 3rd-party monitoring tools can natively consume Prometheus-style metrics.
 
 ## Prometheus Install
 
-A Prometheus-compatible monitoring system must be installed. If you are not consuming metrics with the Cloud's native monitoring framework or a 3rd-party system, you can install Prometheus Operator on the Kubernetes cluster. Grafana is also highly recommended to take avantage of the provided dashboards.
+A Prometheus-compatible monitoring system must be installed. If you are not consuming metrics with the Cloud's native monitoring framework or a 3rd-party system, you can install Prometheus Operator on the Kubernetes cluster. Grafana is also highly recommended to take advantage of the provided dashboards.
 
 ### Kube-prometheus-stack
 
@@ -35,7 +35,7 @@ helm install [RELEASE_NAME] prometheus-community/prometheus
 
 If ServiceMonitors are not defined, HCL Commerce must be installed with the _prometheusAnnotations_ option.
 
-## HCL Comerce - Metrics Enablement
+## HCL Commerce - Metrics Enablement
 
 The HCL Commerce chart provides options for enabling integration with Prometheus. Although _metrics_ are enabled by default, the _serviceMonitor_ or  _prometheusAnnotations_ option must be enabled to match your Prometheus install. 
 
@@ -81,8 +81,8 @@ Spec:
       Component:  demoqaingest-app
 ```
 
-The _prometheusAnotations_ option is available since HCL Commerce 9.1.8. It is available when Prometheus Operator (and ServiceMonitors) are not used. When enabled, it adds
-prometheus scrape anotations to the pods as follows:
+The _prometheusAnnotations_ option is available since HCL Commerce 9.1.8. It is available when Prometheus Operator (and ServiceMonitors) are not used. When enabled, it adds
+prometheus scrape annotations to the pods as follows:
 
 ```
   prometheus.io/scrape: "true"
@@ -101,7 +101,7 @@ In this site you will find a set of Grafana Dashboards for HCL Commerce. These d
 The _Transaction Servers_ and _QueryApp Servers_ dashboards include a comprehensive set of metrics that give you a detailed view into the performance and health of the servers.
 The metrics displayed include:
 - Summary: Container Image name; Number of pods (available and unavailable); Requests per second and average response times
-- Resouces and pools: JVM Heap; CPU Usage; WebContainer/Default Executor pool usage; Datasource usage (tsApp only)
+- Resources and pools: JVM Heap; CPU Usage; WebContainer/Default Executor pool usage; Datasource usage (tsApp only)
 - Logging: Total rate of logging ( messages per second by severity); Rate of warnings and errors, and rate of trace messages, by pod
 - REST calls - executions: Total calls per second; Status (Http) per second; Total calls by resource per second, rate and increase
 - REST calls - Response times: Average response times by resource; 95 and 99 percentile
@@ -128,7 +128,7 @@ Performance statistics for the remote cache, including:
 ![Remote Cache Dashboard](images/hcl_cache_remote.jpg)
 
 *Local Cache Summary*:
-Single table per pod listing all caches and including sizes and fotprint
+Single table per pod listing all caches and including sizes and footprint
 
 *Local Cache Details*:
 Detailed information for local caches including sizes in entries and footprint; hit ratios; operations and removals per second
@@ -172,7 +172,7 @@ hclcache_cache_puts_total{cachespace="demoqaauth",name="services/cache/WCLayoutD
 hclcache_cache_puts_total{cachespace="demoqaauth",name="services/cache/WCCatalogEntryDistributedMapCache",scope="local",source="miss",} 28.0
 ```
 
-If you are using Prometheus anotations, you can verify them with the _kubectl describe pod_ command:
+If you are using Prometheus annotations, you can verify them with the _kubectl describe pod_ command:
 
 ```
   prometheus.io/scrape: "true"
