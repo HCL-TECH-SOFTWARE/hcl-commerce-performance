@@ -15,8 +15,8 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 68,
-  "iteration": 1605757213100,
+  "id": 39,
+  "iteration": 1632233100593,
   "links": [],
   "panels": [
     {
@@ -28,7 +28,6 @@
       "decimals": 0,
       "fieldConfig": {
         "defaults": {
-          "custom": {},
           "links": []
         },
         "overrides": []
@@ -62,7 +61,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.2.1",
+      "pluginVersion": "7.5.5",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -127,7 +126,6 @@
       "datasource": "Prometheus",
       "fieldConfig": {
         "defaults": {
-          "custom": {},
           "links": []
         },
         "overrides": []
@@ -160,7 +158,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.2.1",
+      "pluginVersion": "7.5.5",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -238,7 +236,6 @@
       "datasource": "Prometheus",
       "fieldConfig": {
         "defaults": {
-          "custom": {},
           "links": []
         },
         "overrides": []
@@ -272,7 +269,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.2.1",
+      "pluginVersion": "7.5.5",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -337,7 +334,6 @@
       "datasource": "Prometheus",
       "fieldConfig": {
         "defaults": {
-          "custom": {},
           "links": []
         },
         "overrides": []
@@ -371,7 +367,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.2.1",
+      "pluginVersion": "7.5.5",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -450,7 +446,6 @@
       "datasource": "Prometheus",
       "fieldConfig": {
         "defaults": {
-          "custom": {},
           "links": []
         },
         "overrides": []
@@ -480,7 +475,7 @@
       "linewidth": 1,
       "nullPointMode": "null",
       "percentage": false,
-      "pluginVersion": "7.2.1",
+      "pluginVersion": "7.5.5",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -544,7 +539,6 @@
       "datasource": "Prometheus",
       "fieldConfig": {
         "defaults": {
-          "custom": {},
           "links": []
         },
         "overrides": []
@@ -574,7 +568,7 @@
       "linewidth": 1,
       "nullPointMode": "null",
       "percentage": false,
-      "pluginVersion": "7.2.1",
+      "pluginVersion": "7.5.5",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -632,7 +626,7 @@
     }
   ],
   "refresh": false,
-  "schemaVersion": 26,
+  "schemaVersion": 27,
   "style": "dark",
   "tags": [
     "hcl"
@@ -649,13 +643,18 @@
         },
         "datasource": "Prometheus",
         "definition": "label_values(request_store_seconds_sum, namespace)",
+        "description": null,
+        "error": null,
         "hide": 0,
         "includeAll": false,
         "label": "namespace",
         "multi": false,
         "name": "namespace",
         "options": [],
-        "query": "label_values(request_store_seconds_sum, namespace)",
+        "query": {
+          "query": "label_values(request_store_seconds_sum, namespace)",
+          "refId": "Prometheus-namespace-Variable-Query"
+        },
         "refresh": 2,
         "regex": "",
         "skipUrlSync": false,
@@ -679,13 +678,18 @@
         },
         "datasource": "Prometheus",
         "definition": "label_values(request_store_seconds_sum{namespace=~\"$namespace\", job=~\".*crs-app\"}, pod)",
+        "description": null,
+        "error": null,
         "hide": 0,
         "includeAll": true,
         "label": "pod",
         "multi": true,
         "name": "pod",
         "options": [],
-        "query": "label_values(request_store_seconds_sum{namespace=~\"$namespace\", job=~\".*crs-app\"}, pod)",
+        "query": {
+          "query": "label_values(request_store_seconds_sum{namespace=~\"$namespace\", job=~\".*crs-app\"}, pod)",
+          "refId": "Prometheus-pod-Variable-Query"
+        },
         "refresh": 2,
         "regex": "",
         "skipUrlSync": false,
@@ -709,13 +713,18 @@
         },
         "datasource": "Prometheus",
         "definition": "label_values(request_store_seconds_sum{namespace=~\"$namespace\", job=~\".*crs-app\"}, http_status)",
+        "description": null,
+        "error": null,
         "hide": 0,
         "includeAll": true,
         "label": "http_status",
         "multi": true,
         "name": "http_status",
         "options": [],
-        "query": "label_values(request_store_seconds_sum{namespace=~\"$namespace\", job=~\".*crs-app\"}, http_status)",
+        "query": {
+          "query": "label_values(request_store_seconds_sum{namespace=~\"$namespace\", job=~\".*crs-app\"}, http_status)",
+          "refId": "Prometheus-http_status-Variable-Query"
+        },
         "refresh": 2,
         "regex": "",
         "skipUrlSync": false,
@@ -739,13 +748,18 @@
         },
         "datasource": "Prometheus",
         "definition": "label_values(request_store_seconds_sum{namespace=~\"$namespace\", job=~\".*crs-app\"}, http_method)",
+        "description": null,
+        "error": null,
         "hide": 0,
         "includeAll": true,
         "label": "http_method",
         "multi": true,
         "name": "http_method",
         "options": [],
-        "query": "label_values(request_store_seconds_sum{namespace=~\"$namespace\", job=~\".*crs-app\"}, http_method)",
+        "query": {
+          "query": "label_values(request_store_seconds_sum{namespace=~\"$namespace\", job=~\".*crs-app\"}, http_method)",
+          "refId": "Prometheus-http_method-Variable-Query"
+        },
         "refresh": 2,
         "regex": "",
         "skipUrlSync": false,

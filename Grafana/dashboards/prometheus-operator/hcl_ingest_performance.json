@@ -15,816 +15,33 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 53,
-  "iteration": 1629286752298,
+  "id": 31,
+  "iteration": 1632492804238,
   "links": [],
   "panels": [
     {
-      "collapsed": false,
       "datasource": null,
+      "description": "",
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
       "gridPos": {
-        "h": 1,
+        "h": 7,
         "w": 24,
         "x": 0,
         "y": 0
       },
-      "id": 26,
-      "panels": [],
-      "title": "Ingest Metrics",
-      "type": "row"
-    },
-    {
-      "datasource": "$es_datasource",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {
-            "align": null,
-            "filterable": false
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Write Failure"
-            },
-            "properties": [
-              {
-                "id": "custom.width",
-                "value": 217
-              },
-              {
-                "id": "thresholds",
-                "value": {
-                  "mode": "absolute",
-                  "steps": [
-                    {
-                      "color": "green",
-                      "value": null
-                    },
-                    {
-                      "color": "red",
-                      "value": 1
-                    }
-                  ]
-                }
-              },
-              {
-                "id": "custom.displayMode",
-                "value": "color-text"
-              }
-            ]
-          }
-        ]
-      },
-      "gridPos": {
-        "h": 7,
-        "w": 24,
-        "x": 0,
-        "y": 1
-      },
-      "id": 31,
+      "id": 35,
       "options": {
-        "frameIndex": 1,
-        "showHeader": true,
-        "sortBy": [
-          {
-            "desc": true,
-            "displayName": "Write Success"
-          }
-        ]
+        "content": "After the first ingest is done, an elasticsearch index \"run\" would be created.\nPlease do the following setup after your first ingest is done to view nifi statistics.\n\nAdd an elasticsearch datasource\n   1) Click on the configuration icon (with a wheel picture) on the side \n   2) Choose \"Data Sources\"\n   3) Click on \"Add data source\"\n   4) Type in \"Elasticsearch\" in the search field\n   5) Click on the returned \"Elasticsearch\" icon\n   6) Fill in the name of index (e.g. Elasticsearch)\n   7) Under section \"HTTP\", fill in the field \"URL\" with your elasticsearch domain and port              \n      something like http://elasticsearch-master.es.svc.cluster.local:9200/)      \n\t  The domain and port number could be changed based on the user deployment.\n   8) Under section \"Elastic details\", fill in the fields/choose the options as follows:                      \n\t\t(a) Index name : run   \n\t\t(b) Pattern : No pattern   \n\t\t(c) Time field name : date   \n\t\t(d) Version : 7.0+\n   9)Click on \"Save & Test\" button at the end of the page.          \n     Ensure the connection succeeds before the dashboard would work properly.",
+        "mode": "markdown"
       },
       "pluginVersion": "7.5.3",
-      "targets": [
-        {
-          "alias": "Write Success",
-          "bucketAggs": [
-            {
-              "fake": true,
-              "field": "stage",
-              "id": "4",
-              "settings": {
-                "min_doc_count": "1",
-                "order": "desc",
-                "orderBy": "_term",
-                "size": "0"
-              },
-              "type": "terms"
-            },
-            {
-              "field": "group",
-              "id": "2",
-              "settings": {
-                "min_doc_count": "1",
-                "order": "desc",
-                "orderBy": "_term",
-                "size": "0"
-              },
-              "type": "terms"
-            }
-          ],
-          "hide": false,
-          "metrics": [
-            {
-              "field": "value.numeric",
-              "id": "1",
-              "meta": {},
-              "settings": {},
-              "type": "min"
-            }
-          ],
-          "query": "connector: $connector AND run: $runId  AND group: Create* AND name: \"Write Success\"",
-          "refId": "B",
-          "timeField": "date"
-        },
-        {
-          "bucketAggs": [
-            {
-              "fake": true,
-              "field": "stage",
-              "id": "3",
-              "settings": {
-                "min_doc_count": "1",
-                "order": "desc",
-                "orderBy": "_term",
-                "size": "0"
-              },
-              "type": "terms"
-            },
-            {
-              "field": "group",
-              "id": "2",
-              "settings": {
-                "min_doc_count": "1",
-                "order": "desc",
-                "orderBy": "_term",
-                "size": "0"
-              },
-              "type": "terms"
-            }
-          ],
-          "hide": false,
-          "metrics": [
-            {
-              "field": "value.numeric",
-              "id": "1",
-              "meta": {},
-              "settings": {},
-              "type": "max"
-            }
-          ],
-          "query": "connector: $connector AND run: $runId AND group: Create* AND name: \"Write Failure\"",
-          "refId": "C",
-          "timeField": "date"
-        }
-      ],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Created Document Counters",
-      "transformations": [
-        {
-          "id": "merge",
-          "options": {}
-        },
-        {
-          "id": "organize",
-          "options": {
-            "excludeByName": {},
-            "indexByName": {},
-            "renameByName": {
-              "Max": "Write Failure",
-              "Min": "Write Success",
-              "Sum": "Count"
-            }
-          }
-        }
-      ],
-      "type": "table"
-    },
-    {
-      "datasource": "$es_datasource",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {
-            "align": null,
-            "filterable": false
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Write Failure"
-            },
-            "properties": [
-              {
-                "id": "custom.width",
-                "value": 217
-              },
-              {
-                "id": "thresholds",
-                "value": {
-                  "mode": "absolute",
-                  "steps": [
-                    {
-                      "color": "green",
-                      "value": null
-                    },
-                    {
-                      "color": "red",
-                      "value": 1
-                    }
-                  ]
-                }
-              },
-              {
-                "id": "custom.displayMode",
-                "value": "color-text"
-              }
-            ]
-          }
-        ]
-      },
-      "gridPos": {
-        "h": 7,
-        "w": 24,
-        "x": 0,
-        "y": 8
-      },
-      "id": 33,
-      "options": {
-        "frameIndex": 1,
-        "showHeader": true,
-        "sortBy": [
-          {
-            "desc": true,
-            "displayName": "Write Success"
-          }
-        ]
-      },
-      "pluginVersion": "7.5.3",
-      "targets": [
-        {
-          "alias": "Write Success",
-          "bucketAggs": [
-            {
-              "fake": true,
-              "field": "stage",
-              "id": "4",
-              "settings": {
-                "min_doc_count": "1",
-                "order": "desc",
-                "orderBy": "_term",
-                "size": "0"
-              },
-              "type": "terms"
-            },
-            {
-              "field": "group",
-              "id": "2",
-              "settings": {
-                "min_doc_count": "1",
-                "order": "desc",
-                "orderBy": "_term",
-                "size": "0"
-              },
-              "type": "terms"
-            }
-          ],
-          "hide": false,
-          "metrics": [
-            {
-              "field": "value.numeric",
-              "id": "1",
-              "meta": {},
-              "settings": {},
-              "type": "min"
-            }
-          ],
-          "query": "connector: $connector AND run: $runId  AND NOT group: Create* AND name: \"Write Success\"",
-          "refId": "B",
-          "timeField": "date"
-        },
-        {
-          "bucketAggs": [
-            {
-              "fake": true,
-              "field": "stage",
-              "id": "3",
-              "settings": {
-                "min_doc_count": "1",
-                "order": "desc",
-                "orderBy": "_term",
-                "size": "0"
-              },
-              "type": "terms"
-            },
-            {
-              "field": "group",
-              "id": "2",
-              "settings": {
-                "min_doc_count": "1",
-                "order": "desc",
-                "orderBy": "_term",
-                "size": "0"
-              },
-              "type": "terms"
-            }
-          ],
-          "hide": false,
-          "metrics": [
-            {
-              "field": "value.numeric",
-              "id": "1",
-              "meta": {},
-              "settings": {},
-              "type": "max"
-            }
-          ],
-          "query": "connector: $connector AND run: $runId AND NOT group: Create* AND name: \"Write Failure\"",
-          "refId": "C",
-          "timeField": "date"
-        }
-      ],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "Updated Document Counters ",
-      "transformations": [
-        {
-          "id": "merge",
-          "options": {}
-        },
-        {
-          "id": "organize",
-          "options": {
-            "excludeByName": {},
-            "indexByName": {},
-            "renameByName": {
-              "Max": "Write Failure",
-              "Min": "Write Success",
-              "Sum": "Count"
-            }
-          }
-        }
-      ],
-      "type": "table"
-    },
-    {
-      "datasource": "$es_datasource",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {
-            "align": null,
-            "filterable": false
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Start Time"
-            },
-            "properties": [
-              {
-                "id": "unit",
-                "value": "dateTimeAsUS"
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "End Time"
-            },
-            "properties": [
-              {
-                "id": "unit",
-                "value": "dateTimeAsUS"
-              }
-            ]
-          }
-        ]
-      },
-      "gridPos": {
-        "h": 7,
-        "w": 24,
-        "x": 0,
-        "y": 15
-      },
-      "id": 30,
-      "options": {
-        "frameIndex": 1,
-        "showHeader": true,
-        "sortBy": [
-          {
-            "desc": false,
-            "displayName": "stage"
-          }
-        ]
-      },
-      "pluginVersion": "7.5.3",
-      "targets": [
-        {
-          "alias": "Created Document Counter",
-          "bucketAggs": [
-            {
-              "fake": true,
-              "field": "stage",
-              "id": "4",
-              "settings": {
-                "min_doc_count": "1",
-                "order": "desc",
-                "orderBy": "_term",
-                "size": "0"
-              },
-              "type": "terms"
-            },
-            {
-              "field": "group",
-              "id": "2",
-              "settings": {
-                "min_doc_count": "1",
-                "order": "desc",
-                "orderBy": "_term",
-                "size": "0"
-              },
-              "type": "terms"
-            }
-          ],
-          "hide": false,
-          "metrics": [
-            {
-              "field": "value.numeric",
-              "id": "1",
-              "meta": {},
-              "settings": {},
-              "type": "avg"
-            }
-          ],
-          "query": "connector: $connector AND  run: $runId AND name: \"Cumulative Elapsed Time\"",
-          "refId": "A",
-          "timeField": "date"
-        },
-        {
-          "bucketAggs": [
-            {
-              "fake": true,
-              "field": "stage",
-              "id": "3",
-              "settings": {
-                "min_doc_count": "1",
-                "order": "desc",
-                "orderBy": "_term",
-                "size": "0"
-              },
-              "type": "terms"
-            },
-            {
-              "field": "group",
-              "id": "2",
-              "settings": {
-                "min_doc_count": "1",
-                "order": "desc",
-                "orderBy": "_term",
-                "size": "0"
-              },
-              "type": "terms"
-            }
-          ],
-          "metrics": [
-            {
-              "field": "value.numeric",
-              "id": "1",
-              "inlineScript": null,
-              "meta": {},
-              "settings": {},
-              "type": "min"
-            }
-          ],
-          "query": "connector: $connector AND  run: $runId AND name: \"Absolute Start Time\"",
-          "refId": "B",
-          "timeField": "date"
-        },
-        {
-          "bucketAggs": [
-            {
-              "fake": true,
-              "field": "stage",
-              "id": "3",
-              "settings": {
-                "min_doc_count": "1",
-                "order": "desc",
-                "orderBy": "_term",
-                "size": "0"
-              },
-              "type": "terms"
-            },
-            {
-              "field": "group",
-              "id": "2",
-              "settings": {
-                "min_doc_count": "1",
-                "order": "desc",
-                "orderBy": "_term",
-                "size": "0"
-              },
-              "type": "terms"
-            }
-          ],
-          "metrics": [
-            {
-              "field": "value.numeric",
-              "id": "1",
-              "meta": {},
-              "settings": {},
-              "type": "max"
-            }
-          ],
-          "query": "connector: $connector AND  run: $runId AND name: \"Absolute End Time\"",
-          "refId": "C",
-          "timeField": "date"
-        }
-      ],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": " Elapsed Time",
-      "transformations": [
-        {
-          "id": "merge",
-          "options": {}
-        },
-        {
-          "id": "organize",
-          "options": {
-            "excludeByName": {},
-            "indexByName": {},
-            "renameByName": {
-              "Average": "Elapsed Time (ms)",
-              "Max": "End Time",
-              "Min": "Start Time"
-            }
-          }
-        }
-      ],
-      "type": "table"
-    },
-    {
-      "collapsed": false,
-      "datasource": null,
-      "gridPos": {
-        "h": 1,
-        "w": 24,
-        "x": 0,
-        "y": 22
-      },
-      "id": 24,
-      "panels": [],
-      "title": "Nifi General Metrics",
-      "type": "row"
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "Prometheus",
-      "fieldConfig": {
-        "defaults": {
-          "links": []
-        },
-        "overrides": []
-      },
-      "fill": 1,
-      "fillGradient": 0,
-      "gridPos": {
-        "h": 12,
-        "w": 24,
-        "x": 0,
-        "y": 23
-      },
-      "hiddenSeries": false,
-      "id": 12,
-      "legend": {
-        "alignAsTable": true,
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
-        "rightSide": true,
-        "show": true,
-        "total": false,
-        "values": false
-      },
-      "lines": true,
-      "linewidth": 1,
-      "links": [],
-      "nullPointMode": "null",
-      "options": {
-        "alertThreshold": true
-      },
-      "percentage": false,
-      "pluginVersion": "7.5.3",
-      "pointradius": 5,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "expr": "sum( nifi_amount_items_queued{ component_type = 'ProcessGroup' } ) by ( component_type, component_name )",
-          "format": "time_series",
-          "interval": "",
-          "intervalFactor": 2,
-          "legendFormat": "{{component_name}}",
-          "refId": "A",
-          "step": 2
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "Queued Items",
-      "tooltip": {
-        "shared": false,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "Prometheus",
-      "fieldConfig": {
-        "defaults": {
-          "links": []
-        },
-        "overrides": []
-      },
-      "fill": 1,
-      "fillGradient": 0,
-      "gridPos": {
-        "h": 12,
-        "w": 24,
-        "x": 0,
-        "y": 35
-      },
-      "hiddenSeries": false,
-      "id": 21,
-      "legend": {
-        "alignAsTable": true,
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
-        "rightSide": true,
-        "show": true,
-        "total": false,
-        "values": false
-      },
-      "lines": true,
-      "linewidth": 1,
-      "links": [],
-      "nullPointMode": "null",
-      "options": {
-        "alertThreshold": true
-      },
-      "percentage": false,
-      "pluginVersion": "7.5.3",
-      "pointradius": 5,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "expr": "sum( nifi_amount_items_queued{ component_type = 'ProcessGroup', component_name =~ '.*WaitLink.*' } ) by ( component_type, component_name )",
-          "format": "time_series",
-          "interval": "",
-          "intervalFactor": 2,
-          "legendFormat": "{{component_name}}",
-          "refId": "A",
-          "step": 2
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "Wait Link",
-      "tooltip": {
-        "shared": false,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
+      "title": "Setup for Elasticsearch datasource to access the ingest data",
+      "type": "text"
     },
     {
       "collapsed": true,
@@ -833,7 +50,816 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 47
+        "y": 7
+      },
+      "id": 26,
+      "panels": [
+        {
+          "datasource": "$es_datasource",
+          "fieldConfig": {
+            "defaults": {
+              "custom": {
+                "align": null,
+                "filterable": false
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Write Failure"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 217
+                  },
+                  {
+                    "id": "thresholds",
+                    "value": {
+                      "mode": "absolute",
+                      "steps": [
+                        {
+                          "color": "green",
+                          "value": null
+                        },
+                        {
+                          "color": "red",
+                          "value": 1
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "id": "custom.displayMode",
+                    "value": "color-text"
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 7,
+            "w": 24,
+            "x": 0,
+            "y": 1
+          },
+          "id": 31,
+          "options": {
+            "frameIndex": 1,
+            "showHeader": true,
+            "sortBy": [
+              {
+                "desc": true,
+                "displayName": "Write Success"
+              }
+            ]
+          },
+          "pluginVersion": "7.5.3",
+          "targets": [
+            {
+              "alias": "Write Success",
+              "bucketAggs": [
+                {
+                  "fake": true,
+                  "field": "stage",
+                  "id": "4",
+                  "settings": {
+                    "min_doc_count": "1",
+                    "order": "desc",
+                    "orderBy": "_term",
+                    "size": "0"
+                  },
+                  "type": "terms"
+                },
+                {
+                  "field": "group",
+                  "id": "2",
+                  "settings": {
+                    "min_doc_count": "1",
+                    "order": "desc",
+                    "orderBy": "_term",
+                    "size": "0"
+                  },
+                  "type": "terms"
+                }
+              ],
+              "hide": false,
+              "metrics": [
+                {
+                  "field": "value.numeric",
+                  "id": "1",
+                  "meta": {},
+                  "settings": {},
+                  "type": "min"
+                }
+              ],
+              "query": "connector: $connector AND run: $runId  AND group: Create* AND name: \"Write Success\"",
+              "refId": "B",
+              "timeField": "date"
+            },
+            {
+              "bucketAggs": [
+                {
+                  "fake": true,
+                  "field": "stage",
+                  "id": "3",
+                  "settings": {
+                    "min_doc_count": "1",
+                    "order": "desc",
+                    "orderBy": "_term",
+                    "size": "0"
+                  },
+                  "type": "terms"
+                },
+                {
+                  "field": "group",
+                  "id": "2",
+                  "settings": {
+                    "min_doc_count": "1",
+                    "order": "desc",
+                    "orderBy": "_term",
+                    "size": "0"
+                  },
+                  "type": "terms"
+                }
+              ],
+              "hide": false,
+              "metrics": [
+                {
+                  "field": "value.numeric",
+                  "id": "1",
+                  "meta": {},
+                  "settings": {},
+                  "type": "max"
+                }
+              ],
+              "query": "connector: $connector AND run: $runId AND group: Create* AND name: \"Write Failure\"",
+              "refId": "C",
+              "timeField": "date"
+            }
+          ],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Created Document Counters",
+          "transformations": [
+            {
+              "id": "merge",
+              "options": {}
+            },
+            {
+              "id": "organize",
+              "options": {
+                "excludeByName": {},
+                "indexByName": {},
+                "renameByName": {
+                  "Max": "Write Failure",
+                  "Min": "Write Success",
+                  "Sum": "Count"
+                }
+              }
+            }
+          ],
+          "type": "table"
+        },
+        {
+          "datasource": "$es_datasource",
+          "fieldConfig": {
+            "defaults": {
+              "custom": {
+                "align": null,
+                "filterable": false
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Write Failure"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 217
+                  },
+                  {
+                    "id": "thresholds",
+                    "value": {
+                      "mode": "absolute",
+                      "steps": [
+                        {
+                          "color": "green",
+                          "value": null
+                        },
+                        {
+                          "color": "red",
+                          "value": 1
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "id": "custom.displayMode",
+                    "value": "color-text"
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 7,
+            "w": 24,
+            "x": 0,
+            "y": 8
+          },
+          "id": 33,
+          "options": {
+            "frameIndex": 1,
+            "showHeader": true,
+            "sortBy": [
+              {
+                "desc": true,
+                "displayName": "Write Success"
+              }
+            ]
+          },
+          "pluginVersion": "7.5.3",
+          "targets": [
+            {
+              "alias": "Write Success",
+              "bucketAggs": [
+                {
+                  "fake": true,
+                  "field": "stage",
+                  "id": "4",
+                  "settings": {
+                    "min_doc_count": "1",
+                    "order": "desc",
+                    "orderBy": "_term",
+                    "size": "0"
+                  },
+                  "type": "terms"
+                },
+                {
+                  "field": "group",
+                  "id": "2",
+                  "settings": {
+                    "min_doc_count": "1",
+                    "order": "desc",
+                    "orderBy": "_term",
+                    "size": "0"
+                  },
+                  "type": "terms"
+                }
+              ],
+              "hide": false,
+              "metrics": [
+                {
+                  "field": "value.numeric",
+                  "id": "1",
+                  "meta": {},
+                  "settings": {},
+                  "type": "min"
+                }
+              ],
+              "query": "connector: $connector AND run: $runId  AND NOT group: Create* AND name: \"Write Success\"",
+              "refId": "B",
+              "timeField": "date"
+            },
+            {
+              "bucketAggs": [
+                {
+                  "fake": true,
+                  "field": "stage",
+                  "id": "3",
+                  "settings": {
+                    "min_doc_count": "1",
+                    "order": "desc",
+                    "orderBy": "_term",
+                    "size": "0"
+                  },
+                  "type": "terms"
+                },
+                {
+                  "field": "group",
+                  "id": "2",
+                  "settings": {
+                    "min_doc_count": "1",
+                    "order": "desc",
+                    "orderBy": "_term",
+                    "size": "0"
+                  },
+                  "type": "terms"
+                }
+              ],
+              "hide": false,
+              "metrics": [
+                {
+                  "field": "value.numeric",
+                  "id": "1",
+                  "meta": {},
+                  "settings": {},
+                  "type": "max"
+                }
+              ],
+              "query": "connector: $connector AND run: $runId AND NOT group: Create* AND name: \"Write Failure\"",
+              "refId": "C",
+              "timeField": "date"
+            }
+          ],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Updated Document Counters ",
+          "transformations": [
+            {
+              "id": "merge",
+              "options": {}
+            },
+            {
+              "id": "organize",
+              "options": {
+                "excludeByName": {},
+                "indexByName": {},
+                "renameByName": {
+                  "Max": "Write Failure",
+                  "Min": "Write Success",
+                  "Sum": "Count"
+                }
+              }
+            }
+          ],
+          "type": "table"
+        },
+        {
+          "datasource": "$es_datasource",
+          "fieldConfig": {
+            "defaults": {
+              "custom": {
+                "align": null,
+                "filterable": false
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Start Time"
+                },
+                "properties": [
+                  {
+                    "id": "unit",
+                    "value": "dateTimeAsUS"
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "End Time"
+                },
+                "properties": [
+                  {
+                    "id": "unit",
+                    "value": "dateTimeAsUS"
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 7,
+            "w": 24,
+            "x": 0,
+            "y": 15
+          },
+          "id": 30,
+          "options": {
+            "frameIndex": 1,
+            "showHeader": true,
+            "sortBy": [
+              {
+                "desc": false,
+                "displayName": "stage"
+              }
+            ]
+          },
+          "pluginVersion": "7.5.3",
+          "targets": [
+            {
+              "alias": "Created Document Counter",
+              "bucketAggs": [
+                {
+                  "fake": true,
+                  "field": "stage",
+                  "id": "4",
+                  "settings": {
+                    "min_doc_count": "1",
+                    "order": "desc",
+                    "orderBy": "_term",
+                    "size": "0"
+                  },
+                  "type": "terms"
+                },
+                {
+                  "field": "group",
+                  "id": "2",
+                  "settings": {
+                    "min_doc_count": "1",
+                    "order": "desc",
+                    "orderBy": "_term",
+                    "size": "0"
+                  },
+                  "type": "terms"
+                }
+              ],
+              "hide": false,
+              "metrics": [
+                {
+                  "field": "value.numeric",
+                  "id": "1",
+                  "meta": {},
+                  "settings": {},
+                  "type": "avg"
+                }
+              ],
+              "query": "connector: $connector AND  run: $runId AND name: \"Cumulative Elapsed Time\"",
+              "refId": "A",
+              "timeField": "date"
+            },
+            {
+              "bucketAggs": [
+                {
+                  "fake": true,
+                  "field": "stage",
+                  "id": "3",
+                  "settings": {
+                    "min_doc_count": "1",
+                    "order": "desc",
+                    "orderBy": "_term",
+                    "size": "0"
+                  },
+                  "type": "terms"
+                },
+                {
+                  "field": "group",
+                  "id": "2",
+                  "settings": {
+                    "min_doc_count": "1",
+                    "order": "desc",
+                    "orderBy": "_term",
+                    "size": "0"
+                  },
+                  "type": "terms"
+                }
+              ],
+              "metrics": [
+                {
+                  "field": "value.numeric",
+                  "id": "1",
+                  "inlineScript": null,
+                  "meta": {},
+                  "settings": {},
+                  "type": "min"
+                }
+              ],
+              "query": "connector: $connector AND  run: $runId AND name: \"Absolute Start Time\"",
+              "refId": "B",
+              "timeField": "date"
+            },
+            {
+              "bucketAggs": [
+                {
+                  "fake": true,
+                  "field": "stage",
+                  "id": "3",
+                  "settings": {
+                    "min_doc_count": "1",
+                    "order": "desc",
+                    "orderBy": "_term",
+                    "size": "0"
+                  },
+                  "type": "terms"
+                },
+                {
+                  "field": "group",
+                  "id": "2",
+                  "settings": {
+                    "min_doc_count": "1",
+                    "order": "desc",
+                    "orderBy": "_term",
+                    "size": "0"
+                  },
+                  "type": "terms"
+                }
+              ],
+              "metrics": [
+                {
+                  "field": "value.numeric",
+                  "id": "1",
+                  "meta": {},
+                  "settings": {},
+                  "type": "max"
+                }
+              ],
+              "query": "connector: $connector AND  run: $runId AND name: \"Absolute End Time\"",
+              "refId": "C",
+              "timeField": "date"
+            }
+          ],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": " Elapsed Time",
+          "transformations": [
+            {
+              "id": "merge",
+              "options": {}
+            },
+            {
+              "id": "organize",
+              "options": {
+                "excludeByName": {},
+                "indexByName": {},
+                "renameByName": {
+                  "Average": "Elapsed Time (ms)",
+                  "Max": "End Time",
+                  "Min": "Start Time"
+                }
+              }
+            }
+          ],
+          "type": "table"
+        }
+      ],
+      "title": "Ingest Metrics",
+      "type": "row"
+    },
+    {
+      "collapsed": true,
+      "datasource": null,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 8
+      },
+      "id": 24,
+      "panels": [
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "Prometheus",
+          "fieldConfig": {
+            "defaults": {
+              "links": []
+            },
+            "overrides": []
+          },
+          "fill": 1,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 12,
+            "w": 24,
+            "x": 0,
+            "y": 2
+          },
+          "hiddenSeries": false,
+          "id": 12,
+          "legend": {
+            "alignAsTable": true,
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "rightSide": true,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "null",
+          "options": {
+            "alertThreshold": true
+          },
+          "percentage": false,
+          "pluginVersion": "7.5.3",
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "sum( nifi_amount_items_queued{ component_type = 'ProcessGroup' } ) by ( component_type, component_name )",
+              "format": "time_series",
+              "interval": "",
+              "intervalFactor": 2,
+              "legendFormat": "{{component_name}}",
+              "refId": "A",
+              "step": 2
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "Queued Items",
+          "tooltip": {
+            "shared": false,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "Prometheus",
+          "fieldConfig": {
+            "defaults": {
+              "links": []
+            },
+            "overrides": []
+          },
+          "fill": 1,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 12,
+            "w": 24,
+            "x": 0,
+            "y": 14
+          },
+          "hiddenSeries": false,
+          "id": 21,
+          "legend": {
+            "alignAsTable": true,
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "rightSide": true,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "null",
+          "options": {
+            "alertThreshold": true
+          },
+          "percentage": false,
+          "pluginVersion": "7.5.3",
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "sum( nifi_amount_items_queued{ component_type = 'ProcessGroup', component_name =~ '.*WaitLink.*' } ) by ( component_type, component_name )",
+              "format": "time_series",
+              "interval": "",
+              "intervalFactor": 2,
+              "legendFormat": "{{component_name}}",
+              "refId": "A",
+              "step": 2
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "Wait Link",
+          "tooltip": {
+            "shared": false,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        }
+      ],
+      "title": "Nifi General Metrics",
+      "type": "row"
+    },
+    {
+      "collapsed": true,
+      "datasource": null,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 9
       },
       "id": 9,
       "panels": [
@@ -882,9 +908,10 @@
           "renderer": "flot",
           "scopedVars": {
             "nifipod": {
+              "isNone": true,
               "selected": true,
-              "text": "demoqanifi-app-55784f8b4b-9htgq",
-              "value": "demoqanifi-app-55784f8b4b-9htgq"
+              "text": "None",
+              "value": ""
             }
           },
           "seriesOverrides": [],
@@ -986,9 +1013,10 @@
           "renderer": "flot",
           "scopedVars": {
             "nifipod": {
+              "isNone": true,
               "selected": true,
-              "text": "demoqanifi-app-55784f8b4b-9htgq",
-              "value": "demoqanifi-app-55784f8b4b-9htgq"
+              "text": "None",
+              "value": ""
             }
           },
           "seriesOverrides": [],
@@ -1092,9 +1120,10 @@
           "renderer": "flot",
           "scopedVars": {
             "nifipod": {
+              "isNone": true,
               "selected": true,
-              "text": "demoqanifi-app-55784f8b4b-9htgq",
-              "value": "demoqanifi-app-55784f8b4b-9htgq"
+              "text": "None",
+              "value": ""
             }
           },
           "seriesOverrides": [
@@ -1243,9 +1272,10 @@
           "renderer": "flot",
           "scopedVars": {
             "nifipod": {
+              "isNone": true,
               "selected": true,
-              "text": "demoqanifi-app-55784f8b4b-9htgq",
-              "value": "demoqanifi-app-55784f8b4b-9htgq"
+              "text": "None",
+              "value": ""
             }
           },
           "seriesOverrides": [],
@@ -1360,9 +1390,10 @@
           "renderer": "flot",
           "scopedVars": {
             "nifipod": {
+              "isNone": true,
               "selected": true,
-              "text": "demoqanifi-app-55784f8b4b-9htgq",
-              "value": "demoqanifi-app-55784f8b4b-9htgq"
+              "text": "None",
+              "value": ""
             }
           },
           "seriesOverrides": [
@@ -1511,9 +1542,10 @@
           "renderer": "flot",
           "scopedVars": {
             "nifipod": {
+              "isNone": true,
               "selected": true,
-              "text": "demoqanifi-app-55784f8b4b-9htgq",
-              "value": "demoqanifi-app-55784f8b4b-9htgq"
+              "text": "None",
+              "value": ""
             }
           },
           "seriesOverrides": [],
@@ -1618,9 +1650,10 @@
           "renderer": "flot",
           "scopedVars": {
             "nifipod": {
+              "isNone": true,
               "selected": true,
-              "text": "demoqanifi-app-55784f8b4b-9htgq",
-              "value": "demoqanifi-app-55784f8b4b-9htgq"
+              "text": "None",
+              "value": ""
             }
           },
           "seriesOverrides": [],
@@ -1681,9 +1714,10 @@
       "repeat": "nifipod",
       "scopedVars": {
         "nifipod": {
+          "isNone": true,
           "selected": true,
-          "text": "demoqanifi-app-55784f8b4b-9htgq",
-          "value": "demoqanifi-app-55784f8b4b-9htgq"
+          "text": "None",
+          "value": ""
         }
       },
       "title": "Container - $nifipod  System Metrics",
@@ -1693,17 +1727,16 @@
   "refresh": false,
   "schemaVersion": 27,
   "style": "dark",
-  "tags": [
-    "hcl"
-  ],
+  "tags": [],
   "templating": {
     "list": [
       {
         "allValue": null,
         "current": {
+          "isNone": true,
           "selected": false,
-          "text": "demoqanifi-app-55784f8b4b-9htgq",
-          "value": "demoqanifi-app-55784f8b4b-9htgq"
+          "text": "None",
+          "value": ""
         },
         "datasource": "Prometheus",
         "definition": "label_values(kube_pod_container_resource_requests_cpu_cores{container=\"nifi-app\"},pod)",
@@ -1732,8 +1765,8 @@
       {
         "current": {
           "selected": false,
-          "text": "No data sources found",
-          "value": ""
+          "text": "Elasticsearch",
+          "value": "Elasticsearch"
         },
         "description": null,
         "error": null,
@@ -1781,9 +1814,7 @@
         "datasource": "$es_datasource",
         "definition": "{\"find\": \"terms\",  \"field\": \"connector\"}",
         "description": null,
-        "error": {
-          "message": "Datasource named  was not found"
-        },
+        "error": null,
         "hide": 0,
         "includeAll": false,
         "label": "connector",
@@ -1805,15 +1836,13 @@
         "allValue": null,
         "current": {
           "selected": false,
-          "text": "i-0f0fc322-1c54-4b3c-a408-8218b4b69471",
-          "value": "i-0f0fc322-1c54-4b3c-a408-8218b4b69471"
+          "text": "i-6181fee7-5bd7-4b90-b932-2461abd62d68",
+          "value": "i-6181fee7-5bd7-4b90-b932-2461abd62d68"
         },
         "datasource": "$es_datasource",
         "definition": "{\"find\": \"terms\", \"field\": \"run\", \"query\": \"connector: $connector\"}",
         "description": null,
-        "error": {
-          "message": "Datasource named  was not found"
-        },
+        "error": null,
         "hide": 0,
         "includeAll": false,
         "label": "runId",

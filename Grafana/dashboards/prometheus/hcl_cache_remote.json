@@ -15,8 +15,8 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 37,
-  "iteration": 1623095704835,
+  "id": 8,
+  "iteration": 1632752039555,
   "links": [
     {
       "asDropdown": false,
@@ -88,10 +88,11 @@
             "text": {},
             "textMode": "auto"
           },
-          "pluginVersion": "7.5.3",
+          "pluginVersion": "7.5.5",
           "targets": [
             {
-              "expr": "sum(hclcache_remoteclient_outage{ namespace=~\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\"})",
+              "exemplar": true,
+              "expr": "sum(hclcache_remoteclient_outage{ kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", cachespace=\"$environment\"})",
               "format": "time_series",
               "instant": true,
               "interval": "",
@@ -144,7 +145,7 @@
             "alertThreshold": true
           },
           "percentage": false,
-          "pluginVersion": "7.5.3",
+          "pluginVersion": "7.5.5",
           "pointradius": 2,
           "points": false,
           "renderer": "flot",
@@ -154,10 +155,12 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum(hclcache_remoteclient_outage{namespace=~\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\"}) by (pod) > 0",
+              "exemplar": true,
+              "expr": "sum(hclcache_remoteclient_outage{kubernetes_namespace=~\"$namespace\", cachespace=\"$environment\", component=~\"$component\", kubernetes_pod_name=~\"$pod\"}) by (kubernetes_pod_name) > 0",
+              "hide": false,
               "interval": "",
-              "legendFormat": "{{pod}}",
-              "refId": "A"
+              "legendFormat": "{{kubernetes_pod_name}}",
+              "refId": "B"
             }
           ],
           "thresholds": [],
@@ -248,10 +251,11 @@
             "text": {},
             "textMode": "auto"
           },
-          "pluginVersion": "7.5.3",
+          "pluginVersion": "7.5.5",
           "targets": [
             {
-              "expr": "sum(hclcache_cache_outage{namespace=~\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\"})",
+              "exemplar": true,
+              "expr": "sum(hclcache_cache_outage{kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", cachespace=\"$environment\"})",
               "format": "time_series",
               "instant": true,
               "interval": "",
@@ -304,7 +308,7 @@
             "alertThreshold": true
           },
           "percentage": false,
-          "pluginVersion": "7.5.3",
+          "pluginVersion": "7.5.5",
           "pointradius": 2,
           "points": false,
           "renderer": "flot",
@@ -314,7 +318,8 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum(hclcache_cache_outage{namespace=~\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\"}) by (name) > 0",
+              "exemplar": true,
+              "expr": "sum(hclcache_cache_outage{kubernetes_namespace=~\"$namespace\", cachespace=~\"$environment\", component=~\"$job\", kubernetes_pod_name=~\"$pod\"}) by (name) > 0",
               "interval": "",
               "legendFormat": "{{name}}",
               "refId": "A"
@@ -367,7 +372,7 @@
       "type": "row"
     },
     {
-      "collapsed": false,
+      "collapsed": true,
       "datasource": null,
       "gridPos": {
         "h": 1,
@@ -376,214 +381,216 @@
         "y": 1
       },
       "id": 386,
-      "panels": [],
+      "panels": [
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": null,
+          "decimals": 0,
+          "description": "Cache Manager pod must be enabled",
+          "fieldConfig": {
+            "defaults": {
+              "links": []
+            },
+            "overrides": []
+          },
+          "fill": 1,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 12,
+            "w": 16,
+            "x": 0,
+            "y": 2
+          },
+          "hiddenSeries": false,
+          "id": 388,
+          "legend": {
+            "alignAsTable": true,
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "rightSide": true,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "nullPointMode": "null",
+          "options": {
+            "alertThreshold": true
+          },
+          "percentage": false,
+          "pluginVersion": "7.5.5",
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "repeat": null,
+          "repeatDirection": "v",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "exemplar": true,
+              "expr": "max( (  hclcache_cache_size_current{  kubernetes_namespace=~\"$namespace\", cachespace=~\"$environment\", scope=\"remote\", result!=\"error\", name=~\"$cache\" } > 0 ) * on (  kubernetes_namespace, cachespace, name) group_left( redis_instance ) hclcache_cache_remote_node_mapping{ redis_instance =~ \"$redis\"  }) by ( name, redis_instance )  ",
+              "interval": "",
+              "legendFormat": "{{redis_instance}} - {{name}}",
+              "refId": "A"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "Remote Cache Sizes",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "decimals": 0,
+              "format": "short",
+              "label": "",
+              "logBase": 1,
+              "max": null,
+              "min": "0",
+              "show": true
+            },
+            {
+              "decimals": null,
+              "format": "short",
+              "label": "",
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": null,
+          "description": "This dashboard only works if Redis is installed\nlocally with metrics enabled",
+          "fieldConfig": {
+            "defaults": {
+              "links": []
+            },
+            "overrides": []
+          },
+          "fill": 1,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 12,
+            "w": 8,
+            "x": 16,
+            "y": 2
+          },
+          "hiddenSeries": false,
+          "id": 390,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "nullPointMode": "null",
+          "options": {
+            "alertThreshold": true
+          },
+          "percentage": false,
+          "pluginVersion": "7.5.5",
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "redis_memory_used_bytes",
+              "interval": "",
+              "legendFormat": "{{instance}} - {{pod}} used",
+              "refId": "A"
+            },
+            {
+              "expr": "max(redis_memory_max_bytes)",
+              "interval": "",
+              "legendFormat": "max",
+              "refId": "B"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "Redis Memory",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "decbytes",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": "0",
+              "show": true
+            },
+            {
+              "format": "decbytes",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        }
+      ],
       "title": "Remote Cache Size",
       "type": "row"
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": null,
-      "decimals": 0,
-      "description": "Cache Manager pod must be enabled",
-      "fieldConfig": {
-        "defaults": {
-          "links": []
-        },
-        "overrides": []
-      },
-      "fill": 1,
-      "fillGradient": 0,
-      "gridPos": {
-        "h": 12,
-        "w": 16,
-        "x": 0,
-        "y": 2
-      },
-      "hiddenSeries": false,
-      "id": 388,
-      "legend": {
-        "alignAsTable": true,
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
-        "rightSide": true,
-        "show": true,
-        "total": false,
-        "values": false
-      },
-      "lines": true,
-      "linewidth": 1,
-      "nullPointMode": "null",
-      "options": {
-        "alertThreshold": true
-      },
-      "percentage": false,
-      "pluginVersion": "7.5.3",
-      "pointradius": 2,
-      "points": false,
-      "renderer": "flot",
-      "repeat": null,
-      "repeatDirection": "v",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "expr": "max( (  hclcache_cache_size_current{ namespace=~\"$namespace\", cachespace=\"$environment\", scope=\"remote\", result!=\"error\", name=~\"$cache\" } > 0 ) * on ( namespace, cachespace, name) group_left( redis_instance ) hclcache_cache_remote_node_mapping{ redis_instance =~ \"$redis\"  }) by ( name, redis_instance )  ",
-          "interval": "",
-          "legendFormat": "{{redis_instance}} - {{name}}",
-          "refId": "A"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "Remote Cache Sizes",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "decimals": 0,
-          "format": "short",
-          "label": "",
-          "logBase": 1,
-          "max": null,
-          "min": "0",
-          "show": true
-        },
-        {
-          "decimals": null,
-          "format": "short",
-          "label": "",
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": null,
-      "description": "This dashboard only works if Redis is installed\nlocally with metrics enabled",
-      "fieldConfig": {
-        "defaults": {
-          "links": []
-        },
-        "overrides": []
-      },
-      "fill": 1,
-      "fillGradient": 0,
-      "gridPos": {
-        "h": 12,
-        "w": 8,
-        "x": 16,
-        "y": 2
-      },
-      "hiddenSeries": false,
-      "id": 390,
-      "legend": {
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
-        "show": true,
-        "total": false,
-        "values": false
-      },
-      "lines": true,
-      "linewidth": 1,
-      "nullPointMode": "null",
-      "options": {
-        "alertThreshold": true
-      },
-      "percentage": false,
-      "pluginVersion": "7.5.3",
-      "pointradius": 2,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "expr": "redis_memory_used_bytes",
-          "interval": "",
-          "legendFormat": "{{instance}} - {{pod}} used",
-          "refId": "A"
-        },
-        {
-          "expr": "max(redis_memory_max_bytes)",
-          "interval": "",
-          "legendFormat": "max",
-          "refId": "B"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "Redis Memory",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "decbytes",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": "0",
-          "show": true
-        },
-        {
-          "format": "decbytes",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
     },
     {
       "collapsed": false,
@@ -592,7 +599,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 14
+        "y": 2
       },
       "id": 366,
       "panels": [],
@@ -617,7 +624,7 @@
         "h": 10,
         "w": 15,
         "x": 0,
-        "y": 15
+        "y": 3
       },
       "hiddenSeries": false,
       "id": 324,
@@ -638,7 +645,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.5.3",
+      "pluginVersion": "7.5.5",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -648,26 +655,30 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(rate(hclcache_cache_puts_duration_seconds_count{ namespace=~\"$namespace\", cachespace=\"$environment\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", result!=\"error\", name=~\"$cache\"}[2m]))",
+          "exemplar": true,
+          "expr": "sum(rate(hclcache_cache_puts_duration_seconds_count{  kubernetes_namespace=~\"$namespace\", cachespace=\"$environment\", cachespace=\"$environment\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", scope=\"remote\", result!=\"error\", name=~\"$cache\"}[2m]))",
           "hide": false,
           "interval": "",
           "legendFormat": "put",
           "refId": "A"
         },
         {
-          "expr": "sum(rate(hclcache_cache_gets_duration_seconds_count{ namespace=~\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", result!=\"error\", name=~\"$cache\"}[2m]))",
+          "exemplar": true,
+          "expr": "sum(rate(hclcache_cache_gets_duration_seconds_count{ kubernetes_namespace=~\"$namespace\", cachespace=\"$environment\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", scope=\"remote\", result!=\"error\", name=~\"$cache\"}[2m]))",
           "interval": "",
           "legendFormat": "get",
           "refId": "B"
         },
         {
-          "expr": "sum(rate(hclcache_cache_clears_duration_seconds_count{ namespace=~\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", result!=\"error\", name=~\"$cache\"}[2m]))",
+          "exemplar": true,
+          "expr": "sum(rate(hclcache_cache_clears_duration_seconds_count{ kubernetes_namespace=~\"$namespace\", cachespace=\"$environment\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", scope=\"remote\", result!=\"error\", name=~\"$cache\"}[2m]))",
           "interval": "",
           "legendFormat": "clear",
           "refId": "C"
         },
         {
-          "expr": "sum(rate(hclcache_cache_invalidates_duration_seconds_count{ namespace=~\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", result!=\"error\", name=~\"$cache\"}[2m]))",
+          "exemplar": true,
+          "expr": "sum(rate(hclcache_cache_invalidates_duration_seconds_count{ kubernetes_namespace=~\"$namespace\", cachespace=\"$environment\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", scope=\"remote\", result!=\"error\", name=~\"$cache\"}[2m]))",
           "interval": "",
           "legendFormat": "invalidate",
           "refId": "D"
@@ -734,7 +745,7 @@
         "h": 10,
         "w": 9,
         "x": 15,
-        "y": 15
+        "y": 3
       },
       "hiddenSeries": false,
       "id": 95,
@@ -755,7 +766,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.5.3",
+      "pluginVersion": "7.5.5",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -765,26 +776,30 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(increase(hclcache_cache_puts_duration_seconds_count{ namespace=~\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", result=\"error\", name=~\"$cache\"}[2m]))",
+          "exemplar": true,
+          "expr": "sum(increase(hclcache_cache_puts_duration_seconds_count{ kubernetes_namespace=~\"$namespace\", cachespace=~\"$environment\", componenet=~\"$job\",  kubernetes_pod_name=~\"$pod\", scope=\"remote\", result=\"error\", name=~\"$cache\"}[2m]))",
           "hide": false,
           "interval": "",
           "legendFormat": "put",
           "refId": "A"
         },
         {
-          "expr": "sum(increase(hclcache_cache_gets_duration_seconds_count{ namespace=~\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", result=\"error\", name=~\"$cache\"}[2m]))",
+          "exemplar": true,
+          "expr": "sum(increase(hclcache_cache_gets_duration_seconds_count{ kubernetes_namespace=~\"$namespace\", cachespace=\"$environment\", componenet=~\"$job\", kubernetes_pod_name=~\"$pod\", scope=\"remote\", result=\"error\", name=~\"$cache\"}[2m]))",
           "interval": "",
           "legendFormat": "get",
           "refId": "B"
         },
         {
-          "expr": "sum(increase(hclcache_cache_clears_duration_seconds_count{ namespace=~\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", result=\"error\", name=~\"$cache\"}[2m]))",
+          "exemplar": true,
+          "expr": "sum(increase(hclcache_cache_clears_duration_seconds_count{ kubernetes_namespace=~\"$namespace\", cachespace=\"$environment\", componenet=~\"$job\", kubernetes_pod_name=~\"$pod\", scope=\"remote\", result=\"error\", name=~\"$cache\"}[2m]))",
           "interval": "",
           "legendFormat": "clear",
           "refId": "C"
         },
         {
-          "expr": "sum(increase(hclcache_cache_invalidates_duration_seconds_count{ namespace=~\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", result=\"error\", name=~\"$cache\"}[2m]))",
+          "exemplar": true,
+          "expr": "sum(increase(hclcache_cache_invalidates_duration_seconds_count{ kubernetes_namespace=~\"$namespace\", cachespace=\"$environment\", componenet=~\"$job\", kubernetes_pod_name=~\"$pod\", scope=\"remote\", result=\"error\", name=~\"$cache\"}[2m]))",
           "interval": "",
           "legendFormat": "invalidate",
           "refId": "D"
@@ -849,7 +864,7 @@
         "h": 11,
         "w": 6,
         "x": 0,
-        "y": 25
+        "y": 13
       },
       "hiddenSeries": false,
       "id": 370,
@@ -873,7 +888,7 @@
         "alertThreshold": false
       },
       "percentage": false,
-      "pluginVersion": "7.5.3",
+      "pluginVersion": "7.5.5",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -885,7 +900,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "\r\nsum(rate(hclcache_cache_gets_duration_seconds_count{ namespace=~\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[2m])) by (name) > 0\r\r",
+          "expr": "\r\nsum(rate(hclcache_cache_gets_duration_seconds_count{ kubernetes_namespace=~\"$namespace\", cachespace=~\"$environment\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[2m])) by (name) > 0\r\r",
           "hide": false,
           "interval": "",
           "legendFormat": "{{name}}",
@@ -954,7 +969,7 @@
         "h": 11,
         "w": 6,
         "x": 6,
-        "y": 25
+        "y": 13
       },
       "hiddenSeries": false,
       "id": 402,
@@ -978,7 +993,7 @@
         "alertThreshold": false
       },
       "percentage": false,
-      "pluginVersion": "7.5.3",
+      "pluginVersion": "7.5.5",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -989,7 +1004,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "sum(rate(hclcache_cache_puts_duration_seconds_count{ namespace=~\"$namespace\",cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[2m]) ) by (name) ",
+          "expr": "sum(rate(hclcache_cache_puts_duration_seconds_count{ kubernetes_namespace=~\"$namespace\",cachespace=~\"$environment\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[2m]) ) by (name) ",
           "interval": "",
           "legendFormat": "{{ name }}",
           "refId": "A"
@@ -1057,7 +1072,7 @@
         "h": 11,
         "w": 6,
         "x": 12,
-        "y": 25
+        "y": 13
       },
       "hiddenSeries": false,
       "id": 403,
@@ -1081,7 +1096,7 @@
         "alertThreshold": false
       },
       "percentage": false,
-      "pluginVersion": "7.5.3",
+      "pluginVersion": "7.5.5",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -1092,7 +1107,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "sum(rate(hclcache_cache_clears_duration_seconds_count{ namespace=~\"$namespace\",cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[2m]) ) by (name) ",
+          "expr": "sum(rate(hclcache_cache_clears_duration_seconds_count{ kubernetes_namespace=~\"$namespace\",cachespace=~\"$environment\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[2m]) ) by (name) ",
           "interval": "",
           "legendFormat": "{{ name }}",
           "refId": "A"
@@ -1160,7 +1175,7 @@
         "h": 11,
         "w": 6,
         "x": 18,
-        "y": 25
+        "y": 13
       },
       "hiddenSeries": false,
       "id": 404,
@@ -1184,7 +1199,7 @@
         "alertThreshold": false
       },
       "percentage": false,
-      "pluginVersion": "7.5.3",
+      "pluginVersion": "7.5.5",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -1195,7 +1210,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "sum(rate(hclcache_cache_invalidates_duration_seconds_count{ namespace=~\"$namespace\",cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[2m]) ) by (name) ",
+          "expr": "sum(rate(hclcache_cache_invalidates_duration_seconds_count{ kubernetes_namespace=~\"$namespace\",cachespace=~\"$environment\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[2m]) ) by (name) ",
           "interval": "",
           "legendFormat": "{{ name }}",
           "refId": "A"
@@ -1252,7 +1267,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 36
+        "y": 24
       },
       "id": 364,
       "panels": [],
@@ -1277,7 +1292,7 @@
         "h": 8,
         "w": 16,
         "x": 0,
-        "y": 37
+        "y": 25
       },
       "hiddenSeries": false,
       "id": 361,
@@ -1299,7 +1314,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.5.3",
+      "pluginVersion": "7.5.5",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -1309,25 +1324,29 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(rate(hclcache_cache_gets_duration_seconds_sum{ namespace=\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[2m])) / sum(rate(hclcache_cache_gets_duration_seconds_count{ namespace=\"$namespace\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[2m]))",
+          "exemplar": true,
+          "expr": "sum(rate(hclcache_cache_gets_duration_seconds_sum{ kubernetes_namespace=~\"$namespace\", cachespace=~\"$environment\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[2m])) / sum(rate(hclcache_cache_gets_duration_seconds_count{ kubernetes_namespace=\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[2m]))",
           "interval": "",
           "legendFormat": "get",
           "refId": "A"
         },
         {
-          "expr": "sum(rate(hclcache_cache_puts_duration_seconds_sum{ namespace=\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[2m])) / sum(rate(hclcache_cache_puts_duration_seconds_count{ namespace=\"$namespace\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[2m]))",
+          "exemplar": true,
+          "expr": "sum(rate(hclcache_cache_puts_duration_seconds_sum{ kubernetes_namespace=~\"$namespace\", cachespace=~\"$environment\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[2m])) / sum(rate(hclcache_cache_puts_duration_seconds_count{ kubernetes_namespace=\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[2m]))",
           "interval": "",
           "legendFormat": "put",
           "refId": "B"
         },
         {
-          "expr": "sum(rate(hclcache_cache_removes_duration_seconds_sum{ namespace=\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[2m])) / sum(rate(hclcache_cache_puts_duration_seconds_count{ namespace=\"$namespace\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[2m]))",
+          "exemplar": true,
+          "expr": "sum(rate(hclcache_cache_removes_duration_seconds_sum{ kubernetes_namespace=~\"$namespace\", cachespace=~\"$environment\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[2m])) / sum(rate(hclcache_cache_puts_duration_seconds_count{ kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[2m]))",
           "interval": "",
           "legendFormat": "remove",
           "refId": "C"
         },
         {
-          "expr": "sum(rate(hclcache_cache_invalidates_duration_seconds_sum{ namespace=\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[2m])) / sum(rate(hclcache_cache_puts_duration_seconds_count{ namespace=\"$namespace\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[2m]))",
+          "exemplar": true,
+          "expr": "sum(rate(hclcache_cache_invalidates_duration_seconds_sum{ kubernetes_namespace=\"$namespace\", cachespace=~\"$environment\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[2m])) / sum(rate(hclcache_cache_puts_duration_seconds_count{ kubernetes_namespace=\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[2m]))",
           "interval": "",
           "legendFormat": "invalidate",
           "refId": "D"
@@ -1392,7 +1411,7 @@
         "h": 8,
         "w": 8,
         "x": 0,
-        "y": 45
+        "y": 33
       },
       "hiddenSeries": false,
       "id": 360,
@@ -1414,7 +1433,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.5.3",
+      "pluginVersion": "7.5.5",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -1424,28 +1443,37 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "histogram_quantile(0.95, sum(rate(hclcache_cache_gets_duration_seconds_bucket{ namespace=\"$namespace\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[5m])) by (le))",
+          "exemplar": true,
+          "expr": "histogram_quantile(0.95, sum(rate(hclcache_cache_gets_duration_seconds_bucket{ kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[5m])) by (le))",
           "interval": "",
           "legendFormat": "get",
           "refId": "A"
         },
         {
-          "expr": "histogram_quantile(0.95, sum(rate(hclcache_cache_puts_duration_seconds_bucket{ namespace=\"$namespace\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\"}[5m])) by (le))",
+          "exemplar": true,
+          "expr": "histogram_quantile(0.95, sum(rate(hclcache_cache_puts_duration_seconds_bucket{ kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", scope=\"remote\", name=~\"$cache\"}[5m])) by (le))",
+          "interval": "",
           "legendFormat": "put ",
           "refId": "C"
         },
         {
-          "expr": "histogram_quantile(0.95, sum(rate(hclcache_cache_clears_duration_seconds_bucket{ namespace=\"$namespace\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\"}[5m])) by (le))",
+          "exemplar": true,
+          "expr": "histogram_quantile(0.95, sum(rate(hclcache_cache_clears_duration_seconds_bucket{ kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", scope=\"remote\", name=~\"$cache\"}[5m])) by (le))",
+          "interval": "",
           "legendFormat": "clear",
           "refId": "B"
         },
         {
-          "expr": "histogram_quantile(0.95, sum(rate(hclcache_cache_invalidates_duration_seconds_bucket{ namespace=\"$namespace\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[5m])) by (le))",
+          "exemplar": true,
+          "expr": "histogram_quantile(0.95, sum(rate(hclcache_cache_invalidates_duration_seconds_bucket{ kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[5m])) by (le))",
+          "interval": "",
           "legendFormat": "invalidate",
           "refId": "D"
         },
         {
-          "expr": "histogram_quantile(0.95, sum(rate(hclcache_cache_removes_duration_seconds_bucket{ namespace=\"$namespace\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[5m])) by (le))",
+          "exemplar": true,
+          "expr": "histogram_quantile(0.95, sum(rate(hclcache_cache_removes_duration_seconds_bucket{ kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[5m])) by (le))",
+          "interval": "",
           "legendFormat": "remove",
           "refId": "E"
         }
@@ -1509,7 +1537,7 @@
         "h": 8,
         "w": 8,
         "x": 8,
-        "y": 45
+        "y": 33
       },
       "hiddenSeries": false,
       "id": 369,
@@ -1531,7 +1559,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.5.3",
+      "pluginVersion": "7.5.5",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -1541,27 +1569,37 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "histogram_quantile(0.99, sum(rate(hclcache_cache_gets_duration_seconds_bucket{ namespace=\"$namespace\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\"  }[5m])) by (le))",
+          "exemplar": true,
+          "expr": "histogram_quantile(0.99, sum(rate(hclcache_cache_gets_duration_seconds_bucket{ kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", scope=\"remote\", name=~\"$cache\"  }[5m])) by (le))",
+          "interval": "",
           "legendFormat": "get",
           "refId": "A"
         },
         {
-          "expr": "histogram_quantile(0.99, sum(rate(hclcache_cache_puts_duration_seconds_bucket{ namespace=\"$namespace\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\"}[5m])) by (le))",
+          "exemplar": true,
+          "expr": "histogram_quantile(0.99, sum(rate(hclcache_cache_puts_duration_seconds_bucket{ kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", scope=\"remote\", name=~\"$cache\"}[5m])) by (le))",
+          "interval": "",
           "legendFormat": "put ",
           "refId": "C"
         },
         {
-          "expr": "histogram_quantile(0.99, sum(rate(hclcache_cache_clears_duration_seconds_bucket{ namespace=\"$namespace\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[5m])) by (le))",
+          "exemplar": true,
+          "expr": "histogram_quantile(0.99, sum(rate(hclcache_cache_clears_duration_seconds_bucket{ kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[5m])) by (le))",
+          "interval": "",
           "legendFormat": "clear",
           "refId": "B"
         },
         {
-          "expr": "histogram_quantile(0.99, sum(rate(hclcache_cache_invalidates_duration_seconds_bucket{ namespace=\"$namespace\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[5m])) by (le))",
+          "exemplar": true,
+          "expr": "histogram_quantile(0.99, sum(rate(hclcache_cache_invalidates_duration_seconds_bucket{ kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[5m])) by (le))",
+          "interval": "",
           "legendFormat": "invalidate",
           "refId": "D"
         },
         {
-          "expr": "histogram_quantile(0.99, sum(rate(hclcache_cache_removes_duration_seconds_bucket{ namespace=\"$namespace\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[5m])) by (le))",
+          "exemplar": true,
+          "expr": "histogram_quantile(0.99, sum(rate(hclcache_cache_removes_duration_seconds_bucket{ kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[5m])) by (le))",
+          "interval": "",
           "legendFormat": "remove",
           "refId": "E"
         }
@@ -1608,177 +1646,178 @@
       }
     },
     {
-      "collapsed": true,
+      "collapsed": false,
       "datasource": "Prometheus",
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 53
+        "y": 41
       },
       "id": 368,
-      "panels": [
-        {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": "Prometheus",
-          "fieldConfig": {
-            "defaults": {
-              "links": []
-            },
-            "overrides": []
-          },
-          "fill": 1,
-          "fillGradient": 0,
-          "gridPos": {
-            "h": 8,
-            "w": 13,
-            "x": 0,
-            "y": 55
-          },
-          "hiddenSeries": false,
-          "id": 325,
-          "interval": "",
-          "legend": {
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "nullPointMode": "null",
-          "options": {
-            "alertThreshold": true
-          },
-          "percentage": false,
-          "pluginVersion": "7.5.3",
-          "pointradius": 2,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "stack": true,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "sum by (result) (rate(hclcache_cache_gets_duration_seconds_count{ namespace=~\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", result !=\"error\", name=~\"$cache\"}[2m]))",
-              "hide": false,
-              "interval": "",
-              "legendFormat": "{{result}}",
-              "refId": "A"
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeRegions": [],
-          "timeShift": null,
-          "title": "Remote Gets per second",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": "0",
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            }
-          ],
-          "yaxis": {
-            "align": false,
-            "alignLevel": null
-          }
-        },
-        {
-          "datasource": "Prometheus",
-          "fieldConfig": {
-            "defaults": {
-              "decimals": 0,
-              "mappings": [],
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "green",
-                    "value": null
-                  },
-                  {
-                    "color": "red",
-                    "value": 80
-                  }
-                ]
-              },
-              "unit": "percentunit"
-            },
-            "overrides": []
-          },
-          "gridPos": {
-            "h": 8,
-            "w": 3,
-            "x": 13,
-            "y": 55
-          },
-          "id": 326,
-          "options": {
-            "colorMode": "value",
-            "graphMode": "area",
-            "justifyMode": "auto",
-            "orientation": "auto",
-            "reduceOptions": {
-              "calcs": [
-                "mean"
-              ],
-              "fields": "",
-              "values": false
-            },
-            "text": {},
-            "textMode": "auto"
-          },
-          "pluginVersion": "7.5.3",
-          "targets": [
-            {
-              "expr": "sum(rate(hclcache_cache_gets_duration_seconds_count{ namespace=~\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", result =\"hit\", name=~\"$cache\"}[2m])) / sum(rate(hclcache_cache_gets_duration_seconds_count{ namespace=~\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", result !=\"error\", name=~\"$cache\"}[2m]))",
-              "hide": false,
-              "instant": false,
-              "interval": "",
-              "legendFormat": "{{result}}",
-              "refId": "A"
-            }
-          ],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "Remote Hit Ratio",
-          "type": "stat"
-        }
-      ],
+      "panels": [],
       "title": "Hit Ratios",
       "type": "row"
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "Prometheus",
+      "fieldConfig": {
+        "defaults": {
+          "links": []
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 8,
+        "w": 13,
+        "x": 0,
+        "y": 42
+      },
+      "hiddenSeries": false,
+      "id": 325,
+      "interval": "",
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "7.5.5",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": true,
+      "steppedLine": false,
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "sum by (result) (rate(hclcache_cache_gets_duration_seconds_count{ kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", cachespace=~\"$environment\", scope=\"remote\", result !=\"error\", name=~\"$cache\"}[2m]))",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{result}}",
+          "refId": "A"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Remote Gets per second",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": "0",
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "datasource": "Prometheus",
+      "fieldConfig": {
+        "defaults": {
+          "decimals": 0,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "percentunit"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 3,
+        "x": 13,
+        "y": 42
+      },
+      "id": 326,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "7.5.5",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "sum(rate(hclcache_cache_gets_duration_seconds_count{ kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", cachespace=~\"$environment\", scope=\"remote\", result =\"hit\", name=~\"$cache\"}[2m])) / sum(rate(hclcache_cache_gets_duration_seconds_count{ kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", cachespace=~\"$environment\",  scope=\"remote\", result !=\"error\", name=~\"$cache\"}[2m]))",
+          "hide": false,
+          "instant": false,
+          "interval": "",
+          "legendFormat": "{{result}}",
+          "refId": "A"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Remote Hit Ratio",
+      "type": "stat"
     },
     {
       "collapsed": true,
@@ -1787,7 +1826,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 54
+        "y": 50
       },
       "id": 378,
       "panels": [
@@ -1810,7 +1849,7 @@
             "h": 11,
             "w": 11,
             "x": 0,
-            "y": 56
+            "y": 51
           },
           "hiddenSeries": false,
           "id": 381,
@@ -1832,7 +1871,7 @@
             "alertThreshold": true
           },
           "percentage": false,
-          "pluginVersion": "7.5.3",
+          "pluginVersion": "7.5.5",
           "pointradius": 2,
           "points": false,
           "renderer": "flot",
@@ -1842,7 +1881,8 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum(rate(hclcache_cache_invalidation_messages_total{ namespace=~\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", type=\"dependency\", name=~\"$cache\"} [2m] ) ) by (name) > 0",
+              "exemplar": true,
+              "expr": "sum(rate(hclcache_cache_invalidation_messages_total{ kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", cachespace=~\"$environment\", type=\"dependency\", name=~\"$cache\"} [2m] ) ) by (name) > 0",
               "interval": "",
               "legendFormat": "{{name}}",
               "refId": "A"
@@ -1908,7 +1948,7 @@
             "h": 11,
             "w": 13,
             "x": 11,
-            "y": 56
+            "y": 51
           },
           "hiddenSeries": false,
           "id": 382,
@@ -1930,7 +1970,7 @@
             "alertThreshold": true
           },
           "percentage": false,
-          "pluginVersion": "7.5.3",
+          "pluginVersion": "7.5.5",
           "pointradius": 2,
           "points": false,
           "renderer": "flot",
@@ -1940,7 +1980,8 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum(rate(hclcache_cache_invalidation_messages_total{ namespace=~\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", type=\"clear\", name=~\"$cache\"}[2m])) by (name) > 0",
+              "exemplar": true,
+              "expr": "sum(rate(hclcache_cache_invalidation_messages_total{ kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", cachespace=~\"$environment\", type=\"clear\", name=~\"$cache\"}[2m])) by (name) > 0",
               "interval": "",
               "legendFormat": "{{name}}",
               "refId": "A"
@@ -1992,522 +2033,526 @@
       "type": "row"
     },
     {
-      "collapsed": true,
+      "collapsed": false,
       "datasource": null,
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 55
+        "y": 51
       },
       "id": 392,
-      "panels": [
-        {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": null,
-          "decimals": 0,
-          "description": "This chart shows the number of keys  that have expired and are pending to be removed by the maintenance processes. Large numbers could indicate maintenance is failing or behind\nCache Manager pod must be enabled\n",
-          "fieldConfig": {
-            "defaults": {
-              "links": []
-            },
-            "overrides": []
-          },
-          "fill": 1,
-          "fillGradient": 0,
-          "gridPos": {
-            "h": 10,
-            "w": 12,
-            "x": 0,
-            "y": 57
-          },
-          "hiddenSeries": false,
-          "id": 400,
-          "legend": {
-            "alignAsTable": true,
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "rightSide": true,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "nullPointMode": "null",
-          "options": {
-            "alertThreshold": true
-          },
-          "percentage": false,
-          "pluginVersion": "7.5.3",
-          "pointradius": 2,
-          "points": false,
-          "renderer": "flot",
-          "repeatDirection": "v",
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "sum( hclcache_cache_size_maintenance{ namespace=~\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\" } ) by ( name )  > 0",
-              "interval": "",
-              "legendFormat": "{{name}}",
-              "refId": "A"
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeRegions": [],
-          "timeShift": null,
-          "title": "Number of Expired Keys Pending Maintenance",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "decimals": 0,
-              "format": "short",
-              "label": "",
-              "logBase": 1,
-              "max": null,
-              "min": "0",
-              "show": true
-            },
-            {
-              "decimals": null,
-              "format": "short",
-              "label": "",
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            }
-          ],
-          "yaxis": {
-            "align": false,
-            "alignLevel": null
-          }
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": null,
-          "description": "",
-          "fieldConfig": {
-            "defaults": {
-              "links": []
-            },
-            "overrides": []
-          },
-          "fill": 1,
-          "fillGradient": 0,
-          "gridPos": {
-            "h": 10,
-            "w": 12,
-            "x": 12,
-            "y": 57
-          },
-          "hiddenSeries": false,
-          "id": 394,
-          "legend": {
-            "alignAsTable": true,
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "rightSide": true,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "nullPointMode": "null",
-          "options": {
-            "alertThreshold": true
-          },
-          "percentage": false,
-          "pluginVersion": "7.5.3",
-          "pointradius": 2,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "sum( rate( hclcache_cache_maintenance_online_keys_total{ namespace=~\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", result!=\"error\", name=~\"$cache\", scope=\"remote\", type=\"expired\" }[5m]) > 0 ) by  (name) ",
-              "interval": "",
-              "legendFormat": "{{type}}",
-              "refId": "A"
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeRegions": [],
-          "timeShift": null,
-          "title": "Rate of Expired Keys Removed by Cache",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            }
-          ],
-          "yaxis": {
-            "align": false,
-            "alignLevel": null
-          }
-        },
-        {
-          "aliasColors": {},
-          "bars": true,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": null,
-          "description": "When the HCL Cache detects that the memory in Redis is almost full, it can temporarily stop PUT operations while Low-Memory maintenance is running ",
-          "fieldConfig": {
-            "defaults": {
-              "links": []
-            },
-            "overrides": []
-          },
-          "fill": 1,
-          "fillGradient": 0,
-          "gridPos": {
-            "h": 10,
-            "w": 8,
-            "x": 0,
-            "y": 67
-          },
-          "hiddenSeries": false,
-          "id": 396,
-          "legend": {
-            "alignAsTable": true,
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "rightSide": true,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": false,
-          "linewidth": 1,
-          "nullPointMode": "null",
-          "options": {
-            "alertThreshold": true
-          },
-          "percentage": false,
-          "pluginVersion": "7.5.3",
-          "pointradius": 2,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "sum( hclcache_cache_remote_put_paused{ namespace=~\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", name=~\"$cache\" } ) by (name)  > 0",
-              "interval": "",
-              "legendFormat": "{{name}}",
-              "refId": "A"
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeRegions": [],
-          "timeShift": null,
-          "title": "Low-Memory Maintenance - Paused PUT Operations by Cache",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "decimals": 0,
-              "format": "short",
-              "label": "",
-              "logBase": 1,
-              "max": null,
-              "min": "0",
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            }
-          ],
-          "yaxis": {
-            "align": false,
-            "alignLevel": null
-          }
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": null,
-          "description": "",
-          "fieldConfig": {
-            "defaults": {
-              "links": []
-            },
-            "overrides": []
-          },
-          "fill": 1,
-          "fillGradient": 0,
-          "gridPos": {
-            "h": 10,
-            "w": 7,
-            "x": 8,
-            "y": 67
-          },
-          "hiddenSeries": false,
-          "id": 397,
-          "legend": {
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "nullPointMode": "null",
-          "options": {
-            "alertThreshold": true
-          },
-          "percentage": false,
-          "pluginVersion": "7.5.3",
-          "pointradius": 2,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "sum( rate( hclcache_cache_maintenance_online_keys_total{ namespace=~\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", result!=\"error\", name=~\"$cache\", scope=\"remote\" }[5m]  ) ) by  ( type )",
-              "interval": "",
-              "legendFormat": "{{type}}",
-              "refId": "A"
-            },
-            {
-              "expr": "sum( rate( hclcache_cache_maintenance_online_keys_total{ namespace=~\"$namespace\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", result=\"error\", name=~\"$cache\", scope=\"remote\" }[5m]  ) ) by  ( type )",
-              "interval": "",
-              "legendFormat": "{{type}}-error",
-              "refId": "B"
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeRegions": [],
-          "timeShift": null,
-          "title": "Rate of Keys Maintained by Type",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": "0",
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            }
-          ],
-          "yaxis": {
-            "align": false,
-            "alignLevel": null
-          }
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": null,
-          "description": "",
-          "fieldConfig": {
-            "defaults": {
-              "links": []
-            },
-            "overrides": []
-          },
-          "fill": 1,
-          "fillGradient": 0,
-          "gridPos": {
-            "h": 10,
-            "w": 9,
-            "x": 15,
-            "y": 67
-          },
-          "hiddenSeries": false,
-          "id": 399,
-          "legend": {
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "nullPointMode": "null",
-          "options": {
-            "alertThreshold": true
-          },
-          "percentage": false,
-          "pluginVersion": "7.5.3",
-          "pointradius": 2,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "sum(rate(hclcache_cache_maintenance_online_duration_seconds_sum{ namespace=\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\", type=\"expired\" }[2m]) ) \r\n / sum(rate(hclcache_cache_maintenance_online_duration_seconds_count{ namespace=\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\", type=\"expired\"}[2m]))\r",
-              "interval": "",
-              "legendFormat": "expired",
-              "refId": "A"
-            },
-            {
-              "expr": "sum(rate(hclcache_cache_maintenance_online_duration_seconds_sum{ namespace=\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\", type=\"emergency\" }[2m]) ) \r\n / sum(rate(hclcache_cache_maintenance_online__duration_seconds_count{ namespace=\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\", type=\"emergency\"}[2m]))\r",
-              "interval": "",
-              "legendFormat": "emergency",
-              "refId": "C"
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeRegions": [],
-          "timeShift": null,
-          "title": "Maintenance Average Durations",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "s",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            }
-          ],
-          "yaxis": {
-            "align": false,
-            "alignLevel": null
-          }
-        }
-      ],
+      "panels": [],
       "title": "Maintenance",
       "type": "row"
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": null,
+      "decimals": 0,
+      "description": "This chart shows the number of keys  that have expired and are pending to be removed by the maintenance processes. Large numbers could indicate maintenance is failing or behind\nCache Manager pod must be enabled\n",
+      "fieldConfig": {
+        "defaults": {
+          "links": []
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 10,
+        "w": 12,
+        "x": 0,
+        "y": 52
+      },
+      "hiddenSeries": false,
+      "id": 400,
+      "legend": {
+        "alignAsTable": true,
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "rightSide": true,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "7.5.5",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "repeatDirection": "v",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "sum( hclcache_cache_size_maintenance{ kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", cachespace=~\"$environment\",  scope=\"remote\", name=~\"$cache\" } ) by ( name )  > 0",
+          "interval": "",
+          "legendFormat": "{{name}}",
+          "refId": "A"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Number of Expired Keys Pending Maintenance",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "decimals": 0,
+          "format": "short",
+          "label": "",
+          "logBase": 1,
+          "max": null,
+          "min": "0",
+          "show": true
+        },
+        {
+          "decimals": null,
+          "format": "short",
+          "label": "",
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": null,
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "links": []
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 10,
+        "w": 12,
+        "x": 12,
+        "y": 52
+      },
+      "hiddenSeries": false,
+      "id": 394,
+      "legend": {
+        "alignAsTable": true,
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "rightSide": true,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "7.5.5",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "sum( rate( hclcache_cache_maintenance_online_keys_total{ kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", cachespace=~\"$environment\", scope=\"remote\", result!=\"error\", name=~\"$cache\", scope=\"remote\", type=\"expired\" }[5m]) > 0 ) by  (name) ",
+          "interval": "",
+          "legendFormat": "{{type}}",
+          "refId": "A"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Rate of Expired Keys Removed by Cache",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": true,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": null,
+      "description": "When the HCL Cache detects that the memory in Redis is almost full, it can temporarily stop PUT operations while Low-Memory maintenance is running ",
+      "fieldConfig": {
+        "defaults": {
+          "links": []
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 10,
+        "w": 8,
+        "x": 0,
+        "y": 62
+      },
+      "hiddenSeries": false,
+      "id": 396,
+      "legend": {
+        "alignAsTable": true,
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "rightSide": true,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": false,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "7.5.5",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "sum( hclcache_cache_remote_put_paused{ kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", cachespace=~\"$environment\", name=~\"$cache\" } ) by (name)  > 0",
+          "interval": "",
+          "legendFormat": "{{name}}",
+          "refId": "A"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Low-Memory Maintenance - Paused PUT Operations by Cache",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "decimals": 0,
+          "format": "short",
+          "label": "",
+          "logBase": 1,
+          "max": null,
+          "min": "0",
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": null,
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "links": []
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 10,
+        "w": 7,
+        "x": 8,
+        "y": 62
+      },
+      "hiddenSeries": false,
+      "id": 397,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "7.5.5",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "sum( rate( hclcache_cache_maintenance_online_keys_total{ kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", cachespace=~\"$environment\",  scope=\"remote\", result!=\"error\", name=~\"$cache\", scope=\"remote\" }[5m]  ) ) by  ( type )",
+          "interval": "",
+          "legendFormat": "{{type}}",
+          "refId": "A"
+        },
+        {
+          "expr": "sum( rate( hclcache_cache_maintenance_online_keys_total{ namespace=~\"$namespace\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", result=\"error\", name=~\"$cache\", scope=\"remote\" }[5m]  ) ) by  ( type )",
+          "interval": "",
+          "legendFormat": "{{type}}-error",
+          "refId": "B"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Rate of Keys Maintained by Type",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": "0",
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": null,
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "links": []
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 10,
+        "w": 9,
+        "x": 15,
+        "y": 62
+      },
+      "hiddenSeries": false,
+      "id": 399,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "7.5.5",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "sum(rate(hclcache_cache_maintenance_online_duration_seconds_sum{ kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", cachespace=\"$environment\",  scope=\"remote\", name=~\"$cache\", type=\"expired\" }[2m]) ) \r\n / sum(rate(hclcache_cache_maintenance_online_duration_seconds_count{ kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", cachespace=\"$environment\",  scope=\"remote\", name=~\"$cache\", type=\"expired\"}[2m]))\r",
+          "interval": "",
+          "legendFormat": "expired",
+          "refId": "A"
+        },
+        {
+          "expr": "sum(rate(hclcache_cache_maintenance_online_duration_seconds_sum{ namespace=\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\", type=\"emergency\" }[2m]) ) \r\n / sum(rate(hclcache_cache_maintenance_online__duration_seconds_count{ namespace=\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\", type=\"emergency\"}[2m]))\r",
+          "interval": "",
+          "legendFormat": "emergency",
+          "refId": "C"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Maintenance Average Durations",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "s",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
     }
   ],
   "refresh": false,
@@ -2523,11 +2568,11 @@
         "allValue": null,
         "current": {
           "selected": false,
-          "text": "commerce",
-          "value": "commerce"
+          "text": "sofy",
+          "value": "sofy"
         },
         "datasource": "Prometheus",
-        "definition": "label_values(hclcache_cache_size_max, namespace)",
+        "definition": "label_values(hclcache_cache_size_max, kubernetes_namespace)",
         "description": null,
         "error": null,
         "hide": 0,
@@ -2537,8 +2582,8 @@
         "name": "namespace",
         "options": [],
         "query": {
-          "query": "label_values(hclcache_cache_size_max, namespace)",
-          "refId": "Prometheus-namespace-Variable-Query"
+          "query": "label_values(hclcache_cache_size_max, kubernetes_namespace)",
+          "refId": "StandardVariableQuery"
         },
         "refresh": 2,
         "regex": "",
@@ -2554,11 +2599,11 @@
         "allValue": null,
         "current": {
           "selected": false,
-          "text": "demoqalive",
-          "value": "demoqalive"
+          "text": "comdemoauth",
+          "value": "comdemoauth"
         },
         "datasource": "Prometheus",
-        "definition": "label_values(hclcache_cache_size_max{ namespace=\"$namespace\"}, cachespace)",
+        "definition": "label_values(hclcache_cache_size_max{ kubernetes_namespace=\"$namespace\"}, cachespace)",
         "description": null,
         "error": null,
         "hide": 0,
@@ -2568,8 +2613,8 @@
         "name": "environment",
         "options": [],
         "query": {
-          "query": "label_values(hclcache_cache_size_max{ namespace=\"$namespace\"}, cachespace)",
-          "refId": "Prometheus-environment-Variable-Query"
+          "query": "label_values(hclcache_cache_size_max{ kubernetes_namespace=\"$namespace\"}, cachespace)",
+          "refId": "StandardVariableQuery"
         },
         "refresh": 2,
         "regex": "",
@@ -2589,7 +2634,7 @@
           "value": "$__all"
         },
         "datasource": "Prometheus",
-        "definition": "label_values(hclcache_cache_size_max{ namespace=~\"$namespace\", cachespace=\"$environment\"}, job)",
+        "definition": "label_values(hclcache_cache_size_max{ kubernetes_namespace=~\"$namespace\", cachespace=\"$environment\"}, component)",
         "description": null,
         "error": null,
         "hide": 0,
@@ -2599,8 +2644,8 @@
         "name": "job",
         "options": [],
         "query": {
-          "query": "label_values(hclcache_cache_size_max{ namespace=~\"$namespace\", cachespace=\"$environment\"}, job)",
-          "refId": "Prometheus-job-Variable-Query"
+          "query": "label_values(hclcache_cache_size_max{ kubernetes_namespace=~\"$namespace\", cachespace=\"$environment\"}, component)",
+          "refId": "StandardVariableQuery"
         },
         "refresh": 2,
         "regex": "",
@@ -2613,14 +2658,14 @@
         "useTags": false
       },
       {
-        "allValue": ".*",
+        "allValue": "$job.*",
         "current": {
           "selected": false,
           "text": "All",
           "value": "$__all"
         },
         "datasource": "Prometheus",
-        "definition": "label_values(hclcache_cache_size_max{ namespace=~\"$namespace\", cachespace=\"$environment\", job=~\"$job\"}, pod)",
+        "definition": "label_values(hclcache_cache_size_max{ kubernetes_namespace=~\"$namespace\", cachespace=\"$environment\", component=~\"$job\"}, kubernetes_pod_name)",
         "description": null,
         "error": null,
         "hide": 0,
@@ -2630,8 +2675,8 @@
         "name": "pod",
         "options": [],
         "query": {
-          "query": "label_values(hclcache_cache_size_max{ namespace=~\"$namespace\", cachespace=\"$environment\", job=~\"$job\"}, pod)",
-          "refId": "Prometheus-pod-Variable-Query"
+          "query": "label_values(hclcache_cache_size_max{ kubernetes_namespace=~\"$namespace\", cachespace=\"$environment\", component=~\"$job\"}, kubernetes_pod_name)",
+          "refId": "StandardVariableQuery"
         },
         "refresh": 2,
         "regex": "",
@@ -2651,7 +2696,7 @@
           "value": "$__all"
         },
         "datasource": "Prometheus",
-        "definition": "label_values(hclcache_cache_size_max{ namespace=~\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\"},name)",
+        "definition": "label_values(hclcache_cache_size_max{ kubernetes_namespace=~\"$namespace\", cachespace=\"$environment\", component=~\"$job\", kubernetes_pod_name=~\"$pod\"},name)",
         "description": null,
         "error": null,
         "hide": 0,
@@ -2661,8 +2706,8 @@
         "name": "cache",
         "options": [],
         "query": {
-          "query": "label_values(hclcache_cache_size_max{ namespace=~\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\"},name)",
-          "refId": "Prometheus-cache-Variable-Query"
+          "query": "label_values(hclcache_cache_size_max{ kubernetes_namespace=~\"$namespace\", cachespace=\"$environment\", component=~\"$job\", kubernetes_pod_name=~\"$pod\"},name)",
+          "refId": "StandardVariableQuery"
         },
         "refresh": 2,
         "regex": "",
@@ -2693,7 +2738,7 @@
         "options": [],
         "query": {
           "query": "label_values(hclcache_cache_remote_node_mapping{ cachespace=\"$environment\" },redis_instance)",
-          "refId": "Prometheus-redis-Variable-Query"
+          "refId": "StandardVariableQuery"
         },
         "refresh": 2,
         "regex": "",

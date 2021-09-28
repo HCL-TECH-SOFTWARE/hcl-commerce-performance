@@ -15,8 +15,8 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 51,
-  "iteration": 1625766621628,
+  "id": 42,
+  "iteration": 1632233993965,
   "links": [
     {
       "asDropdown": false,
@@ -70,7 +70,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.5.3",
+      "pluginVersion": "7.5.5",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -173,7 +173,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.5.3",
+      "pluginVersion": "7.5.5",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -1090,7 +1090,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.5.3",
+      "pluginVersion": "7.5.5",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -1210,12 +1210,12 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.5.3",
+      "pluginVersion": "7.5.5",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
       "repeatDirection": "h",
-      "repeatIteration": 1625766621628,
+      "repeatIteration": 1632233993965,
       "repeatPanelId": 30,
       "scopedVars": {
         "jvm_memory_pool_nonheap": {
@@ -1268,6 +1268,7 @@
       },
       "yaxes": [
         {
+          "$$hashKey": "object:402",
           "format": "decbytes",
           "label": null,
           "logBase": 1,
@@ -1276,6 +1277,7 @@
           "show": true
         },
         {
+          "$$hashKey": "object:403",
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -1329,12 +1331,12 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.5.3",
+      "pluginVersion": "7.5.5",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
       "repeatDirection": "h",
-      "repeatIteration": 1625766621628,
+      "repeatIteration": 1632233993965,
       "repeatPanelId": 30,
       "scopedVars": {
         "jvm_memory_pool_nonheap": {
@@ -1387,6 +1389,7 @@
       },
       "yaxes": [
         {
+          "$$hashKey": "object:402",
           "format": "decbytes",
           "label": null,
           "logBase": 1,
@@ -1395,6 +1398,7 @@
           "show": true
         },
         {
+          "$$hashKey": "object:403",
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -1448,12 +1452,12 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.5.3",
+      "pluginVersion": "7.5.5",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
       "repeatDirection": "h",
-      "repeatIteration": 1625766621628,
+      "repeatIteration": 1632233993965,
       "repeatPanelId": 30,
       "scopedVars": {
         "jvm_memory_pool_nonheap": {
@@ -1506,6 +1510,7 @@
       },
       "yaxes": [
         {
+          "$$hashKey": "object:402",
           "format": "decbytes",
           "label": null,
           "logBase": 1,
@@ -1514,6 +1519,7 @@
           "show": true
         },
         {
+          "$$hashKey": "object:403",
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -1564,7 +1570,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.5.3",
+      "pluginVersion": "7.5.5",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -1704,8 +1710,8 @@
         "allValue": ".*",
         "current": {
           "selected": false,
-          "text": "demoqalivets-app-7674cf67c8-6hrvx",
-          "value": "demoqalivets-app-7674cf67c8-6hrvx"
+          "text": "demoqalivecache-app-65d566d779-zw24q",
+          "value": "demoqalivecache-app-65d566d779-zw24q"
         },
         "datasource": "Prometheus",
         "definition": "label_values(jvm_memory_used_bytes{namespace=~\"$namespace\",job=~\"$job\"}, pod)",
@@ -1796,7 +1802,7 @@
     ]
   },
   "time": {
-    "from": "now-15m",
+    "from": "now-5m",
     "to": "now"
   },
   "timepicker": {

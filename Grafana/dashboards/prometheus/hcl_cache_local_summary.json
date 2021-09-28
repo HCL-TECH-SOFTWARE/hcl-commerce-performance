@@ -16,8 +16,8 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 67,
-  "iteration": 1605756818238,
+  "id": 10,
+  "iteration": 1632760627447,
   "links": [
     {
       "asDropdown": false,
@@ -37,9 +37,7 @@
       "datasource": "Prometheus",
       "description": "",
       "fieldConfig": {
-        "defaults": {
-          "custom": {}
-        },
+        "defaults": {},
         "overrides": []
       },
       "fontSize": "100%",
@@ -193,39 +191,57 @@
       ],
       "targets": [
         {
-          "expr": "sum( hclcache_cache_size_current{ namespace=\"$namespace\", pod=\"$pod\", scope=\"local\" }) by (name)",
+          "exemplar": true,
+          "expr": "sum( hclcache_cache_size_current{ kubernetes_namespace=~\"$namespace\", kubernetes_pod_name=\"$pod\", scope=\"local\" }) by (name)",
           "format": "table",
           "instant": true,
+          "interval": "",
+          "legendFormat": "",
           "refId": "A"
         },
         {
-          "expr": "sum( hclcache_cache_size_max{ namespace=\"$namespace\", pod=\"$pod\", scope=\"local\" }) by (name)",
+          "exemplar": true,
+          "expr": "sum( hclcache_cache_size_max{ kubernetes_namespace=~\"$namespace\", kubernetes_pod_name=\"$pod\", scope=\"local\" }) by (name)",
           "format": "table",
           "instant": true,
+          "interval": "",
+          "legendFormat": "",
           "refId": "B"
         },
         {
-          "expr": "sum( hclcache_cache_size_current{ namespace=\"$namespace\", pod=\"$pod\", scope=\"local\" }) by (name) / sum( hclcache_cache_size_max{ namespace=\"$namespace\", pod=\"$pod\", scope=\"local\" }) by (name)",
+          "exemplar": true,
+          "expr": "sum( hclcache_cache_size_current{ kubernetes_namespace=~\"$namespace\", kubernetes_pod_name=\"$pod\", scope=\"local\" }) by (name) / sum( hclcache_cache_size_max{ kubernetes_namespace=~\"$namespace\", kubernetes_pod_name=\"$pod\", scope=\"local\" }) by (name)",
           "format": "table",
           "instant": true,
+          "interval": "",
+          "legendFormat": "",
           "refId": "C"
         },
         {
-          "expr": "sum( hclcache_cache_size_mb_current{ namespace=\"$namespace\", pod=\"$pod\", scope=\"local\" }) by (name)",
+          "exemplar": true,
+          "expr": "sum( hclcache_cache_size_mb_current{ kubernetes_namespace=~\"$namespace\", kubernetes_pod_name=\"$pod\", scope=\"local\" }) by (name)",
           "format": "table",
           "instant": true,
+          "interval": "",
+          "legendFormat": "",
           "refId": "D"
         },
         {
-          "expr": "sum( hclcache_cache_size_mb_max{ namespace=\"$namespace\", pod=\"$pod\", scope=\"local\" }) by (name)",
+          "exemplar": true,
+          "expr": "sum( hclcache_cache_size_mb_max{ kubernetes_namespace=~\"$namespace\", kubernetes_pod_name=\"$pod\", scope=\"local\" }) by (name)",
           "format": "table",
           "instant": true,
+          "interval": "",
+          "legendFormat": "",
           "refId": "E"
         },
         {
-          "expr": "sum( hclcache_cache_size_mb_current{ namespace=\"$namespace\", pod=\"$pod\", scope=\"local\" }) by (name) / sum( hclcache_cache_size_mb_max{ namespace=\"$namespace\", pod=\"$pod\", scope=\"local\" }) by (name)",
+          "exemplar": true,
+          "expr": "sum( hclcache_cache_size_mb_current{ kubernetes_namespace=~\"$namespace\", kubernetes_pod_name=\"$pod\", scope=\"local\" }) by (name) / sum( hclcache_cache_size_mb_max{ kubernetes_namespace=~\"$namespace\", kubernetes_pod_name=\"$pod\", scope=\"local\" }) by (name)",
           "format": "table",
           "instant": true,
+          "interval": "",
+          "legendFormat": "",
           "refId": "F"
         }
       ],
@@ -237,7 +253,7 @@
     }
   ],
   "refresh": false,
-  "schemaVersion": 26,
+  "schemaVersion": 27,
   "style": "dark",
   "tags": [
     "hcl-cache",
@@ -249,18 +265,23 @@
         "allValue": null,
         "current": {
           "selected": false,
-          "text": "commerce",
-          "value": "commerce"
+          "text": "sofy",
+          "value": "sofy"
         },
         "datasource": "Prometheus",
-        "definition": "label_values(hclcache_cache_size_max, namespace)",
+        "definition": "label_values(hclcache_cache_size_max, kubernetes_namespace)",
+        "description": null,
+        "error": null,
         "hide": 0,
         "includeAll": false,
         "label": "namespace",
         "multi": false,
         "name": "namespace",
         "options": [],
-        "query": "label_values(hclcache_cache_size_max, namespace)",
+        "query": {
+          "query": "label_values(hclcache_cache_size_max, kubernetes_namespace)",
+          "refId": "StandardVariableQuery"
+        },
         "refresh": 2,
         "regex": "",
         "skipUrlSync": false,
@@ -283,14 +304,19 @@
           ]
         },
         "datasource": "Prometheus",
-        "definition": "label_values(hclcache_cache_size_max{namespace=~\"$namespace\"}, job)",
+        "definition": "label_values(hclcache_cache_size_max{kubernetes_namespace=~\"$namespace\"}, component)",
+        "description": null,
+        "error": null,
         "hide": 0,
         "includeAll": true,
         "label": "deployment",
         "multi": true,
         "name": "job",
         "options": [],
-        "query": "label_values(hclcache_cache_size_max{namespace=~\"$namespace\"}, job)",
+        "query": {
+          "query": "label_values(hclcache_cache_size_max{kubernetes_namespace=~\"$namespace\"}, component)",
+          "refId": "StandardVariableQuery"
+        },
         "refresh": 2,
         "regex": "",
         "skipUrlSync": false,
@@ -304,19 +330,24 @@
       {
         "allValue": ".*",
         "current": {
-          "selected": false,
-          "text": "demoqaquery-app-78768877d9-q45qc",
-          "value": "demoqaquery-app-78768877d9-q45qc"
+          "selected": true,
+          "text": "comdemoauthquery-app-c5f4f869d-npn85",
+          "value": "comdemoauthquery-app-c5f4f869d-npn85"
         },
         "datasource": "Prometheus",
-        "definition": "label_values(hclcache_cache_size_max{namespace=~\"$namespace\",job=~\"$job\"}, pod)",
+        "definition": "label_values(hclcache_cache_size_max{kubernetes_namespace=~\"$namespace\",component=~\"$job\"}, kubernetes_pod_name)",
+        "description": null,
+        "error": null,
         "hide": 0,
         "includeAll": false,
         "label": "pod",
         "multi": false,
         "name": "pod",
         "options": [],
-        "query": "label_values(hclcache_cache_size_max{namespace=~\"$namespace\",job=~\"$job\"}, pod)",
+        "query": {
+          "query": "label_values(hclcache_cache_size_max{kubernetes_namespace=~\"$namespace\",component=~\"$job\"}, kubernetes_pod_name)",
+          "refId": "StandardVariableQuery"
+        },
         "refresh": 2,
         "regex": "",
         "skipUrlSync": false,
