@@ -15,8 +15,8 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 31,
-  "iteration": 1632492804238,
+  "id": 26,
+  "iteration": 1632844403066,
   "links": [],
   "panels": [
     {
@@ -37,7 +37,7 @@
         "content": "After the first ingest is done, an elasticsearch index \"run\" would be created.\nPlease do the following setup after your first ingest is done to view nifi statistics.\n\nAdd an elasticsearch datasource\n   1) Click on the configuration icon (with a wheel picture) on the side \n   2) Choose \"Data Sources\"\n   3) Click on \"Add data source\"\n   4) Type in \"Elasticsearch\" in the search field\n   5) Click on the returned \"Elasticsearch\" icon\n   6) Fill in the name of index (e.g. Elasticsearch)\n   7) Under section \"HTTP\", fill in the field \"URL\" with your elasticsearch domain and port              \n      something like http://elasticsearch-master.es.svc.cluster.local:9200/)      \n\t  The domain and port number could be changed based on the user deployment.\n   8) Under section \"Elastic details\", fill in the fields/choose the options as follows:                      \n\t\t(a) Index name : run   \n\t\t(b) Pattern : No pattern   \n\t\t(c) Time field name : date   \n\t\t(d) Version : 7.0+\n   9)Click on \"Save & Test\" button at the end of the page.          \n     Ensure the connection succeeds before the dashboard would work properly.",
         "mode": "markdown"
       },
-      "pluginVersion": "7.5.3",
+      "pluginVersion": "7.5.5",
       "timeFrom": null,
       "timeShift": null,
       "title": "Setup for Elasticsearch datasource to access the ingest data",
@@ -908,10 +908,9 @@
           "renderer": "flot",
           "scopedVars": {
             "nifipod": {
-              "isNone": true,
               "selected": true,
-              "text": "None",
-              "value": ""
+              "text": "comdemonifi-app-6c589556c4-shq5s",
+              "value": "comdemonifi-app-6c589556c4-shq5s"
             }
           },
           "seriesOverrides": [],
@@ -1013,10 +1012,9 @@
           "renderer": "flot",
           "scopedVars": {
             "nifipod": {
-              "isNone": true,
               "selected": true,
-              "text": "None",
-              "value": ""
+              "text": "comdemonifi-app-6c589556c4-shq5s",
+              "value": "comdemonifi-app-6c589556c4-shq5s"
             }
           },
           "seriesOverrides": [],
@@ -1120,10 +1118,9 @@
           "renderer": "flot",
           "scopedVars": {
             "nifipod": {
-              "isNone": true,
               "selected": true,
-              "text": "None",
-              "value": ""
+              "text": "comdemonifi-app-6c589556c4-shq5s",
+              "value": "comdemonifi-app-6c589556c4-shq5s"
             }
           },
           "seriesOverrides": [
@@ -1272,10 +1269,9 @@
           "renderer": "flot",
           "scopedVars": {
             "nifipod": {
-              "isNone": true,
               "selected": true,
-              "text": "None",
-              "value": ""
+              "text": "comdemonifi-app-6c589556c4-shq5s",
+              "value": "comdemonifi-app-6c589556c4-shq5s"
             }
           },
           "seriesOverrides": [],
@@ -1390,10 +1386,9 @@
           "renderer": "flot",
           "scopedVars": {
             "nifipod": {
-              "isNone": true,
               "selected": true,
-              "text": "None",
-              "value": ""
+              "text": "comdemonifi-app-6c589556c4-shq5s",
+              "value": "comdemonifi-app-6c589556c4-shq5s"
             }
           },
           "seriesOverrides": [
@@ -1542,10 +1537,9 @@
           "renderer": "flot",
           "scopedVars": {
             "nifipod": {
-              "isNone": true,
               "selected": true,
-              "text": "None",
-              "value": ""
+              "text": "comdemonifi-app-6c589556c4-shq5s",
+              "value": "comdemonifi-app-6c589556c4-shq5s"
             }
           },
           "seriesOverrides": [],
@@ -1650,10 +1644,9 @@
           "renderer": "flot",
           "scopedVars": {
             "nifipod": {
-              "isNone": true,
               "selected": true,
-              "text": "None",
-              "value": ""
+              "text": "comdemonifi-app-6c589556c4-shq5s",
+              "value": "comdemonifi-app-6c589556c4-shq5s"
             }
           },
           "seriesOverrides": [],
@@ -1714,10 +1707,9 @@
       "repeat": "nifipod",
       "scopedVars": {
         "nifipod": {
-          "isNone": true,
           "selected": true,
-          "text": "None",
-          "value": ""
+          "text": "comdemonifi-app-6c589556c4-shq5s",
+          "value": "comdemonifi-app-6c589556c4-shq5s"
         }
       },
       "title": "Container - $nifipod  System Metrics",
@@ -1727,16 +1719,17 @@
   "refresh": false,
   "schemaVersion": 27,
   "style": "dark",
-  "tags": [],
+  "tags": [
+    "hcl"
+  ],
   "templating": {
     "list": [
       {
         "allValue": null,
         "current": {
-          "isNone": true,
           "selected": false,
-          "text": "None",
-          "value": ""
+          "text": "comdemonifi-app-6c589556c4-shq5s",
+          "value": "comdemonifi-app-6c589556c4-shq5s"
         },
         "datasource": "Prometheus",
         "definition": "label_values(kube_pod_container_resource_requests_cpu_cores{container=\"nifi-app\"},pod)",
@@ -1807,9 +1800,10 @@
       {
         "allValue": null,
         "current": {
+          "isNone": true,
           "selected": false,
-          "text": "auth.reindex",
-          "value": "auth.reindex"
+          "text": "None",
+          "value": ""
         },
         "datasource": "$es_datasource",
         "definition": "{\"find\": \"terms\",  \"field\": \"connector\"}",
@@ -1835,9 +1829,10 @@
       {
         "allValue": null,
         "current": {
+          "isNone": true,
           "selected": false,
-          "text": "i-6181fee7-5bd7-4b90-b932-2461abd62d68",
-          "value": "i-6181fee7-5bd7-4b90-b932-2461abd62d68"
+          "text": "None",
+          "value": ""
         },
         "datasource": "$es_datasource",
         "definition": "{\"find\": \"terms\", \"field\": \"run\", \"query\": \"connector: $connector\"}",
