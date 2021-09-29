@@ -15,8 +15,8 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 26,
-  "iteration": 1632844403066,
+  "id": 58,
+  "iteration": 1632909505236,
   "links": [],
   "panels": [
     {
@@ -116,7 +116,7 @@
             "h": 7,
             "w": 24,
             "x": 0,
-            "y": 1
+            "y": 8
           },
           "id": 31,
           "options": {
@@ -129,7 +129,7 @@
               }
             ]
           },
-          "pluginVersion": "7.5.3",
+          "pluginVersion": "7.5.5",
           "targets": [
             {
               "alias": "Write Success",
@@ -298,7 +298,7 @@
             "h": 7,
             "w": 24,
             "x": 0,
-            "y": 8
+            "y": 15
           },
           "id": 33,
           "options": {
@@ -311,7 +311,7 @@
               }
             ]
           },
-          "pluginVersion": "7.5.3",
+          "pluginVersion": "7.5.5",
           "targets": [
             {
               "alias": "Write Success",
@@ -472,7 +472,7 @@
             "h": 7,
             "w": 24,
             "x": 0,
-            "y": 15
+            "y": 22
           },
           "id": 30,
           "options": {
@@ -485,7 +485,7 @@
               }
             ]
           },
-          "pluginVersion": "7.5.3",
+          "pluginVersion": "7.5.5",
           "targets": [
             {
               "alias": "Created Document Counter",
@@ -664,7 +664,7 @@
             "h": 12,
             "w": 24,
             "x": 0,
-            "y": 2
+            "y": 9
           },
           "hiddenSeries": false,
           "id": 12,
@@ -687,7 +687,7 @@
             "alertThreshold": true
           },
           "percentage": false,
-          "pluginVersion": "7.5.3",
+          "pluginVersion": "7.5.5",
           "pointradius": 5,
           "points": false,
           "renderer": "flot",
@@ -765,7 +765,7 @@
             "h": 12,
             "w": 24,
             "x": 0,
-            "y": 14
+            "y": 21
           },
           "hiddenSeries": false,
           "id": 21,
@@ -788,7 +788,7 @@
             "alertThreshold": true
           },
           "percentage": false,
-          "pluginVersion": "7.5.3",
+          "pluginVersion": "7.5.5",
           "pointradius": 5,
           "points": false,
           "renderer": "flot",
@@ -871,7 +871,6 @@
           "datasource": null,
           "fieldConfig": {
             "defaults": {
-              "custom": {},
               "links": []
             },
             "overrides": []
@@ -882,7 +881,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 48
+            "y": 10
           },
           "hiddenSeries": false,
           "id": 4,
@@ -902,15 +901,15 @@
             "alertThreshold": true
           },
           "percentage": false,
-          "pluginVersion": "7.3.5",
+          "pluginVersion": "7.5.5",
           "pointradius": 2,
           "points": false,
           "renderer": "flot",
           "scopedVars": {
             "nifipod": {
               "selected": true,
-              "text": "comdemonifi-app-6c589556c4-shq5s",
-              "value": "comdemonifi-app-6c589556c4-shq5s"
+              "text": "demoqanifi-app-76446bc6d8-5httn",
+              "value": "demoqanifi-app-76446bc6d8-5httn"
             }
           },
           "seriesOverrides": [],
@@ -975,7 +974,6 @@
           "datasource": null,
           "fieldConfig": {
             "defaults": {
-              "custom": {},
               "links": []
             },
             "overrides": []
@@ -986,7 +984,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 48
+            "y": 10
           },
           "hiddenSeries": false,
           "id": 5,
@@ -1006,15 +1004,15 @@
             "alertThreshold": true
           },
           "percentage": false,
-          "pluginVersion": "7.3.5",
+          "pluginVersion": "7.5.5",
           "pointradius": 2,
           "points": false,
           "renderer": "flot",
           "scopedVars": {
             "nifipod": {
               "selected": true,
-              "text": "comdemonifi-app-6c589556c4-shq5s",
-              "value": "comdemonifi-app-6c589556c4-shq5s"
+              "text": "demoqanifi-app-76446bc6d8-5httn",
+              "value": "demoqanifi-app-76446bc6d8-5httn"
             }
           },
           "seriesOverrides": [],
@@ -1079,7 +1077,6 @@
           "datasource": "Prometheus",
           "fieldConfig": {
             "defaults": {
-              "custom": {},
               "links": []
             },
             "overrides": []
@@ -1090,7 +1087,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 56
+            "y": 18
           },
           "hiddenSeries": false,
           "id": 11,
@@ -1112,15 +1109,15 @@
             "alertThreshold": true
           },
           "percentage": false,
-          "pluginVersion": "7.3.5",
+          "pluginVersion": "7.5.5",
           "pointradius": 5,
           "points": false,
           "renderer": "flot",
           "scopedVars": {
             "nifipod": {
               "selected": true,
-              "text": "comdemonifi-app-6c589556c4-shq5s",
-              "value": "comdemonifi-app-6c589556c4-shq5s"
+              "text": "demoqanifi-app-76446bc6d8-5httn",
+              "value": "demoqanifi-app-76446bc6d8-5httn"
             }
           },
           "seriesOverrides": [
@@ -1230,7 +1227,6 @@
           "datasource": "Prometheus",
           "fieldConfig": {
             "defaults": {
-              "custom": {},
               "links": []
             },
             "overrides": []
@@ -1241,7 +1237,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 56
+            "y": 18
           },
           "hiddenSeries": false,
           "id": 13,
@@ -1263,15 +1259,15 @@
             "alertThreshold": true
           },
           "percentage": false,
-          "pluginVersion": "7.3.5",
+          "pluginVersion": "7.5.5",
           "pointradius": 5,
           "points": false,
           "renderer": "flot",
           "scopedVars": {
             "nifipod": {
               "selected": true,
-              "text": "comdemonifi-app-6c589556c4-shq5s",
-              "value": "comdemonifi-app-6c589556c4-shq5s"
+              "text": "demoqanifi-app-76446bc6d8-5httn",
+              "value": "demoqanifi-app-76446bc6d8-5httn"
             }
           },
           "seriesOverrides": [],
@@ -1349,7 +1345,6 @@
           "datasource": null,
           "fieldConfig": {
             "defaults": {
-              "custom": {},
               "links": []
             },
             "overrides": []
@@ -1360,7 +1355,7 @@
             "h": 7,
             "w": 24,
             "x": 0,
-            "y": 64
+            "y": 26
           },
           "hiddenSeries": false,
           "id": 15,
@@ -1380,15 +1375,15 @@
             "alertThreshold": true
           },
           "percentage": false,
-          "pluginVersion": "7.3.5",
+          "pluginVersion": "7.5.5",
           "pointradius": 2,
           "points": false,
           "renderer": "flot",
           "scopedVars": {
             "nifipod": {
               "selected": true,
-              "text": "comdemonifi-app-6c589556c4-shq5s",
-              "value": "comdemonifi-app-6c589556c4-shq5s"
+              "text": "demoqanifi-app-76446bc6d8-5httn",
+              "value": "demoqanifi-app-76446bc6d8-5httn"
             }
           },
           "seriesOverrides": [
@@ -1498,7 +1493,6 @@
           "datasource": null,
           "fieldConfig": {
             "defaults": {
-              "custom": {},
               "links": []
             },
             "overrides": []
@@ -1509,7 +1503,7 @@
             "h": 10,
             "w": 12,
             "x": 0,
-            "y": 71
+            "y": 33
           },
           "hiddenSeries": false,
           "id": 19,
@@ -1531,15 +1525,15 @@
             "alertThreshold": true
           },
           "percentage": false,
-          "pluginVersion": "7.3.5",
+          "pluginVersion": "7.5.5",
           "pointradius": 2,
           "points": false,
           "renderer": "flot",
           "scopedVars": {
             "nifipod": {
               "selected": true,
-              "text": "comdemonifi-app-6c589556c4-shq5s",
-              "value": "comdemonifi-app-6c589556c4-shq5s"
+              "text": "demoqanifi-app-76446bc6d8-5httn",
+              "value": "demoqanifi-app-76446bc6d8-5httn"
             }
           },
           "seriesOverrides": [],
@@ -1605,7 +1599,6 @@
           "datasource": null,
           "fieldConfig": {
             "defaults": {
-              "custom": {},
               "links": []
             },
             "overrides": []
@@ -1616,7 +1609,7 @@
             "h": 10,
             "w": 12,
             "x": 12,
-            "y": 71
+            "y": 33
           },
           "hiddenSeries": false,
           "id": 20,
@@ -1638,15 +1631,15 @@
             "alertThreshold": true
           },
           "percentage": false,
-          "pluginVersion": "7.3.5",
+          "pluginVersion": "7.5.5",
           "pointradius": 2,
           "points": false,
           "renderer": "flot",
           "scopedVars": {
             "nifipod": {
               "selected": true,
-              "text": "comdemonifi-app-6c589556c4-shq5s",
-              "value": "comdemonifi-app-6c589556c4-shq5s"
+              "text": "demoqanifi-app-76446bc6d8-5httn",
+              "value": "demoqanifi-app-76446bc6d8-5httn"
             }
           },
           "seriesOverrides": [],
@@ -1708,8 +1701,8 @@
       "scopedVars": {
         "nifipod": {
           "selected": true,
-          "text": "comdemonifi-app-6c589556c4-shq5s",
-          "value": "comdemonifi-app-6c589556c4-shq5s"
+          "text": "demoqanifi-app-76446bc6d8-5httn",
+          "value": "demoqanifi-app-76446bc6d8-5httn"
         }
       },
       "title": "Container - $nifipod  System Metrics",
@@ -1728,8 +1721,8 @@
         "allValue": null,
         "current": {
           "selected": false,
-          "text": "comdemonifi-app-6c589556c4-shq5s",
-          "value": "comdemonifi-app-6c589556c4-shq5s"
+          "text": "demoqanifi-app-76446bc6d8-5httn",
+          "value": "demoqanifi-app-76446bc6d8-5httn"
         },
         "datasource": "Prometheus",
         "definition": "label_values(kube_pod_container_resource_requests_cpu_cores{container=\"nifi-app\"},pod)",
@@ -1858,7 +1851,7 @@
     ]
   },
   "time": {
-    "from": "now-5m",
+    "from": "now-24h",
     "to": "now"
   },
   "timepicker": {

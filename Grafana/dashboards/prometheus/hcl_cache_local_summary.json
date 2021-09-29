@@ -16,8 +16,8 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 10,
-  "iteration": 1632760627447,
+  "id": 17,
+  "iteration": 1632907644538,
   "links": [
     {
       "asDropdown": false,
@@ -330,7 +330,7 @@
       {
         "allValue": ".*",
         "current": {
-          "selected": true,
+          "selected": false,
           "text": "comdemoauthquery-app-c5f4f869d-npn85",
           "value": "comdemoauthquery-app-c5f4f869d-npn85"
         },

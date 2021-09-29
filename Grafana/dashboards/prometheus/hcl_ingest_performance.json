@@ -15,8 +15,8 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 26,
-  "iteration": 1632844403066,
+  "id": 19,
+  "iteration": 1632907853750,
   "links": [],
   "panels": [
     {
@@ -34,7 +34,7 @@
       },
       "id": 35,
       "options": {
-        "content": "After the first ingest is done, an elasticsearch index \"run\" would be created.\nPlease do the following setup after your first ingest is done to view nifi statistics.\n\nAdd an elasticsearch datasource\n   1) Click on the configuration icon (with a wheel picture) on the side \n   2) Choose \"Data Sources\"\n   3) Click on \"Add data source\"\n   4) Type in \"Elasticsearch\" in the search field\n   5) Click on the returned \"Elasticsearch\" icon\n   6) Fill in the name of index (e.g. Elasticsearch)\n   7) Under section \"HTTP\", fill in the field \"URL\" with your elasticsearch domain and port              \n      something like http://elasticsearch-master.es.svc.cluster.local:9200/)      \n\t  The domain and port number could be changed based on the user deployment.\n   8) Under section \"Elastic details\", fill in the fields/choose the options as follows:                      \n\t\t(a) Index name : run   \n\t\t(b) Pattern : No pattern   \n\t\t(c) Time field name : date   \n\t\t(d) Version : 7.0+\n   9)Click on \"Save & Test\" button at the end of the page.          \n     Ensure the connection succeeds before the dashboard would work properly.",
+        "content": "After the first ingest is done, an elasticsearch index \"run\" would be created.\nPlease do the following setup after your first ingest is done to view nifi statistics.\n\nAdd an elasticsearch datasource\n   1) Click on the configuration icon (with a wheel picture) on the side \n   2) Choose \"Data Sources\"\n   3) Click on \"Add data source\"\n   4) Type in \"Elasticsearch\" in the search field\n   5) Click on the returned \"Elasticsearch\" icon\n   6) Fill in the name of index (e.g. Elasticsearch)\n   7) Under section \"HTTP\", fill in the field \"URL\" with your elasticsearch domain and port              \n      something like http://elasticsearch-master.es.svc.cluster.local:9200/)      \n\t  The domain and port number could be changed based on the user deployment.\n   8) Under section \"Elastic details\", fill in the fields/choose the options as follows:                      \n\t\t(a) Index name : run   \n\t\t(b) Pattern : No pattern   \n\t\t(c) Time field name : date   \n\t\t(d) Version : 7.0+\n   9)Click on \"Save & Test\" button at the end of the page.          \n     Ensure the connection succeeds before the dashboard would work properly.\n\n     Note: The ingest panels only show the data for auth.reindex and live.reindex",
         "mode": "markdown"
       },
       "pluginVersion": "7.5.5",
@@ -116,7 +116,7 @@
             "h": 7,
             "w": 24,
             "x": 0,
-            "y": 1
+            "y": 8
           },
           "id": 31,
           "options": {
@@ -129,7 +129,7 @@
               }
             ]
           },
-          "pluginVersion": "7.5.3",
+          "pluginVersion": "7.5.5",
           "targets": [
             {
               "alias": "Write Success",
@@ -298,7 +298,7 @@
             "h": 7,
             "w": 24,
             "x": 0,
-            "y": 8
+            "y": 15
           },
           "id": 33,
           "options": {
@@ -311,7 +311,7 @@
               }
             ]
           },
-          "pluginVersion": "7.5.3",
+          "pluginVersion": "7.5.5",
           "targets": [
             {
               "alias": "Write Success",
@@ -472,7 +472,7 @@
             "h": 7,
             "w": 24,
             "x": 0,
-            "y": 15
+            "y": 22
           },
           "id": 30,
           "options": {
@@ -485,7 +485,7 @@
               }
             ]
           },
-          "pluginVersion": "7.5.3",
+          "pluginVersion": "7.5.5",
           "targets": [
             {
               "alias": "Created Document Counter",
@@ -644,223 +644,6 @@
         "x": 0,
         "y": 8
       },
-      "id": 24,
-      "panels": [
-        {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": "Prometheus",
-          "fieldConfig": {
-            "defaults": {
-              "links": []
-            },
-            "overrides": []
-          },
-          "fill": 1,
-          "fillGradient": 0,
-          "gridPos": {
-            "h": 12,
-            "w": 24,
-            "x": 0,
-            "y": 2
-          },
-          "hiddenSeries": false,
-          "id": 12,
-          "legend": {
-            "alignAsTable": true,
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "rightSide": true,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "links": [],
-          "nullPointMode": "null",
-          "options": {
-            "alertThreshold": true
-          },
-          "percentage": false,
-          "pluginVersion": "7.5.3",
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "sum( nifi_amount_items_queued{ component_type = 'ProcessGroup' } ) by ( component_type, component_name )",
-              "format": "time_series",
-              "interval": "",
-              "intervalFactor": 2,
-              "legendFormat": "{{component_name}}",
-              "refId": "A",
-              "step": 2
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeRegions": [],
-          "timeShift": null,
-          "title": "Queued Items",
-          "tooltip": {
-            "shared": false,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            }
-          ],
-          "yaxis": {
-            "align": false,
-            "alignLevel": null
-          }
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": "Prometheus",
-          "fieldConfig": {
-            "defaults": {
-              "links": []
-            },
-            "overrides": []
-          },
-          "fill": 1,
-          "fillGradient": 0,
-          "gridPos": {
-            "h": 12,
-            "w": 24,
-            "x": 0,
-            "y": 14
-          },
-          "hiddenSeries": false,
-          "id": 21,
-          "legend": {
-            "alignAsTable": true,
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "rightSide": true,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "links": [],
-          "nullPointMode": "null",
-          "options": {
-            "alertThreshold": true
-          },
-          "percentage": false,
-          "pluginVersion": "7.5.3",
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "sum( nifi_amount_items_queued{ component_type = 'ProcessGroup', component_name =~ '.*WaitLink.*' } ) by ( component_type, component_name )",
-              "format": "time_series",
-              "interval": "",
-              "intervalFactor": 2,
-              "legendFormat": "{{component_name}}",
-              "refId": "A",
-              "step": 2
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeRegions": [],
-          "timeShift": null,
-          "title": "Wait Link",
-          "tooltip": {
-            "shared": false,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            }
-          ],
-          "yaxis": {
-            "align": false,
-            "alignLevel": null
-          }
-        }
-      ],
-      "title": "Nifi General Metrics",
-      "type": "row"
-    },
-    {
-      "collapsed": true,
-      "datasource": null,
-      "gridPos": {
-        "h": 1,
-        "w": 24,
-        "x": 0,
-        "y": 9
-      },
       "id": 9,
       "panels": [
         {
@@ -868,218 +651,9 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": null,
-          "fieldConfig": {
-            "defaults": {
-              "custom": {},
-              "links": []
-            },
-            "overrides": []
-          },
-          "fill": 1,
-          "fillGradient": 0,
-          "gridPos": {
-            "h": 8,
-            "w": 12,
-            "x": 0,
-            "y": 48
-          },
-          "hiddenSeries": false,
-          "id": 4,
-          "legend": {
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "show": false,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "nullPointMode": "null",
-          "options": {
-            "alertThreshold": true
-          },
-          "percentage": false,
-          "pluginVersion": "7.3.5",
-          "pointradius": 2,
-          "points": false,
-          "renderer": "flot",
-          "scopedVars": {
-            "nifipod": {
-              "selected": true,
-              "text": "comdemonifi-app-6c589556c4-shq5s",
-              "value": "comdemonifi-app-6c589556c4-shq5s"
-            }
-          },
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "sum(nifi_jvm_heap_usage{pod=\"$nifipod\"}) by (pod)",
-              "interval": "",
-              "legendFormat": "{{pod}}",
-              "refId": "A"
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeRegions": [],
-          "timeShift": null,
-          "title": "Heap Used (%)",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "decimals": null,
-              "format": "percentunit",
-              "label": "",
-              "logBase": 1,
-              "max": null,
-              "min": "0",
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            }
-          ],
-          "yaxis": {
-            "align": false,
-            "alignLevel": null
-          }
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": null,
-          "fieldConfig": {
-            "defaults": {
-              "custom": {},
-              "links": []
-            },
-            "overrides": []
-          },
-          "fill": 1,
-          "fillGradient": 0,
-          "gridPos": {
-            "h": 8,
-            "w": 12,
-            "x": 12,
-            "y": 48
-          },
-          "hiddenSeries": false,
-          "id": 5,
-          "legend": {
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "show": false,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "nullPointMode": "null",
-          "options": {
-            "alertThreshold": true
-          },
-          "percentage": false,
-          "pluginVersion": "7.3.5",
-          "pointradius": 2,
-          "points": false,
-          "renderer": "flot",
-          "scopedVars": {
-            "nifipod": {
-              "selected": true,
-              "text": "comdemonifi-app-6c589556c4-shq5s",
-              "value": "comdemonifi-app-6c589556c4-shq5s"
-            }
-          },
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "nifi_jvm_heap_used{pod=\"$nifipod\"}",
-              "interval": "",
-              "legendFormat": "{{pod}}",
-              "refId": "A"
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeRegions": [],
-          "timeShift": null,
-          "title": "Heap Used (bytes)",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "decimals": null,
-              "format": "bytes",
-              "label": "",
-              "logBase": 1,
-              "max": null,
-              "min": "0",
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            }
-          ],
-          "yaxis": {
-            "align": false,
-            "alignLevel": null
-          }
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
           "datasource": "Prometheus",
           "fieldConfig": {
             "defaults": {
-              "custom": {},
               "links": []
             },
             "overrides": []
@@ -1090,7 +664,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 56
+            "y": 9
           },
           "hiddenSeries": false,
           "id": 11,
@@ -1112,7 +686,7 @@
             "alertThreshold": true
           },
           "percentage": false,
-          "pluginVersion": "7.3.5",
+          "pluginVersion": "7.5.5",
           "pointradius": 5,
           "points": false,
           "renderer": "flot",
@@ -1148,7 +722,8 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "node_namespace_pod_container:container_cpu_usage_seconds_total:sum_rate{pod=\"$nifipod\"}",
+              "exemplar": true,
+              "expr": "sum(rate(container_cpu_usage_seconds_total{pod=~\"$nifipod\",container=\"nifi-app\"}[5m])) by (pod)",
               "format": "time_series",
               "hide": false,
               "interval": "",
@@ -1159,6 +734,7 @@
               "step": 10
             },
             {
+              "exemplar": true,
               "expr": "kube_pod_container_resource_requests_cpu_cores{pod=\"$nifipod\"}\n",
               "format": "time_series",
               "hide": false,
@@ -1170,6 +746,7 @@
               "step": 10
             },
             {
+              "exemplar": true,
               "expr": "kube_pod_container_resource_limits_cpu_cores{pod=\"$nifipod\"}\n",
               "format": "time_series",
               "hide": false,
@@ -1230,7 +807,6 @@
           "datasource": "Prometheus",
           "fieldConfig": {
             "defaults": {
-              "custom": {},
               "links": []
             },
             "overrides": []
@@ -1241,7 +817,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 56
+            "y": 9
           },
           "hiddenSeries": false,
           "id": 13,
@@ -1263,7 +839,7 @@
             "alertThreshold": true
           },
           "percentage": false,
-          "pluginVersion": "7.3.5",
+          "pluginVersion": "7.5.5",
           "pointradius": 5,
           "points": false,
           "renderer": "flot",
@@ -1349,7 +925,6 @@
           "datasource": null,
           "fieldConfig": {
             "defaults": {
-              "custom": {},
               "links": []
             },
             "overrides": []
@@ -1360,7 +935,7 @@
             "h": 7,
             "w": 24,
             "x": 0,
-            "y": 64
+            "y": 17
           },
           "hiddenSeries": false,
           "id": 15,
@@ -1380,7 +955,7 @@
             "alertThreshold": true
           },
           "percentage": false,
-          "pluginVersion": "7.3.5",
+          "pluginVersion": "7.5.5",
           "pointradius": 2,
           "points": false,
           "renderer": "flot",
@@ -1498,7 +1073,6 @@
           "datasource": null,
           "fieldConfig": {
             "defaults": {
-              "custom": {},
               "links": []
             },
             "overrides": []
@@ -1509,7 +1083,7 @@
             "h": 10,
             "w": 12,
             "x": 0,
-            "y": 71
+            "y": 24
           },
           "hiddenSeries": false,
           "id": 19,
@@ -1531,7 +1105,7 @@
             "alertThreshold": true
           },
           "percentage": false,
-          "pluginVersion": "7.3.5",
+          "pluginVersion": "7.5.5",
           "pointradius": 2,
           "points": false,
           "renderer": "flot",
@@ -1605,7 +1179,6 @@
           "datasource": null,
           "fieldConfig": {
             "defaults": {
-              "custom": {},
               "links": []
             },
             "overrides": []
@@ -1616,7 +1189,7 @@
             "h": 10,
             "w": 12,
             "x": 12,
-            "y": 71
+            "y": 24
           },
           "hiddenSeries": false,
           "id": 20,
@@ -1638,7 +1211,7 @@
             "alertThreshold": true
           },
           "percentage": false,
-          "pluginVersion": "7.3.5",
+          "pluginVersion": "7.5.5",
           "pointradius": 2,
           "points": false,
           "renderer": "flot",
@@ -1743,7 +1316,7 @@
         "options": [],
         "query": {
           "query": "label_values(kube_pod_container_resource_requests_cpu_cores{container=\"nifi-app\"},pod)",
-          "refId": "Prometheus-nifipod-Variable-Query"
+          "refId": "StandardVariableQuery"
         },
         "refresh": 2,
         "regex": "",
@@ -1858,7 +1431,7 @@
     ]
   },
   "time": {
-    "from": "now-5m",
+    "from": "now-24h",
     "to": "now"
   },
   "timepicker": {
