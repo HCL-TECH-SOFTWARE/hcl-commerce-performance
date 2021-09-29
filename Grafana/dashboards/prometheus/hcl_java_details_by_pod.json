@@ -15,8 +15,8 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 4,
-  "iteration": 1632742027871,
+  "id": 15,
+  "iteration": 1632907749620,
   "links": [
     {
       "asDropdown": false,
@@ -594,7 +594,7 @@
       "type": "row"
     },
     {
-      "collapsed": false,
+      "collapsed": true,
       "datasource": null,
       "gridPos": {
         "h": 1,
@@ -603,519 +603,6 @@
         "y": 9
       },
       "id": 21,
-      "panels": [],
-      "title": "JVM Heap Memory Pools",
-      "type": "row"
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "Prometheus",
-      "fieldConfig": {
-        "defaults": {
-          "links": []
-        },
-        "overrides": []
-      },
-      "fill": 1,
-      "fillGradient": 0,
-      "gridPos": {
-        "h": 8,
-        "w": 8,
-        "x": 0,
-        "y": 10
-      },
-      "hiddenSeries": false,
-      "id": 16,
-      "legend": {
-        "avg": false,
-        "current": true,
-        "max": true,
-        "min": false,
-        "rightSide": false,
-        "show": true,
-        "total": false,
-        "values": true
-      },
-      "lines": true,
-      "linewidth": 1,
-      "maxPerRow": 3,
-      "nullPointMode": "null",
-      "options": {
-        "alertThreshold": true
-      },
-      "percentage": false,
-      "pluginVersion": "7.5.5",
-      "pointradius": 2,
-      "points": false,
-      "renderer": "flot",
-      "repeat": "jvm_memory_pool_heap",
-      "repeatDirection": "h",
-      "scopedVars": {
-        "jvm_memory_pool_heap": {
-          "selected": false,
-          "text": "tenured-SOA",
-          "value": "tenured-SOA"
-        }
-      },
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "exemplar": true,
-          "expr": "sum(jvm_memory_used_bytes{kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", area=\"heap\", id=\"$jvm_memory_pool_heap\"})",
-          "interval": "",
-          "intervalFactor": 2,
-          "legendFormat": "used",
-          "refId": "A"
-        },
-        {
-          "exemplar": true,
-          "expr": "sum(jvm_memory_committed_bytes{kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", area=\"heap\", id=\"$jvm_memory_pool_heap\"})  ",
-          "interval": "",
-          "intervalFactor": 2,
-          "legendFormat": "committed",
-          "refId": "B"
-        },
-        {
-          "exemplar": true,
-          "expr": "sum(jvm_memory_max_bytes{kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", area=\"heap\", id=\"$jvm_memory_pool_heap\"})  ",
-          "interval": "",
-          "intervalFactor": 2,
-          "legendFormat": "max",
-          "refId": "C"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "$jvm_memory_pool_heap",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "decbytes",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": "0",
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "Prometheus",
-      "fieldConfig": {
-        "defaults": {
-          "links": []
-        },
-        "overrides": []
-      },
-      "fill": 1,
-      "fillGradient": 0,
-      "gridPos": {
-        "h": 8,
-        "w": 8,
-        "x": 8,
-        "y": 10
-      },
-      "hiddenSeries": false,
-      "id": 76,
-      "legend": {
-        "avg": false,
-        "current": true,
-        "max": true,
-        "min": false,
-        "rightSide": false,
-        "show": true,
-        "total": false,
-        "values": true
-      },
-      "lines": true,
-      "linewidth": 1,
-      "maxPerRow": 3,
-      "nullPointMode": "null",
-      "options": {
-        "alertThreshold": true
-      },
-      "percentage": false,
-      "pluginVersion": "7.5.5",
-      "pointradius": 2,
-      "points": false,
-      "renderer": "flot",
-      "repeatDirection": "h",
-      "repeatIteration": 1632742027871,
-      "repeatPanelId": 16,
-      "scopedVars": {
-        "jvm_memory_pool_heap": {
-          "selected": false,
-          "text": "tenured-LOA",
-          "value": "tenured-LOA"
-        }
-      },
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "exemplar": true,
-          "expr": "sum(jvm_memory_used_bytes{kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", area=\"heap\", id=\"$jvm_memory_pool_heap\"})",
-          "interval": "",
-          "intervalFactor": 2,
-          "legendFormat": "used",
-          "refId": "A"
-        },
-        {
-          "exemplar": true,
-          "expr": "sum(jvm_memory_committed_bytes{kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", area=\"heap\", id=\"$jvm_memory_pool_heap\"})  ",
-          "interval": "",
-          "intervalFactor": 2,
-          "legendFormat": "committed",
-          "refId": "B"
-        },
-        {
-          "exemplar": true,
-          "expr": "sum(jvm_memory_max_bytes{kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", area=\"heap\", id=\"$jvm_memory_pool_heap\"})  ",
-          "interval": "",
-          "intervalFactor": 2,
-          "legendFormat": "max",
-          "refId": "C"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "$jvm_memory_pool_heap",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "decbytes",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": "0",
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "Prometheus",
-      "fieldConfig": {
-        "defaults": {
-          "links": []
-        },
-        "overrides": []
-      },
-      "fill": 1,
-      "fillGradient": 0,
-      "gridPos": {
-        "h": 8,
-        "w": 8,
-        "x": 16,
-        "y": 10
-      },
-      "hiddenSeries": false,
-      "id": 77,
-      "legend": {
-        "avg": false,
-        "current": true,
-        "max": true,
-        "min": false,
-        "rightSide": false,
-        "show": true,
-        "total": false,
-        "values": true
-      },
-      "lines": true,
-      "linewidth": 1,
-      "maxPerRow": 3,
-      "nullPointMode": "null",
-      "options": {
-        "alertThreshold": true
-      },
-      "percentage": false,
-      "pluginVersion": "7.5.5",
-      "pointradius": 2,
-      "points": false,
-      "renderer": "flot",
-      "repeatDirection": "h",
-      "repeatIteration": 1632742027871,
-      "repeatPanelId": 16,
-      "scopedVars": {
-        "jvm_memory_pool_heap": {
-          "selected": false,
-          "text": "nursery-survivor",
-          "value": "nursery-survivor"
-        }
-      },
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "exemplar": true,
-          "expr": "sum(jvm_memory_used_bytes{kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", area=\"heap\", id=\"$jvm_memory_pool_heap\"})",
-          "interval": "",
-          "intervalFactor": 2,
-          "legendFormat": "used",
-          "refId": "A"
-        },
-        {
-          "exemplar": true,
-          "expr": "sum(jvm_memory_committed_bytes{kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", area=\"heap\", id=\"$jvm_memory_pool_heap\"})  ",
-          "interval": "",
-          "intervalFactor": 2,
-          "legendFormat": "committed",
-          "refId": "B"
-        },
-        {
-          "exemplar": true,
-          "expr": "sum(jvm_memory_max_bytes{kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", area=\"heap\", id=\"$jvm_memory_pool_heap\"})  ",
-          "interval": "",
-          "intervalFactor": 2,
-          "legendFormat": "max",
-          "refId": "C"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "$jvm_memory_pool_heap",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "decbytes",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": "0",
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "Prometheus",
-      "fieldConfig": {
-        "defaults": {
-          "links": []
-        },
-        "overrides": []
-      },
-      "fill": 1,
-      "fillGradient": 0,
-      "gridPos": {
-        "h": 8,
-        "w": 8,
-        "x": 0,
-        "y": 18
-      },
-      "hiddenSeries": false,
-      "id": 78,
-      "legend": {
-        "avg": false,
-        "current": true,
-        "max": true,
-        "min": false,
-        "rightSide": false,
-        "show": true,
-        "total": false,
-        "values": true
-      },
-      "lines": true,
-      "linewidth": 1,
-      "maxPerRow": 3,
-      "nullPointMode": "null",
-      "options": {
-        "alertThreshold": true
-      },
-      "percentage": false,
-      "pluginVersion": "7.5.5",
-      "pointradius": 2,
-      "points": false,
-      "renderer": "flot",
-      "repeatDirection": "h",
-      "repeatIteration": 1632742027871,
-      "repeatPanelId": 16,
-      "scopedVars": {
-        "jvm_memory_pool_heap": {
-          "selected": false,
-          "text": "nursery-allocate",
-          "value": "nursery-allocate"
-        }
-      },
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "exemplar": true,
-          "expr": "sum(jvm_memory_used_bytes{kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", area=\"heap\", id=\"$jvm_memory_pool_heap\"})",
-          "interval": "",
-          "intervalFactor": 2,
-          "legendFormat": "used",
-          "refId": "A"
-        },
-        {
-          "exemplar": true,
-          "expr": "sum(jvm_memory_committed_bytes{kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", area=\"heap\", id=\"$jvm_memory_pool_heap\"})  ",
-          "interval": "",
-          "intervalFactor": 2,
-          "legendFormat": "committed",
-          "refId": "B"
-        },
-        {
-          "exemplar": true,
-          "expr": "sum(jvm_memory_max_bytes{kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", area=\"heap\", id=\"$jvm_memory_pool_heap\"})  ",
-          "interval": "",
-          "intervalFactor": 2,
-          "legendFormat": "max",
-          "refId": "C"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "$jvm_memory_pool_heap",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "decbytes",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": "0",
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
-    },
-    {
-      "collapsed": true,
-      "datasource": null,
-      "gridPos": {
-        "h": 1,
-        "w": 24,
-        "x": 0,
-        "y": 26
-      },
-      "id": 26,
       "panels": [
         {
           "aliasColors": {},
@@ -1135,10 +622,10 @@
             "h": 8,
             "w": 8,
             "x": 0,
-            "y": 11
+            "y": 10
           },
           "hiddenSeries": false,
-          "id": 30,
+          "id": 16,
           "legend": {
             "avg": false,
             "current": true,
@@ -1161,13 +648,13 @@
           "pointradius": 2,
           "points": false,
           "renderer": "flot",
-          "repeat": "jvm_memory_pool_nonheap",
+          "repeat": "jvm_memory_pool_heap",
           "repeatDirection": "h",
           "scopedVars": {
-            "jvm_memory_pool_nonheap": {
+            "jvm_memory_pool_heap": {
               "selected": false,
-              "text": "miscellaneous non-heap storage",
-              "value": "miscellaneous non-heap storage"
+              "text": "tenured-SOA",
+              "value": "tenured-SOA"
             }
           },
           "seriesOverrides": [],
@@ -1177,7 +664,7 @@
           "targets": [
             {
               "exemplar": true,
-              "expr": "sum(jvm_memory_used_bytes{kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", area=\"nonheap\", id=\"$jvm_memory_pool_nonheap\"})",
+              "expr": "sum(jvm_memory_used_bytes{kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", area=\"heap\", id=\"$jvm_memory_pool_heap\"})",
               "interval": "",
               "intervalFactor": 2,
               "legendFormat": "used",
@@ -1185,7 +672,7 @@
             },
             {
               "exemplar": true,
-              "expr": "sum(jvm_memory_committed_bytes{kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", area=\"nonheap\", id=\"$jvm_memory_pool_nonheap\"})  ",
+              "expr": "sum(jvm_memory_committed_bytes{kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", area=\"heap\", id=\"$jvm_memory_pool_heap\"})  ",
               "interval": "",
               "intervalFactor": 2,
               "legendFormat": "committed",
@@ -1193,7 +680,7 @@
             },
             {
               "exemplar": true,
-              "expr": "sum(jvm_memory_max_bytes{kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", area=\"nonheap\", id=\"$jvm_memory_pool_nonheap\"})  ",
+              "expr": "sum(jvm_memory_max_bytes{kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", area=\"heap\", id=\"$jvm_memory_pool_heap\"})  ",
               "interval": "",
               "intervalFactor": 2,
               "legendFormat": "max",
@@ -1204,7 +691,7 @@
           "timeFrom": null,
           "timeRegions": [],
           "timeShift": null,
-          "title": "$jvm_memory_pool_nonheap",
+          "title": "$jvm_memory_pool_heap",
           "tooltip": {
             "shared": true,
             "sort": 0,
@@ -1220,7 +707,6 @@
           },
           "yaxes": [
             {
-              "$$hashKey": "object:402",
               "format": "decbytes",
               "label": null,
               "logBase": 1,
@@ -1229,7 +715,6 @@
               "show": true
             },
             {
-              "$$hashKey": "object:403",
               "format": "short",
               "label": null,
               "logBase": 1,
@@ -1261,10 +746,10 @@
             "h": 8,
             "w": 8,
             "x": 8,
-            "y": 11
+            "y": 10
           },
           "hiddenSeries": false,
-          "id": 73,
+          "id": 61,
           "legend": {
             "avg": false,
             "current": true,
@@ -1288,13 +773,13 @@
           "points": false,
           "renderer": "flot",
           "repeatDirection": "h",
-          "repeatIteration": 1632742027871,
-          "repeatPanelId": 30,
+          "repeatIteration": 1632907749620,
+          "repeatPanelId": 16,
           "scopedVars": {
-            "jvm_memory_pool_nonheap": {
+            "jvm_memory_pool_heap": {
               "selected": false,
-              "text": "class storage",
-              "value": "class storage"
+              "text": "tenured-LOA",
+              "value": "tenured-LOA"
             }
           },
           "seriesOverrides": [],
@@ -1304,7 +789,7 @@
           "targets": [
             {
               "exemplar": true,
-              "expr": "sum(jvm_memory_used_bytes{kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", area=\"nonheap\", id=\"$jvm_memory_pool_nonheap\"})",
+              "expr": "sum(jvm_memory_used_bytes{kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", area=\"heap\", id=\"$jvm_memory_pool_heap\"})",
               "interval": "",
               "intervalFactor": 2,
               "legendFormat": "used",
@@ -1312,7 +797,7 @@
             },
             {
               "exemplar": true,
-              "expr": "sum(jvm_memory_committed_bytes{kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", area=\"nonheap\", id=\"$jvm_memory_pool_nonheap\"})  ",
+              "expr": "sum(jvm_memory_committed_bytes{kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", area=\"heap\", id=\"$jvm_memory_pool_heap\"})  ",
               "interval": "",
               "intervalFactor": 2,
               "legendFormat": "committed",
@@ -1320,7 +805,7 @@
             },
             {
               "exemplar": true,
-              "expr": "sum(jvm_memory_max_bytes{kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", area=\"nonheap\", id=\"$jvm_memory_pool_nonheap\"})  ",
+              "expr": "sum(jvm_memory_max_bytes{kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", area=\"heap\", id=\"$jvm_memory_pool_heap\"})  ",
               "interval": "",
               "intervalFactor": 2,
               "legendFormat": "max",
@@ -1331,7 +816,7 @@
           "timeFrom": null,
           "timeRegions": [],
           "timeShift": null,
-          "title": "$jvm_memory_pool_nonheap",
+          "title": "$jvm_memory_pool_heap",
           "tooltip": {
             "shared": true,
             "sort": 0,
@@ -1347,7 +832,6 @@
           },
           "yaxes": [
             {
-              "$$hashKey": "object:402",
               "format": "decbytes",
               "label": null,
               "logBase": 1,
@@ -1356,7 +840,6 @@
               "show": true
             },
             {
-              "$$hashKey": "object:403",
               "format": "short",
               "label": null,
               "logBase": 1,
@@ -1388,10 +871,10 @@
             "h": 8,
             "w": 8,
             "x": 16,
-            "y": 11
+            "y": 10
           },
           "hiddenSeries": false,
-          "id": 74,
+          "id": 62,
           "legend": {
             "avg": false,
             "current": true,
@@ -1415,13 +898,13 @@
           "points": false,
           "renderer": "flot",
           "repeatDirection": "h",
-          "repeatIteration": 1632742027871,
-          "repeatPanelId": 30,
+          "repeatIteration": 1632907749620,
+          "repeatPanelId": 16,
           "scopedVars": {
-            "jvm_memory_pool_nonheap": {
+            "jvm_memory_pool_heap": {
               "selected": false,
-              "text": "JIT data cache",
-              "value": "JIT data cache"
+              "text": "nursery-survivor",
+              "value": "nursery-survivor"
             }
           },
           "seriesOverrides": [],
@@ -1431,7 +914,7 @@
           "targets": [
             {
               "exemplar": true,
-              "expr": "sum(jvm_memory_used_bytes{kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", area=\"nonheap\", id=\"$jvm_memory_pool_nonheap\"})",
+              "expr": "sum(jvm_memory_used_bytes{kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", area=\"heap\", id=\"$jvm_memory_pool_heap\"})",
               "interval": "",
               "intervalFactor": 2,
               "legendFormat": "used",
@@ -1439,7 +922,7 @@
             },
             {
               "exemplar": true,
-              "expr": "sum(jvm_memory_committed_bytes{kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", area=\"nonheap\", id=\"$jvm_memory_pool_nonheap\"})  ",
+              "expr": "sum(jvm_memory_committed_bytes{kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", area=\"heap\", id=\"$jvm_memory_pool_heap\"})  ",
               "interval": "",
               "intervalFactor": 2,
               "legendFormat": "committed",
@@ -1447,7 +930,7 @@
             },
             {
               "exemplar": true,
-              "expr": "sum(jvm_memory_max_bytes{kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", area=\"nonheap\", id=\"$jvm_memory_pool_nonheap\"})  ",
+              "expr": "sum(jvm_memory_max_bytes{kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", area=\"heap\", id=\"$jvm_memory_pool_heap\"})  ",
               "interval": "",
               "intervalFactor": 2,
               "legendFormat": "max",
@@ -1458,7 +941,7 @@
           "timeFrom": null,
           "timeRegions": [],
           "timeShift": null,
-          "title": "$jvm_memory_pool_nonheap",
+          "title": "$jvm_memory_pool_heap",
           "tooltip": {
             "shared": true,
             "sort": 0,
@@ -1474,7 +957,6 @@
           },
           "yaxes": [
             {
-              "$$hashKey": "object:402",
               "format": "decbytes",
               "label": null,
               "logBase": 1,
@@ -1483,7 +965,6 @@
               "show": true
             },
             {
-              "$$hashKey": "object:403",
               "format": "short",
               "label": null,
               "logBase": 1,
@@ -1515,10 +996,10 @@
             "h": 8,
             "w": 8,
             "x": 0,
-            "y": 19
+            "y": 18
           },
           "hiddenSeries": false,
-          "id": 75,
+          "id": 63,
           "legend": {
             "avg": false,
             "current": true,
@@ -1542,13 +1023,13 @@
           "points": false,
           "renderer": "flot",
           "repeatDirection": "h",
-          "repeatIteration": 1632742027871,
-          "repeatPanelId": 30,
+          "repeatIteration": 1632907749620,
+          "repeatPanelId": 16,
           "scopedVars": {
-            "jvm_memory_pool_nonheap": {
+            "jvm_memory_pool_heap": {
               "selected": false,
-              "text": "JIT code cache",
-              "value": "JIT code cache"
+              "text": "nursery-allocate",
+              "value": "nursery-allocate"
             }
           },
           "seriesOverrides": [],
@@ -1558,7 +1039,7 @@
           "targets": [
             {
               "exemplar": true,
-              "expr": "sum(jvm_memory_used_bytes{kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", area=\"nonheap\", id=\"$jvm_memory_pool_nonheap\"})",
+              "expr": "sum(jvm_memory_used_bytes{kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", area=\"heap\", id=\"$jvm_memory_pool_heap\"})",
               "interval": "",
               "intervalFactor": 2,
               "legendFormat": "used",
@@ -1566,7 +1047,7 @@
             },
             {
               "exemplar": true,
-              "expr": "sum(jvm_memory_committed_bytes{kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", area=\"nonheap\", id=\"$jvm_memory_pool_nonheap\"})  ",
+              "expr": "sum(jvm_memory_committed_bytes{kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", area=\"heap\", id=\"$jvm_memory_pool_heap\"})  ",
               "interval": "",
               "intervalFactor": 2,
               "legendFormat": "committed",
@@ -1574,7 +1055,7 @@
             },
             {
               "exemplar": true,
-              "expr": "sum(jvm_memory_max_bytes{kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", area=\"nonheap\", id=\"$jvm_memory_pool_nonheap\"})  ",
+              "expr": "sum(jvm_memory_max_bytes{kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", area=\"heap\", id=\"$jvm_memory_pool_heap\"})  ",
               "interval": "",
               "intervalFactor": 2,
               "legendFormat": "max",
@@ -1585,7 +1066,7 @@
           "timeFrom": null,
           "timeRegions": [],
           "timeShift": null,
-          "title": "$jvm_memory_pool_nonheap",
+          "title": "$jvm_memory_pool_heap",
           "tooltip": {
             "shared": true,
             "sort": 0,
@@ -1601,7 +1082,6 @@
           },
           "yaxes": [
             {
-              "$$hashKey": "object:402",
               "format": "decbytes",
               "label": null,
               "logBase": 1,
@@ -1610,104 +1090,6 @@
               "show": true
             },
             {
-              "$$hashKey": "object:403",
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            }
-          ],
-          "yaxis": {
-            "align": false,
-            "alignLevel": null
-          }
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": null,
-          "description": "",
-          "fieldConfig": {
-            "defaults": {},
-            "overrides": []
-          },
-          "fill": 1,
-          "fillGradient": 0,
-          "gridPos": {
-            "h": 8,
-            "w": 8,
-            "x": 8,
-            "y": 19
-          },
-          "hiddenSeries": false,
-          "id": 60,
-          "legend": {
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "nullPointMode": "null",
-          "options": {
-            "alertThreshold": true
-          },
-          "percentage": false,
-          "pluginVersion": "7.5.5",
-          "pointradius": 2,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "exemplar": true,
-              "expr": "hclcache_netty_used_direct_memory_bytes{kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\"}",
-              "interval": "",
-              "legendFormat": "direct_memory",
-              "refId": "A"
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeRegions": [],
-          "timeShift": null,
-          "title": "HCL Cache Netty used direct memory",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "$$hashKey": "object:84",
-              "format": "decbytes",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": "0",
-              "show": true
-            },
-            {
-              "$$hashKey": "object:85",
               "format": "short",
               "label": null,
               "logBase": 1,
@@ -1722,8 +1104,626 @@
           }
         }
       ],
+      "title": "JVM Heap Memory Pools",
+      "type": "row"
+    },
+    {
+      "collapsed": false,
+      "datasource": null,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 10
+      },
+      "id": 26,
+      "panels": [],
       "title": "JVM Non-Heap Memory Pools",
       "type": "row"
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "Prometheus",
+      "fieldConfig": {
+        "defaults": {
+          "links": []
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 0,
+        "y": 11
+      },
+      "hiddenSeries": false,
+      "id": 30,
+      "legend": {
+        "avg": false,
+        "current": true,
+        "max": true,
+        "min": false,
+        "rightSide": false,
+        "show": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "maxPerRow": 3,
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "7.5.5",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "repeat": "jvm_memory_pool_nonheap",
+      "repeatDirection": "h",
+      "scopedVars": {
+        "jvm_memory_pool_nonheap": {
+          "selected": false,
+          "text": "miscellaneous non-heap storage",
+          "value": "miscellaneous non-heap storage"
+        }
+      },
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "sum(jvm_memory_used_bytes{kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", area=\"nonheap\", id=\"$jvm_memory_pool_nonheap\"})",
+          "interval": "",
+          "intervalFactor": 2,
+          "legendFormat": "used",
+          "refId": "A"
+        },
+        {
+          "exemplar": true,
+          "expr": "sum(jvm_memory_committed_bytes{kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", area=\"nonheap\", id=\"$jvm_memory_pool_nonheap\"})  ",
+          "interval": "",
+          "intervalFactor": 2,
+          "legendFormat": "committed",
+          "refId": "B"
+        },
+        {
+          "exemplar": true,
+          "expr": "sum(jvm_memory_max_bytes{kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", area=\"nonheap\", id=\"$jvm_memory_pool_nonheap\"})  ",
+          "interval": "",
+          "intervalFactor": 2,
+          "legendFormat": "max",
+          "refId": "C"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "$jvm_memory_pool_nonheap",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "$$hashKey": "object:402",
+          "format": "decbytes",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": "0",
+          "show": true
+        },
+        {
+          "$$hashKey": "object:403",
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "Prometheus",
+      "fieldConfig": {
+        "defaults": {
+          "links": []
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 8,
+        "y": 11
+      },
+      "hiddenSeries": false,
+      "id": 64,
+      "legend": {
+        "avg": false,
+        "current": true,
+        "max": true,
+        "min": false,
+        "rightSide": false,
+        "show": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "maxPerRow": 3,
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "7.5.5",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "repeatDirection": "h",
+      "repeatIteration": 1632907749620,
+      "repeatPanelId": 30,
+      "scopedVars": {
+        "jvm_memory_pool_nonheap": {
+          "selected": false,
+          "text": "class storage",
+          "value": "class storage"
+        }
+      },
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "sum(jvm_memory_used_bytes{kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", area=\"nonheap\", id=\"$jvm_memory_pool_nonheap\"})",
+          "interval": "",
+          "intervalFactor": 2,
+          "legendFormat": "used",
+          "refId": "A"
+        },
+        {
+          "exemplar": true,
+          "expr": "sum(jvm_memory_committed_bytes{kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", area=\"nonheap\", id=\"$jvm_memory_pool_nonheap\"})  ",
+          "interval": "",
+          "intervalFactor": 2,
+          "legendFormat": "committed",
+          "refId": "B"
+        },
+        {
+          "exemplar": true,
+          "expr": "sum(jvm_memory_max_bytes{kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", area=\"nonheap\", id=\"$jvm_memory_pool_nonheap\"})  ",
+          "interval": "",
+          "intervalFactor": 2,
+          "legendFormat": "max",
+          "refId": "C"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "$jvm_memory_pool_nonheap",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "$$hashKey": "object:402",
+          "format": "decbytes",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": "0",
+          "show": true
+        },
+        {
+          "$$hashKey": "object:403",
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "Prometheus",
+      "fieldConfig": {
+        "defaults": {
+          "links": []
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 16,
+        "y": 11
+      },
+      "hiddenSeries": false,
+      "id": 65,
+      "legend": {
+        "avg": false,
+        "current": true,
+        "max": true,
+        "min": false,
+        "rightSide": false,
+        "show": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "maxPerRow": 3,
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "7.5.5",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "repeatDirection": "h",
+      "repeatIteration": 1632907749620,
+      "repeatPanelId": 30,
+      "scopedVars": {
+        "jvm_memory_pool_nonheap": {
+          "selected": false,
+          "text": "JIT data cache",
+          "value": "JIT data cache"
+        }
+      },
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "sum(jvm_memory_used_bytes{kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", area=\"nonheap\", id=\"$jvm_memory_pool_nonheap\"})",
+          "interval": "",
+          "intervalFactor": 2,
+          "legendFormat": "used",
+          "refId": "A"
+        },
+        {
+          "exemplar": true,
+          "expr": "sum(jvm_memory_committed_bytes{kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", area=\"nonheap\", id=\"$jvm_memory_pool_nonheap\"})  ",
+          "interval": "",
+          "intervalFactor": 2,
+          "legendFormat": "committed",
+          "refId": "B"
+        },
+        {
+          "exemplar": true,
+          "expr": "sum(jvm_memory_max_bytes{kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", area=\"nonheap\", id=\"$jvm_memory_pool_nonheap\"})  ",
+          "interval": "",
+          "intervalFactor": 2,
+          "legendFormat": "max",
+          "refId": "C"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "$jvm_memory_pool_nonheap",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "$$hashKey": "object:402",
+          "format": "decbytes",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": "0",
+          "show": true
+        },
+        {
+          "$$hashKey": "object:403",
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "Prometheus",
+      "fieldConfig": {
+        "defaults": {
+          "links": []
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 0,
+        "y": 19
+      },
+      "hiddenSeries": false,
+      "id": 66,
+      "legend": {
+        "avg": false,
+        "current": true,
+        "max": true,
+        "min": false,
+        "rightSide": false,
+        "show": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "maxPerRow": 3,
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "7.5.5",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "repeatDirection": "h",
+      "repeatIteration": 1632907749620,
+      "repeatPanelId": 30,
+      "scopedVars": {
+        "jvm_memory_pool_nonheap": {
+          "selected": false,
+          "text": "JIT code cache",
+          "value": "JIT code cache"
+        }
+      },
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "sum(jvm_memory_used_bytes{kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", area=\"nonheap\", id=\"$jvm_memory_pool_nonheap\"})",
+          "interval": "",
+          "intervalFactor": 2,
+          "legendFormat": "used",
+          "refId": "A"
+        },
+        {
+          "exemplar": true,
+          "expr": "sum(jvm_memory_committed_bytes{kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", area=\"nonheap\", id=\"$jvm_memory_pool_nonheap\"})  ",
+          "interval": "",
+          "intervalFactor": 2,
+          "legendFormat": "committed",
+          "refId": "B"
+        },
+        {
+          "exemplar": true,
+          "expr": "sum(jvm_memory_max_bytes{kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", area=\"nonheap\", id=\"$jvm_memory_pool_nonheap\"})  ",
+          "interval": "",
+          "intervalFactor": 2,
+          "legendFormat": "max",
+          "refId": "C"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "$jvm_memory_pool_nonheap",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "$$hashKey": "object:402",
+          "format": "decbytes",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": "0",
+          "show": true
+        },
+        {
+          "$$hashKey": "object:403",
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": null,
+      "description": "",
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 8,
+        "y": 19
+      },
+      "hiddenSeries": false,
+      "id": 60,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "7.5.5",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "hclcache_netty_used_direct_memory_bytes{kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\"}",
+          "interval": "",
+          "legendFormat": "direct_memory",
+          "refId": "A"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "HCL Cache Netty used direct memory",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "$$hashKey": "object:84",
+          "format": "decbytes",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": "0",
+          "show": true
+        },
+        {
+          "$$hashKey": "object:85",
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
     }
   ],
   "refresh": false,
@@ -1916,6 +1916,6 @@
   },
   "timezone": "",
   "title": "Java - Detailed Metrics by Pod",
-  "uid": "hcl_java_details_by_pod",
+  "uid": "hcl_java_details_by_pod_updated",
   "version": 918
 }
