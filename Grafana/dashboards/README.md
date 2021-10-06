@@ -20,6 +20,13 @@ helm install hc-dashboards ./hcl-commerce-performance/Grafana/dashboards -n moni
 
 * Use --set folder=dashboards/prometheus if your Prometheus version is not Operator
 
+If `git` is not installed, the repo can be downloaded with `curl` or `wget` as follows. Notice the
+directory name will change.
+
+```
+curl -k -J -L -O https://github.com/HCL-TECH-SOFTWARE/hcl-commerce-performance/archive/main.zip 
+```
+
 The `get configmap` command can be used to verify that the dashboards were loaded 
 corrected:
 
