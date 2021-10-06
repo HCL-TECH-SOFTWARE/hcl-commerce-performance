@@ -1,0 +1,16 @@
+######################################################
+# Licensed Materials - Property of HCL Technologies
+#  HCL Commerce
+#  (C) Copyright HCL Technologies Limited 1996, 2020
+######################################################
+
+# Folder from which dashboards are loaded
+# Use "dashboards/prometheus" for standard Prometheus or
+# "dashboards/prometheus-operator" when Operator version is used
+folder: dashboards/prometheus-operator
+
+# Label to assign to each config map so Grafana can discovered
+# Depending on the Grafana configurations, Grafana might look
+# for config maps only on specific namespaces
+configMap:
+  label: grafana_dashboard
