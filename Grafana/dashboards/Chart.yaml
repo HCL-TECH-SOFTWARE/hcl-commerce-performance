@@ -1,0 +1,13 @@
+######################################################
+# Licensed Materials - Property of HCL Technologies
+# HCL Commerce
+# (C) Copyright HCL Technologies Limited 1996, 2020
+######################################################
+apiVersion: v2
+description: HCL Commerce Dashboards Version 9 Helm Chart
+keywords:
+  - HCL Commerce V9
+name: hcl-commerce-dashboards
+version: 91.8.0
+kubeVersion: ">=1.16.0-0"
+appVersion: "9.1.8.0"
