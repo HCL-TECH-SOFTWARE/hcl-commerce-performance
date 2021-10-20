@@ -177,6 +177,7 @@ hclcache_cache_puts_total{cachespace="demoqaauth",name="services/cache/WCLayoutD
 hclcache_cache_puts_total{cachespace="demoqaauth",name="services/cache/WCCatalogEntryDistributedMapCache",scope="local",source="miss",} 28.0
 ```
 
+*Prometheus (not operator):*
 If you are using Prometheus annotations, you can verify them with the _kubectl describe pod_ command:
 
 ```
@@ -185,6 +186,7 @@ If you are using Prometheus annotations, you can verify them with the _kubectl d
   prometheus.io/port: "8280"
 ```
 
+*Prometheus Operator:*
 When used with Prometheus Operator, HCL Commerce defines Service Monitors to instruct how often and from which services metrics can be scrapped. 
 
 ```
@@ -211,5 +213,19 @@ Spec:
 ```
 
 If they are consumed correctly, you should be able to query these metrics with Grafana or the Prometheus UI. If metrics are missing, ensure Prometheus is correctly scraping the Commerce pods. The Prometheus console provides details for the scraping process, and lists healthy and unhealthy endpoints. 
+
 In the Prometheus console see the menu items: _Status > Targets_ and _Status > Service Discovery_ for ServiceMonitors.
+If the Commerce service monitors are defined, but are not listed, validate the Prometheus configuration to ensure the Commerce monitors are included: 
+
+```
+kubectl edit prometheus -n monitoring
+```
+
+Validate the following two configurations: By default Prometheus only looks at Service Monitors within its namespace or with the release: prometheus label, and this
+excludes the Commerce Service Monitors.
+
+```
+  serviceMonitorNamespaceSelector: {}
+  serviceMonitorSelector: {}
+```
 
