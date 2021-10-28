@@ -1,4 +1,4 @@
-# HCL Commerce - Grafana Dashboards
+# HCL Commerce - Dashboards for Grafana
 
 In this site you will find a set of Grafana Dashboards for HCL Commerce. These dashboards are designed to bring attention to critical metrics and highlight problems. They give insight into the overall performance, as well as internal components such as caching and backend services. The dashboards can be used in production, or to support the performance tuning process. They are the best way to learn and consume the metrics made available by Commerce. You can use them as-is, or customize to meet your needs. Following is a list of the dashboards currently provided:
 
