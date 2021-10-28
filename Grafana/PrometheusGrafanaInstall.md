@@ -35,7 +35,7 @@ kubectl edit prometheus -n monitoring
   serviceMonitorNamespaceSelector: {}
   serviceMonitorSelector: {}
 ```
-For more details see the [troubleshooting](Grafana/Troubleshooting.md) document.
+For more details see the [troubleshooting](Troubleshooting.md) document.
 
 ### Prometheus
 
@@ -52,4 +52,4 @@ helm install [RELEASE_NAME] prometheus-community/prometheus
 ## Commerce Dashboards installation
 
 Once Prometheus and Grafana are installed, you can import the HCL Commerce Grafana dashboards. Although it's possible to import the dashboards individually using the json 
-file, the hc-dashboards chart can assist you in installing all the dashboards at once. See the [dashboards](Grafana/dashboards) page for more information.
+file, the hc-dashboards chart can assist you in installing all the dashboards at once. See the [dashboards](dashboards) page for more information.
