@@ -49,6 +49,65 @@ helm repo add prometheus-community https://prometheus-community.github.io/helm-c
 helm repo update
 helm install [RELEASE_NAME] prometheus-community/prometheus
 ```
+
+## HCL Commerce - Metrics Enablement
+
+The HCL Commerce chart provides options for enabling integration with Prometheus. Although _metrics_ are enabled by default, the _serviceMonitor_ or  _prometheusAnnotations_ option must be enabled to match your Prometheus install. 
+
+```
+## Flag to enable metrics. Enabled by default
+metrics:
+  enabled: true
+  ## Flag to add prometheus scraping annotations to pods. Disabled by default
+  prometheusAnnotations:
+    enabled: false
+  ## Flag to enable service monitor. Disabled by default    
+  serviceMonitor:
+    enabled: false
+    ## Specify a namespace in which to install the ServiceMonitor resource.
+    ## Default to use the same release namespace where commerce is deployed to
+    # namespace: monitoring
+    # interval between service monitoring requests
+    interval: 15s
+    ## Defaults to what's used if you follow CoreOS [Prometheus Install Instructions](https://github.com/helm/charts/tree/master/stable/prometheus-operator#tldr)
+    ## [Prometheus Selector Label](https://github.com/helm/charts/tree/master/stable/prometheus-operator#prometheus-operator-1)
+    ## [Kube Prometheus Selector Label](https://github.com/helm/charts/tree/master/stable/prometheus-operator#exporters)
+    selector:
+      prometheus: kube-prometheus
+```
+
+If your Prometheus distribution supports ServiceMonitor CRDs, such as Kube-prometheus-stack, configure _metrics.serviceMonitor.enabled=true_. This is the recommended option.
+
+ServiceMonitors instruct Prometheus Operator what Commerce services to scrape, including details such as the path and the frequency. Prometheus Operator must be installed before using this option, as otherwise Kubernetes will not recognize the ServiceMonitor CRD and the Commerce installation will fail.
+
+```
+kubectl describe servicemonitor demoqaingest-app -n commerce
+...
+Spec:
+  Endpoints:
+    Interval:  15s
+    Path:      /monitor/metrics
+    Port:      metrics
+  Namespace Selector:
+    Match Names:
+      commerce
+  Selector:
+    Match Labels:
+      Component:  demoqaingest-app
+```
+
+The _prometheusAnnotations_ option is available since HCL Commerce 9.1.8. It is available when Prometheus Operator (and ServiceMonitors) are not used. When enabled, it adds
+prometheus scrape annotations to the pods as follows:
+
+```
+  prometheus.io/scrape: "true"
+  prometheus.io/path: /monitor/metrics
+  prometheus.io/port: "8280"
+```
+
+Note: The NiFi pod exports two metrics endpoints. One with HCL Commerce metrics, such as for caching, and one native to NiFi (PrometheusReportingTask). When annotations are used, only the HCL Commerce metrics endpoint is exported.
+
+
 ## Commerce Dashboards installation
 
 Once Prometheus and Grafana are installed, you can import the HCL Commerce Grafana dashboards. Although it's possible to import the dashboards individually using the json 
