@@ -8,6 +8,12 @@ Grafana automatically finds and loads the dashboards from the Config Map that ha
 specified label (grafana_dashboard). By default Grafana only looks for Config Maps on its
 own namespace, but it can be configured to search in all. 
 
+For details on the provided dashboards see the [Commerce Dashboards](CommerceDashboards.md) document.
+
+## Compatibility:
+
+The provided dashboards are tested with Grafana 7.5.5 and 8.1.4
+
 ## Installation
 
 The following steps download the git repo and install the dashboards using the monitoring 
