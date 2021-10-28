@@ -112,3 +112,7 @@ Note: The NiFi pod exports two metrics endpoints. One with HCL Commerce metrics,
 
 Once Prometheus and Grafana are installed, you can import the HCL Commerce Grafana dashboards. Although it's possible to import the dashboards individually using the json 
 file, the hc-dashboards chart can assist you in installing all the dashboards at once. See the [dashboards](dashboards) page for more information.
+
+## Troubleshooting
+
+See the [troubleshooting](Troubleshooting.md) document.
