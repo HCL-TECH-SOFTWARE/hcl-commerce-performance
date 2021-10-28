@@ -14,7 +14,7 @@ The metrics displayed include:
 - REST calls - Caching: Cache hits and misses per second; Cache hit ratios by resource
 - Backend requests (QueryApp only): Active requests by service; Total calls per second per service Average response times, 95, and 99 percentiles
 
-![QueryApp Dashboard](../images/query_app.jpg)
+![QueryApp Dashboard](images/query_app.jpg)
 
 #### HCL Cache dashboards
 
@@ -30,7 +30,7 @@ Performance statistics for the remote cache, including:
 - Invalidation Messages
 - Maintenance
 
-![Remote Cache Dashboard](../images/hcl_cache_remote.jpg)
+![Remote Cache Dashboard](images/hcl_cache_remote.jpg)
 
 *Local Cache Summary*:
 Single table per pod listing all caches and including sizes and footprint
