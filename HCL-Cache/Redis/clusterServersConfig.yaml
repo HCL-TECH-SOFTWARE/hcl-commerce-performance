@@ -30,6 +30,7 @@ clusterServersConfig:
   - "redis://redis-redis-cluster-2.redis-redis-cluster-headless.redis.svc.cluster.local.:6379"
   scanInterval: 5000
   checkSlotsCoverage: false
+  password: "${JNDI/ENCRYPTED:REDIS_PASSWORD_ENCRYPT:-}"
 threads: 16
 nettyThreads: 32
 referenceEnabled: true
