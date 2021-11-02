@@ -83,7 +83,7 @@ With Redis Cluster, the cluster maintains a _nodes.conf_ file that must persist,
 minimal storage.
 
 ### Resources
-Redis is single-threaded (for the most part), so it benefits more from fast processors, than multiple processors. 2 CPUs can work well in many scenarios. It's key to monitor for Kubernetes CPU resource throttling and ensure that is is not happening, as throttling can 'hang' the Redis main thread. The memory assigned should be larger than the memory allocated for the Redis cache memory (see above)
+Redis is single-threaded (for the most part), so it benefits more from having faster processors, vs. having multiple processors. 2 CPUs can work well in many scenarios. It's key to monitor for Kubernetes CPU resource throttling and ensure that is is not happening, as throttling can 'hang' the Redis main thread. The memory assigned should be larger than the memory allocated for the Redis cache memory (see above)
 
 ```
  resources:
@@ -117,7 +117,7 @@ The configuration can be checked with this command:
 ```
 cat /sys/kernel/mm/transparent_hugepage/enabled
 ```
-*Socket Max Conections (somaxconn):* If missconfigured, the following warning can be printed to the logs:
+*Socket Max Connections (somaxconn):* If missconfigured, the following warning can be printed to the logs:
 ```
 WARNING: The TCP backlog setting of 511 cannot be enforced because /proc/sys/net/core/somaxconn is set to the lower value of 128.
 ```
