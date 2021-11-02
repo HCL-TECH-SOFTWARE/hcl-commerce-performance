@@ -13,6 +13,9 @@ helm repo add prometheus-community https://prometheus-community.github.io/helm-c
 helm repo update
 helm install [RELEASE_NAME] prometheus-community/kube-prometheus-stack
 ```
+
+See [Kube-prometheus-stack-step-by-step](Kube-prometheus-stack-step-by-step.md) for additional details.
+
 ##### ServiceMonitor selectors
 
 With the default configuration, service monitors defined by HCL Commerce are not picked up by Prometheus. This is because Prometheus only loads service monitors
