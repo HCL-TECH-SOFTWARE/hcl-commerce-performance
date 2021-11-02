@@ -1,0 +1,40 @@
+architecture: standalone
+replica:
+  replicaCount: 0
+image:
+  registry: docker.io
+  repository: bitnami/redis
+  tag: 6.2.3-debian-10-r0
+auth:
+  enabled: false
+  password: ""
+master:
+  disableCommands: []
+  persistence:
+    enabled: false
+  resources:
+    limits:
+      cpu: 2000m
+      memory: 12Gi
+    requests:
+      cpu: 2000m
+      memory: 12Gi
+  configuration: |-
+    appendonly no
+    save ""
+    maxmemory 10000mb
+    maxmemory-policy volatile-lru
+# Disable is Prometheus is not installed
+metrics:
+  enabled: true
+  serviceMonitor:
+    enabled: true
+#sysctl:
+#  enabled: true
+#  mountHostSys: true
+#  command:
+#    - /bin/sh
+#    - -c
+#    - |-
+#      sysctl -w net.core.somaxconn=10240
+#      echo madvise > /host-sys/kernel/mm/transparent_hugepage/enabled
