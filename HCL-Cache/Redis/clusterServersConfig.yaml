@@ -1,0 +1,46 @@
+clusterServersConfig:
+  idleConnectionTimeout: 10000
+  connectTimeout: 10000
+  timeout: 3000
+  retryAttempts: 3
+  retryInterval: 1500
+  subscriptionsPerConnection: 5
+  sslEnableEndpointIdentification: true
+  sslProvider: "JDK"
+  pingConnectionInterval: 30000
+  keepAlive: true
+  tcpNoDelay: true
+  nameMapper: !<org.redisson.api.DefaultNameMapper> {}
+  loadBalancer: !<org.redisson.connection.balancer.RoundRobinLoadBalancer> {}
+  slaveConnectionMinimumIdleSize: 24
+  slaveConnectionPoolSize: 64
+  failedSlaveReconnectionInterval: 3000
+  failedSlaveCheckInterval: 180000
+  masterConnectionMinimumIdleSize: 24
+  masterConnectionPoolSize: 64
+  readMode: "MASTER"
+  subscriptionMode: "MASTER"
+  subscriptionConnectionMinimumIdleSize: 1
+  subscriptionConnectionPoolSize: 50
+  dnsMonitoringInterval: 5000
+  natMapper: !<org.redisson.api.DefaultNatMapper> {}
+  nodeAddresses:
+  - "redis://redis-redis-cluster-0.redis-redis-cluster-headless.redis.svc.cluster.local.:6379"
+  - "redis://redis-redis-cluster-1.redis-redis-cluster-headless.redis.svc.cluster.local.:6379"
+  - "redis://redis-redis-cluster-2.redis-redis-cluster-headless.redis.svc.cluster.local.:6379"
+  scanInterval: 5000
+  checkSlotsCoverage: false
+threads: 16
+nettyThreads: 32
+referenceEnabled: true
+transportMode: "NIO"
+lockWatchdogTimeout: 30000
+reliableTopicWatchdogTimeout: 600000
+keepPubSubOrder: true
+useScriptCache: false
+minCleanUpDelay: 5
+maxCleanUpDelay: 1800
+cleanUpKeysAmount: 100
+nettyHook: !<org.redisson.client.DefaultNettyHook> {}
+useThreadClassLoader: true
+addressResolverGroupFactory: !<org.redisson.connection.DnsAddressResolverGroupFactory> {}
