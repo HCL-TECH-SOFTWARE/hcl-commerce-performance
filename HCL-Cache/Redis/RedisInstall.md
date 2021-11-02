@@ -44,7 +44,7 @@ _Note: If Prometheus is not setup, disable the metrics section prior to install_
 These steps install a [Redis Cluster](https://github.com/bitnami/charts/tree/master/bitnami/redis-cluster) with three masters. Review [redis-cluster-values.yaml](redis-cluster-values.yaml) For details.
 
 ```
-helm install hcl-commerce-redis bitnami/redis -n redis -f redis-cluster-values.yaml
+helm install hcl-commerce-redis bitnami/redis-cluster -n redis -f redis-cluster-values.yaml
 ```
 
 _Note: If Prometheus is not setup, disable the metrics section prior to install_
