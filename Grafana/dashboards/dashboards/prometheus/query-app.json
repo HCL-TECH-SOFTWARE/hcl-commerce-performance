@@ -578,40 +578,6 @@
               "interval": "",
               "legendFormat": "{{pod}}",
               "refId": "D"
-            },
-            {
-              "exemplar": true,
-              "expr": "sum(container_cpu_usage_seconds_total{namespace=\"$namespace\", kubernetes_pod_name=~\"$pod\",component=~\"$job\" }) by (kubernetes_pod_name)\n",
-              "format": "time_series",
-              "hide": true,
-              "interval": "",
-              "intervalFactor": 2,
-              "legendFormat": "{{kubernetes_pod_name}}",
-              "legendLink": null,
-              "refId": "A",
-              "step": 10
-            },
-            {
-              "expr": "max( kube_pod_container_resource_requests_cpu_cores{namespace=\"$namespace\", container=\"ts-app\"}* on(pod) group_left(workload) namespace_workload_pod:kube_pod_owner:relabel{ namespace=\"$namespace\", workload_type=\"deployment\", workload=\"$job\" })",
-              "format": "time_series",
-              "hide": true,
-              "interval": "",
-              "intervalFactor": 2,
-              "legendFormat": "quota - requests",
-              "legendLink": null,
-              "refId": "B",
-              "step": 10
-            },
-            {
-              "expr": "max( kube_pod_container_resource_limits_cpu_cores{namespace=\"$namespace\", container=\"ts-app\"}* on(pod) group_left(workload) namespace_workload_pod:kube_pod_owner:relabel{ namespace=\"$namespace\", workload_type=\"deployment\", workload=\"$job\" })",
-              "format": "time_series",
-              "hide": true,
-              "interval": "",
-              "intervalFactor": 2,
-              "legendFormat": "quota - limits",
-              "legendLink": null,
-              "refId": "C",
-              "step": 10
             }
           ],
           "thresholds": [],
