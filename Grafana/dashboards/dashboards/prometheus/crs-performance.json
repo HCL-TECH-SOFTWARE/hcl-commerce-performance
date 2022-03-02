@@ -15,8 +15,8 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 16,
-  "iteration": 1632907394085,
+  "id": 22,
+  "iteration": 1646053391283,
   "links": [],
   "panels": [
     {
@@ -24,7 +24,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Prometheus",
+      "datasource": "${DS_PROMETHEUS}",
       "decimals": 0,
       "fieldConfig": {
         "defaults": {
@@ -125,7 +125,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Prometheus",
+      "datasource": "${DS_PROMETHEUS}",
       "fieldConfig": {
         "defaults": {
           "links": []
@@ -220,7 +220,7 @@
     },
     {
       "collapsed": true,
-      "datasource": "Prometheus",
+      "datasource": "${DS_PROMETHEUS}",
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -234,7 +234,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "fieldConfig": {
             "defaults": {
               "links": []
@@ -334,7 +334,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "fieldConfig": {
             "defaults": {
               "links": []
@@ -435,7 +435,7 @@
     },
     {
       "collapsed": true,
-      "datasource": "Prometheus",
+      "datasource": "${DS_PROMETHEUS}",
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -449,7 +449,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "fieldConfig": {
             "defaults": {
               "links": []
@@ -547,7 +547,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "fieldConfig": {
             "defaults": {
               "links": []
@@ -654,13 +654,34 @@
   "templating": {
     "list": [
       {
-        "allValue": null,
         "current": {
           "selected": false,
-          "text": "sofy",
-          "value": "sofy"
+          "text": "Prometheus",
+          "value": "Prometheus"
         },
-        "datasource": "Prometheus",
+        "description": null,
+        "error": null,
+        "hide": 0,
+        "includeAll": false,
+        "label": "Prometheus",
+        "multi": false,
+        "name": "DS_PROMETHEUS",
+        "options": [],
+        "query": "prometheus",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "type": "datasource"
+      },
+      {
+        "allValue": null,
+        "current": {
+          "isNone": true,
+          "selected": false,
+          "text": "None",
+          "value": ""
+        },
+        "datasource": "${DS_PROMETHEUS}",
         "definition": "label_values(request_store_seconds_sum, kubernetes_namespace)",
         "description": null,
         "error": null,
@@ -695,7 +716,7 @@
             "$__all"
           ]
         },
-        "datasource": "Prometheus",
+        "datasource": "${DS_PROMETHEUS}",
         "definition": "label_values(request_store_seconds_sum{kubernetes_namespace=~\"$namespace\", component=~\".*crs-app\"}, kubernetes_pod_name)",
         "description": null,
         "error": null,
@@ -730,7 +751,7 @@
             "$__all"
           ]
         },
-        "datasource": "Prometheus",
+        "datasource": "${DS_PROMETHEUS}",
         "definition": "label_values(request_store_seconds_sum{kubernetes_namespace=~\"$namespace\", component=~\".*crs-app\"}, http_status)",
         "description": null,
         "error": null,
@@ -765,7 +786,7 @@
             "$__all"
           ]
         },
-        "datasource": "Prometheus",
+        "datasource": "${DS_PROMETHEUS}",
         "definition": "label_values(request_store_seconds_sum{kubernetes_namespace=~\"$namespace\", component=~\".*crs-app\"}, http_method)",
         "description": null,
         "error": null,
@@ -812,5 +833,5 @@
   "timezone": "",
   "title": "CRS Performance",
   "uid": "hcl_crs_performance",
-  "version": 918
+  "version": 919
 }

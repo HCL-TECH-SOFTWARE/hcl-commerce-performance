@@ -21,13 +21,13 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 56,
-  "iteration": 1632909666901,
+  "id": 315,
+  "iteration": 1646206603908,
   "links": [],
   "panels": [
     {
-      "collapsed": true,
-      "datasource": "Prometheus",
+      "collapsed": false,
+      "datasource": "${DS_PROMETHEUS}",
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -35,369 +35,368 @@
         "y": 0
       },
       "id": 373,
-      "panels": [
-        {
-          "datasource": null,
-          "description": "",
-          "fieldConfig": {
-            "defaults": {
-              "mappings": [],
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "green",
-                    "value": null
-                  }
-                ]
-              }
-            },
-            "overrides": []
-          },
-          "gridPos": {
-            "h": 2,
-            "w": 8,
-            "x": 0,
-            "y": 1
-          },
-          "id": 390,
-          "options": {
-            "colorMode": "value",
-            "graphMode": "none",
-            "justifyMode": "auto",
-            "orientation": "auto",
-            "reduceOptions": {
-              "calcs": [
-                "last"
-              ],
-              "fields": "/^image$/",
-              "values": false
-            },
-            "text": {},
-            "textMode": "value"
-          },
-          "pluginVersion": "7.5.5",
-          "targets": [
-            {
-              "exemplar": true,
-              "expr": "kube_pod_container_info{ namespace=\"$namespace\", pod=~\"$pod\", container=\"query-app\" }\r\n* on(pod)\r\ngroup_left(workload) namespace_workload_pod:kube_pod_owner:relabel{ namespace=\"$namespace\", workload_type=\"deployment\", workload=\"$job\" } \r",
-              "format": "table",
-              "instant": false,
-              "interval": "",
-              "legendFormat": "",
-              "refId": "A"
-            }
-          ],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "Image",
-          "transparent": true,
-          "type": "stat"
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": "Prometheus",
-          "description": "",
-          "fieldConfig": {
-            "defaults": {
-              "links": []
-            },
-            "overrides": []
-          },
-          "fill": 1,
-          "fillGradient": 0,
-          "gridPos": {
-            "h": 9,
-            "w": 8,
-            "x": 8,
-            "y": 1
-          },
-          "hiddenSeries": false,
-          "id": 394,
-          "interval": "",
-          "legend": {
-            "alignAsTable": false,
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "rightSide": false,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "nullPointMode": "null",
-          "options": {
-            "alertThreshold": true
-          },
-          "percentage": false,
-          "pluginVersion": "7.5.5",
-          "pointradius": 2,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "sum(rate(request_rest_status_total{ namespace=~\"$namespace\", job=~\"$job\", pod=~\"$pod\", resource=~\"$resource\", http_status=~\"$http_status\" }[2m]))  by (http_status)",
-              "hide": false,
-              "legendFormat": "{{http_status}}",
-              "refId": "A"
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeRegions": [],
-          "timeShift": null,
-          "title": "Requests Status - per second",
-          "tooltip": {
-            "shared": true,
-            "sort": 2,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "$$hashKey": "object:81",
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": "0",
-              "show": true
-            },
-            {
-              "$$hashKey": "object:82",
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            }
-          ],
-          "yaxis": {
-            "align": false,
-            "alignLevel": null
-          }
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": "Prometheus",
-          "description": "",
-          "fieldConfig": {
-            "defaults": {
-              "links": []
-            },
-            "overrides": []
-          },
-          "fill": 1,
-          "fillGradient": 0,
-          "gridPos": {
-            "h": 9,
-            "w": 8,
-            "x": 16,
-            "y": 1
-          },
-          "hiddenSeries": false,
-          "id": 371,
-          "legend": {
-            "alignAsTable": false,
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "rightSide": false,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "nullPointMode": "null",
-          "options": {
-            "alertThreshold": true
-          },
-          "percentage": false,
-          "pluginVersion": "7.5.5",
-          "pointradius": 2,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "sum(rate(request_rest_seconds_sum{ namespace=~\"$namespace\", job=~\"$job\", pod=~\"$pod\", resource=~\"$resource\"} [2m])) by (job) / sum(rate(request_rest_seconds_count{ namespace=~\"$namespace\", job=~\"$job\", pod=~\"$pod\", resource=~\"$resource\"} [2m])) by (job)",
-              "legendFormat": "{{job}}",
-              "refId": "A"
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeRegions": [],
-          "timeShift": null,
-          "title": "Average Response Times",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "$$hashKey": "object:137",
-              "format": "s",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": "0",
-              "show": true
-            },
-            {
-              "$$hashKey": "object:138",
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            }
-          ],
-          "yaxis": {
-            "align": false,
-            "alignLevel": null
-          }
-        },
-        {
-          "datasource": null,
-          "description": "",
-          "fieldConfig": {
-            "defaults": {
-              "mappings": [],
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "red",
-                    "value": null
-                  },
-                  {
-                    "color": "green",
-                    "value": 1
-                  }
-                ]
-              }
-            },
-            "overrides": [
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "unavailable"
-                },
-                "properties": [
-                  {
-                    "id": "thresholds",
-                    "value": {
-                      "mode": "absolute",
-                      "steps": [
-                        {
-                          "color": "green",
-                          "value": null
-                        },
-                        {
-                          "color": "red",
-                          "value": 1
-                        }
-                      ]
-                    }
-                  }
-                ]
-              }
-            ]
-          },
-          "gridPos": {
-            "h": 7,
-            "w": 8,
-            "x": 0,
-            "y": 3
-          },
-          "id": 383,
-          "options": {
-            "colorMode": "value",
-            "graphMode": "area",
-            "justifyMode": "auto",
-            "orientation": "auto",
-            "reduceOptions": {
-              "calcs": [
-                "last"
-              ],
-              "fields": "",
-              "values": false
-            },
-            "text": {},
-            "textMode": "auto"
-          },
-          "pluginVersion": "7.5.5",
-          "targets": [
-            {
-              "expr": "kube_deployment_status_replicas_available{ namespace=\"$namespace\", deployment=~\"$job\"   }  ",
-              "format": "time_series",
-              "instant": false,
-              "interval": "",
-              "legendFormat": "available",
-              "refId": "A"
-            },
-            {
-              "expr": "kube_deployment_status_replicas_unavailable{ namespace=\"$namespace\", deployment=~\"$job\" }",
-              "instant": false,
-              "interval": "",
-              "legendFormat": "unavailable",
-              "refId": "B"
-            }
-          ],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "query-app pods",
-          "type": "stat"
-        }
-      ],
+      "panels": [],
       "title": "Summary",
       "type": "row"
     },
     {
+      "datasource": "${DS_PROMETHEUS}",
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 8,
+        "x": 0,
+        "y": 1
+      },
+      "id": 390,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "last"
+          ],
+          "fields": "/^image$/",
+          "values": false
+        },
+        "text": {},
+        "textMode": "value"
+      },
+      "pluginVersion": "7.5.5",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "kube_pod_container_info{ namespace=\"$namespace\", pod=~\"$pod\", container=\"query-app\" }\r\n* on(pod)\r\ngroup_left(workload) namespace_workload_pod:kube_pod_owner:relabel{ namespace=\"$namespace\", workload_type=\"deployment\", workload=\"$job\" } \r",
+          "format": "table",
+          "instant": false,
+          "interval": "",
+          "legendFormat": "",
+          "refId": "A"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Image",
+      "transparent": true,
+      "type": "stat"
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "${DS_PROMETHEUS}",
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "links": []
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 9,
+        "w": 8,
+        "x": 8,
+        "y": 1
+      },
+      "hiddenSeries": false,
+      "id": 394,
+      "interval": "",
+      "legend": {
+        "alignAsTable": false,
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "rightSide": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "7.5.5",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "sum(rate(request_rest_status_total{ namespace=~\"$namespace\", job=~\"$job\", pod=~\"$pod\", resource=~\"$resource\", http_status=~\"$http_status\" }[2m]))  by (http_status)",
+          "hide": false,
+          "legendFormat": "{{http_status}}",
+          "refId": "A"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Requests Status - per second",
+      "tooltip": {
+        "shared": true,
+        "sort": 2,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "$$hashKey": "object:81",
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": "0",
+          "show": true
+        },
+        {
+          "$$hashKey": "object:82",
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "${DS_PROMETHEUS}",
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "links": []
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 9,
+        "w": 8,
+        "x": 16,
+        "y": 1
+      },
+      "hiddenSeries": false,
+      "id": 371,
+      "legend": {
+        "alignAsTable": false,
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "rightSide": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "7.5.5",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "sum(rate(request_rest_seconds_sum{ namespace=~\"$namespace\", job=~\"$job\", pod=~\"$pod\", resource=~\"$resource\"} [2m])) by (job) / sum(rate(request_rest_seconds_count{ namespace=~\"$namespace\", job=~\"$job\", pod=~\"$pod\", resource=~\"$resource\"} [2m])) by (job)",
+          "legendFormat": "{{job}}",
+          "refId": "A"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Average Response Times",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "$$hashKey": "object:137",
+          "format": "s",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": "0",
+          "show": true
+        },
+        {
+          "$$hashKey": "object:138",
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "datasource": "${DS_PROMETHEUS}",
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "green",
+                "value": 1
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "unavailable"
+            },
+            "properties": [
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": null
+                    },
+                    {
+                      "color": "red",
+                      "value": 1
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 8,
+        "x": 0,
+        "y": 3
+      },
+      "id": 383,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "last"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "7.5.5",
+      "targets": [
+        {
+          "expr": "kube_deployment_status_replicas_available{ namespace=\"$namespace\", deployment=~\"$job\"   }  ",
+          "format": "time_series",
+          "instant": false,
+          "interval": "",
+          "legendFormat": "available",
+          "refId": "A"
+        },
+        {
+          "expr": "kube_deployment_status_replicas_unavailable{ namespace=\"$namespace\", deployment=~\"$job\" }",
+          "instant": false,
+          "interval": "",
+          "legendFormat": "unavailable",
+          "refId": "B"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "ts-app pods",
+      "type": "stat"
+    },
+    {
       "collapsed": true,
-      "datasource": null,
+      "datasource": "${DS_PROMETHEUS}",
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 1
+        "y": 10
       },
       "id": 389,
       "panels": [
@@ -406,7 +405,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "fieldConfig": {
             "defaults": {
               "links": []
@@ -520,7 +519,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": null,
+          "datasource": "${DS_PROMETHEUS}",
           "fieldConfig": {
             "defaults": {},
             "overrides": []
@@ -660,7 +659,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": null,
+          "datasource": "${DS_PROMETHEUS}",
           "fieldConfig": {
             "defaults": {},
             "overrides": []
@@ -768,7 +767,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "description": "",
           "fieldConfig": {
             "defaults": {
@@ -874,12 +873,12 @@
     },
     {
       "collapsed": true,
-      "datasource": null,
+      "datasource": "${DS_PROMETHEUS}",
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 2
+        "y": 11
       },
       "id": 387,
       "panels": [
@@ -888,7 +887,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": null,
+          "datasource": "${DS_PROMETHEUS}",
           "description": "",
           "fieldConfig": {
             "defaults": {},
@@ -982,7 +981,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": null,
+          "datasource": "${DS_PROMETHEUS}",
           "description": "",
           "fieldConfig": {
             "defaults": {},
@@ -1076,7 +1075,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": null,
+          "datasource": "${DS_PROMETHEUS}",
           "description": "",
           "fieldConfig": {
             "defaults": {},
@@ -1171,12 +1170,12 @@
     },
     {
       "collapsed": true,
-      "datasource": "Prometheus",
+      "datasource": "${DS_PROMETHEUS}",
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 3
+        "y": 12
       },
       "id": 369,
       "panels": [
@@ -1185,7 +1184,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "description": "",
           "fieldConfig": {
             "defaults": {
@@ -1287,7 +1286,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "description": "",
           "fieldConfig": {
             "defaults": {
@@ -1390,7 +1389,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "fieldConfig": {
             "defaults": {
               "links": []
@@ -1489,7 +1488,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "fieldConfig": {
             "defaults": {
               "links": []
@@ -1588,17 +1587,17 @@
     },
     {
       "collapsed": true,
-      "datasource": "Prometheus",
+      "datasource": "${DS_PROMETHEUS}",
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 4
+        "y": 13
       },
       "id": 365,
       "panels": [
         {
-          "datasource": null,
+          "datasource": "${DS_PROMETHEUS}",
           "description": "",
           "fieldConfig": {
             "defaults": {
@@ -1661,7 +1660,7 @@
           "type": "stat"
         },
         {
-          "datasource": null,
+          "datasource": "${DS_PROMETHEUS}",
           "description": "",
           "fieldConfig": {
             "defaults": {
@@ -1728,7 +1727,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "fieldConfig": {
             "defaults": {
               "links": []
@@ -1826,7 +1825,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "fieldConfig": {
             "defaults": {
               "links": []
@@ -1924,7 +1923,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "fieldConfig": {
             "defaults": {
               "links": []
@@ -2023,12 +2022,12 @@
     },
     {
       "collapsed": true,
-      "datasource": null,
+      "datasource": "${DS_PROMETHEUS}",
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 5
+        "y": 14
       },
       "id": 405,
       "panels": [
@@ -2037,7 +2036,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "description": "",
           "fieldConfig": {
             "defaults": {
@@ -2139,7 +2138,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "description": "",
           "fieldConfig": {
             "defaults": {
@@ -2242,12 +2241,12 @@
     },
     {
       "collapsed": true,
-      "datasource": null,
+      "datasource": "${DS_PROMETHEUS}",
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 6
+        "y": 15
       },
       "id": 397,
       "panels": [
@@ -2256,7 +2255,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": null,
+          "datasource": "${DS_PROMETHEUS}",
           "decimals": 0,
           "description": "",
           "fieldConfig": {
@@ -2357,7 +2356,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "description": "",
           "fieldConfig": {
             "defaults": {
@@ -2460,7 +2459,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "fieldConfig": {
             "defaults": {
               "links": []
@@ -2560,7 +2559,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "fieldConfig": {
             "defaults": {
               "links": []
@@ -2660,7 +2659,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "fieldConfig": {
             "defaults": {
               "links": []
@@ -2769,13 +2768,33 @@
   "templating": {
     "list": [
       {
+        "current": {
+          "selected": false,
+          "text": "Prometheus",
+          "value": "Prometheus"
+        },
+        "description": null,
+        "error": null,
+        "hide": 0,
+        "includeAll": false,
+        "label": "Prometheus",
+        "multi": false,
+        "name": "DS_PROMETHEUS",
+        "options": [],
+        "query": "prometheus",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "type": "datasource"
+      },
+      {
         "allValue": null,
         "current": {
           "selected": false,
           "text": "commerce",
           "value": "commerce"
         },
-        "datasource": "Prometheus",
+        "datasource": "${DS_PROMETHEUS}",
         "definition": "label_values(kube_pod_container_info{container=\"ts-app\"}, namespace)",
         "description": null,
         "error": null,
@@ -2806,7 +2825,7 @@
           "text": "demoqalivequery-app",
           "value": "demoqalivequery-app"
         },
-        "datasource": "Prometheus",
+        "datasource": "${DS_PROMETHEUS}",
         "definition": "label_values(kube_deployment_status_replicas{namespace=\"$namespace\",deployment=~\".*query-app.*\"} , deployment) ",
         "description": null,
         "error": null,
@@ -2841,7 +2860,7 @@
             "$__all"
           ]
         },
-        "datasource": "Prometheus",
+        "datasource": "${DS_PROMETHEUS}",
         "definition": "label_values(namespace_workload_pod:kube_pod_owner:relabel{ namespace=\"$namespace\", workload_type=\"deployment\",workload=\"$job\" }, pod)",
         "description": null,
         "error": null,
@@ -2876,7 +2895,7 @@
             "$__all"
           ]
         },
-        "datasource": "Prometheus",
+        "datasource": "${DS_PROMETHEUS}",
         "definition": "label_values(request_rest_seconds_count{namespace=~\"$namespace\",job=\"$job\",pod=~\"$pod\"}, resource)",
         "description": null,
         "error": null,
@@ -2911,7 +2930,7 @@
             "$__all"
           ]
         },
-        "datasource": "Prometheus",
+        "datasource": "${DS_PROMETHEUS}",
         "definition": "label_values(request_rest_status_total{namespace=~\"$namespace\",job=\"$job\",pod=~\"$pod\",resource=~\"$resource\"}, http_status)",
         "description": null,
         "error": null,
@@ -2943,7 +2962,7 @@
           "text": "None",
           "value": ""
         },
-        "datasource": null,
+        "datasource": "${DS_PROMETHEUS}",
         "definition": "label_values(kube_pod_info, cluster)",
         "description": null,
         "error": null,
@@ -2989,6 +3008,6 @@
   },
   "timezone": "",
   "title": "QueryApp Servers",
-  "uid": "hcl_query_app",
-  "version": 918
+  "uid": "query-app",
+  "version": 919
 }

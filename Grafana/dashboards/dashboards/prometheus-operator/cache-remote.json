@@ -15,8 +15,8 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 38,
-  "iteration": 1632233749629,
+  "id": 217,
+  "iteration": 1646056240169,
   "links": [
     {
       "asDropdown": false,
@@ -32,8 +32,8 @@
   ],
   "panels": [
     {
-      "collapsed": true,
-      "datasource": "Prometheus",
+      "collapsed": false,
+      "datasource": "${DS_PROMETHEUS}",
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -41,353 +41,78 @@
         "y": 0
       },
       "id": 374,
-      "panels": [
-        {
-          "cacheTimeout": null,
-          "datasource": "Prometheus",
-          "fieldConfig": {
-            "defaults": {
-              "mappings": [],
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "green",
-                    "value": null
-                  },
-                  {
-                    "color": "red",
-                    "value": 80
-                  }
-                ]
-              },
-              "unit": "none"
-            },
-            "overrides": []
-          },
-          "gridPos": {
-            "h": 5,
-            "w": 4,
-            "x": 0,
-            "y": 1
-          },
-          "id": 376,
-          "links": [],
-          "options": {
-            "colorMode": "value",
-            "graphMode": "area",
-            "justifyMode": "auto",
-            "orientation": "horizontal",
-            "reduceOptions": {
-              "calcs": [
-                "mean"
-              ],
-              "fields": "",
-              "values": false
-            },
-            "text": {},
-            "textMode": "auto"
-          },
-          "pluginVersion": "7.5.3",
-          "targets": [
-            {
-              "expr": "sum(hclcache_remoteclient_outage{ namespace=~\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\"})",
-              "format": "time_series",
-              "instant": true,
-              "interval": "",
-              "legendFormat": "",
-              "refId": "A"
-            }
-          ],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "Clients Currently in Outage Mode",
-          "type": "stat"
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": "Prometheus",
-          "fieldConfig": {
-            "defaults": {
-              "links": []
-            },
-            "overrides": []
-          },
-          "fill": 1,
-          "fillGradient": 0,
-          "gridPos": {
-            "h": 5,
-            "w": 8,
-            "x": 4,
-            "y": 1
-          },
-          "hiddenSeries": false,
-          "id": 372,
-          "legend": {
-            "alignAsTable": true,
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "rightSide": true,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "nullPointMode": "null",
-          "options": {
-            "alertThreshold": true
-          },
-          "percentage": false,
-          "pluginVersion": "7.5.3",
-          "pointradius": 2,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "sum(hclcache_remoteclient_outage{namespace=~\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\"}) by (pod) > 0",
-              "interval": "",
-              "legendFormat": "{{pod}}",
-              "refId": "A"
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeRegions": [],
-          "timeShift": null,
-          "title": "Remote Clients in Outage Mode",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "decimals": 0,
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": "0",
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": "0",
-              "show": true
-            }
-          ],
-          "yaxis": {
-            "align": false,
-            "alignLevel": null
-          }
-        },
-        {
-          "cacheTimeout": null,
-          "datasource": "Prometheus",
-          "fieldConfig": {
-            "defaults": {
-              "mappings": [],
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "green",
-                    "value": null
-                  },
-                  {
-                    "color": "red",
-                    "value": 80
-                  }
-                ]
-              },
-              "unit": "none"
-            },
-            "overrides": []
-          },
-          "gridPos": {
-            "h": 5,
-            "w": 4,
-            "x": 12,
-            "y": 1
-          },
-          "id": 383,
-          "links": [],
-          "options": {
-            "colorMode": "value",
-            "graphMode": "area",
-            "justifyMode": "auto",
-            "orientation": "horizontal",
-            "reduceOptions": {
-              "calcs": [
-                "mean"
-              ],
-              "fields": "",
-              "values": false
-            },
-            "text": {},
-            "textMode": "auto"
-          },
-          "pluginVersion": "7.5.3",
-          "targets": [
-            {
-              "expr": "sum(hclcache_cache_outage{namespace=~\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\"})",
-              "format": "time_series",
-              "instant": true,
-              "interval": "",
-              "legendFormat": "",
-              "refId": "A"
-            }
-          ],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "Caches Currently in Outage Mode",
-          "type": "stat"
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": "Prometheus",
-          "fieldConfig": {
-            "defaults": {
-              "links": []
-            },
-            "overrides": []
-          },
-          "fill": 1,
-          "fillGradient": 0,
-          "gridPos": {
-            "h": 5,
-            "w": 8,
-            "x": 16,
-            "y": 1
-          },
-          "hiddenSeries": false,
-          "id": 384,
-          "legend": {
-            "alignAsTable": true,
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "rightSide": true,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "nullPointMode": "null",
-          "options": {
-            "alertThreshold": true
-          },
-          "percentage": false,
-          "pluginVersion": "7.5.3",
-          "pointradius": 2,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "sum(hclcache_cache_outage{namespace=~\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\"}) by (name) > 0",
-              "interval": "",
-              "legendFormat": "{{name}}",
-              "refId": "A"
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeRegions": [],
-          "timeShift": null,
-          "title": "Remote Caches in Outage Mode",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "decimals": 0,
-              "format": "short",
-              "label": "",
-              "logBase": 1,
-              "max": null,
-              "min": "0",
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": "0",
-              "show": true
-            }
-          ],
-          "yaxis": {
-            "align": false,
-            "alignLevel": null
-          }
-        }
-      ],
+      "panels": [],
       "title": "Availability",
       "type": "row"
     },
     {
-      "collapsed": false,
-      "datasource": null,
+      "cacheTimeout": null,
+      "datasource": "${DS_PROMETHEUS}",
+      "fieldConfig": {
+        "defaults": {
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
       "gridPos": {
-        "h": 1,
-        "w": 24,
+        "h": 5,
+        "w": 4,
         "x": 0,
         "y": 1
       },
-      "id": 386,
-      "panels": [],
-      "title": "Remote Cache Size",
-      "type": "row"
+      "id": 376,
+      "links": [],
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "7.5.5",
+      "targets": [
+        {
+          "expr": "sum(hclcache_remoteclient_outage{ namespace=~\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\"})",
+          "format": "time_series",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "",
+          "refId": "A"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Clients Currently in Outage Mode",
+      "type": "stat"
     },
     {
       "aliasColors": {},
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": null,
-      "decimals": 0,
-      "description": "Cache Manager pod must be enabled",
+      "datasource": "${DS_PROMETHEUS}",
       "fieldConfig": {
         "defaults": {
           "links": []
@@ -397,13 +122,13 @@
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
-        "h": 12,
-        "w": 16,
-        "x": 0,
-        "y": 2
+        "h": 5,
+        "w": 8,
+        "x": 4,
+        "y": 1
       },
       "hiddenSeries": false,
-      "id": 388,
+      "id": 372,
       "legend": {
         "alignAsTable": true,
         "avg": false,
@@ -426,17 +151,15 @@
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
-      "repeat": null,
-      "repeatDirection": "v",
       "seriesOverrides": [],
       "spaceLength": 10,
       "stack": false,
       "steppedLine": false,
       "targets": [
         {
-          "expr": "max( (  hclcache_cache_size_current{ namespace=~\"$namespace\", cachespace=\"$environment\", scope=\"remote\", result!=\"error\", name=~\"$cache\" } > 0 ) * on ( namespace, cachespace, name) group_left( redis_instance ) hclcache_cache_remote_node_mapping{ redis_instance =~ \"$redis\"  }) by ( name, redis_instance )  ",
+          "expr": "sum(hclcache_remoteclient_outage{namespace=~\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\"}) by (pod) > 0",
           "interval": "",
-          "legendFormat": "{{redis_instance}} - {{name}}",
+          "legendFormat": "{{pod}}",
           "refId": "A"
         }
       ],
@@ -444,7 +167,167 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Remote Cache Sizes",
+      "title": "Remote Clients in Outage Mode",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "decimals": 0,
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": "0",
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": "0",
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "cacheTimeout": null,
+      "datasource": "${DS_PROMETHEUS}",
+      "fieldConfig": {
+        "defaults": {
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 4,
+        "x": 12,
+        "y": 1
+      },
+      "id": 383,
+      "links": [],
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "7.5.5",
+      "targets": [
+        {
+          "expr": "sum(hclcache_cache_outage{namespace=~\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\"})",
+          "format": "time_series",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "",
+          "refId": "A"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Caches Currently in Outage Mode",
+      "type": "stat"
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "${DS_PROMETHEUS}",
+      "fieldConfig": {
+        "defaults": {
+          "links": []
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 5,
+        "w": 8,
+        "x": 16,
+        "y": 1
+      },
+      "hiddenSeries": false,
+      "id": 384,
+      "legend": {
+        "alignAsTable": true,
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "rightSide": true,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "7.5.5",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": true,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "sum(hclcache_cache_outage{namespace=~\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\"}) by (name) > 0",
+          "interval": "",
+          "legendFormat": "{{name}}",
+          "refId": "A"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Remote Caches in Outage Mode",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -469,1131 +352,6 @@
           "show": true
         },
         {
-          "decimals": null,
-          "format": "short",
-          "label": "",
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": null,
-      "description": "This dashboard only works if Redis is installed\nlocally with metrics enabled",
-      "fieldConfig": {
-        "defaults": {
-          "links": []
-        },
-        "overrides": []
-      },
-      "fill": 1,
-      "fillGradient": 0,
-      "gridPos": {
-        "h": 12,
-        "w": 8,
-        "x": 16,
-        "y": 2
-      },
-      "hiddenSeries": false,
-      "id": 390,
-      "legend": {
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
-        "show": true,
-        "total": false,
-        "values": false
-      },
-      "lines": true,
-      "linewidth": 1,
-      "nullPointMode": "null",
-      "options": {
-        "alertThreshold": true
-      },
-      "percentage": false,
-      "pluginVersion": "7.5.5",
-      "pointradius": 2,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "expr": "redis_memory_used_bytes",
-          "interval": "",
-          "legendFormat": "{{instance}} - {{pod}} used",
-          "refId": "A"
-        },
-        {
-          "expr": "max(redis_memory_max_bytes)",
-          "interval": "",
-          "legendFormat": "max",
-          "refId": "B"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "Redis Memory",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "decbytes",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": "0",
-          "show": true
-        },
-        {
-          "format": "decbytes",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
-    },
-    {
-      "collapsed": false,
-      "datasource": "Prometheus",
-      "gridPos": {
-        "h": 1,
-        "w": 24,
-        "x": 0,
-        "y": 14
-      },
-      "id": 366,
-      "panels": [],
-      "title": "Remote Operations",
-      "type": "row"
-    },
-    {
-      "aliasColors": {},
-      "bars": true,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "Prometheus",
-      "fieldConfig": {
-        "defaults": {
-          "links": []
-        },
-        "overrides": []
-      },
-      "fill": 1,
-      "fillGradient": 0,
-      "gridPos": {
-        "h": 10,
-        "w": 15,
-        "x": 0,
-        "y": 15
-      },
-      "hiddenSeries": false,
-      "id": 324,
-      "interval": "",
-      "legend": {
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
-        "show": true,
-        "total": false,
-        "values": false
-      },
-      "lines": false,
-      "linewidth": 1,
-      "nullPointMode": "null",
-      "options": {
-        "alertThreshold": true
-      },
-      "percentage": false,
-      "pluginVersion": "7.5.5",
-      "pointradius": 2,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": true,
-      "steppedLine": false,
-      "targets": [
-        {
-          "expr": "sum(rate(hclcache_cache_puts_duration_seconds_count{ namespace=~\"$namespace\", cachespace=\"$environment\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", result!=\"error\", name=~\"$cache\"}[2m]))",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "put",
-          "refId": "A"
-        },
-        {
-          "expr": "sum(rate(hclcache_cache_gets_duration_seconds_count{ namespace=~\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", result!=\"error\", name=~\"$cache\"}[2m]))",
-          "interval": "",
-          "legendFormat": "get",
-          "refId": "B"
-        },
-        {
-          "expr": "sum(rate(hclcache_cache_clears_duration_seconds_count{ namespace=~\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", result!=\"error\", name=~\"$cache\"}[2m]))",
-          "interval": "",
-          "legendFormat": "clear",
-          "refId": "C"
-        },
-        {
-          "expr": "sum(rate(hclcache_cache_invalidates_duration_seconds_count{ namespace=~\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", result!=\"error\", name=~\"$cache\"}[2m]))",
-          "interval": "",
-          "legendFormat": "invalidate",
-          "refId": "D"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "Remote Operations per second",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "$$hashKey": "object:1508",
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": "0",
-          "show": true
-        },
-        {
-          "$$hashKey": "object:1509",
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "Prometheus",
-      "fieldConfig": {
-        "defaults": {
-          "links": []
-        },
-        "overrides": []
-      },
-      "fill": 1,
-      "fillGradient": 0,
-      "gridPos": {
-        "h": 10,
-        "w": 9,
-        "x": 15,
-        "y": 15
-      },
-      "hiddenSeries": false,
-      "id": 95,
-      "interval": "",
-      "legend": {
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
-        "show": true,
-        "total": false,
-        "values": false
-      },
-      "lines": true,
-      "linewidth": 1,
-      "nullPointMode": "null",
-      "options": {
-        "alertThreshold": true
-      },
-      "percentage": false,
-      "pluginVersion": "7.5.5",
-      "pointradius": 2,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": true,
-      "steppedLine": false,
-      "targets": [
-        {
-          "expr": "sum(increase(hclcache_cache_puts_duration_seconds_count{ namespace=~\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", result=\"error\", name=~\"$cache\"}[2m]))",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "put",
-          "refId": "A"
-        },
-        {
-          "expr": "sum(increase(hclcache_cache_gets_duration_seconds_count{ namespace=~\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", result=\"error\", name=~\"$cache\"}[2m]))",
-          "interval": "",
-          "legendFormat": "get",
-          "refId": "B"
-        },
-        {
-          "expr": "sum(increase(hclcache_cache_clears_duration_seconds_count{ namespace=~\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", result=\"error\", name=~\"$cache\"}[2m]))",
-          "interval": "",
-          "legendFormat": "clear",
-          "refId": "C"
-        },
-        {
-          "expr": "sum(increase(hclcache_cache_invalidates_duration_seconds_count{ namespace=~\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", result=\"error\", name=~\"$cache\"}[2m]))",
-          "interval": "",
-          "legendFormat": "invalidate",
-          "refId": "D"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "Remote Error Count",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": "0",
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
-    },
-    {
-      "aliasColors": {},
-      "bars": true,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "Prometheus",
-      "fieldConfig": {
-        "defaults": {
-          "unit": "short"
-        },
-        "overrides": []
-      },
-      "fill": 1,
-      "fillGradient": 0,
-      "gridPos": {
-        "h": 11,
-        "w": 6,
-        "x": 0,
-        "y": 25
-      },
-      "hiddenSeries": false,
-      "id": 370,
-      "interval": "",
-      "legend": {
-        "alignAsTable": true,
-        "avg": false,
-        "current": false,
-        "hideZero": true,
-        "max": false,
-        "min": false,
-        "rightSide": false,
-        "show": true,
-        "total": false,
-        "values": false
-      },
-      "lines": false,
-      "linewidth": 1,
-      "nullPointMode": "null",
-      "options": {
-        "alertThreshold": false
-      },
-      "percentage": false,
-      "pluginVersion": "7.5.5",
-      "pointradius": 2,
-      "points": false,
-      "renderer": "flot",
-      "repeat": null,
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": true,
-      "steppedLine": false,
-      "targets": [
-        {
-          "exemplar": true,
-          "expr": "\r\nsum(rate(hclcache_cache_gets_duration_seconds_count{ namespace=~\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[2m])) by (name) > 0\r\r",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "{{name}}",
-          "refId": "A"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "Get Ops per Cache per second",
-      "tooltip": {
-        "shared": true,
-        "sort": 2,
-        "value_type": "individual"
-      },
-      "transformations": [],
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "$$hashKey": "object:1263",
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": "0",
-          "show": true
-        },
-        {
-          "$$hashKey": "object:1264",
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
-    },
-    {
-      "aliasColors": {},
-      "bars": true,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "Prometheus",
-      "fieldConfig": {
-        "defaults": {
-          "unit": "short"
-        },
-        "overrides": []
-      },
-      "fill": 1,
-      "fillGradient": 0,
-      "gridPos": {
-        "h": 11,
-        "w": 6,
-        "x": 6,
-        "y": 25
-      },
-      "hiddenSeries": false,
-      "id": 402,
-      "interval": "",
-      "legend": {
-        "alignAsTable": true,
-        "avg": false,
-        "current": false,
-        "hideZero": true,
-        "max": false,
-        "min": false,
-        "rightSide": false,
-        "show": true,
-        "total": false,
-        "values": false
-      },
-      "lines": false,
-      "linewidth": 1,
-      "nullPointMode": "null",
-      "options": {
-        "alertThreshold": false
-      },
-      "percentage": false,
-      "pluginVersion": "7.5.5",
-      "pointradius": 2,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": true,
-      "steppedLine": false,
-      "targets": [
-        {
-          "exemplar": true,
-          "expr": "sum(rate(hclcache_cache_puts_duration_seconds_count{ namespace=~\"$namespace\",cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[2m]) ) by (name) ",
-          "interval": "",
-          "legendFormat": "{{ name }}",
-          "refId": "A"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "Put Ops per Cache per second",
-      "tooltip": {
-        "shared": true,
-        "sort": 2,
-        "value_type": "individual"
-      },
-      "transformations": [],
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "$$hashKey": "object:1263",
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": "0",
-          "show": true
-        },
-        {
-          "$$hashKey": "object:1264",
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
-    },
-    {
-      "aliasColors": {},
-      "bars": true,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "Prometheus",
-      "fieldConfig": {
-        "defaults": {
-          "unit": "short"
-        },
-        "overrides": []
-      },
-      "fill": 1,
-      "fillGradient": 0,
-      "gridPos": {
-        "h": 11,
-        "w": 6,
-        "x": 12,
-        "y": 25
-      },
-      "hiddenSeries": false,
-      "id": 403,
-      "interval": "",
-      "legend": {
-        "alignAsTable": true,
-        "avg": false,
-        "current": false,
-        "hideZero": true,
-        "max": false,
-        "min": false,
-        "rightSide": false,
-        "show": true,
-        "total": false,
-        "values": false
-      },
-      "lines": false,
-      "linewidth": 1,
-      "nullPointMode": "null",
-      "options": {
-        "alertThreshold": false
-      },
-      "percentage": false,
-      "pluginVersion": "7.5.5",
-      "pointradius": 2,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": true,
-      "steppedLine": false,
-      "targets": [
-        {
-          "exemplar": true,
-          "expr": "sum(rate(hclcache_cache_clears_duration_seconds_count{ namespace=~\"$namespace\",cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[2m]) ) by (name) ",
-          "interval": "",
-          "legendFormat": "{{ name }}",
-          "refId": "A"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "Clear Ops per Cache per second",
-      "tooltip": {
-        "shared": true,
-        "sort": 2,
-        "value_type": "individual"
-      },
-      "transformations": [],
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "$$hashKey": "object:1263",
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": "0",
-          "show": true
-        },
-        {
-          "$$hashKey": "object:1264",
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
-    },
-    {
-      "aliasColors": {},
-      "bars": true,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "Prometheus",
-      "fieldConfig": {
-        "defaults": {
-          "unit": "short"
-        },
-        "overrides": []
-      },
-      "fill": 1,
-      "fillGradient": 0,
-      "gridPos": {
-        "h": 11,
-        "w": 6,
-        "x": 18,
-        "y": 25
-      },
-      "hiddenSeries": false,
-      "id": 404,
-      "interval": "",
-      "legend": {
-        "alignAsTable": true,
-        "avg": false,
-        "current": false,
-        "hideZero": true,
-        "max": false,
-        "min": false,
-        "rightSide": false,
-        "show": true,
-        "total": false,
-        "values": false
-      },
-      "lines": false,
-      "linewidth": 1,
-      "nullPointMode": "null",
-      "options": {
-        "alertThreshold": false
-      },
-      "percentage": false,
-      "pluginVersion": "7.5.5",
-      "pointradius": 2,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": true,
-      "steppedLine": false,
-      "targets": [
-        {
-          "exemplar": true,
-          "expr": "sum(rate(hclcache_cache_invalidates_duration_seconds_count{ namespace=~\"$namespace\",cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[2m]) ) by (name) ",
-          "interval": "",
-          "legendFormat": "{{ name }}",
-          "refId": "A"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "Invalidate Ops per Cache per second",
-      "tooltip": {
-        "shared": true,
-        "sort": 2,
-        "value_type": "individual"
-      },
-      "transformations": [],
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "$$hashKey": "object:1263",
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": "0",
-          "show": true
-        },
-        {
-          "$$hashKey": "object:1264",
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
-    },
-    {
-      "collapsed": false,
-      "datasource": "Prometheus",
-      "gridPos": {
-        "h": 1,
-        "w": 24,
-        "x": 0,
-        "y": 36
-      },
-      "id": 364,
-      "panels": [],
-      "title": "Response Times",
-      "type": "row"
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "Prometheus",
-      "fieldConfig": {
-        "defaults": {
-          "links": []
-        },
-        "overrides": []
-      },
-      "fill": 1,
-      "fillGradient": 0,
-      "gridPos": {
-        "h": 8,
-        "w": 16,
-        "x": 0,
-        "y": 37
-      },
-      "hiddenSeries": false,
-      "id": 361,
-      "legend": {
-        "alignAsTable": true,
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
-        "rightSide": true,
-        "show": true,
-        "total": false,
-        "values": false
-      },
-      "lines": true,
-      "linewidth": 1,
-      "nullPointMode": "null",
-      "options": {
-        "alertThreshold": true
-      },
-      "percentage": false,
-      "pluginVersion": "7.5.5",
-      "pointradius": 2,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "expr": "sum(rate(hclcache_cache_gets_duration_seconds_sum{ namespace=\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[2m])) / sum(rate(hclcache_cache_gets_duration_seconds_count{ namespace=\"$namespace\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[2m]))",
-          "interval": "",
-          "legendFormat": "get",
-          "refId": "A"
-        },
-        {
-          "expr": "sum(rate(hclcache_cache_puts_duration_seconds_sum{ namespace=\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[2m])) / sum(rate(hclcache_cache_puts_duration_seconds_count{ namespace=\"$namespace\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[2m]))",
-          "interval": "",
-          "legendFormat": "put",
-          "refId": "B"
-        },
-        {
-          "expr": "sum(rate(hclcache_cache_removes_duration_seconds_sum{ namespace=\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[2m])) / sum(rate(hclcache_cache_puts_duration_seconds_count{ namespace=\"$namespace\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[2m]))",
-          "interval": "",
-          "legendFormat": "remove",
-          "refId": "C"
-        },
-        {
-          "expr": "sum(rate(hclcache_cache_invalidates_duration_seconds_sum{ namespace=\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[2m])) / sum(rate(hclcache_cache_puts_duration_seconds_count{ namespace=\"$namespace\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[2m]))",
-          "interval": "",
-          "legendFormat": "invalidate",
-          "refId": "D"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "Remote Average Durations",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "s",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": "0",
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "Prometheus",
-      "fieldConfig": {
-        "defaults": {
-          "links": []
-        },
-        "overrides": []
-      },
-      "fill": 1,
-      "fillGradient": 0,
-      "gridPos": {
-        "h": 8,
-        "w": 8,
-        "x": 0,
-        "y": 45
-      },
-      "hiddenSeries": false,
-      "id": 360,
-      "legend": {
-        "alignAsTable": true,
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
-        "rightSide": true,
-        "show": true,
-        "total": false,
-        "values": false
-      },
-      "lines": true,
-      "linewidth": 1,
-      "nullPointMode": "null",
-      "options": {
-        "alertThreshold": true
-      },
-      "percentage": false,
-      "pluginVersion": "7.5.5",
-      "pointradius": 2,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "expr": "histogram_quantile(0.95, sum(rate(hclcache_cache_gets_duration_seconds_bucket{ namespace=\"$namespace\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[5m])) by (le))",
-          "interval": "",
-          "legendFormat": "get",
-          "refId": "A"
-        },
-        {
-          "expr": "histogram_quantile(0.95, sum(rate(hclcache_cache_puts_duration_seconds_bucket{ namespace=\"$namespace\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\"}[5m])) by (le))",
-          "legendFormat": "put ",
-          "refId": "C"
-        },
-        {
-          "expr": "histogram_quantile(0.95, sum(rate(hclcache_cache_clears_duration_seconds_bucket{ namespace=\"$namespace\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\"}[5m])) by (le))",
-          "legendFormat": "clear",
-          "refId": "B"
-        },
-        {
-          "expr": "histogram_quantile(0.95, sum(rate(hclcache_cache_invalidates_duration_seconds_bucket{ namespace=\"$namespace\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[5m])) by (le))",
-          "legendFormat": "invalidate",
-          "refId": "D"
-        },
-        {
-          "expr": "histogram_quantile(0.95, sum(rate(hclcache_cache_removes_duration_seconds_bucket{ namespace=\"$namespace\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[5m])) by (le))",
-          "legendFormat": "remove",
-          "refId": "E"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "Remote Operations - 95% Percentile",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "s",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": "0",
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "Prometheus",
-      "fieldConfig": {
-        "defaults": {
-          "links": []
-        },
-        "overrides": []
-      },
-      "fill": 1,
-      "fillGradient": 0,
-      "gridPos": {
-        "h": 8,
-        "w": 8,
-        "x": 8,
-        "y": 45
-      },
-      "hiddenSeries": false,
-      "id": 369,
-      "legend": {
-        "alignAsTable": true,
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
-        "rightSide": true,
-        "show": true,
-        "total": false,
-        "values": false
-      },
-      "lines": true,
-      "linewidth": 1,
-      "nullPointMode": "null",
-      "options": {
-        "alertThreshold": true
-      },
-      "percentage": false,
-      "pluginVersion": "7.5.5",
-      "pointradius": 2,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "expr": "histogram_quantile(0.99, sum(rate(hclcache_cache_gets_duration_seconds_bucket{ namespace=\"$namespace\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\"  }[5m])) by (le))",
-          "legendFormat": "get",
-          "refId": "A"
-        },
-        {
-          "expr": "histogram_quantile(0.99, sum(rate(hclcache_cache_puts_duration_seconds_bucket{ namespace=\"$namespace\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\"}[5m])) by (le))",
-          "legendFormat": "put ",
-          "refId": "C"
-        },
-        {
-          "expr": "histogram_quantile(0.99, sum(rate(hclcache_cache_clears_duration_seconds_bucket{ namespace=\"$namespace\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[5m])) by (le))",
-          "legendFormat": "clear",
-          "refId": "B"
-        },
-        {
-          "expr": "histogram_quantile(0.99, sum(rate(hclcache_cache_invalidates_duration_seconds_bucket{ namespace=\"$namespace\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[5m])) by (le))",
-          "legendFormat": "invalidate",
-          "refId": "D"
-        },
-        {
-          "expr": "histogram_quantile(0.99, sum(rate(hclcache_cache_removes_duration_seconds_bucket{ namespace=\"$namespace\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[5m])) by (le))",
-          "legendFormat": "remove",
-          "refId": "E"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "Remote Operations - 99% Percentile",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "s",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        },
-        {
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -1609,12 +367,1256 @@
     },
     {
       "collapsed": true,
-      "datasource": "Prometheus",
+      "datasource": "${DS_PROMETHEUS}",
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 53
+        "y": 6
+      },
+      "id": 386,
+      "panels": [
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "${DS_PROMETHEUS}",
+          "decimals": 0,
+          "description": "Cache Manager pod must be enabled",
+          "fieldConfig": {
+            "defaults": {
+              "links": []
+            },
+            "overrides": []
+          },
+          "fill": 1,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 12,
+            "w": 16,
+            "x": 0,
+            "y": 7
+          },
+          "hiddenSeries": false,
+          "id": 388,
+          "legend": {
+            "alignAsTable": true,
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "rightSide": true,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "nullPointMode": "null",
+          "options": {
+            "alertThreshold": true
+          },
+          "percentage": false,
+          "pluginVersion": "7.5.5",
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "repeat": null,
+          "repeatDirection": "v",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "max( (  hclcache_cache_size_current{ namespace=~\"$namespace\", cachespace=\"$environment\", scope=\"remote\", result!=\"error\", name=~\"$cache\" } > 0 ) * on ( namespace, cachespace, name) group_left( redis_instance ) hclcache_cache_remote_node_mapping{ redis_instance =~ \"$redis\"  }) by ( name, redis_instance )  ",
+              "interval": "",
+              "legendFormat": "{{redis_instance}} - {{name}}",
+              "refId": "A"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "Remote Cache Sizes",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "decimals": 0,
+              "format": "short",
+              "label": "",
+              "logBase": 1,
+              "max": null,
+              "min": "0",
+              "show": true
+            },
+            {
+              "decimals": null,
+              "format": "short",
+              "label": "",
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "${DS_PROMETHEUS}",
+          "description": "This dashboard only works if Redis is installed\nlocally with metrics enabled",
+          "fieldConfig": {
+            "defaults": {
+              "links": []
+            },
+            "overrides": []
+          },
+          "fill": 1,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 12,
+            "w": 8,
+            "x": 16,
+            "y": 7
+          },
+          "hiddenSeries": false,
+          "id": 390,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "nullPointMode": "null",
+          "options": {
+            "alertThreshold": true
+          },
+          "percentage": false,
+          "pluginVersion": "7.5.5",
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "redis_memory_used_bytes",
+              "interval": "",
+              "legendFormat": "{{instance}} - {{pod}} used",
+              "refId": "A"
+            },
+            {
+              "expr": "max(redis_memory_max_bytes)",
+              "interval": "",
+              "legendFormat": "max",
+              "refId": "B"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "Redis Memory",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "decbytes",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": "0",
+              "show": true
+            },
+            {
+              "format": "decbytes",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        }
+      ],
+      "title": "Remote Cache Size",
+      "type": "row"
+    },
+    {
+      "collapsed": true,
+      "datasource": "${DS_PROMETHEUS}",
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 7
+      },
+      "id": 366,
+      "panels": [
+        {
+          "aliasColors": {},
+          "bars": true,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "${DS_PROMETHEUS}",
+          "fieldConfig": {
+            "defaults": {
+              "links": []
+            },
+            "overrides": []
+          },
+          "fill": 1,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 10,
+            "w": 15,
+            "x": 0,
+            "y": 8
+          },
+          "hiddenSeries": false,
+          "id": 324,
+          "interval": "",
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": false,
+          "linewidth": 1,
+          "nullPointMode": "null",
+          "options": {
+            "alertThreshold": true
+          },
+          "percentage": false,
+          "pluginVersion": "7.5.5",
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": true,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "sum(rate(hclcache_cache_puts_duration_seconds_count{ namespace=~\"$namespace\", cachespace=\"$environment\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", result!=\"error\", name=~\"$cache\"}[2m]))",
+              "hide": false,
+              "interval": "",
+              "legendFormat": "put",
+              "refId": "A"
+            },
+            {
+              "expr": "sum(rate(hclcache_cache_gets_duration_seconds_count{ namespace=~\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", result!=\"error\", name=~\"$cache\"}[2m]))",
+              "interval": "",
+              "legendFormat": "get",
+              "refId": "B"
+            },
+            {
+              "expr": "sum(rate(hclcache_cache_clears_duration_seconds_count{ namespace=~\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", result!=\"error\", name=~\"$cache\"}[2m]))",
+              "interval": "",
+              "legendFormat": "clear",
+              "refId": "C"
+            },
+            {
+              "expr": "sum(rate(hclcache_cache_invalidates_duration_seconds_count{ namespace=~\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", result!=\"error\", name=~\"$cache\"}[2m]))",
+              "interval": "",
+              "legendFormat": "invalidate",
+              "refId": "D"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "Remote Operations per second",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "$$hashKey": "object:1508",
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": "0",
+              "show": true
+            },
+            {
+              "$$hashKey": "object:1509",
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "${DS_PROMETHEUS}",
+          "fieldConfig": {
+            "defaults": {
+              "links": []
+            },
+            "overrides": []
+          },
+          "fill": 1,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 10,
+            "w": 9,
+            "x": 15,
+            "y": 8
+          },
+          "hiddenSeries": false,
+          "id": 95,
+          "interval": "",
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "nullPointMode": "null",
+          "options": {
+            "alertThreshold": true
+          },
+          "percentage": false,
+          "pluginVersion": "7.5.5",
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": true,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "sum(increase(hclcache_cache_puts_duration_seconds_count{ namespace=~\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", result=\"error\", name=~\"$cache\"}[2m]))",
+              "hide": false,
+              "interval": "",
+              "legendFormat": "put",
+              "refId": "A"
+            },
+            {
+              "expr": "sum(increase(hclcache_cache_gets_duration_seconds_count{ namespace=~\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", result=\"error\", name=~\"$cache\"}[2m]))",
+              "interval": "",
+              "legendFormat": "get",
+              "refId": "B"
+            },
+            {
+              "expr": "sum(increase(hclcache_cache_clears_duration_seconds_count{ namespace=~\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", result=\"error\", name=~\"$cache\"}[2m]))",
+              "interval": "",
+              "legendFormat": "clear",
+              "refId": "C"
+            },
+            {
+              "expr": "sum(increase(hclcache_cache_invalidates_duration_seconds_count{ namespace=~\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", result=\"error\", name=~\"$cache\"}[2m]))",
+              "interval": "",
+              "legendFormat": "invalidate",
+              "refId": "D"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "Remote Error Count",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": "0",
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": true,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "${DS_PROMETHEUS}",
+          "fieldConfig": {
+            "defaults": {
+              "unit": "short"
+            },
+            "overrides": []
+          },
+          "fill": 1,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 11,
+            "w": 6,
+            "x": 0,
+            "y": 18
+          },
+          "hiddenSeries": false,
+          "id": 370,
+          "interval": "",
+          "legend": {
+            "alignAsTable": true,
+            "avg": false,
+            "current": false,
+            "hideZero": true,
+            "max": false,
+            "min": false,
+            "rightSide": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": false,
+          "linewidth": 1,
+          "nullPointMode": "null",
+          "options": {
+            "alertThreshold": false
+          },
+          "percentage": false,
+          "pluginVersion": "7.5.5",
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "repeat": null,
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": true,
+          "steppedLine": false,
+          "targets": [
+            {
+              "exemplar": true,
+              "expr": "\r\nsum(rate(hclcache_cache_gets_duration_seconds_count{ namespace=~\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[2m])) by (name) > 0\r\r",
+              "hide": false,
+              "interval": "",
+              "legendFormat": "{{name}}",
+              "refId": "A"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "Get Ops per Cache per second",
+          "tooltip": {
+            "shared": true,
+            "sort": 2,
+            "value_type": "individual"
+          },
+          "transformations": [],
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "$$hashKey": "object:1263",
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": "0",
+              "show": true
+            },
+            {
+              "$$hashKey": "object:1264",
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": true,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "${DS_PROMETHEUS}",
+          "fieldConfig": {
+            "defaults": {
+              "unit": "short"
+            },
+            "overrides": []
+          },
+          "fill": 1,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 11,
+            "w": 6,
+            "x": 6,
+            "y": 18
+          },
+          "hiddenSeries": false,
+          "id": 402,
+          "interval": "",
+          "legend": {
+            "alignAsTable": true,
+            "avg": false,
+            "current": false,
+            "hideZero": true,
+            "max": false,
+            "min": false,
+            "rightSide": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": false,
+          "linewidth": 1,
+          "nullPointMode": "null",
+          "options": {
+            "alertThreshold": false
+          },
+          "percentage": false,
+          "pluginVersion": "7.5.5",
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": true,
+          "steppedLine": false,
+          "targets": [
+            {
+              "exemplar": true,
+              "expr": "sum(rate(hclcache_cache_puts_duration_seconds_count{ namespace=~\"$namespace\",cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[2m]) ) by (name) ",
+              "interval": "",
+              "legendFormat": "{{ name }}",
+              "refId": "A"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "Put Ops per Cache per second",
+          "tooltip": {
+            "shared": true,
+            "sort": 2,
+            "value_type": "individual"
+          },
+          "transformations": [],
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "$$hashKey": "object:1263",
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": "0",
+              "show": true
+            },
+            {
+              "$$hashKey": "object:1264",
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": true,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "${DS_PROMETHEUS}",
+          "fieldConfig": {
+            "defaults": {
+              "unit": "short"
+            },
+            "overrides": []
+          },
+          "fill": 1,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 11,
+            "w": 6,
+            "x": 12,
+            "y": 18
+          },
+          "hiddenSeries": false,
+          "id": 403,
+          "interval": "",
+          "legend": {
+            "alignAsTable": true,
+            "avg": false,
+            "current": false,
+            "hideZero": true,
+            "max": false,
+            "min": false,
+            "rightSide": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": false,
+          "linewidth": 1,
+          "nullPointMode": "null",
+          "options": {
+            "alertThreshold": false
+          },
+          "percentage": false,
+          "pluginVersion": "7.5.5",
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": true,
+          "steppedLine": false,
+          "targets": [
+            {
+              "exemplar": true,
+              "expr": "sum(rate(hclcache_cache_clears_duration_seconds_count{ namespace=~\"$namespace\",cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[2m]) ) by (name) ",
+              "interval": "",
+              "legendFormat": "{{ name }}",
+              "refId": "A"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "Clear Ops per Cache per second",
+          "tooltip": {
+            "shared": true,
+            "sort": 2,
+            "value_type": "individual"
+          },
+          "transformations": [],
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "$$hashKey": "object:1263",
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": "0",
+              "show": true
+            },
+            {
+              "$$hashKey": "object:1264",
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": true,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "${DS_PROMETHEUS}",
+          "fieldConfig": {
+            "defaults": {
+              "unit": "short"
+            },
+            "overrides": []
+          },
+          "fill": 1,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 11,
+            "w": 6,
+            "x": 18,
+            "y": 18
+          },
+          "hiddenSeries": false,
+          "id": 404,
+          "interval": "",
+          "legend": {
+            "alignAsTable": true,
+            "avg": false,
+            "current": false,
+            "hideZero": true,
+            "max": false,
+            "min": false,
+            "rightSide": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": false,
+          "linewidth": 1,
+          "nullPointMode": "null",
+          "options": {
+            "alertThreshold": false
+          },
+          "percentage": false,
+          "pluginVersion": "7.5.5",
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": true,
+          "steppedLine": false,
+          "targets": [
+            {
+              "exemplar": true,
+              "expr": "sum(rate(hclcache_cache_invalidates_duration_seconds_count{ namespace=~\"$namespace\",cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[2m]) ) by (name) ",
+              "interval": "",
+              "legendFormat": "{{ name }}",
+              "refId": "A"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "Invalidate Ops per Cache per second",
+          "tooltip": {
+            "shared": true,
+            "sort": 2,
+            "value_type": "individual"
+          },
+          "transformations": [],
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "$$hashKey": "object:1263",
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": "0",
+              "show": true
+            },
+            {
+              "$$hashKey": "object:1264",
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        }
+      ],
+      "title": "Remote Operations",
+      "type": "row"
+    },
+    {
+      "collapsed": true,
+      "datasource": "${DS_PROMETHEUS}",
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 8
+      },
+      "id": 364,
+      "panels": [
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "${DS_PROMETHEUS}",
+          "fieldConfig": {
+            "defaults": {
+              "links": []
+            },
+            "overrides": []
+          },
+          "fill": 1,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 8,
+            "w": 16,
+            "x": 0,
+            "y": 9
+          },
+          "hiddenSeries": false,
+          "id": 361,
+          "legend": {
+            "alignAsTable": true,
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "rightSide": true,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "nullPointMode": "null",
+          "options": {
+            "alertThreshold": true
+          },
+          "percentage": false,
+          "pluginVersion": "7.5.5",
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "sum(rate(hclcache_cache_gets_duration_seconds_sum{ namespace=\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[2m])) / sum(rate(hclcache_cache_gets_duration_seconds_count{ namespace=\"$namespace\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[2m]))",
+              "interval": "",
+              "legendFormat": "get",
+              "refId": "A"
+            },
+            {
+              "expr": "sum(rate(hclcache_cache_puts_duration_seconds_sum{ namespace=\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[2m])) / sum(rate(hclcache_cache_puts_duration_seconds_count{ namespace=\"$namespace\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[2m]))",
+              "interval": "",
+              "legendFormat": "put",
+              "refId": "B"
+            },
+            {
+              "expr": "sum(rate(hclcache_cache_removes_duration_seconds_sum{ namespace=\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[2m])) / sum(rate(hclcache_cache_puts_duration_seconds_count{ namespace=\"$namespace\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[2m]))",
+              "interval": "",
+              "legendFormat": "remove",
+              "refId": "C"
+            },
+            {
+              "expr": "sum(rate(hclcache_cache_invalidates_duration_seconds_sum{ namespace=\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[2m])) / sum(rate(hclcache_cache_puts_duration_seconds_count{ namespace=\"$namespace\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[2m]))",
+              "interval": "",
+              "legendFormat": "invalidate",
+              "refId": "D"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "Remote Average Durations",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "s",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": "0",
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "${DS_PROMETHEUS}",
+          "fieldConfig": {
+            "defaults": {
+              "links": []
+            },
+            "overrides": []
+          },
+          "fill": 1,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 8,
+            "w": 8,
+            "x": 0,
+            "y": 17
+          },
+          "hiddenSeries": false,
+          "id": 360,
+          "legend": {
+            "alignAsTable": true,
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "rightSide": true,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "nullPointMode": "null",
+          "options": {
+            "alertThreshold": true
+          },
+          "percentage": false,
+          "pluginVersion": "7.5.5",
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "histogram_quantile(0.95, sum(rate(hclcache_cache_gets_duration_seconds_bucket{ namespace=\"$namespace\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[5m])) by (le))",
+              "interval": "",
+              "legendFormat": "get",
+              "refId": "A"
+            },
+            {
+              "expr": "histogram_quantile(0.95, sum(rate(hclcache_cache_puts_duration_seconds_bucket{ namespace=\"$namespace\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\"}[5m])) by (le))",
+              "legendFormat": "put ",
+              "refId": "C"
+            },
+            {
+              "expr": "histogram_quantile(0.95, sum(rate(hclcache_cache_clears_duration_seconds_bucket{ namespace=\"$namespace\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\"}[5m])) by (le))",
+              "legendFormat": "clear",
+              "refId": "B"
+            },
+            {
+              "expr": "histogram_quantile(0.95, sum(rate(hclcache_cache_invalidates_duration_seconds_bucket{ namespace=\"$namespace\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[5m])) by (le))",
+              "legendFormat": "invalidate",
+              "refId": "D"
+            },
+            {
+              "expr": "histogram_quantile(0.95, sum(rate(hclcache_cache_removes_duration_seconds_bucket{ namespace=\"$namespace\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[5m])) by (le))",
+              "legendFormat": "remove",
+              "refId": "E"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "Remote Operations - 95% Percentile",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "s",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": "0",
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "${DS_PROMETHEUS}",
+          "fieldConfig": {
+            "defaults": {
+              "links": []
+            },
+            "overrides": []
+          },
+          "fill": 1,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 8,
+            "w": 8,
+            "x": 8,
+            "y": 17
+          },
+          "hiddenSeries": false,
+          "id": 369,
+          "legend": {
+            "alignAsTable": true,
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "rightSide": true,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "nullPointMode": "null",
+          "options": {
+            "alertThreshold": true
+          },
+          "percentage": false,
+          "pluginVersion": "7.5.5",
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "histogram_quantile(0.99, sum(rate(hclcache_cache_gets_duration_seconds_bucket{ namespace=\"$namespace\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\"  }[5m])) by (le))",
+              "legendFormat": "get",
+              "refId": "A"
+            },
+            {
+              "expr": "histogram_quantile(0.99, sum(rate(hclcache_cache_puts_duration_seconds_bucket{ namespace=\"$namespace\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\"}[5m])) by (le))",
+              "legendFormat": "put ",
+              "refId": "C"
+            },
+            {
+              "expr": "histogram_quantile(0.99, sum(rate(hclcache_cache_clears_duration_seconds_bucket{ namespace=\"$namespace\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[5m])) by (le))",
+              "legendFormat": "clear",
+              "refId": "B"
+            },
+            {
+              "expr": "histogram_quantile(0.99, sum(rate(hclcache_cache_invalidates_duration_seconds_bucket{ namespace=\"$namespace\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[5m])) by (le))",
+              "legendFormat": "invalidate",
+              "refId": "D"
+            },
+            {
+              "expr": "histogram_quantile(0.99, sum(rate(hclcache_cache_removes_duration_seconds_bucket{ namespace=\"$namespace\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[5m])) by (le))",
+              "legendFormat": "remove",
+              "refId": "E"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "Remote Operations - 99% Percentile",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "s",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": "0",
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        }
+      ],
+      "title": "Response Times",
+      "type": "row"
+    },
+    {
+      "collapsed": true,
+      "datasource": "${DS_PROMETHEUS}",
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 9
       },
       "id": 368,
       "panels": [
@@ -1623,7 +1625,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "fieldConfig": {
             "defaults": {
               "links": []
@@ -1636,7 +1638,7 @@
             "h": 8,
             "w": 13,
             "x": 0,
-            "y": 55
+            "y": 10
           },
           "hiddenSeries": false,
           "id": 325,
@@ -1657,7 +1659,7 @@
             "alertThreshold": true
           },
           "percentage": false,
-          "pluginVersion": "7.5.3",
+          "pluginVersion": "7.5.5",
           "pointradius": 2,
           "points": false,
           "renderer": "flot",
@@ -1716,11 +1718,13 @@
           }
         },
         {
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "fieldConfig": {
             "defaults": {
               "decimals": 0,
               "mappings": [],
+              "max": 1,
+              "min": 0,
               "thresholds": {
                 "mode": "absolute",
                 "steps": [
@@ -1742,7 +1746,7 @@
             "h": 8,
             "w": 3,
             "x": 13,
-            "y": 55
+            "y": 10
           },
           "id": 326,
           "options": {
@@ -1760,7 +1764,7 @@
             "text": {},
             "textMode": "auto"
           },
-          "pluginVersion": "7.5.3",
+          "pluginVersion": "7.5.5",
           "targets": [
             {
               "expr": "sum(rate(hclcache_cache_gets_duration_seconds_count{ namespace=~\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", result =\"hit\", name=~\"$cache\"}[2m])) / sum(rate(hclcache_cache_gets_duration_seconds_count{ namespace=~\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", result !=\"error\", name=~\"$cache\"}[2m]))",
@@ -1782,12 +1786,12 @@
     },
     {
       "collapsed": true,
-      "datasource": "Prometheus",
+      "datasource": "${DS_PROMETHEUS}",
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 54
+        "y": 10
       },
       "id": 378,
       "panels": [
@@ -1796,7 +1800,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "description": "",
           "fieldConfig": {
             "defaults": {
@@ -1810,7 +1814,7 @@
             "h": 11,
             "w": 11,
             "x": 0,
-            "y": 56
+            "y": 11
           },
           "hiddenSeries": false,
           "id": 381,
@@ -1832,7 +1836,7 @@
             "alertThreshold": true
           },
           "percentage": false,
-          "pluginVersion": "7.5.3",
+          "pluginVersion": "7.5.5",
           "pointradius": 2,
           "points": false,
           "renderer": "flot",
@@ -1894,7 +1898,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "description": "",
           "fieldConfig": {
             "defaults": {
@@ -1908,7 +1912,7 @@
             "h": 11,
             "w": 13,
             "x": 11,
-            "y": 56
+            "y": 11
           },
           "hiddenSeries": false,
           "id": 382,
@@ -1930,7 +1934,7 @@
             "alertThreshold": true
           },
           "percentage": false,
-          "pluginVersion": "7.5.3",
+          "pluginVersion": "7.5.5",
           "pointradius": 2,
           "points": false,
           "renderer": "flot",
@@ -1993,12 +1997,12 @@
     },
     {
       "collapsed": true,
-      "datasource": null,
+      "datasource": "${DS_PROMETHEUS}",
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 55
+        "y": 11
       },
       "id": 392,
       "panels": [
@@ -2007,7 +2011,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": null,
+          "datasource": "${DS_PROMETHEUS}",
           "decimals": 0,
           "description": "This chart shows the number of keys  that have expired and are pending to be removed by the maintenance processes. Large numbers could indicate maintenance is failing or behind\nCache Manager pod must be enabled\n",
           "fieldConfig": {
@@ -2022,7 +2026,7 @@
             "h": 10,
             "w": 12,
             "x": 0,
-            "y": 57
+            "y": 12
           },
           "hiddenSeries": false,
           "id": 400,
@@ -2044,7 +2048,7 @@
             "alertThreshold": true
           },
           "percentage": false,
-          "pluginVersion": "7.5.3",
+          "pluginVersion": "7.5.5",
           "pointradius": 2,
           "points": false,
           "renderer": "flot",
@@ -2109,7 +2113,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": null,
+          "datasource": "${DS_PROMETHEUS}",
           "description": "",
           "fieldConfig": {
             "defaults": {
@@ -2123,7 +2127,7 @@
             "h": 10,
             "w": 12,
             "x": 12,
-            "y": 57
+            "y": 12
           },
           "hiddenSeries": false,
           "id": 394,
@@ -2145,7 +2149,7 @@
             "alertThreshold": true
           },
           "percentage": false,
-          "pluginVersion": "7.5.3",
+          "pluginVersion": "7.5.5",
           "pointradius": 2,
           "points": false,
           "renderer": "flot",
@@ -2207,7 +2211,7 @@
           "bars": true,
           "dashLength": 10,
           "dashes": false,
-          "datasource": null,
+          "datasource": "${DS_PROMETHEUS}",
           "description": "When the HCL Cache detects that the memory in Redis is almost full, it can temporarily stop PUT operations while Low-Memory maintenance is running ",
           "fieldConfig": {
             "defaults": {
@@ -2221,7 +2225,7 @@
             "h": 10,
             "w": 8,
             "x": 0,
-            "y": 67
+            "y": 22
           },
           "hiddenSeries": false,
           "id": 396,
@@ -2243,7 +2247,7 @@
             "alertThreshold": true
           },
           "percentage": false,
-          "pluginVersion": "7.5.3",
+          "pluginVersion": "7.5.5",
           "pointradius": 2,
           "points": false,
           "renderer": "flot",
@@ -2306,7 +2310,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": null,
+          "datasource": "${DS_PROMETHEUS}",
           "description": "",
           "fieldConfig": {
             "defaults": {
@@ -2320,7 +2324,7 @@
             "h": 10,
             "w": 7,
             "x": 8,
-            "y": 67
+            "y": 22
           },
           "hiddenSeries": false,
           "id": 397,
@@ -2340,7 +2344,7 @@
             "alertThreshold": true
           },
           "percentage": false,
-          "pluginVersion": "7.5.3",
+          "pluginVersion": "7.5.5",
           "pointradius": 2,
           "points": false,
           "renderer": "flot",
@@ -2408,7 +2412,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": null,
+          "datasource": "${DS_PROMETHEUS}",
           "description": "",
           "fieldConfig": {
             "defaults": {
@@ -2422,7 +2426,7 @@
             "h": 10,
             "w": 9,
             "x": 15,
-            "y": 67
+            "y": 22
           },
           "hiddenSeries": false,
           "id": 399,
@@ -2442,7 +2446,7 @@
             "alertThreshold": true
           },
           "percentage": false,
-          "pluginVersion": "7.5.3",
+          "pluginVersion": "7.5.5",
           "pointradius": 2,
           "points": false,
           "renderer": "flot",
@@ -2520,13 +2524,33 @@
   "templating": {
     "list": [
       {
+        "current": {
+          "selected": false,
+          "text": "Prometheus",
+          "value": "Prometheus"
+        },
+        "description": null,
+        "error": null,
+        "hide": 0,
+        "includeAll": false,
+        "label": "Prometheus",
+        "multi": false,
+        "name": "DS_PROMETHEUS",
+        "options": [],
+        "query": "prometheus",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "type": "datasource"
+      },
+      {
         "allValue": null,
         "current": {
           "selected": false,
           "text": "commerce",
           "value": "commerce"
         },
-        "datasource": "Prometheus",
+        "datasource": "${DS_PROMETHEUS}",
         "definition": "label_values(hclcache_cache_size_max, namespace)",
         "description": null,
         "error": null,
@@ -2557,19 +2581,19 @@
           "text": "demoqalive",
           "value": "demoqalive"
         },
-        "datasource": "Prometheus",
+        "datasource": "${DS_PROMETHEUS}",
         "definition": "label_values(hclcache_cache_size_max{ namespace=\"$namespace\"}, cachespace)",
         "description": null,
         "error": null,
         "hide": 0,
-        "includeAll": false,
+        "includeAll": true,
         "label": "environment",
-        "multi": false,
+        "multi": true,
         "name": "environment",
         "options": [],
         "query": {
           "query": "label_values(hclcache_cache_size_max{ namespace=\"$namespace\"}, cachespace)",
-          "refId": "Prometheus-environment-Variable-Query"
+          "refId": "StandardVariableQuery"
         },
         "refresh": 2,
         "regex": "",
@@ -2588,7 +2612,7 @@
           "text": "All",
           "value": "$__all"
         },
-        "datasource": "Prometheus",
+        "datasource": "${DS_PROMETHEUS}",
         "definition": "label_values(hclcache_cache_size_max{ namespace=~\"$namespace\", cachespace=\"$environment\"}, job)",
         "description": null,
         "error": null,
@@ -2619,7 +2643,7 @@
           "text": "All",
           "value": "$__all"
         },
-        "datasource": "Prometheus",
+        "datasource": "${DS_PROMETHEUS}",
         "definition": "label_values(hclcache_cache_size_max{ namespace=~\"$namespace\", cachespace=\"$environment\", job=~\"$job\"}, pod)",
         "description": null,
         "error": null,
@@ -2650,7 +2674,7 @@
           "text": "All",
           "value": "$__all"
         },
-        "datasource": "Prometheus",
+        "datasource": "${DS_PROMETHEUS}",
         "definition": "label_values(hclcache_cache_size_max{ namespace=~\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\"},name)",
         "description": null,
         "error": null,
@@ -2681,7 +2705,7 @@
           "text": "All",
           "value": "$__all"
         },
-        "datasource": "Prometheus",
+        "datasource": "${DS_PROMETHEUS}",
         "definition": "label_values(hclcache_cache_remote_node_mapping{ cachespace=\"$environment\" },redis_instance)",
         "description": null,
         "error": null,
@@ -2727,5 +2751,5 @@
   "timezone": "",
   "title": "HCL Cache - Remote",
   "uid": "hcl_cache_remote",
-  "version": 918
+  "version": 919
 }

@@ -21,13 +21,13 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 13,
-  "iteration": 1632907955691,
+  "id": 18,
+  "iteration": 1645803871765,
   "links": [],
   "panels": [
     {
       "collapsed": false,
-      "datasource": "Prometheus",
+      "datasource": "${DS_PROMETHEUS}",
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -40,7 +40,7 @@
       "type": "row"
     },
     {
-      "datasource": null,
+      "datasource": "${DS_PROMETHEUS}",
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -83,7 +83,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "count (kube_pod_container_info{ kubernetes_namespace=~\"$namespace\", container=\"query-app\", pod=~\"$job.*\"}) by (image) \r",
+          "expr": "count (kube_pod_container_info{ namespace=~\"$namespace\", container=\"query-app\", pod=~\"$job.*\"}) by (image) \r",
           "format": "table",
           "instant": false,
           "interval": "",
@@ -102,7 +102,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Prometheus",
+      "datasource": "${DS_PROMETHEUS}",
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -150,7 +150,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "sum(rate(request_rest_status_total{ kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", resource=~\"$resource\", http_status=~\"$http_status\" }[2m]))  by (http_status)",
+          "expr": "sum(rate(request_rest_status_total{ namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", resource=~\"$resource\", http_status=~\"$http_status\" }[2m]))  by (http_status)",
           "hide": false,
           "interval": "",
           "legendFormat": "{{http_status}}",
@@ -205,7 +205,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Prometheus",
+      "datasource": "${DS_PROMETHEUS}",
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -252,7 +252,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "sum(rate(request_rest_seconds_sum{ kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", resource=~\"$resource\"} [2m])) by (component) / sum(rate(request_rest_seconds_count{ kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", resource=~\"$resource\"} [2m])) by (component)",
+          "expr": "sum(rate(request_rest_seconds_sum{ namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", resource=~\"$resource\"} [2m])) by (component) / sum(rate(request_rest_seconds_count{ namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", resource=~\"$resource\"} [2m])) by (component)",
           "interval": "",
           "legendFormat": "{{component}}",
           "refId": "A"
@@ -302,7 +302,7 @@
       }
     },
     {
-      "datasource": null,
+      "datasource": "${DS_PROMETHEUS}",
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -374,7 +374,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "kube_deployment_status_replicas_available{kubernetes_namespace=~\"$namespace\", deployment=~\"$job\"   }  ",
+          "expr": "kube_deployment_status_replicas_available{namespace=~\"$namespace\", deployment=~\"$job\"   }  ",
           "format": "time_series",
           "instant": false,
           "interval": "",
@@ -383,7 +383,7 @@
         },
         {
           "exemplar": true,
-          "expr": "kube_deployment_status_replicas_unavailable{  kubernetes_namespace=~\"$namespace\", deployment=~\"$job\" }",
+          "expr": "kube_deployment_status_replicas_unavailable{  namespace=~\"$namespace\", deployment=~\"$job\" }",
           "instant": false,
           "interval": "",
           "legendFormat": "unavailable",
@@ -397,7 +397,7 @@
     },
     {
       "collapsed": true,
-      "datasource": null,
+      "datasource": "${DS_PROMETHEUS}",
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -411,7 +411,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "fieldConfig": {
             "defaults": {
               "links": []
@@ -456,7 +456,7 @@
           "targets": [
             {
               "exemplar": true,
-              "expr": "sum(jvm_memory_used_bytes{kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", area=\"heap\"}) by (kubernetes_pod_name)",
+              "expr": "sum(jvm_memory_used_bytes{namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", area=\"heap\"}) by (kubernetes_pod_name)",
               "interval": "",
               "intervalFactor": 2,
               "legendFormat": "{{pod}}",
@@ -509,7 +509,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": null,
+          "datasource": "${DS_PROMETHEUS}",
           "fieldConfig": {
             "defaults": {},
             "overrides": []
@@ -581,7 +581,7 @@
             },
             {
               "exemplar": true,
-              "expr": "sum(container_cpu_usage_seconds_total{kubernetes_namespace=\"$namespace\", kubernetes_pod_name=~\"$pod\",component=~\"$job\" }) by (kubernetes_pod_name)\n",
+              "expr": "sum(container_cpu_usage_seconds_total{namespace=\"$namespace\", kubernetes_pod_name=~\"$pod\",component=~\"$job\" }) by (kubernetes_pod_name)\n",
               "format": "time_series",
               "hide": true,
               "interval": "",
@@ -660,7 +660,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": null,
+          "datasource": "${DS_PROMETHEUS}",
           "fieldConfig": {
             "defaults": {},
             "overrides": []
@@ -768,7 +768,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "description": "",
           "fieldConfig": {
             "defaults": {
@@ -814,14 +814,14 @@
           "targets": [
             {
               "exemplar": true,
-              "expr": "max(threadpool_maximum_pool_size{ kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", pool=\"Default_Executor\" })",
+              "expr": "max(threadpool_maximum_pool_size{ namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", pool=\"Default_Executor\" })",
               "interval": "",
               "legendFormat": "max",
               "refId": "A"
             },
             {
               "exemplar": true,
-              "expr": "sum( threadpool_active_pool_size{ kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\",pool=\"Default_Executor\"} ) by ( kubernetes_pod_name )",
+              "expr": "sum( threadpool_active_pool_size{ namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\",pool=\"Default_Executor\"} ) by ( kubernetes_pod_name )",
               "interval": "",
               "legendFormat": "{{kubernetes_pod_name}} -  active",
               "refId": "C"
@@ -874,7 +874,7 @@
     },
     {
       "collapsed": true,
-      "datasource": null,
+      "datasource": "${DS_PROMETHEUS}",
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -888,7 +888,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": null,
+          "datasource": "${DS_PROMETHEUS}",
           "description": "",
           "fieldConfig": {
             "defaults": {},
@@ -931,7 +931,7 @@
           "targets": [
             {
               "exemplar": true,
-              "expr": "sum( rate(java_logging_messages_total{ kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\" }[2m]) ) by ( level )",
+              "expr": "sum( rate(java_logging_messages_total{ namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\" }[2m]) ) by ( level )",
               "interval": "",
               "legendFormat": "{{ level }}",
               "refId": "A"
@@ -983,7 +983,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": null,
+          "datasource": "${DS_PROMETHEUS}",
           "description": "",
           "fieldConfig": {
             "defaults": {},
@@ -1026,7 +1026,7 @@
           "targets": [
             {
               "exemplar": true,
-              "expr": "sum( rate(java_logging_messages_total{ kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", level=~\"SEVERE|WARNING\"}[2m]) ) by ( kubernetes_pod_name ) ",
+              "expr": "sum( rate(java_logging_messages_total{ namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", level=~\"SEVERE|WARNING\"}[2m]) ) by ( kubernetes_pod_name ) ",
               "interval": "",
               "legendFormat": " {{kubernetes_pod_name}} ",
               "refId": "A"
@@ -1078,7 +1078,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": null,
+          "datasource": "${DS_PROMETHEUS}",
           "description": "",
           "fieldConfig": {
             "defaults": {},
@@ -1121,7 +1121,7 @@
           "targets": [
             {
               "exemplar": true,
-              "expr": "sum( rate(java_logging_messages_total{ kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", level=\"TRACE\"}[2m]) ) by ( kubernetes_pod_name ) ",
+              "expr": "sum( rate(java_logging_messages_total{ namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", level=\"TRACE\"}[2m]) ) by ( kubernetes_pod_name ) ",
               "interval": "",
               "legendFormat": " {{kubernetes_pod_name}} ",
               "refId": "A"
@@ -1174,7 +1174,7 @@
     },
     {
       "collapsed": true,
-      "datasource": "Prometheus",
+      "datasource": "${DS_PROMETHEUS}",
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -1188,7 +1188,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "description": "",
           "fieldConfig": {
             "defaults": {
@@ -1236,7 +1236,7 @@
           "targets": [
             {
               "exemplar": true,
-              "expr": "sum(rate(request_rest_status_total{ kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", resource=~\"$resource\", http_status=~\"$http_status\"}[2m]))",
+              "expr": "sum(rate(request_rest_status_total{ namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", resource=~\"$resource\", http_status=~\"$http_status\"}[2m]))",
               "hide": false,
               "interval": "",
               "legendFormat": "",
@@ -1291,7 +1291,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "description": "",
           "fieldConfig": {
             "defaults": {
@@ -1339,7 +1339,7 @@
           "targets": [
             {
               "exemplar": true,
-              "expr": "sum(rate(request_rest_status_total{ kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", resource=~\"$resource\", http_status=~\"$http_status\" }[2m]))  by (http_status)",
+              "expr": "sum(rate(request_rest_status_total{ namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", resource=~\"$resource\", http_status=~\"$http_status\" }[2m]))  by (http_status)",
               "hide": false,
               "interval": "",
               "legendFormat": "{{http_status}}",
@@ -1394,7 +1394,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "fieldConfig": {
             "defaults": {
               "links": []
@@ -1441,7 +1441,7 @@
           "targets": [
             {
               "exemplar": true,
-              "expr": "sum(rate(request_rest_status_total{ kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", resource=~\"$resource\", http_status=~\"$http_status\"}[2m]))  by (resource)",
+              "expr": "sum(rate(request_rest_status_total{ namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", resource=~\"$resource\", http_status=~\"$http_status\"}[2m]))  by (resource)",
               "hide": false,
               "interval": "",
               "legendFormat": "{{resource}}",
@@ -1494,7 +1494,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "fieldConfig": {
             "defaults": {
               "links": []
@@ -1541,7 +1541,7 @@
           "targets": [
             {
               "exemplar": true,
-              "expr": "sum(increase(request_rest_status_total{ kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", resource=~\"$resource\", http_status=~\"$http_status\"}[2m]))  by (resource)",
+              "expr": "sum(increase(request_rest_status_total{ namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", resource=~\"$resource\", http_status=~\"$http_status\"}[2m]))  by (resource)",
               "hide": false,
               "interval": "",
               "legendFormat": "{{resource}}",
@@ -1595,7 +1595,7 @@
     },
     {
       "collapsed": true,
-      "datasource": "Prometheus",
+      "datasource": "${DS_PROMETHEUS}",
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -1605,7 +1605,7 @@
       "id": 365,
       "panels": [
         {
-          "datasource": null,
+          "datasource": "${DS_PROMETHEUS}",
           "description": "",
           "fieldConfig": {
             "defaults": {
@@ -1656,7 +1656,7 @@
           "targets": [
             {
               "exemplar": true,
-              "expr": "sum(rate(request_rest_seconds_sum{ kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", resource=~\"$resource\"} [2m]))  by (pod)  / sum(rate(request_rest_seconds_count{ kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", resource=~\"$resource\"} [2m])) by (pod)",
+              "expr": "sum(rate(request_rest_seconds_sum{ namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", resource=~\"$resource\"} [2m]))  by (pod)  / sum(rate(request_rest_seconds_count{ namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", resource=~\"$resource\"} [2m])) by (pod)",
               "interval": "",
               "legendFormat": "{{pod}}",
               "refId": "A"
@@ -1668,7 +1668,7 @@
           "type": "stat"
         },
         {
-          "datasource": null,
+          "datasource": "${DS_PROMETHEUS}",
           "description": "",
           "fieldConfig": {
             "defaults": {
@@ -1719,7 +1719,7 @@
           "targets": [
             {
               "exemplar": true,
-              "expr": "sum(rate(request_rest_seconds_sum{ kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", resource=~\"$resource\"} [2m])) by (resource)   / sum(rate(request_rest_seconds_count{ kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", resource=~\"$resource\"} [2m])) by (resource)",
+              "expr": "sum(rate(request_rest_seconds_sum{ namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", resource=~\"$resource\"} [2m])) by (resource)   / sum(rate(request_rest_seconds_count{ namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", resource=~\"$resource\"} [2m])) by (resource)",
               "interval": "",
               "legendFormat": "{{resource}}",
               "refId": "A"
@@ -1735,7 +1735,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "fieldConfig": {
             "defaults": {
               "links": []
@@ -1781,7 +1781,7 @@
           "targets": [
             {
               "exemplar": true,
-              "expr": "sum(rate(request_rest_seconds_sum{ kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", resource=~\"$resource\"} [2m]))  by (resource) / sum(rate(request_rest_seconds_count{ kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", resource=~\"$resource\"} [2m])) by (resource) ",
+              "expr": "sum(rate(request_rest_seconds_sum{ namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", resource=~\"$resource\"} [2m]))  by (resource) / sum(rate(request_rest_seconds_count{ namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", resource=~\"$resource\"} [2m])) by (resource) ",
               "interval": "",
               "legendFormat": "{{resource}}",
               "refId": "A"
@@ -1835,7 +1835,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "fieldConfig": {
             "defaults": {
               "links": []
@@ -1881,7 +1881,7 @@
           "targets": [
             {
               "exemplar": true,
-              "expr": "histogram_quantile(0.95, sum(rate(request_rest_seconds_bucket{ kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", resource=~\"$resource\" }[2m])) by (resource,le))",
+              "expr": "histogram_quantile(0.95, sum(rate(request_rest_seconds_bucket{ namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", resource=~\"$resource\" }[2m])) by (resource,le))",
               "interval": "",
               "legendFormat": "{{resource}}",
               "refId": "A"
@@ -1935,7 +1935,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "fieldConfig": {
             "defaults": {
               "links": []
@@ -1981,7 +1981,7 @@
           "targets": [
             {
               "exemplar": true,
-              "expr": "histogram_quantile(0.99, sum(rate(request_rest_seconds_bucket{ kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", resource=~\"$resource\" }[2m])) by (resource,le))",
+              "expr": "histogram_quantile(0.99, sum(rate(request_rest_seconds_bucket{ namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", resource=~\"$resource\" }[2m])) by (resource,le))",
               "interval": "",
               "legendFormat": "{{resource}}",
               "refId": "A"
@@ -2036,7 +2036,7 @@
     },
     {
       "collapsed": true,
-      "datasource": null,
+      "datasource": "${DS_PROMETHEUS}",
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -2050,7 +2050,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "description": "",
           "fieldConfig": {
             "defaults": {
@@ -2097,7 +2097,7 @@
           "targets": [
             {
               "exemplar": true,
-              "expr": "sum(rate(request_rest_status_total{ kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", resource=~\"$resource\", cache =\"miss\" }[2m]))  by ( resource) > 0\r",
+              "expr": "sum(rate(request_rest_status_total{ namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", resource=~\"$resource\", cache =\"miss\" }[2m]))  by ( resource) > 0\r",
               "interval": "",
               "legendFormat": "{{resource}}",
               "refId": "A"
@@ -2152,7 +2152,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "description": "",
           "fieldConfig": {
             "defaults": {
@@ -2199,7 +2199,7 @@
           "targets": [
             {
               "exemplar": true,
-              "expr": "sum(rate(request_rest_status_total{ kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", resource=~\"$resource\", cache =\"hit\" }[2m]))  by ( resource) > 0\r",
+              "expr": "sum(rate(request_rest_status_total{ namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", resource=~\"$resource\", cache =\"hit\" }[2m]))  by ( resource) > 0\r",
               "interval": "",
               "legendFormat": "{{resource}}",
               "refId": "A"
@@ -2255,7 +2255,7 @@
     },
     {
       "collapsed": true,
-      "datasource": null,
+      "datasource": "${DS_PROMETHEUS}",
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -2269,7 +2269,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": null,
+          "datasource": "${DS_PROMETHEUS}",
           "decimals": 0,
           "description": "",
           "fieldConfig": {
@@ -2315,7 +2315,7 @@
           "targets": [
             {
               "exemplar": true,
-              "expr": "sum( service_active_count{ kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\" } ) by ( service )",
+              "expr": "sum( service_active_count{ namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\" } ) by ( service )",
               "interval": "",
               "legendFormat": "{{service}}",
               "refId": "A"
@@ -2370,7 +2370,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "description": "",
           "fieldConfig": {
             "defaults": {
@@ -2418,7 +2418,7 @@
           "targets": [
             {
               "exemplar": true,
-              "expr": "sum(rate(request_backend_seconds_count{ kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\"}[2m])) by (host)",
+              "expr": "sum(rate(request_backend_seconds_count{ namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\"}[2m])) by (host)",
               "hide": false,
               "interval": "",
               "legendFormat": "{{host}}",
@@ -2473,7 +2473,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "fieldConfig": {
             "defaults": {
               "links": []
@@ -2519,7 +2519,7 @@
           "targets": [
             {
               "exemplar": true,
-              "expr": "sum(rate(request_backend_seconds_sum{ kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\"} [2m]))  by (host) / sum(rate(request_backend_seconds_count{ kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\"} [2m])) by (host) ",
+              "expr": "sum(rate(request_backend_seconds_sum{ namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\"} [2m]))  by (host) / sum(rate(request_backend_seconds_count{ namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\"} [2m])) by (host) ",
               "interval": "",
               "legendFormat": "{{resource}}",
               "refId": "A"
@@ -2573,7 +2573,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "fieldConfig": {
             "defaults": {
               "links": []
@@ -2619,7 +2619,7 @@
           "targets": [
             {
               "exemplar": true,
-              "expr": "histogram_quantile(0.95, sum(rate(request_backend_seconds_bucket{ kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\" }[2m])) by (host,le))",
+              "expr": "histogram_quantile(0.95, sum(rate(request_backend_seconds_bucket{ namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\" }[2m])) by (host,le))",
               "interval": "",
               "legendFormat": "{{host}}",
               "refId": "A"
@@ -2673,7 +2673,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "fieldConfig": {
             "defaults": {
               "links": []
@@ -2719,7 +2719,7 @@
           "targets": [
             {
               "exemplar": true,
-              "expr": "histogram_quantile(0.99, sum(rate(request_backend_seconds_bucket{ kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\" }[2m])) by (host,le))",
+              "expr": "histogram_quantile(0.99, sum(rate(request_backend_seconds_bucket{ namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\" }[2m])) by (host,le))",
               "interval": "",
               "legendFormat": "{{host}}",
               "refId": "A"
@@ -2782,14 +2782,34 @@
   "templating": {
     "list": [
       {
+        "current": {
+          "selected": false,
+          "text": "Prometheus",
+          "value": "Prometheus"
+        },
+        "description": null,
+        "error": null,
+        "hide": 0,
+        "includeAll": false,
+        "label": "Prometheus",
+        "multi": false,
+        "name": "DS_PROMETHEUS",
+        "options": [],
+        "query": "prometheus",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "type": "datasource"
+      },
+      {
         "allValue": null,
         "current": {
           "selected": false,
-          "text": "sofy",
-          "value": "sofy"
+          "text": "c8braucjf2nnsdd85h10",
+          "value": "c8braucjf2nnsdd85h10"
         },
-        "datasource": "Prometheus",
-        "definition": "label_values(kube_pod_container_info{container=\"ts-app\"}, kubernetes_namespace)",
+        "datasource": "${DS_PROMETHEUS}",
+        "definition": "label_values(kube_pod_container_info{container=\"ts-app\"}, namespace)",
         "description": null,
         "error": null,
         "hide": 0,
@@ -2799,7 +2819,7 @@
         "name": "namespace",
         "options": [],
         "query": {
-          "query": "label_values(kube_pod_container_info{container=\"ts-app\"}, kubernetes_namespace)",
+          "query": "label_values(kube_pod_container_info{container=\"ts-app\"}, namespace)",
           "refId": "StandardVariableQuery"
         },
         "refresh": 2,
@@ -2819,8 +2839,8 @@
           "text": "comdemoquery-app",
           "value": "comdemoquery-app"
         },
-        "datasource": "Prometheus",
-        "definition": "label_values(kube_deployment_status_replicas{kubernetes_namespace=\"$namespace\",deployment=~\".*query-app.*\"} , deployment) ",
+        "datasource": "${DS_PROMETHEUS}",
+        "definition": "label_values(kube_deployment_status_replicas{namespace=\"$namespace\",deployment=~\".*query-app.*\"} , deployment) ",
         "description": null,
         "error": null,
         "hide": 0,
@@ -2830,7 +2850,7 @@
         "name": "job",
         "options": [],
         "query": {
-          "query": "label_values(kube_deployment_status_replicas{kubernetes_namespace=\"$namespace\",deployment=~\".*query-app.*\"} , deployment) ",
+          "query": "label_values(kube_deployment_status_replicas{namespace=\"$namespace\",deployment=~\".*query-app.*\"} , deployment) ",
           "refId": "StandardVariableQuery"
         },
         "refresh": 2,
@@ -2854,8 +2874,8 @@
             "$__all"
           ]
         },
-        "datasource": "Prometheus",
-        "definition": "label_values(kube_pod_status_ready{kubernetes_namespace=\"$namespace\",pod=~\"$job.*\"} , pod)",
+        "datasource": "${DS_PROMETHEUS}",
+        "definition": "label_values(kube_pod_status_ready{namespace=\"$namespace\",pod=~\"$job.*\"} , pod)",
         "description": null,
         "error": null,
         "hide": 0,
@@ -2865,7 +2885,7 @@
         "name": "pod",
         "options": [],
         "query": {
-          "query": "label_values(kube_pod_status_ready{kubernetes_namespace=\"$namespace\",pod=~\"$job.*\"} , pod)",
+          "query": "label_values(kube_pod_status_ready{namespace=\"$namespace\",pod=~\"$job.*\"} , pod)",
           "refId": "StandardVariableQuery"
         },
         "refresh": 2,
@@ -2889,8 +2909,8 @@
             "$__all"
           ]
         },
-        "datasource": "Prometheus",
-        "definition": "label_values(request_rest_seconds_count{kubernetes_namespace=~\"$namespace\",component=\"$job\",kubernetes_pod_name=~\"$pod\"}, resource)",
+        "datasource": "${DS_PROMETHEUS}",
+        "definition": "label_values(request_rest_seconds_count{namespace=~\"$namespace\",component=\"$job\",kubernetes_pod_name=~\"$pod\"}, resource)",
         "description": null,
         "error": null,
         "hide": 0,
@@ -2900,7 +2920,7 @@
         "name": "resource",
         "options": [],
         "query": {
-          "query": "label_values(request_rest_seconds_count{kubernetes_namespace=~\"$namespace\",component=\"$job\",kubernetes_pod_name=~\"$pod\"}, resource)",
+          "query": "label_values(request_rest_seconds_count{namespace=~\"$namespace\",component=\"$job\",kubernetes_pod_name=~\"$pod\"}, resource)",
           "refId": "StandardVariableQuery"
         },
         "refresh": 2,
@@ -2924,8 +2944,8 @@
             "$__all"
           ]
         },
-        "datasource": "Prometheus",
-        "definition": "label_values(request_rest_status_total{kubernetes_namespace=~\"$namespace\",component=\"$job\",kubernetes_pod_name=~\"$pod\",resource=~\"$resource\"}, http_status)",
+        "datasource": "${DS_PROMETHEUS}",
+        "definition": "label_values(request_rest_status_total{namespace=~\"$namespace\",component=\"$job\",kubernetes_pod_name=~\"$pod\",resource=~\"$resource\"}, http_status)",
         "description": null,
         "error": null,
         "hide": 0,
@@ -2935,7 +2955,7 @@
         "name": "http_status",
         "options": [],
         "query": {
-          "query": "label_values(request_rest_status_total{kubernetes_namespace=~\"$namespace\",component=\"$job\",kubernetes_pod_name=~\"$pod\",resource=~\"$resource\"}, http_status)",
+          "query": "label_values(request_rest_status_total{namespace=~\"$namespace\",component=\"$job\",kubernetes_pod_name=~\"$pod\",resource=~\"$resource\"}, http_status)",
           "refId": "StandardVariableQuery"
         },
         "refresh": 2,
@@ -2971,5 +2991,5 @@
   "timezone": "",
   "title": "QueryApp Servers",
   "uid": "hcl_query_app",
-  "version": 918
+  "version": 919
 }

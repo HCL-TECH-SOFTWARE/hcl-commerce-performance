@@ -15,8 +15,8 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 42,
-  "iteration": 1632233993965,
+  "id": 220,
+  "iteration": 1646056560108,
   "links": [
     {
       "asDropdown": false,
@@ -37,7 +37,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": null,
+      "datasource": "${DS_PROMETHEUS}",
       "fieldConfig": {
         "defaults": {
           "links": []
@@ -140,7 +140,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Prometheus",
+      "datasource": "${DS_PROMETHEUS}",
       "fieldConfig": {
         "defaults": {
           "links": []
@@ -233,7 +233,7 @@
     },
     {
       "collapsed": true,
-      "datasource": null,
+      "datasource": "${DS_PROMETHEUS}",
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -247,7 +247,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "decimals": null,
           "fieldConfig": {
             "defaults": {
@@ -282,7 +282,7 @@
             "alertThreshold": true
           },
           "percentage": false,
-          "pluginVersion": "7.5.3",
+          "pluginVersion": "7.5.5",
           "pointradius": 2,
           "points": false,
           "renderer": "flot",
@@ -356,7 +356,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "fieldConfig": {
             "defaults": {
               "links": []
@@ -390,7 +390,7 @@
             "alertThreshold": true
           },
           "percentage": false,
-          "pluginVersion": "7.5.3",
+          "pluginVersion": "7.5.5",
           "pointradius": 2,
           "points": false,
           "renderer": "flot",
@@ -464,7 +464,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "fieldConfig": {
             "defaults": {
               "links": []
@@ -498,7 +498,7 @@
             "alertThreshold": true
           },
           "percentage": false,
-          "pluginVersion": "7.5.3",
+          "pluginVersion": "7.5.5",
           "pointradius": 2,
           "points": false,
           "renderer": "flot",
@@ -573,7 +573,7 @@
     },
     {
       "collapsed": true,
-      "datasource": null,
+      "datasource": "${DS_PROMETHEUS}",
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -587,7 +587,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "fill": 1,
           "fillGradient": 0,
           "gridPos": {
@@ -621,352 +621,6 @@
           "renderer": "flot",
           "repeat": "jvm_memory_pool_heap",
           "repeatDirection": "h",
-          "scopedVars": {
-            "jvm_memory_pool_heap": {
-              "selected": false,
-              "text": "tenured-SOA",
-              "value": "tenured-SOA"
-            }
-          },
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "sum(jvm_memory_used_bytes{namespace=~\"$namespace\", job=~\"$job\", pod=\"$pod\", area=\"heap\", id=\"$jvm_memory_pool_heap\"})",
-              "intervalFactor": 2,
-              "legendFormat": "used",
-              "refId": "A"
-            },
-            {
-              "expr": "sum(jvm_memory_committed_bytes{namespace=~\"$namespace\", job=~\"$job\", pod=\"$pod\", area=\"heap\", id=\"$jvm_memory_pool_heap\"})  ",
-              "intervalFactor": 2,
-              "legendFormat": "committed",
-              "refId": "B"
-            },
-            {
-              "expr": "sum(jvm_memory_max_bytes{namespace=~\"$namespace\", job=~\"$job\", pod=\"$pod\", area=\"heap\", id=\"$jvm_memory_pool_heap\"})  ",
-              "intervalFactor": 2,
-              "legendFormat": "max",
-              "refId": "C"
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeRegions": [],
-          "timeShift": null,
-          "title": "$jvm_memory_pool_heap",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "decbytes",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": "0",
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            }
-          ],
-          "yaxis": {
-            "align": false,
-            "alignLevel": null
-          }
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": "Prometheus",
-          "fill": 1,
-          "fillGradient": 0,
-          "gridPos": {
-            "h": 8,
-            "w": 8,
-            "x": 8,
-            "y": 10
-          },
-          "hiddenSeries": false,
-          "id": 48,
-          "legend": {
-            "avg": false,
-            "current": true,
-            "max": true,
-            "min": false,
-            "rightSide": false,
-            "show": true,
-            "total": false,
-            "values": true
-          },
-          "lines": true,
-          "linewidth": 1,
-          "maxPerRow": 3,
-          "nullPointMode": "null",
-          "options": {
-            "dataLinks": []
-          },
-          "percentage": false,
-          "pointradius": 2,
-          "points": false,
-          "renderer": "flot",
-          "repeat": null,
-          "repeatDirection": "h",
-          "repeatIteration": 1606489948413,
-          "repeatPanelId": 16,
-          "scopedVars": {
-            "jvm_memory_pool_heap": {
-              "selected": false,
-              "text": "tenured-LOA",
-              "value": "tenured-LOA"
-            }
-          },
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "sum(jvm_memory_used_bytes{namespace=~\"$namespace\", job=~\"$job\", pod=\"$pod\", area=\"heap\", id=\"$jvm_memory_pool_heap\"})",
-              "intervalFactor": 2,
-              "legendFormat": "used",
-              "refId": "A"
-            },
-            {
-              "expr": "sum(jvm_memory_committed_bytes{namespace=~\"$namespace\", job=~\"$job\", pod=\"$pod\", area=\"heap\", id=\"$jvm_memory_pool_heap\"})  ",
-              "intervalFactor": 2,
-              "legendFormat": "committed",
-              "refId": "B"
-            },
-            {
-              "expr": "sum(jvm_memory_max_bytes{namespace=~\"$namespace\", job=~\"$job\", pod=\"$pod\", area=\"heap\", id=\"$jvm_memory_pool_heap\"})  ",
-              "intervalFactor": 2,
-              "legendFormat": "max",
-              "refId": "C"
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeRegions": [],
-          "timeShift": null,
-          "title": "$jvm_memory_pool_heap",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "decbytes",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": "0",
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            }
-          ],
-          "yaxis": {
-            "align": false,
-            "alignLevel": null
-          }
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": "Prometheus",
-          "fill": 1,
-          "fillGradient": 0,
-          "gridPos": {
-            "h": 8,
-            "w": 8,
-            "x": 16,
-            "y": 10
-          },
-          "hiddenSeries": false,
-          "id": 49,
-          "legend": {
-            "avg": false,
-            "current": true,
-            "max": true,
-            "min": false,
-            "rightSide": false,
-            "show": true,
-            "total": false,
-            "values": true
-          },
-          "lines": true,
-          "linewidth": 1,
-          "maxPerRow": 3,
-          "nullPointMode": "null",
-          "options": {
-            "dataLinks": []
-          },
-          "percentage": false,
-          "pointradius": 2,
-          "points": false,
-          "renderer": "flot",
-          "repeat": null,
-          "repeatDirection": "h",
-          "repeatIteration": 1606489948413,
-          "repeatPanelId": 16,
-          "scopedVars": {
-            "jvm_memory_pool_heap": {
-              "selected": false,
-              "text": "nursery-survivor",
-              "value": "nursery-survivor"
-            }
-          },
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "sum(jvm_memory_used_bytes{namespace=~\"$namespace\", job=~\"$job\", pod=\"$pod\", area=\"heap\", id=\"$jvm_memory_pool_heap\"})",
-              "intervalFactor": 2,
-              "legendFormat": "used",
-              "refId": "A"
-            },
-            {
-              "expr": "sum(jvm_memory_committed_bytes{namespace=~\"$namespace\", job=~\"$job\", pod=\"$pod\", area=\"heap\", id=\"$jvm_memory_pool_heap\"})  ",
-              "intervalFactor": 2,
-              "legendFormat": "committed",
-              "refId": "B"
-            },
-            {
-              "expr": "sum(jvm_memory_max_bytes{namespace=~\"$namespace\", job=~\"$job\", pod=\"$pod\", area=\"heap\", id=\"$jvm_memory_pool_heap\"})  ",
-              "intervalFactor": 2,
-              "legendFormat": "max",
-              "refId": "C"
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeRegions": [],
-          "timeShift": null,
-          "title": "$jvm_memory_pool_heap",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "decbytes",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": "0",
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            }
-          ],
-          "yaxis": {
-            "align": false,
-            "alignLevel": null
-          }
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": "Prometheus",
-          "fill": 1,
-          "fillGradient": 0,
-          "gridPos": {
-            "h": 8,
-            "w": 8,
-            "x": 0,
-            "y": 18
-          },
-          "hiddenSeries": false,
-          "id": 50,
-          "legend": {
-            "avg": false,
-            "current": true,
-            "max": true,
-            "min": false,
-            "rightSide": false,
-            "show": true,
-            "total": false,
-            "values": true
-          },
-          "lines": true,
-          "linewidth": 1,
-          "maxPerRow": 3,
-          "nullPointMode": "null",
-          "options": {
-            "dataLinks": []
-          },
-          "percentage": false,
-          "pointradius": 2,
-          "points": false,
-          "renderer": "flot",
-          "repeat": null,
-          "repeatDirection": "h",
-          "repeatIteration": 1606489948413,
-          "repeatPanelId": 16,
-          "scopedVars": {
-            "jvm_memory_pool_heap": {
-              "selected": false,
-              "text": "nursery-allocate",
-              "value": "nursery-allocate"
-            }
-          },
           "seriesOverrides": [],
           "spaceLength": 10,
           "stack": false,
@@ -1037,8 +691,8 @@
       "type": "row"
     },
     {
-      "collapsed": false,
-      "datasource": null,
+      "collapsed": true,
+      "datasource": "${DS_PROMETHEUS}",
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -1046,589 +700,590 @@
         "y": 10
       },
       "id": 26,
-      "panels": [],
+      "panels": [
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "${DS_PROMETHEUS}",
+          "fieldConfig": {
+            "defaults": {
+              "links": []
+            },
+            "overrides": []
+          },
+          "fill": 1,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 8,
+            "w": 8,
+            "x": 0,
+            "y": 11
+          },
+          "hiddenSeries": false,
+          "id": 30,
+          "legend": {
+            "avg": false,
+            "current": true,
+            "max": true,
+            "min": false,
+            "rightSide": false,
+            "show": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "maxPerRow": 3,
+          "nullPointMode": "null",
+          "options": {
+            "alertThreshold": true
+          },
+          "percentage": false,
+          "pluginVersion": "7.5.5",
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "repeat": "jvm_memory_pool_nonheap",
+          "repeatDirection": "h",
+          "scopedVars": {
+            "jvm_memory_pool_nonheap": {
+              "selected": false,
+              "text": "miscellaneous non-heap storage",
+              "value": "miscellaneous non-heap storage"
+            }
+          },
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "sum(jvm_memory_used_bytes{namespace=~\"$namespace\", job=~\"$job\", pod=\"$pod\", area=\"nonheap\", id=\"$jvm_memory_pool_nonheap\"})",
+              "intervalFactor": 2,
+              "legendFormat": "used",
+              "refId": "A"
+            },
+            {
+              "expr": "sum(jvm_memory_committed_bytes{namespace=~\"$namespace\", job=~\"$job\", pod=\"$pod\", area=\"nonheap\", id=\"$jvm_memory_pool_nonheap\"})  ",
+              "intervalFactor": 2,
+              "legendFormat": "committed",
+              "refId": "B"
+            },
+            {
+              "expr": "sum(jvm_memory_max_bytes{namespace=~\"$namespace\", job=~\"$job\", pod=\"$pod\", area=\"nonheap\", id=\"$jvm_memory_pool_nonheap\"})  ",
+              "intervalFactor": 2,
+              "legendFormat": "max",
+              "refId": "C"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "$jvm_memory_pool_nonheap",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "$$hashKey": "object:402",
+              "format": "decbytes",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": "0",
+              "show": true
+            },
+            {
+              "$$hashKey": "object:403",
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "${DS_PROMETHEUS}",
+          "fieldConfig": {
+            "defaults": {
+              "links": []
+            },
+            "overrides": []
+          },
+          "fill": 1,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 8,
+            "w": 8,
+            "x": 8,
+            "y": 11
+          },
+          "hiddenSeries": false,
+          "id": 61,
+          "legend": {
+            "avg": false,
+            "current": true,
+            "max": true,
+            "min": false,
+            "rightSide": false,
+            "show": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "maxPerRow": 3,
+          "nullPointMode": "null",
+          "options": {
+            "alertThreshold": true
+          },
+          "percentage": false,
+          "pluginVersion": "7.5.5",
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "repeatDirection": "h",
+          "repeatIteration": 1646056560108,
+          "repeatPanelId": 30,
+          "scopedVars": {
+            "jvm_memory_pool_nonheap": {
+              "selected": false,
+              "text": "class storage",
+              "value": "class storage"
+            }
+          },
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "sum(jvm_memory_used_bytes{namespace=~\"$namespace\", job=~\"$job\", pod=\"$pod\", area=\"nonheap\", id=\"$jvm_memory_pool_nonheap\"})",
+              "intervalFactor": 2,
+              "legendFormat": "used",
+              "refId": "A"
+            },
+            {
+              "expr": "sum(jvm_memory_committed_bytes{namespace=~\"$namespace\", job=~\"$job\", pod=\"$pod\", area=\"nonheap\", id=\"$jvm_memory_pool_nonheap\"})  ",
+              "intervalFactor": 2,
+              "legendFormat": "committed",
+              "refId": "B"
+            },
+            {
+              "expr": "sum(jvm_memory_max_bytes{namespace=~\"$namespace\", job=~\"$job\", pod=\"$pod\", area=\"nonheap\", id=\"$jvm_memory_pool_nonheap\"})  ",
+              "intervalFactor": 2,
+              "legendFormat": "max",
+              "refId": "C"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "$jvm_memory_pool_nonheap",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "$$hashKey": "object:402",
+              "format": "decbytes",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": "0",
+              "show": true
+            },
+            {
+              "$$hashKey": "object:403",
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "${DS_PROMETHEUS}",
+          "fieldConfig": {
+            "defaults": {
+              "links": []
+            },
+            "overrides": []
+          },
+          "fill": 1,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 8,
+            "w": 8,
+            "x": 16,
+            "y": 11
+          },
+          "hiddenSeries": false,
+          "id": 62,
+          "legend": {
+            "avg": false,
+            "current": true,
+            "max": true,
+            "min": false,
+            "rightSide": false,
+            "show": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "maxPerRow": 3,
+          "nullPointMode": "null",
+          "options": {
+            "alertThreshold": true
+          },
+          "percentage": false,
+          "pluginVersion": "7.5.5",
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "repeatDirection": "h",
+          "repeatIteration": 1646056560108,
+          "repeatPanelId": 30,
+          "scopedVars": {
+            "jvm_memory_pool_nonheap": {
+              "selected": false,
+              "text": "JIT data cache",
+              "value": "JIT data cache"
+            }
+          },
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "sum(jvm_memory_used_bytes{namespace=~\"$namespace\", job=~\"$job\", pod=\"$pod\", area=\"nonheap\", id=\"$jvm_memory_pool_nonheap\"})",
+              "intervalFactor": 2,
+              "legendFormat": "used",
+              "refId": "A"
+            },
+            {
+              "expr": "sum(jvm_memory_committed_bytes{namespace=~\"$namespace\", job=~\"$job\", pod=\"$pod\", area=\"nonheap\", id=\"$jvm_memory_pool_nonheap\"})  ",
+              "intervalFactor": 2,
+              "legendFormat": "committed",
+              "refId": "B"
+            },
+            {
+              "expr": "sum(jvm_memory_max_bytes{namespace=~\"$namespace\", job=~\"$job\", pod=\"$pod\", area=\"nonheap\", id=\"$jvm_memory_pool_nonheap\"})  ",
+              "intervalFactor": 2,
+              "legendFormat": "max",
+              "refId": "C"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "$jvm_memory_pool_nonheap",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "$$hashKey": "object:402",
+              "format": "decbytes",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": "0",
+              "show": true
+            },
+            {
+              "$$hashKey": "object:403",
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "${DS_PROMETHEUS}",
+          "fieldConfig": {
+            "defaults": {
+              "links": []
+            },
+            "overrides": []
+          },
+          "fill": 1,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 8,
+            "w": 8,
+            "x": 0,
+            "y": 19
+          },
+          "hiddenSeries": false,
+          "id": 63,
+          "legend": {
+            "avg": false,
+            "current": true,
+            "max": true,
+            "min": false,
+            "rightSide": false,
+            "show": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "maxPerRow": 3,
+          "nullPointMode": "null",
+          "options": {
+            "alertThreshold": true
+          },
+          "percentage": false,
+          "pluginVersion": "7.5.5",
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "repeatDirection": "h",
+          "repeatIteration": 1646056560108,
+          "repeatPanelId": 30,
+          "scopedVars": {
+            "jvm_memory_pool_nonheap": {
+              "selected": false,
+              "text": "JIT code cache",
+              "value": "JIT code cache"
+            }
+          },
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "sum(jvm_memory_used_bytes{namespace=~\"$namespace\", job=~\"$job\", pod=\"$pod\", area=\"nonheap\", id=\"$jvm_memory_pool_nonheap\"})",
+              "intervalFactor": 2,
+              "legendFormat": "used",
+              "refId": "A"
+            },
+            {
+              "expr": "sum(jvm_memory_committed_bytes{namespace=~\"$namespace\", job=~\"$job\", pod=\"$pod\", area=\"nonheap\", id=\"$jvm_memory_pool_nonheap\"})  ",
+              "intervalFactor": 2,
+              "legendFormat": "committed",
+              "refId": "B"
+            },
+            {
+              "expr": "sum(jvm_memory_max_bytes{namespace=~\"$namespace\", job=~\"$job\", pod=\"$pod\", area=\"nonheap\", id=\"$jvm_memory_pool_nonheap\"})  ",
+              "intervalFactor": 2,
+              "legendFormat": "max",
+              "refId": "C"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "$jvm_memory_pool_nonheap",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "$$hashKey": "object:402",
+              "format": "decbytes",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": "0",
+              "show": true
+            },
+            {
+              "$$hashKey": "object:403",
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "${DS_PROMETHEUS}",
+          "description": "",
+          "fieldConfig": {
+            "defaults": {},
+            "overrides": []
+          },
+          "fill": 1,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 8,
+            "w": 8,
+            "x": 8,
+            "y": 19
+          },
+          "hiddenSeries": false,
+          "id": 60,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "nullPointMode": "null",
+          "options": {
+            "alertThreshold": true
+          },
+          "percentage": false,
+          "pluginVersion": "7.5.5",
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "exemplar": true,
+              "expr": "hclcache_netty_used_direct_memory_bytes{namespace=~\"$namespace\", job=~\"$job\", pod=\"$pod\"}",
+              "interval": "",
+              "legendFormat": "direct_memory",
+              "refId": "A"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "HCL Cache Netty used direct memory",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "$$hashKey": "object:84",
+              "format": "decbytes",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": "0",
+              "show": true
+            },
+            {
+              "$$hashKey": "object:85",
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        }
+      ],
       "title": "JVM Non-Heap Memory Pools",
       "type": "row"
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "Prometheus",
-      "fieldConfig": {
-        "defaults": {
-          "links": []
-        },
-        "overrides": []
-      },
-      "fill": 1,
-      "fillGradient": 0,
-      "gridPos": {
-        "h": 8,
-        "w": 8,
-        "x": 0,
-        "y": 11
-      },
-      "hiddenSeries": false,
-      "id": 30,
-      "legend": {
-        "avg": false,
-        "current": true,
-        "max": true,
-        "min": false,
-        "rightSide": false,
-        "show": true,
-        "total": false,
-        "values": true
-      },
-      "lines": true,
-      "linewidth": 1,
-      "maxPerRow": 3,
-      "nullPointMode": "null",
-      "options": {
-        "alertThreshold": true
-      },
-      "percentage": false,
-      "pluginVersion": "7.5.5",
-      "pointradius": 2,
-      "points": false,
-      "renderer": "flot",
-      "repeat": "jvm_memory_pool_nonheap",
-      "repeatDirection": "h",
-      "scopedVars": {
-        "jvm_memory_pool_nonheap": {
-          "selected": false,
-          "text": "miscellaneous non-heap storage",
-          "value": "miscellaneous non-heap storage"
-        }
-      },
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "expr": "sum(jvm_memory_used_bytes{namespace=~\"$namespace\", job=~\"$job\", pod=\"$pod\", area=\"nonheap\", id=\"$jvm_memory_pool_nonheap\"})",
-          "intervalFactor": 2,
-          "legendFormat": "used",
-          "refId": "A"
-        },
-        {
-          "expr": "sum(jvm_memory_committed_bytes{namespace=~\"$namespace\", job=~\"$job\", pod=\"$pod\", area=\"nonheap\", id=\"$jvm_memory_pool_nonheap\"})  ",
-          "intervalFactor": 2,
-          "legendFormat": "committed",
-          "refId": "B"
-        },
-        {
-          "expr": "sum(jvm_memory_max_bytes{namespace=~\"$namespace\", job=~\"$job\", pod=\"$pod\", area=\"nonheap\", id=\"$jvm_memory_pool_nonheap\"})  ",
-          "intervalFactor": 2,
-          "legendFormat": "max",
-          "refId": "C"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "$jvm_memory_pool_nonheap",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "$$hashKey": "object:402",
-          "format": "decbytes",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": "0",
-          "show": true
-        },
-        {
-          "$$hashKey": "object:403",
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "Prometheus",
-      "fieldConfig": {
-        "defaults": {
-          "links": []
-        },
-        "overrides": []
-      },
-      "fill": 1,
-      "fillGradient": 0,
-      "gridPos": {
-        "h": 8,
-        "w": 8,
-        "x": 8,
-        "y": 11
-      },
-      "hiddenSeries": false,
-      "id": 61,
-      "legend": {
-        "avg": false,
-        "current": true,
-        "max": true,
-        "min": false,
-        "rightSide": false,
-        "show": true,
-        "total": false,
-        "values": true
-      },
-      "lines": true,
-      "linewidth": 1,
-      "maxPerRow": 3,
-      "nullPointMode": "null",
-      "options": {
-        "alertThreshold": true
-      },
-      "percentage": false,
-      "pluginVersion": "7.5.5",
-      "pointradius": 2,
-      "points": false,
-      "renderer": "flot",
-      "repeatDirection": "h",
-      "repeatIteration": 1632233993965,
-      "repeatPanelId": 30,
-      "scopedVars": {
-        "jvm_memory_pool_nonheap": {
-          "selected": false,
-          "text": "class storage",
-          "value": "class storage"
-        }
-      },
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "expr": "sum(jvm_memory_used_bytes{namespace=~\"$namespace\", job=~\"$job\", pod=\"$pod\", area=\"nonheap\", id=\"$jvm_memory_pool_nonheap\"})",
-          "intervalFactor": 2,
-          "legendFormat": "used",
-          "refId": "A"
-        },
-        {
-          "expr": "sum(jvm_memory_committed_bytes{namespace=~\"$namespace\", job=~\"$job\", pod=\"$pod\", area=\"nonheap\", id=\"$jvm_memory_pool_nonheap\"})  ",
-          "intervalFactor": 2,
-          "legendFormat": "committed",
-          "refId": "B"
-        },
-        {
-          "expr": "sum(jvm_memory_max_bytes{namespace=~\"$namespace\", job=~\"$job\", pod=\"$pod\", area=\"nonheap\", id=\"$jvm_memory_pool_nonheap\"})  ",
-          "intervalFactor": 2,
-          "legendFormat": "max",
-          "refId": "C"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "$jvm_memory_pool_nonheap",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "$$hashKey": "object:402",
-          "format": "decbytes",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": "0",
-          "show": true
-        },
-        {
-          "$$hashKey": "object:403",
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "Prometheus",
-      "fieldConfig": {
-        "defaults": {
-          "links": []
-        },
-        "overrides": []
-      },
-      "fill": 1,
-      "fillGradient": 0,
-      "gridPos": {
-        "h": 8,
-        "w": 8,
-        "x": 16,
-        "y": 11
-      },
-      "hiddenSeries": false,
-      "id": 62,
-      "legend": {
-        "avg": false,
-        "current": true,
-        "max": true,
-        "min": false,
-        "rightSide": false,
-        "show": true,
-        "total": false,
-        "values": true
-      },
-      "lines": true,
-      "linewidth": 1,
-      "maxPerRow": 3,
-      "nullPointMode": "null",
-      "options": {
-        "alertThreshold": true
-      },
-      "percentage": false,
-      "pluginVersion": "7.5.5",
-      "pointradius": 2,
-      "points": false,
-      "renderer": "flot",
-      "repeatDirection": "h",
-      "repeatIteration": 1632233993965,
-      "repeatPanelId": 30,
-      "scopedVars": {
-        "jvm_memory_pool_nonheap": {
-          "selected": false,
-          "text": "JIT data cache",
-          "value": "JIT data cache"
-        }
-      },
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "expr": "sum(jvm_memory_used_bytes{namespace=~\"$namespace\", job=~\"$job\", pod=\"$pod\", area=\"nonheap\", id=\"$jvm_memory_pool_nonheap\"})",
-          "intervalFactor": 2,
-          "legendFormat": "used",
-          "refId": "A"
-        },
-        {
-          "expr": "sum(jvm_memory_committed_bytes{namespace=~\"$namespace\", job=~\"$job\", pod=\"$pod\", area=\"nonheap\", id=\"$jvm_memory_pool_nonheap\"})  ",
-          "intervalFactor": 2,
-          "legendFormat": "committed",
-          "refId": "B"
-        },
-        {
-          "expr": "sum(jvm_memory_max_bytes{namespace=~\"$namespace\", job=~\"$job\", pod=\"$pod\", area=\"nonheap\", id=\"$jvm_memory_pool_nonheap\"})  ",
-          "intervalFactor": 2,
-          "legendFormat": "max",
-          "refId": "C"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "$jvm_memory_pool_nonheap",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "$$hashKey": "object:402",
-          "format": "decbytes",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": "0",
-          "show": true
-        },
-        {
-          "$$hashKey": "object:403",
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "Prometheus",
-      "fieldConfig": {
-        "defaults": {
-          "links": []
-        },
-        "overrides": []
-      },
-      "fill": 1,
-      "fillGradient": 0,
-      "gridPos": {
-        "h": 8,
-        "w": 8,
-        "x": 0,
-        "y": 19
-      },
-      "hiddenSeries": false,
-      "id": 63,
-      "legend": {
-        "avg": false,
-        "current": true,
-        "max": true,
-        "min": false,
-        "rightSide": false,
-        "show": true,
-        "total": false,
-        "values": true
-      },
-      "lines": true,
-      "linewidth": 1,
-      "maxPerRow": 3,
-      "nullPointMode": "null",
-      "options": {
-        "alertThreshold": true
-      },
-      "percentage": false,
-      "pluginVersion": "7.5.5",
-      "pointradius": 2,
-      "points": false,
-      "renderer": "flot",
-      "repeatDirection": "h",
-      "repeatIteration": 1632233993965,
-      "repeatPanelId": 30,
-      "scopedVars": {
-        "jvm_memory_pool_nonheap": {
-          "selected": false,
-          "text": "JIT code cache",
-          "value": "JIT code cache"
-        }
-      },
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "expr": "sum(jvm_memory_used_bytes{namespace=~\"$namespace\", job=~\"$job\", pod=\"$pod\", area=\"nonheap\", id=\"$jvm_memory_pool_nonheap\"})",
-          "intervalFactor": 2,
-          "legendFormat": "used",
-          "refId": "A"
-        },
-        {
-          "expr": "sum(jvm_memory_committed_bytes{namespace=~\"$namespace\", job=~\"$job\", pod=\"$pod\", area=\"nonheap\", id=\"$jvm_memory_pool_nonheap\"})  ",
-          "intervalFactor": 2,
-          "legendFormat": "committed",
-          "refId": "B"
-        },
-        {
-          "expr": "sum(jvm_memory_max_bytes{namespace=~\"$namespace\", job=~\"$job\", pod=\"$pod\", area=\"nonheap\", id=\"$jvm_memory_pool_nonheap\"})  ",
-          "intervalFactor": 2,
-          "legendFormat": "max",
-          "refId": "C"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "$jvm_memory_pool_nonheap",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "$$hashKey": "object:402",
-          "format": "decbytes",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": "0",
-          "show": true
-        },
-        {
-          "$$hashKey": "object:403",
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": null,
-      "description": "",
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
-      },
-      "fill": 1,
-      "fillGradient": 0,
-      "gridPos": {
-        "h": 8,
-        "w": 8,
-        "x": 8,
-        "y": 19
-      },
-      "hiddenSeries": false,
-      "id": 60,
-      "legend": {
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
-        "show": true,
-        "total": false,
-        "values": false
-      },
-      "lines": true,
-      "linewidth": 1,
-      "nullPointMode": "null",
-      "options": {
-        "alertThreshold": true
-      },
-      "percentage": false,
-      "pluginVersion": "7.5.5",
-      "pointradius": 2,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "exemplar": true,
-          "expr": "hclcache_netty_used_direct_memory_bytes{namespace=~\"$namespace\", job=~\"$job\", pod=\"$pod\"}",
-          "interval": "",
-          "legendFormat": "direct_memory",
-          "refId": "A"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "HCL Cache Netty used direct memory",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "$$hashKey": "object:84",
-          "format": "decbytes",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": "0",
-          "show": true
-        },
-        {
-          "$$hashKey": "object:85",
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
     }
   ],
   "refresh": false,
@@ -1641,13 +1296,33 @@
   "templating": {
     "list": [
       {
+        "current": {
+          "selected": false,
+          "text": "Prometheus",
+          "value": "Prometheus"
+        },
+        "description": null,
+        "error": null,
+        "hide": 0,
+        "includeAll": false,
+        "label": "Prometheus",
+        "multi": false,
+        "name": "DS_PROMETHEUS",
+        "options": [],
+        "query": "prometheus",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "type": "datasource"
+      },
+      {
         "allValue": null,
         "current": {
           "selected": false,
           "text": "commerce",
           "value": "commerce"
         },
-        "datasource": "Prometheus",
+        "datasource": "${DS_PROMETHEUS}",
         "definition": "label_values(jvm_memory_used_bytes, namespace)",
         "description": null,
         "error": null,
@@ -1682,7 +1357,7 @@
             "$__all"
           ]
         },
-        "datasource": "Prometheus",
+        "datasource": "${DS_PROMETHEUS}",
         "definition": "label_values(jvm_memory_used_bytes{namespace=~\"$namespace\"}, job)",
         "description": null,
         "error": null,
@@ -1710,10 +1385,10 @@
         "allValue": ".*",
         "current": {
           "selected": false,
-          "text": "demoqalivecache-app-65d566d779-zw24q",
-          "value": "demoqalivecache-app-65d566d779-zw24q"
+          "text": "demoqalivequery-app-65f847fdff-lr45k",
+          "value": "demoqalivequery-app-65f847fdff-lr45k"
         },
-        "datasource": "Prometheus",
+        "datasource": "${DS_PROMETHEUS}",
         "definition": "label_values(jvm_memory_used_bytes{namespace=~\"$namespace\",job=~\"$job\"}, pod)",
         "description": null,
         "error": null,
@@ -1744,7 +1419,7 @@
           "text": "All",
           "value": "$__all"
         },
-        "datasource": "Prometheus",
+        "datasource": "${DS_PROMETHEUS}",
         "definition": "label_values(jvm_memory_used_bytes{ namespace=~\"$namespace\", job=~\"$job\",pod=\"$pod\", area=\"heap\",},id)",
         "description": null,
         "error": null,
@@ -1775,7 +1450,7 @@
           "text": "All",
           "value": "$__all"
         },
-        "datasource": "Prometheus",
+        "datasource": "${DS_PROMETHEUS}",
         "definition": "label_values(jvm_memory_used_bytes{ namespace=~\"$namespace\", job=~\"$job\",pod=\"$pod\", area=\"nonheap\",},id)",
         "description": null,
         "error": null,
@@ -1822,5 +1497,5 @@
   "timezone": "",
   "title": "Java - Detailed Metrics by Pod",
   "uid": "hcl_java_details_by_pod",
-  "version": 918
+  "version": 919
 }
