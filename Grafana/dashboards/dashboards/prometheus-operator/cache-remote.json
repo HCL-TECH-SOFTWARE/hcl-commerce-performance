@@ -15,8 +15,8 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 217,
-  "iteration": 1646056240169,
+  "id": 349,
+  "iteration": 1646324403658,
   "links": [
     {
       "asDropdown": false,
@@ -94,7 +94,7 @@
       "pluginVersion": "7.5.5",
       "targets": [
         {
-          "expr": "sum(hclcache_remoteclient_outage{ namespace=~\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\"})",
+          "expr": "sum(hclcache_remoteclient_outage{ namespace=\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\"})",
           "format": "time_series",
           "instant": true,
           "interval": "",
@@ -157,7 +157,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(hclcache_remoteclient_outage{namespace=~\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\"}) by (pod) > 0",
+          "expr": "sum(hclcache_remoteclient_outage{namespace=\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\"}) by (pod) > 0",
           "interval": "",
           "legendFormat": "{{pod}}",
           "refId": "A"
@@ -254,7 +254,7 @@
       "pluginVersion": "7.5.5",
       "targets": [
         {
-          "expr": "sum(hclcache_cache_outage{namespace=~\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\"})",
+          "expr": "sum(hclcache_cache_outage{namespace=\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\"})",
           "format": "time_series",
           "instant": true,
           "interval": "",
@@ -317,7 +317,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(hclcache_cache_outage{namespace=~\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\"}) by (name) > 0",
+          "expr": "sum(hclcache_cache_outage{namespace=\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\"}) by (name) > 0",
           "interval": "",
           "legendFormat": "{{name}}",
           "refId": "A"
@@ -430,7 +430,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "max( (  hclcache_cache_size_current{ namespace=~\"$namespace\", cachespace=\"$environment\", scope=\"remote\", result!=\"error\", name=~\"$cache\" } > 0 ) * on ( namespace, cachespace, name) group_left( redis_instance ) hclcache_cache_remote_node_mapping{ redis_instance =~ \"$redis\"  }) by ( name, redis_instance )  ",
+              "expr": "max( (  hclcache_cache_size_current{ namespace=\"$namespace\", cachespace=\"$environment\", scope=\"remote\", result!=\"error\", name=~\"$cache\" } > 0 ) * on ( namespace, cachespace, name) group_left( redis_instance ) hclcache_cache_remote_node_mapping{ redis_instance =~ \"$redis\"  }) by ( name, redis_instance )  ",
               "interval": "",
               "legendFormat": "{{redis_instance}} - {{name}}",
               "refId": "A"
@@ -645,26 +645,26 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum(rate(hclcache_cache_puts_duration_seconds_count{ namespace=~\"$namespace\", cachespace=\"$environment\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", result!=\"error\", name=~\"$cache\"}[2m]))",
+              "expr": "sum(rate(hclcache_cache_puts_duration_seconds_count{ namespace=\"$namespace\", cachespace=\"$environment\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", result!=\"error\", name=~\"$cache\"}[2m]))",
               "hide": false,
               "interval": "",
               "legendFormat": "put",
               "refId": "A"
             },
             {
-              "expr": "sum(rate(hclcache_cache_gets_duration_seconds_count{ namespace=~\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", result!=\"error\", name=~\"$cache\"}[2m]))",
+              "expr": "sum(rate(hclcache_cache_gets_duration_seconds_count{ namespace=\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", result!=\"error\", name=~\"$cache\"}[2m]))",
               "interval": "",
               "legendFormat": "get",
               "refId": "B"
             },
             {
-              "expr": "sum(rate(hclcache_cache_clears_duration_seconds_count{ namespace=~\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", result!=\"error\", name=~\"$cache\"}[2m]))",
+              "expr": "sum(rate(hclcache_cache_clears_duration_seconds_count{ namespace=\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", result!=\"error\", name=~\"$cache\"}[2m]))",
               "interval": "",
               "legendFormat": "clear",
               "refId": "C"
             },
             {
-              "expr": "sum(rate(hclcache_cache_invalidates_duration_seconds_count{ namespace=~\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", result!=\"error\", name=~\"$cache\"}[2m]))",
+              "expr": "sum(rate(hclcache_cache_invalidates_duration_seconds_count{ namespace=\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", result!=\"error\", name=~\"$cache\"}[2m]))",
               "interval": "",
               "legendFormat": "invalidate",
               "refId": "D"
@@ -762,26 +762,26 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum(increase(hclcache_cache_puts_duration_seconds_count{ namespace=~\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", result=\"error\", name=~\"$cache\"}[2m]))",
+              "expr": "sum(increase(hclcache_cache_puts_duration_seconds_count{ namespace=\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", result=\"error\", name=~\"$cache\"}[2m]))",
               "hide": false,
               "interval": "",
               "legendFormat": "put",
               "refId": "A"
             },
             {
-              "expr": "sum(increase(hclcache_cache_gets_duration_seconds_count{ namespace=~\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", result=\"error\", name=~\"$cache\"}[2m]))",
+              "expr": "sum(increase(hclcache_cache_gets_duration_seconds_count{ namespace=\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", result=\"error\", name=~\"$cache\"}[2m]))",
               "interval": "",
               "legendFormat": "get",
               "refId": "B"
             },
             {
-              "expr": "sum(increase(hclcache_cache_clears_duration_seconds_count{ namespace=~\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", result=\"error\", name=~\"$cache\"}[2m]))",
+              "expr": "sum(increase(hclcache_cache_clears_duration_seconds_count{ namespace=\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", result=\"error\", name=~\"$cache\"}[2m]))",
               "interval": "",
               "legendFormat": "clear",
               "refId": "C"
             },
             {
-              "expr": "sum(increase(hclcache_cache_invalidates_duration_seconds_count{ namespace=~\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", result=\"error\", name=~\"$cache\"}[2m]))",
+              "expr": "sum(increase(hclcache_cache_invalidates_duration_seconds_count{ namespace=\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", result=\"error\", name=~\"$cache\"}[2m]))",
               "interval": "",
               "legendFormat": "invalidate",
               "refId": "D"
@@ -882,7 +882,7 @@
           "targets": [
             {
               "exemplar": true,
-              "expr": "\r\nsum(rate(hclcache_cache_gets_duration_seconds_count{ namespace=~\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[2m])) by (name) > 0\r\r",
+              "expr": "\r\nsum(rate(hclcache_cache_gets_duration_seconds_count{ namespace=\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[2m])) by (name) > 0\r\r",
               "hide": false,
               "interval": "",
               "legendFormat": "{{name}}",
@@ -986,7 +986,7 @@
           "targets": [
             {
               "exemplar": true,
-              "expr": "sum(rate(hclcache_cache_puts_duration_seconds_count{ namespace=~\"$namespace\",cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[2m]) ) by (name) ",
+              "expr": "sum(rate(hclcache_cache_puts_duration_seconds_count{ namespace=\"$namespace\",cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[2m]) ) by (name) ",
               "interval": "",
               "legendFormat": "{{ name }}",
               "refId": "A"
@@ -1089,7 +1089,7 @@
           "targets": [
             {
               "exemplar": true,
-              "expr": "sum(rate(hclcache_cache_clears_duration_seconds_count{ namespace=~\"$namespace\",cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[2m]) ) by (name) ",
+              "expr": "sum(rate(hclcache_cache_clears_duration_seconds_count{ namespace=\"$namespace\",cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[2m]) ) by (name) ",
               "interval": "",
               "legendFormat": "{{ name }}",
               "refId": "A"
@@ -1192,7 +1192,7 @@
           "targets": [
             {
               "exemplar": true,
-              "expr": "sum(rate(hclcache_cache_invalidates_duration_seconds_count{ namespace=~\"$namespace\",cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[2m]) ) by (name) ",
+              "expr": "sum(rate(hclcache_cache_invalidates_duration_seconds_count{ namespace=\"$namespace\",cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[2m]) ) by (name) ",
               "interval": "",
               "legendFormat": "{{ name }}",
               "refId": "A"
@@ -1422,28 +1422,37 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "histogram_quantile(0.95, sum(rate(hclcache_cache_gets_duration_seconds_bucket{ namespace=\"$namespace\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[5m])) by (le))",
+              "exemplar": true,
+              "expr": "histogram_quantile(0.95, sum(rate(hclcache_cache_gets_duration_seconds_bucket{ namespace=\"$namespace\", cachespace=\"$environment\", cachespace=\"$environment\",job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[5m])) by (le))",
               "interval": "",
               "legendFormat": "get",
               "refId": "A"
             },
             {
-              "expr": "histogram_quantile(0.95, sum(rate(hclcache_cache_puts_duration_seconds_bucket{ namespace=\"$namespace\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\"}[5m])) by (le))",
+              "exemplar": true,
+              "expr": "histogram_quantile(0.95, sum(rate(hclcache_cache_puts_duration_seconds_bucket{ namespace=\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\"}[5m])) by (le))",
+              "interval": "",
               "legendFormat": "put ",
               "refId": "C"
             },
             {
-              "expr": "histogram_quantile(0.95, sum(rate(hclcache_cache_clears_duration_seconds_bucket{ namespace=\"$namespace\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\"}[5m])) by (le))",
+              "exemplar": true,
+              "expr": "histogram_quantile(0.95, sum(rate(hclcache_cache_clears_duration_seconds_bucket{ namespace=\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\"}[5m])) by (le))",
+              "interval": "",
               "legendFormat": "clear",
               "refId": "B"
             },
             {
-              "expr": "histogram_quantile(0.95, sum(rate(hclcache_cache_invalidates_duration_seconds_bucket{ namespace=\"$namespace\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[5m])) by (le))",
+              "exemplar": true,
+              "expr": "histogram_quantile(0.95, sum(rate(hclcache_cache_invalidates_duration_seconds_bucket{ namespace=\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[5m])) by (le))",
+              "interval": "",
               "legendFormat": "invalidate",
               "refId": "D"
             },
             {
-              "expr": "histogram_quantile(0.95, sum(rate(hclcache_cache_removes_duration_seconds_bucket{ namespace=\"$namespace\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[5m])) by (le))",
+              "exemplar": true,
+              "expr": "histogram_quantile(0.95, sum(rate(hclcache_cache_removes_duration_seconds_bucket{ namespace=\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[5m])) by (le))",
+              "interval": "",
               "legendFormat": "remove",
               "refId": "E"
             }
@@ -1468,6 +1477,7 @@
           },
           "yaxes": [
             {
+              "$$hashKey": "object:59",
               "format": "s",
               "label": null,
               "logBase": 1,
@@ -1476,6 +1486,7 @@
               "show": true
             },
             {
+              "$$hashKey": "object:60",
               "format": "short",
               "label": null,
               "logBase": 1,
@@ -1539,27 +1550,37 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "histogram_quantile(0.99, sum(rate(hclcache_cache_gets_duration_seconds_bucket{ namespace=\"$namespace\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\"  }[5m])) by (le))",
+              "exemplar": true,
+              "expr": "histogram_quantile(0.99, sum(rate(hclcache_cache_gets_duration_seconds_bucket{ namespace=\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\"  }[5m])) by (le))",
+              "interval": "",
               "legendFormat": "get",
               "refId": "A"
             },
             {
-              "expr": "histogram_quantile(0.99, sum(rate(hclcache_cache_puts_duration_seconds_bucket{ namespace=\"$namespace\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\"}[5m])) by (le))",
+              "exemplar": true,
+              "expr": "histogram_quantile(0.99, sum(rate(hclcache_cache_puts_duration_seconds_bucket{ namespace=\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\"}[5m])) by (le))",
+              "interval": "",
               "legendFormat": "put ",
               "refId": "C"
             },
             {
-              "expr": "histogram_quantile(0.99, sum(rate(hclcache_cache_clears_duration_seconds_bucket{ namespace=\"$namespace\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[5m])) by (le))",
+              "exemplar": true,
+              "expr": "histogram_quantile(0.99, sum(rate(hclcache_cache_clears_duration_seconds_bucket{ namespace=\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[5m])) by (le))",
+              "interval": "",
               "legendFormat": "clear",
               "refId": "B"
             },
             {
-              "expr": "histogram_quantile(0.99, sum(rate(hclcache_cache_invalidates_duration_seconds_bucket{ namespace=\"$namespace\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[5m])) by (le))",
+              "exemplar": true,
+              "expr": "histogram_quantile(0.99, sum(rate(hclcache_cache_invalidates_duration_seconds_bucket{ namespace=\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[5m])) by (le))",
+              "interval": "",
               "legendFormat": "invalidate",
               "refId": "D"
             },
             {
-              "expr": "histogram_quantile(0.99, sum(rate(hclcache_cache_removes_duration_seconds_bucket{ namespace=\"$namespace\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[5m])) by (le))",
+              "exemplar": true,
+              "expr": "histogram_quantile(0.99, sum(rate(hclcache_cache_removes_duration_seconds_bucket{ namespace=\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[5m])) by (le))",
+              "interval": "",
               "legendFormat": "remove",
               "refId": "E"
             }
@@ -1584,6 +1605,7 @@
           },
           "yaxes": [
             {
+              "$$hashKey": "object:117",
               "format": "s",
               "label": null,
               "logBase": 1,
@@ -1592,6 +1614,7 @@
               "show": true
             },
             {
+              "$$hashKey": "object:118",
               "format": "short",
               "label": null,
               "logBase": 1,
@@ -1669,7 +1692,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum by (result) (rate(hclcache_cache_gets_duration_seconds_count{ namespace=~\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", result !=\"error\", name=~\"$cache\"}[2m]))",
+              "expr": "sum by (result) (rate(hclcache_cache_gets_duration_seconds_count{ namespace=\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", result !=\"error\", name=~\"$cache\"}[2m]))",
               "hide": false,
               "interval": "",
               "legendFormat": "{{result}}",
@@ -1767,7 +1790,7 @@
           "pluginVersion": "7.5.5",
           "targets": [
             {
-              "expr": "sum(rate(hclcache_cache_gets_duration_seconds_count{ namespace=~\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", result =\"hit\", name=~\"$cache\"}[2m])) / sum(rate(hclcache_cache_gets_duration_seconds_count{ namespace=~\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", result !=\"error\", name=~\"$cache\"}[2m]))",
+              "expr": "sum(rate(hclcache_cache_gets_duration_seconds_count{ namespace=\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", result =\"hit\", name=~\"$cache\"}[2m])) / sum(rate(hclcache_cache_gets_duration_seconds_count{ namespace=\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", result !=\"error\", name=~\"$cache\"}[2m]))",
               "hide": false,
               "instant": false,
               "interval": "",
@@ -1846,7 +1869,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum(rate(hclcache_cache_invalidation_messages_total{ namespace=~\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", type=\"dependency\", name=~\"$cache\"} [2m] ) ) by (name) > 0",
+              "expr": "sum(rate(hclcache_cache_invalidation_messages_total{ namespace=\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", type=\"dependency\", name=~\"$cache\"} [2m] ) ) by (name) > 0",
               "interval": "",
               "legendFormat": "{{name}}",
               "refId": "A"
@@ -1944,7 +1967,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum(rate(hclcache_cache_invalidation_messages_total{ namespace=~\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", type=\"clear\", name=~\"$cache\"}[2m])) by (name) > 0",
+              "expr": "sum(rate(hclcache_cache_invalidation_messages_total{ namespace=\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", type=\"clear\", name=~\"$cache\"}[2m])) by (name) > 0",
               "interval": "",
               "legendFormat": "{{name}}",
               "refId": "A"
@@ -2059,7 +2082,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum( hclcache_cache_size_maintenance{ namespace=~\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\" } ) by ( name )  > 0",
+              "expr": "sum( hclcache_cache_size_maintenance{ namespace=\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\" } ) by ( name )  > 0",
               "interval": "",
               "legendFormat": "{{name}}",
               "refId": "A"
@@ -2159,7 +2182,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum( rate( hclcache_cache_maintenance_online_keys_total{ namespace=~\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", result!=\"error\", name=~\"$cache\", scope=\"remote\", type=\"expired\" }[5m]) > 0 ) by  (name) ",
+              "expr": "sum( rate( hclcache_cache_maintenance_online_keys_total{ namespace=\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", result!=\"error\", name=~\"$cache\", scope=\"remote\", type=\"expired\" }[5m]) > 0 ) by  (name) ",
               "interval": "",
               "legendFormat": "{{type}}",
               "refId": "A"
@@ -2257,7 +2280,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum( hclcache_cache_remote_put_paused{ namespace=~\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", name=~\"$cache\" } ) by (name)  > 0",
+              "expr": "sum( hclcache_cache_remote_put_paused{ namespace=\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", name=~\"$cache\" } ) by (name)  > 0",
               "interval": "",
               "legendFormat": "{{name}}",
               "refId": "A"
@@ -2354,13 +2377,13 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum( rate( hclcache_cache_maintenance_online_keys_total{ namespace=~\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", result!=\"error\", name=~\"$cache\", scope=\"remote\" }[5m]  ) ) by  ( type )",
+              "expr": "sum( rate( hclcache_cache_maintenance_online_keys_total{ namespace=\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", result!=\"error\", name=~\"$cache\", scope=\"remote\" }[5m]  ) ) by  ( type )",
               "interval": "",
               "legendFormat": "{{type}}",
               "refId": "A"
             },
             {
-              "expr": "sum( rate( hclcache_cache_maintenance_online_keys_total{ namespace=~\"$namespace\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", result=\"error\", name=~\"$cache\", scope=\"remote\" }[5m]  ) ) by  ( type )",
+              "expr": "sum( rate( hclcache_cache_maintenance_online_keys_total{ namespace=\"$namespace\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", result=\"error\", name=~\"$cache\", scope=\"remote\" }[5m]  ) ) by  ( type )",
               "interval": "",
               "legendFormat": "{{type}}-error",
               "refId": "B"
@@ -2586,9 +2609,9 @@
         "description": null,
         "error": null,
         "hide": 0,
-        "includeAll": true,
+        "includeAll": false,
         "label": "environment",
-        "multi": true,
+        "multi": false,
         "name": "environment",
         "options": [],
         "query": {
@@ -2613,7 +2636,7 @@
           "value": "$__all"
         },
         "datasource": "${DS_PROMETHEUS}",
-        "definition": "label_values(hclcache_cache_size_max{ namespace=~\"$namespace\", cachespace=\"$environment\"}, job)",
+        "definition": "label_values(hclcache_cache_size_max{ namespace=\"$namespace\", cachespace=\"$environment\"}, job)",
         "description": null,
         "error": null,
         "hide": 0,
@@ -2623,7 +2646,7 @@
         "name": "job",
         "options": [],
         "query": {
-          "query": "label_values(hclcache_cache_size_max{ namespace=~\"$namespace\", cachespace=\"$environment\"}, job)",
+          "query": "label_values(hclcache_cache_size_max{ namespace=\"$namespace\", cachespace=\"$environment\"}, job)",
           "refId": "Prometheus-job-Variable-Query"
         },
         "refresh": 2,
@@ -2644,7 +2667,7 @@
           "value": "$__all"
         },
         "datasource": "${DS_PROMETHEUS}",
-        "definition": "label_values(hclcache_cache_size_max{ namespace=~\"$namespace\", cachespace=\"$environment\", job=~\"$job\"}, pod)",
+        "definition": "label_values(hclcache_cache_size_max{ namespace=\"$namespace\", cachespace=\"$environment\", job=~\"$job\"}, pod)",
         "description": null,
         "error": null,
         "hide": 0,
@@ -2654,7 +2677,7 @@
         "name": "pod",
         "options": [],
         "query": {
-          "query": "label_values(hclcache_cache_size_max{ namespace=~\"$namespace\", cachespace=\"$environment\", job=~\"$job\"}, pod)",
+          "query": "label_values(hclcache_cache_size_max{ namespace=\"$namespace\", cachespace=\"$environment\", job=~\"$job\"}, pod)",
           "refId": "Prometheus-pod-Variable-Query"
         },
         "refresh": 2,
@@ -2675,7 +2698,7 @@
           "value": "$__all"
         },
         "datasource": "${DS_PROMETHEUS}",
-        "definition": "label_values(hclcache_cache_size_max{ namespace=~\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\"},name)",
+        "definition": "label_values(hclcache_cache_size_max{ namespace=\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\"},name)",
         "description": null,
         "error": null,
         "hide": 0,
@@ -2685,7 +2708,7 @@
         "name": "cache",
         "options": [],
         "query": {
-          "query": "label_values(hclcache_cache_size_max{ namespace=~\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\"},name)",
+          "query": "label_values(hclcache_cache_size_max{ namespace=\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\"},name)",
           "refId": "Prometheus-cache-Variable-Query"
         },
         "refresh": 2,
@@ -2732,7 +2755,7 @@
     ]
   },
   "time": {
-    "from": "now-5m",
+    "from": "now-15m",
     "to": "now"
   },
   "timepicker": {
