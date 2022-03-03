@@ -16,8 +16,8 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 17,
-  "iteration": 1632907644538,
+  "id": 24,
+  "iteration": 1646053989577,
   "links": [
     {
       "asDropdown": false,
@@ -34,7 +34,7 @@
   "panels": [
     {
       "columns": [],
-      "datasource": "Prometheus",
+      "datasource": "${DS_PROMETHEUS}",
       "description": "",
       "fieldConfig": {
         "defaults": {},
@@ -262,13 +262,33 @@
   "templating": {
     "list": [
       {
+        "current": {
+          "selected": false,
+          "text": "Prometheus",
+          "value": "Prometheus"
+        },
+        "description": null,
+        "error": null,
+        "hide": 0,
+        "includeAll": false,
+        "label": "Prometheus",
+        "multi": false,
+        "name": "DS_PROMETHEUS",
+        "options": [],
+        "query": "prometheus",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "type": "datasource"
+      },
+      {
         "allValue": null,
         "current": {
           "selected": false,
-          "text": "sofy",
-          "value": "sofy"
+          "text": "c8braucjf2nnsdd85h10",
+          "value": "c8braucjf2nnsdd85h10"
         },
-        "datasource": "Prometheus",
+        "datasource": "${DS_PROMETHEUS}",
         "definition": "label_values(hclcache_cache_size_max, kubernetes_namespace)",
         "description": null,
         "error": null,
@@ -303,7 +323,7 @@
             "$__all"
           ]
         },
-        "datasource": "Prometheus",
+        "datasource": "${DS_PROMETHEUS}",
         "definition": "label_values(hclcache_cache_size_max{kubernetes_namespace=~\"$namespace\"}, component)",
         "description": null,
         "error": null,
@@ -331,10 +351,10 @@
         "allValue": ".*",
         "current": {
           "selected": false,
-          "text": "comdemoauthquery-app-c5f4f869d-npn85",
-          "value": "comdemoauthquery-app-c5f4f869d-npn85"
+          "text": "comdemoauthcache-app-6f8c8568df-78wnd",
+          "value": "comdemoauthcache-app-6f8c8568df-78wnd"
         },
-        "datasource": "Prometheus",
+        "datasource": "${DS_PROMETHEUS}",
         "definition": "label_values(hclcache_cache_size_max{kubernetes_namespace=~\"$namespace\",component=~\"$job\"}, kubernetes_pod_name)",
         "description": null,
         "error": null,
@@ -381,5 +401,5 @@
   "timezone": "",
   "title": "HCL Cache - Local Cache Summary",
   "uid": "hcl_cache_local_summary",
-  "version": 918
+  "version": 919
 }

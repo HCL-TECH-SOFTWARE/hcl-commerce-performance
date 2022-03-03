@@ -15,8 +15,8 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 14,
-  "iteration": 1632907810056,
+  "id": 19,
+  "iteration": 1645804143946,
   "links": [
     {
       "asDropdown": false,
@@ -33,7 +33,7 @@
   "panels": [
     {
       "collapsed": true,
-      "datasource": "Prometheus",
+      "datasource": "${DS_PROMETHEUS}",
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -47,7 +47,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "fieldConfig": {
             "defaults": {
               "links": []
@@ -87,8 +87,8 @@
           "scopedVars": {
             "pod": {
               "selected": false,
-              "text": "comdemoauthcache-app-7b5c5cc5b-5cw5c",
-              "value": "comdemoauthcache-app-7b5c5cc5b-5cw5c"
+              "text": "comdemoauthcache-app-6f8c8568df-78wnd",
+              "value": "comdemoauthcache-app-6f8c8568df-78wnd"
             }
           },
           "seriesOverrides": [],
@@ -157,7 +157,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "fieldConfig": {
             "defaults": {
               "links": []
@@ -199,8 +199,8 @@
           "scopedVars": {
             "pod": {
               "selected": false,
-              "text": "comdemoauthcache-app-7b5c5cc5b-5cw5c",
-              "value": "comdemoauthcache-app-7b5c5cc5b-5cw5c"
+              "text": "comdemoauthcache-app-6f8c8568df-78wnd",
+              "value": "comdemoauthcache-app-6f8c8568df-78wnd"
             }
           },
           "seriesOverrides": [],
@@ -262,7 +262,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "fieldConfig": {
             "defaults": {
               "links": []
@@ -303,8 +303,8 @@
           "scopedVars": {
             "pod": {
               "selected": false,
-              "text": "comdemoauthcache-app-7b5c5cc5b-5cw5c",
-              "value": "comdemoauthcache-app-7b5c5cc5b-5cw5c"
+              "text": "comdemoauthcache-app-6f8c8568df-78wnd",
+              "value": "comdemoauthcache-app-6f8c8568df-78wnd"
             }
           },
           "seriesOverrides": [],
@@ -383,7 +383,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "fieldConfig": {
             "defaults": {
               "links": []
@@ -424,8 +424,8 @@
           "scopedVars": {
             "pod": {
               "selected": false,
-              "text": "comdemoauthcache-app-7b5c5cc5b-5cw5c",
-              "value": "comdemoauthcache-app-7b5c5cc5b-5cw5c"
+              "text": "comdemoauthcache-app-6f8c8568df-78wnd",
+              "value": "comdemoauthcache-app-6f8c8568df-78wnd"
             }
           },
           "seriesOverrides": [],
@@ -504,7 +504,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "fieldConfig": {
             "defaults": {
               "links": []
@@ -545,8 +545,8 @@
           "scopedVars": {
             "pod": {
               "selected": false,
-              "text": "comdemoauthcache-app-7b5c5cc5b-5cw5c",
-              "value": "comdemoauthcache-app-7b5c5cc5b-5cw5c"
+              "text": "comdemoauthcache-app-6f8c8568df-78wnd",
+              "value": "comdemoauthcache-app-6f8c8568df-78wnd"
             }
           },
           "seriesOverrides": [],
@@ -625,8 +625,8 @@
       "scopedVars": {
         "pod": {
           "selected": false,
-          "text": "comdemoauthcache-app-7b5c5cc5b-5cw5c",
-          "value": "comdemoauthcache-app-7b5c5cc5b-5cw5c"
+          "text": "comdemoauthcache-app-6f8c8568df-78wnd",
+          "value": "comdemoauthcache-app-6f8c8568df-78wnd"
         }
       },
       "title": "pod: $pod",
@@ -634,7 +634,7 @@
     },
     {
       "collapsed": true,
-      "datasource": "Prometheus",
+      "datasource": "${DS_PROMETHEUS}",
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -648,7 +648,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "fieldConfig": {
             "defaults": {
               "links": []
@@ -685,14 +685,14 @@
           "pointradius": 2,
           "points": false,
           "renderer": "flot",
-          "repeatIteration": 1632907810056,
+          "repeatIteration": 1645804143946,
           "repeatPanelId": 14,
           "repeatedByRow": true,
           "scopedVars": {
             "pod": {
               "selected": false,
-              "text": "comdemoauthcrs-app-686f4777bb-zfhfp",
-              "value": "comdemoauthcrs-app-686f4777bb-zfhfp"
+              "text": "comdemoauthcrs-app-7d6b4f798f-dwn4l",
+              "value": "comdemoauthcrs-app-7d6b4f798f-dwn4l"
             }
           },
           "seriesOverrides": [],
@@ -761,7 +761,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "fieldConfig": {
             "defaults": {
               "links": []
@@ -800,14 +800,14 @@
           "renderer": "flot",
           "repeat": null,
           "repeatDirection": "h",
-          "repeatIteration": 1632907810056,
+          "repeatIteration": 1645804143946,
           "repeatPanelId": 15,
           "repeatedByRow": true,
           "scopedVars": {
             "pod": {
               "selected": false,
-              "text": "comdemoauthcrs-app-686f4777bb-zfhfp",
-              "value": "comdemoauthcrs-app-686f4777bb-zfhfp"
+              "text": "comdemoauthcrs-app-7d6b4f798f-dwn4l",
+              "value": "comdemoauthcrs-app-7d6b4f798f-dwn4l"
             }
           },
           "seriesOverrides": [],
@@ -869,7 +869,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "fieldConfig": {
             "defaults": {
               "links": []
@@ -907,14 +907,14 @@
           "pointradius": 2,
           "points": false,
           "renderer": "flot",
-          "repeatIteration": 1632907810056,
+          "repeatIteration": 1645804143946,
           "repeatPanelId": 10,
           "repeatedByRow": true,
           "scopedVars": {
             "pod": {
               "selected": false,
-              "text": "comdemoauthcrs-app-686f4777bb-zfhfp",
-              "value": "comdemoauthcrs-app-686f4777bb-zfhfp"
+              "text": "comdemoauthcrs-app-7d6b4f798f-dwn4l",
+              "value": "comdemoauthcrs-app-7d6b4f798f-dwn4l"
             }
           },
           "seriesOverrides": [],
@@ -993,7 +993,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "fieldConfig": {
             "defaults": {
               "links": []
@@ -1031,14 +1031,14 @@
           "pointradius": 2,
           "points": false,
           "renderer": "flot",
-          "repeatIteration": 1632907810056,
+          "repeatIteration": 1645804143946,
           "repeatPanelId": 9,
           "repeatedByRow": true,
           "scopedVars": {
             "pod": {
               "selected": false,
-              "text": "comdemoauthcrs-app-686f4777bb-zfhfp",
-              "value": "comdemoauthcrs-app-686f4777bb-zfhfp"
+              "text": "comdemoauthcrs-app-7d6b4f798f-dwn4l",
+              "value": "comdemoauthcrs-app-7d6b4f798f-dwn4l"
             }
           },
           "seriesOverrides": [],
@@ -1117,7 +1117,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "fieldConfig": {
             "defaults": {
               "links": []
@@ -1155,14 +1155,14 @@
           "pointradius": 2,
           "points": false,
           "renderer": "flot",
-          "repeatIteration": 1632907810056,
+          "repeatIteration": 1645804143946,
           "repeatPanelId": 6,
           "repeatedByRow": true,
           "scopedVars": {
             "pod": {
               "selected": false,
-              "text": "comdemoauthcrs-app-686f4777bb-zfhfp",
-              "value": "comdemoauthcrs-app-686f4777bb-zfhfp"
+              "text": "comdemoauthcrs-app-7d6b4f798f-dwn4l",
+              "value": "comdemoauthcrs-app-7d6b4f798f-dwn4l"
             }
           },
           "seriesOverrides": [],
@@ -1237,13 +1237,13 @@
           }
         }
       ],
-      "repeatIteration": 1632907810056,
+      "repeatIteration": 1645804143946,
       "repeatPanelId": 43,
       "scopedVars": {
         "pod": {
           "selected": false,
-          "text": "comdemoauthcrs-app-686f4777bb-zfhfp",
-          "value": "comdemoauthcrs-app-686f4777bb-zfhfp"
+          "text": "comdemoauthcrs-app-7d6b4f798f-dwn4l",
+          "value": "comdemoauthcrs-app-7d6b4f798f-dwn4l"
         }
       },
       "title": "pod: $pod",
@@ -1251,7 +1251,7 @@
     },
     {
       "collapsed": true,
-      "datasource": "Prometheus",
+      "datasource": "${DS_PROMETHEUS}",
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -1265,7 +1265,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "fieldConfig": {
             "defaults": {
               "links": []
@@ -1302,14 +1302,14 @@
           "pointradius": 2,
           "points": false,
           "renderer": "flot",
-          "repeatIteration": 1632907810056,
+          "repeatIteration": 1645804143946,
           "repeatPanelId": 14,
           "repeatedByRow": true,
           "scopedVars": {
             "pod": {
               "selected": false,
-              "text": "comdemoauthquery-app-c5f4f869d-npn85",
-              "value": "comdemoauthquery-app-c5f4f869d-npn85"
+              "text": "comdemoauthquery-app-7548cc5db5-mx8xs",
+              "value": "comdemoauthquery-app-7548cc5db5-mx8xs"
             }
           },
           "seriesOverrides": [],
@@ -1378,7 +1378,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "fieldConfig": {
             "defaults": {
               "links": []
@@ -1417,14 +1417,14 @@
           "renderer": "flot",
           "repeat": null,
           "repeatDirection": "h",
-          "repeatIteration": 1632907810056,
+          "repeatIteration": 1645804143946,
           "repeatPanelId": 15,
           "repeatedByRow": true,
           "scopedVars": {
             "pod": {
               "selected": false,
-              "text": "comdemoauthquery-app-c5f4f869d-npn85",
-              "value": "comdemoauthquery-app-c5f4f869d-npn85"
+              "text": "comdemoauthquery-app-7548cc5db5-mx8xs",
+              "value": "comdemoauthquery-app-7548cc5db5-mx8xs"
             }
           },
           "seriesOverrides": [],
@@ -1486,7 +1486,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "fieldConfig": {
             "defaults": {
               "links": []
@@ -1524,14 +1524,14 @@
           "pointradius": 2,
           "points": false,
           "renderer": "flot",
-          "repeatIteration": 1632907810056,
+          "repeatIteration": 1645804143946,
           "repeatPanelId": 10,
           "repeatedByRow": true,
           "scopedVars": {
             "pod": {
               "selected": false,
-              "text": "comdemoauthquery-app-c5f4f869d-npn85",
-              "value": "comdemoauthquery-app-c5f4f869d-npn85"
+              "text": "comdemoauthquery-app-7548cc5db5-mx8xs",
+              "value": "comdemoauthquery-app-7548cc5db5-mx8xs"
             }
           },
           "seriesOverrides": [],
@@ -1610,7 +1610,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "fieldConfig": {
             "defaults": {
               "links": []
@@ -1648,14 +1648,14 @@
           "pointradius": 2,
           "points": false,
           "renderer": "flot",
-          "repeatIteration": 1632907810056,
+          "repeatIteration": 1645804143946,
           "repeatPanelId": 9,
           "repeatedByRow": true,
           "scopedVars": {
             "pod": {
               "selected": false,
-              "text": "comdemoauthquery-app-c5f4f869d-npn85",
-              "value": "comdemoauthquery-app-c5f4f869d-npn85"
+              "text": "comdemoauthquery-app-7548cc5db5-mx8xs",
+              "value": "comdemoauthquery-app-7548cc5db5-mx8xs"
             }
           },
           "seriesOverrides": [],
@@ -1734,7 +1734,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "fieldConfig": {
             "defaults": {
               "links": []
@@ -1772,14 +1772,14 @@
           "pointradius": 2,
           "points": false,
           "renderer": "flot",
-          "repeatIteration": 1632907810056,
+          "repeatIteration": 1645804143946,
           "repeatPanelId": 6,
           "repeatedByRow": true,
           "scopedVars": {
             "pod": {
               "selected": false,
-              "text": "comdemoauthquery-app-c5f4f869d-npn85",
-              "value": "comdemoauthquery-app-c5f4f869d-npn85"
+              "text": "comdemoauthquery-app-7548cc5db5-mx8xs",
+              "value": "comdemoauthquery-app-7548cc5db5-mx8xs"
             }
           },
           "seriesOverrides": [],
@@ -1854,13 +1854,13 @@
           }
         }
       ],
-      "repeatIteration": 1632907810056,
+      "repeatIteration": 1645804143946,
       "repeatPanelId": 43,
       "scopedVars": {
         "pod": {
           "selected": false,
-          "text": "comdemoauthquery-app-c5f4f869d-npn85",
-          "value": "comdemoauthquery-app-c5f4f869d-npn85"
+          "text": "comdemoauthquery-app-7548cc5db5-mx8xs",
+          "value": "comdemoauthquery-app-7548cc5db5-mx8xs"
         }
       },
       "title": "pod: $pod",
@@ -1868,7 +1868,7 @@
     },
     {
       "collapsed": true,
-      "datasource": "Prometheus",
+      "datasource": "${DS_PROMETHEUS}",
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -1882,7 +1882,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "fieldConfig": {
             "defaults": {
               "links": []
@@ -1919,14 +1919,14 @@
           "pointradius": 2,
           "points": false,
           "renderer": "flot",
-          "repeatIteration": 1632907810056,
+          "repeatIteration": 1645804143946,
           "repeatPanelId": 14,
           "repeatedByRow": true,
           "scopedVars": {
             "pod": {
               "selected": false,
-              "text": "comdemoauthts-app-c4f4d49fd-s6tfc",
-              "value": "comdemoauthts-app-c4f4d49fd-s6tfc"
+              "text": "comdemoauthts-app-548fdd5cf6-zczq7",
+              "value": "comdemoauthts-app-548fdd5cf6-zczq7"
             }
           },
           "seriesOverrides": [],
@@ -1995,7 +1995,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "fieldConfig": {
             "defaults": {
               "links": []
@@ -2034,14 +2034,14 @@
           "renderer": "flot",
           "repeat": null,
           "repeatDirection": "h",
-          "repeatIteration": 1632907810056,
+          "repeatIteration": 1645804143946,
           "repeatPanelId": 15,
           "repeatedByRow": true,
           "scopedVars": {
             "pod": {
               "selected": false,
-              "text": "comdemoauthts-app-c4f4d49fd-s6tfc",
-              "value": "comdemoauthts-app-c4f4d49fd-s6tfc"
+              "text": "comdemoauthts-app-548fdd5cf6-zczq7",
+              "value": "comdemoauthts-app-548fdd5cf6-zczq7"
             }
           },
           "seriesOverrides": [],
@@ -2103,7 +2103,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "fieldConfig": {
             "defaults": {
               "links": []
@@ -2141,14 +2141,14 @@
           "pointradius": 2,
           "points": false,
           "renderer": "flot",
-          "repeatIteration": 1632907810056,
+          "repeatIteration": 1645804143946,
           "repeatPanelId": 10,
           "repeatedByRow": true,
           "scopedVars": {
             "pod": {
               "selected": false,
-              "text": "comdemoauthts-app-c4f4d49fd-s6tfc",
-              "value": "comdemoauthts-app-c4f4d49fd-s6tfc"
+              "text": "comdemoauthts-app-548fdd5cf6-zczq7",
+              "value": "comdemoauthts-app-548fdd5cf6-zczq7"
             }
           },
           "seriesOverrides": [],
@@ -2227,7 +2227,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "fieldConfig": {
             "defaults": {
               "links": []
@@ -2265,14 +2265,14 @@
           "pointradius": 2,
           "points": false,
           "renderer": "flot",
-          "repeatIteration": 1632907810056,
+          "repeatIteration": 1645804143946,
           "repeatPanelId": 9,
           "repeatedByRow": true,
           "scopedVars": {
             "pod": {
               "selected": false,
-              "text": "comdemoauthts-app-c4f4d49fd-s6tfc",
-              "value": "comdemoauthts-app-c4f4d49fd-s6tfc"
+              "text": "comdemoauthts-app-548fdd5cf6-zczq7",
+              "value": "comdemoauthts-app-548fdd5cf6-zczq7"
             }
           },
           "seriesOverrides": [],
@@ -2351,7 +2351,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "fieldConfig": {
             "defaults": {
               "links": []
@@ -2389,14 +2389,14 @@
           "pointradius": 2,
           "points": false,
           "renderer": "flot",
-          "repeatIteration": 1632907810056,
+          "repeatIteration": 1645804143946,
           "repeatPanelId": 6,
           "repeatedByRow": true,
           "scopedVars": {
             "pod": {
               "selected": false,
-              "text": "comdemoauthts-app-c4f4d49fd-s6tfc",
-              "value": "comdemoauthts-app-c4f4d49fd-s6tfc"
+              "text": "comdemoauthts-app-548fdd5cf6-zczq7",
+              "value": "comdemoauthts-app-548fdd5cf6-zczq7"
             }
           },
           "seriesOverrides": [],
@@ -2471,13 +2471,13 @@
           }
         }
       ],
-      "repeatIteration": 1632907810056,
+      "repeatIteration": 1645804143946,
       "repeatPanelId": 43,
       "scopedVars": {
         "pod": {
           "selected": false,
-          "text": "comdemoauthts-app-c4f4d49fd-s6tfc",
-          "value": "comdemoauthts-app-c4f4d49fd-s6tfc"
+          "text": "comdemoauthts-app-548fdd5cf6-zczq7",
+          "value": "comdemoauthts-app-548fdd5cf6-zczq7"
         }
       },
       "title": "pod: $pod",
@@ -2485,7 +2485,7 @@
     },
     {
       "collapsed": true,
-      "datasource": "Prometheus",
+      "datasource": "${DS_PROMETHEUS}",
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -2499,7 +2499,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "fieldConfig": {
             "defaults": {
               "links": []
@@ -2536,14 +2536,14 @@
           "pointradius": 2,
           "points": false,
           "renderer": "flot",
-          "repeatIteration": 1632907810056,
+          "repeatIteration": 1645804143946,
           "repeatPanelId": 14,
           "repeatedByRow": true,
           "scopedVars": {
             "pod": {
               "selected": false,
-              "text": "comdemoingest-app-55465455c6-grjhn",
-              "value": "comdemoingest-app-55465455c6-grjhn"
+              "text": "comdemoingest-app-574f5687b6-j6zp4",
+              "value": "comdemoingest-app-574f5687b6-j6zp4"
             }
           },
           "seriesOverrides": [],
@@ -2612,7 +2612,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "fieldConfig": {
             "defaults": {
               "links": []
@@ -2651,14 +2651,14 @@
           "renderer": "flot",
           "repeat": null,
           "repeatDirection": "h",
-          "repeatIteration": 1632907810056,
+          "repeatIteration": 1645804143946,
           "repeatPanelId": 15,
           "repeatedByRow": true,
           "scopedVars": {
             "pod": {
               "selected": false,
-              "text": "comdemoingest-app-55465455c6-grjhn",
-              "value": "comdemoingest-app-55465455c6-grjhn"
+              "text": "comdemoingest-app-574f5687b6-j6zp4",
+              "value": "comdemoingest-app-574f5687b6-j6zp4"
             }
           },
           "seriesOverrides": [],
@@ -2720,7 +2720,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "fieldConfig": {
             "defaults": {
               "links": []
@@ -2758,14 +2758,14 @@
           "pointradius": 2,
           "points": false,
           "renderer": "flot",
-          "repeatIteration": 1632907810056,
+          "repeatIteration": 1645804143946,
           "repeatPanelId": 10,
           "repeatedByRow": true,
           "scopedVars": {
             "pod": {
               "selected": false,
-              "text": "comdemoingest-app-55465455c6-grjhn",
-              "value": "comdemoingest-app-55465455c6-grjhn"
+              "text": "comdemoingest-app-574f5687b6-j6zp4",
+              "value": "comdemoingest-app-574f5687b6-j6zp4"
             }
           },
           "seriesOverrides": [],
@@ -2844,7 +2844,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "fieldConfig": {
             "defaults": {
               "links": []
@@ -2882,14 +2882,14 @@
           "pointradius": 2,
           "points": false,
           "renderer": "flot",
-          "repeatIteration": 1632907810056,
+          "repeatIteration": 1645804143946,
           "repeatPanelId": 9,
           "repeatedByRow": true,
           "scopedVars": {
             "pod": {
               "selected": false,
-              "text": "comdemoingest-app-55465455c6-grjhn",
-              "value": "comdemoingest-app-55465455c6-grjhn"
+              "text": "comdemoingest-app-574f5687b6-j6zp4",
+              "value": "comdemoingest-app-574f5687b6-j6zp4"
             }
           },
           "seriesOverrides": [],
@@ -2968,7 +2968,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "fieldConfig": {
             "defaults": {
               "links": []
@@ -3006,14 +3006,14 @@
           "pointradius": 2,
           "points": false,
           "renderer": "flot",
-          "repeatIteration": 1632907810056,
+          "repeatIteration": 1645804143946,
           "repeatPanelId": 6,
           "repeatedByRow": true,
           "scopedVars": {
             "pod": {
               "selected": false,
-              "text": "comdemoingest-app-55465455c6-grjhn",
-              "value": "comdemoingest-app-55465455c6-grjhn"
+              "text": "comdemoingest-app-574f5687b6-j6zp4",
+              "value": "comdemoingest-app-574f5687b6-j6zp4"
             }
           },
           "seriesOverrides": [],
@@ -3088,13 +3088,13 @@
           }
         }
       ],
-      "repeatIteration": 1632907810056,
+      "repeatIteration": 1645804143946,
       "repeatPanelId": 43,
       "scopedVars": {
         "pod": {
           "selected": false,
-          "text": "comdemoingest-app-55465455c6-grjhn",
-          "value": "comdemoingest-app-55465455c6-grjhn"
+          "text": "comdemoingest-app-574f5687b6-j6zp4",
+          "value": "comdemoingest-app-574f5687b6-j6zp4"
         }
       },
       "title": "pod: $pod",
@@ -3102,7 +3102,7 @@
     },
     {
       "collapsed": true,
-      "datasource": "Prometheus",
+      "datasource": "${DS_PROMETHEUS}",
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -3116,7 +3116,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "fieldConfig": {
             "defaults": {
               "links": []
@@ -3153,14 +3153,14 @@
           "pointradius": 2,
           "points": false,
           "renderer": "flot",
-          "repeatIteration": 1632907810056,
+          "repeatIteration": 1645804143946,
           "repeatPanelId": 14,
           "repeatedByRow": true,
           "scopedVars": {
             "pod": {
               "selected": false,
-              "text": "comdemoquery-app-6c575d7f79-8ztd6",
-              "value": "comdemoquery-app-6c575d7f79-8ztd6"
+              "text": "comdemoquery-app-dc8dc4798-fv747",
+              "value": "comdemoquery-app-dc8dc4798-fv747"
             }
           },
           "seriesOverrides": [],
@@ -3229,7 +3229,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "fieldConfig": {
             "defaults": {
               "links": []
@@ -3268,14 +3268,14 @@
           "renderer": "flot",
           "repeat": null,
           "repeatDirection": "h",
-          "repeatIteration": 1632907810056,
+          "repeatIteration": 1645804143946,
           "repeatPanelId": 15,
           "repeatedByRow": true,
           "scopedVars": {
             "pod": {
               "selected": false,
-              "text": "comdemoquery-app-6c575d7f79-8ztd6",
-              "value": "comdemoquery-app-6c575d7f79-8ztd6"
+              "text": "comdemoquery-app-dc8dc4798-fv747",
+              "value": "comdemoquery-app-dc8dc4798-fv747"
             }
           },
           "seriesOverrides": [],
@@ -3337,7 +3337,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "fieldConfig": {
             "defaults": {
               "links": []
@@ -3375,14 +3375,14 @@
           "pointradius": 2,
           "points": false,
           "renderer": "flot",
-          "repeatIteration": 1632907810056,
+          "repeatIteration": 1645804143946,
           "repeatPanelId": 10,
           "repeatedByRow": true,
           "scopedVars": {
             "pod": {
               "selected": false,
-              "text": "comdemoquery-app-6c575d7f79-8ztd6",
-              "value": "comdemoquery-app-6c575d7f79-8ztd6"
+              "text": "comdemoquery-app-dc8dc4798-fv747",
+              "value": "comdemoquery-app-dc8dc4798-fv747"
             }
           },
           "seriesOverrides": [],
@@ -3461,7 +3461,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "fieldConfig": {
             "defaults": {
               "links": []
@@ -3499,14 +3499,14 @@
           "pointradius": 2,
           "points": false,
           "renderer": "flot",
-          "repeatIteration": 1632907810056,
+          "repeatIteration": 1645804143946,
           "repeatPanelId": 9,
           "repeatedByRow": true,
           "scopedVars": {
             "pod": {
               "selected": false,
-              "text": "comdemoquery-app-6c575d7f79-8ztd6",
-              "value": "comdemoquery-app-6c575d7f79-8ztd6"
+              "text": "comdemoquery-app-dc8dc4798-fv747",
+              "value": "comdemoquery-app-dc8dc4798-fv747"
             }
           },
           "seriesOverrides": [],
@@ -3585,7 +3585,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "fieldConfig": {
             "defaults": {
               "links": []
@@ -3623,14 +3623,14 @@
           "pointradius": 2,
           "points": false,
           "renderer": "flot",
-          "repeatIteration": 1632907810056,
+          "repeatIteration": 1645804143946,
           "repeatPanelId": 6,
           "repeatedByRow": true,
           "scopedVars": {
             "pod": {
               "selected": false,
-              "text": "comdemoquery-app-6c575d7f79-8ztd6",
-              "value": "comdemoquery-app-6c575d7f79-8ztd6"
+              "text": "comdemoquery-app-dc8dc4798-fv747",
+              "value": "comdemoquery-app-dc8dc4798-fv747"
             }
           },
           "seriesOverrides": [],
@@ -3705,13 +3705,13 @@
           }
         }
       ],
-      "repeatIteration": 1632907810056,
+      "repeatIteration": 1645804143946,
       "repeatPanelId": 43,
       "scopedVars": {
         "pod": {
           "selected": false,
-          "text": "comdemoquery-app-6c575d7f79-8ztd6",
-          "value": "comdemoquery-app-6c575d7f79-8ztd6"
+          "text": "comdemoquery-app-dc8dc4798-fv747",
+          "value": "comdemoquery-app-dc8dc4798-fv747"
         }
       },
       "title": "pod: $pod",
@@ -3728,13 +3728,33 @@
   "templating": {
     "list": [
       {
+        "current": {
+          "selected": false,
+          "text": "Prometheus",
+          "value": "Prometheus"
+        },
+        "description": null,
+        "error": null,
+        "hide": 0,
+        "includeAll": false,
+        "label": "Prometheus",
+        "multi": false,
+        "name": "DS_PROMETHEUS",
+        "options": [],
+        "query": "prometheus",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "type": "datasource"
+      },
+      {
         "allValue": ".*",
         "current": {
           "selected": false,
-          "text": "sofy",
-          "value": "sofy"
+          "text": "c8braucjf2nnsdd85h10",
+          "value": "c8braucjf2nnsdd85h10"
         },
-        "datasource": "Prometheus",
+        "datasource": "${DS_PROMETHEUS}",
         "definition": "label_values(jvm_memory_used_bytes, kubernetes_namespace)",
         "description": null,
         "error": null,
@@ -3769,7 +3789,7 @@
             "$__all"
           ]
         },
-        "datasource": "Prometheus",
+        "datasource": "${DS_PROMETHEUS}",
         "definition": "label_values(jvm_memory_used_bytes{kubernetes_namespace=~\"$namespace\"}, component)",
         "description": null,
         "error": null,
@@ -3800,7 +3820,7 @@
           "text": "All",
           "value": "$__all"
         },
-        "datasource": "Prometheus",
+        "datasource": "${DS_PROMETHEUS}",
         "definition": "label_values(jvm_memory_used_bytes{kubernetes_namespace=~\"$namespace\",component=~\"$job\"}, kubernetes_pod_name)",
         "description": null,
         "error": null,
@@ -3847,5 +3867,5 @@
   "timezone": "",
   "title": "Java - Summary Metrics by Pod",
   "uid": "hcl_java_summary_by_pod",
-  "version": 918
+  "version": 919
 }

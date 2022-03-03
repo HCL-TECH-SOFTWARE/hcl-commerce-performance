@@ -21,13 +21,13 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 42,
-  "iteration": 1632909149182,
+  "id": 36,
+  "iteration": 1646230735870,
   "links": [],
   "panels": [
     {
       "collapsed": true,
-      "datasource": "Prometheus",
+      "datasource": "${DS_PROMETHEUS}",
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -37,7 +37,7 @@
       "id": 373,
       "panels": [
         {
-          "datasource": null,
+          "datasource": "${DS_PROMETHEUS}",
           "description": "",
           "fieldConfig": {
             "defaults": {
@@ -99,7 +99,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "description": "",
           "fieldConfig": {
             "defaults": {
@@ -202,7 +202,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "description": "",
           "fieldConfig": {
             "defaults": {
@@ -299,7 +299,7 @@
           }
         },
         {
-          "datasource": null,
+          "datasource": "${DS_PROMETHEUS}",
           "description": "",
           "fieldConfig": {
             "defaults": {
@@ -398,7 +398,7 @@
     },
     {
       "collapsed": true,
-      "datasource": null,
+      "datasource": "${DS_PROMETHEUS}",
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -412,7 +412,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "fieldConfig": {
             "defaults": {
               "links": []
@@ -529,7 +529,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": null,
+          "datasource": "${DS_PROMETHEUS}",
           "fieldConfig": {
             "defaults": {},
             "overrides": []
@@ -598,40 +598,6 @@
               "interval": "",
               "legendFormat": "{{pod}}",
               "refId": "D"
-            },
-            {
-              "exemplar": true,
-              "expr": "sum(\n    node_namespace_pod_container:container_cpu_usage_seconds_total:sum_rate{namespace=\"$namespace\", pod=~\"$pod\", container=\"ts-app\" }\n  * on(pod)\n    group_left(workload) namespace_workload_pod:kube_pod_owner:relabel{ namespace=\"$namespace\", workload_type=\"deployment\", workload=\"$job\" }\n) by (pod)\n",
-              "format": "time_series",
-              "hide": true,
-              "interval": "",
-              "intervalFactor": 2,
-              "legendFormat": "{{pod}}",
-              "legendLink": null,
-              "refId": "A",
-              "step": 10
-            },
-            {
-              "expr": "max( kube_pod_container_resource_requests_cpu_cores{namespace=\"$namespace\", container=\"ts-app\"}* on(pod) group_left(workload) namespace_workload_pod:kube_pod_owner:relabel{ namespace=\"$namespace\", workload_type=\"deployment\", workload=\"$job\" })",
-              "format": "time_series",
-              "hide": true,
-              "interval": "",
-              "intervalFactor": 2,
-              "legendFormat": "quota - requests",
-              "legendLink": null,
-              "refId": "B",
-              "step": 10
-            },
-            {
-              "expr": "max( kube_pod_container_resource_limits_cpu_cores{namespace=\"$namespace\", container=\"ts-app\"}* on(pod) group_left(workload) namespace_workload_pod:kube_pod_owner:relabel{ namespace=\"$namespace\", workload_type=\"deployment\", workload=\"$job\" })",
-              "format": "time_series",
-              "hide": true,
-              "interval": "",
-              "intervalFactor": 2,
-              "legendFormat": "quota - limits",
-              "legendLink": null,
-              "refId": "C",
-              "step": 10
             }
           ],
           "thresholds": [],
@@ -680,7 +646,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": null,
+          "datasource": "${DS_PROMETHEUS}",
           "fieldConfig": {
             "defaults": {
               "unit": "percentunit"
@@ -793,7 +759,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "description": "",
           "fieldConfig": {
             "defaults": {
@@ -898,7 +864,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "fieldConfig": {
             "defaults": {
               "links": []
@@ -1010,7 +976,7 @@
     },
     {
       "collapsed": true,
-      "datasource": null,
+      "datasource": "${DS_PROMETHEUS}",
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -1024,7 +990,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": null,
+          "datasource": "${DS_PROMETHEUS}",
           "description": "",
           "fieldConfig": {
             "defaults": {},
@@ -1119,7 +1085,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": null,
+          "datasource": "${DS_PROMETHEUS}",
           "description": "",
           "fieldConfig": {
             "defaults": {},
@@ -1214,7 +1180,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": null,
+          "datasource": "${DS_PROMETHEUS}",
           "description": "",
           "fieldConfig": {
             "defaults": {},
@@ -1310,7 +1276,7 @@
     },
     {
       "collapsed": true,
-      "datasource": "Prometheus",
+      "datasource": "${DS_PROMETHEUS}",
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -1324,7 +1290,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "description": "",
           "fieldConfig": {
             "defaults": {
@@ -1427,7 +1393,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "description": "",
           "fieldConfig": {
             "defaults": {
@@ -1530,7 +1496,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "fieldConfig": {
             "defaults": {
               "links": []
@@ -1630,7 +1596,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "fieldConfig": {
             "defaults": {
               "links": []
@@ -1731,7 +1697,7 @@
     },
     {
       "collapsed": true,
-      "datasource": "Prometheus",
+      "datasource": "${DS_PROMETHEUS}",
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -1741,7 +1707,7 @@
       "id": 365,
       "panels": [
         {
-          "datasource": null,
+          "datasource": "${DS_PROMETHEUS}",
           "description": "",
           "fieldConfig": {
             "defaults": {
@@ -1804,7 +1770,7 @@
           "type": "stat"
         },
         {
-          "datasource": null,
+          "datasource": "${DS_PROMETHEUS}",
           "description": "",
           "fieldConfig": {
             "defaults": {
@@ -1871,7 +1837,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "fieldConfig": {
             "defaults": {
               "links": []
@@ -1917,7 +1883,7 @@
           "targets": [
             {
               "exemplar": true,
-              "expr": "sum(rate(request_rest_seconds_sum{ namespace=~\"$namespace\", job=~\"$job\", pod=~\"$pod\", resource=~\"$resource\"} [2m]))  by (resource) / sum(rate(request_rest_seconds_count{ namespace=~\"$namespace\", job=~\"$job\", pod=~\"$pod\", resource=~\"$resource\"} [2m])) by (resource) ",
+              "expr": "sum(rate(request_rest_seconds_sum{ kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", resource=~\"$resource\"} [2m]))  by (resource) / sum(rate(request_rest_seconds_count{ kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", resource=~\"$resource\"} [2m])) by (resource) ",
               "interval": "",
               "legendFormat": "{{resource}}",
               "refId": "A"
@@ -1971,7 +1937,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "fieldConfig": {
             "defaults": {
               "links": []
@@ -2016,7 +1982,9 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "histogram_quantile(0.95, sum(rate(request_rest_seconds_bucket{ namespace=~\"$namespace\", job=~\"$job\", pod=~\"$pod\", resource=~\"$resource\" }[2m])) by (resource,le))",
+              "exemplar": true,
+              "expr": "histogram_quantile(0.95, sum(rate(request_rest_seconds_bucket{ kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", resource=~\"$resource\" }[2m])) by (resource,le))",
+              "interval": "",
               "legendFormat": "{{resource}}",
               "refId": "A"
             }
@@ -2067,7 +2035,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "fieldConfig": {
             "defaults": {
               "links": []
@@ -2112,7 +2080,9 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "histogram_quantile(0.99, sum(rate(request_rest_seconds_bucket{ namespace=~\"$namespace\", job=~\"$job\", pod=~\"$pod\", resource=~\"$resource\" }[2m])) by (resource,le))",
+              "exemplar": true,
+              "expr": "histogram_quantile(0.99, sum(rate(request_rest_seconds_bucket{ kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", resource=~\"$resource\" }[2m])) by (resource,le))",
+              "interval": "",
               "legendFormat": "{{resource}}",
               "refId": "A"
             }
@@ -2164,7 +2134,7 @@
     },
     {
       "collapsed": true,
-      "datasource": null,
+      "datasource": "${DS_PROMETHEUS}",
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -2178,7 +2148,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "description": "",
           "fieldConfig": {
             "defaults": {
@@ -2192,7 +2162,7 @@
             "h": 11,
             "w": 12,
             "x": 0,
-            "y": 6
+            "y": 46
           },
           "hiddenSeries": false,
           "id": 399,
@@ -2280,7 +2250,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "description": "",
           "fieldConfig": {
             "defaults": {
@@ -2294,7 +2264,7 @@
             "h": 11,
             "w": 12,
             "x": 12,
-            "y": 6
+            "y": 46
           },
           "hiddenSeries": false,
           "id": 400,
@@ -2382,7 +2352,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "description": "",
           "fieldConfig": {
             "defaults": {
@@ -2396,7 +2366,7 @@
             "h": 11,
             "w": 24,
             "x": 0,
-            "y": 17
+            "y": 57
           },
           "hiddenSeries": false,
           "id": 405,
@@ -2494,13 +2464,33 @@
   "templating": {
     "list": [
       {
+        "current": {
+          "selected": false,
+          "text": "Prometheus",
+          "value": "Prometheus"
+        },
+        "description": null,
+        "error": null,
+        "hide": 0,
+        "includeAll": false,
+        "label": "Prometheus",
+        "multi": false,
+        "name": "DS_PROMETHEUS",
+        "options": [],
+        "query": "prometheus",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "type": "datasource"
+      },
+      {
         "allValue": null,
         "current": {
           "selected": false,
-          "text": "sofy",
-          "value": "sofy"
+          "text": "c8braucjf2nnsdd85h10",
+          "value": "c8braucjf2nnsdd85h10"
         },
-        "datasource": "Prometheus",
+        "datasource": "${DS_PROMETHEUS}",
         "definition": "label_values(kube_pod_container_info{container=\"ts-app\"}, kubernetes_namespace)",
         "description": null,
         "error": null,
@@ -2527,11 +2517,11 @@
       {
         "allValue": null,
         "current": {
-          "selected": false,
+          "selected": true,
           "text": "comdemoauthts-app",
           "value": "comdemoauthts-app"
         },
-        "datasource": "Prometheus",
+        "datasource": "${DS_PROMETHEUS}",
         "definition": "label_values(kube_deployment_status_replicas{kubernetes_namespace=\"$namespace\",deployment=~\".*ts-app.*\"} , deployment) ",
         "description": null,
         "error": null,
@@ -2566,7 +2556,7 @@
             "$__all"
           ]
         },
-        "datasource": "Prometheus",
+        "datasource": "${DS_PROMETHEUS}",
         "definition": "label_values(kube_pod_status_ready{kubernetes_namespace=\"$namespace\",pod=~\"$job.*\"} , pod)",
         "description": null,
         "error": null,
@@ -2601,7 +2591,7 @@
             "$__all"
           ]
         },
-        "datasource": "Prometheus",
+        "datasource": "${DS_PROMETHEUS}",
         "definition": "label_values(request_rest_seconds_count{kubernetes_namespace=~\"$namespace\",component=\"$job\",kubernetes_pod_name=~\"$pod\"}, resource)",
         "description": null,
         "error": null,
@@ -2636,7 +2626,7 @@
             "$__all"
           ]
         },
-        "datasource": "Prometheus",
+        "datasource": "${DS_PROMETHEUS}",
         "definition": "label_values(request_rest_status_total{kubernetes_namespace=~\"$namespace\",component=\"$job\",kubernetes_pod_name=~\"$pod\",resource=~\"$resource\"}, http_status)",
         "description": null,
         "error": null,
@@ -2682,6 +2672,6 @@
   },
   "timezone": "",
   "title": "Transaction Servers",
-  "uid": "hcl_ts_app",
-  "version": 918
+  "uid": "ts-app",
+  "version": 919
 }
