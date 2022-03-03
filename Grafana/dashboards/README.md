@@ -14,6 +14,10 @@ For details on the provided dashboards see the [Commerce Dashboards](CommerceDas
 
 The provided dashboards are tested with Grafana 7.5.5 and 8.1.4
 
+Prometheus v15 renamed the target_label *namespace* from *kubernetes_namespace* to *exported_namespace*.
+To use with Prometheus v15, manually replace *kubernetes_namespace* to *exported_namespace* in the Json files.
+Follow this link details: https://github.com/prometheus-community/helm-charts/issues/1613
+
 ## Installation
 
 The following steps download the git repo and install the dashboards using the monitoring 
