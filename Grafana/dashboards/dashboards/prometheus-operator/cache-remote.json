@@ -430,7 +430,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "max( (  hclcache_cache_size_current{ namespace=\"$namespace\", cachespace=\"$environment\", scope=\"remote\", result!=\"error\", name=~\"$cache\" } > 0 ) * on ( namespace, cachespace, name) group_left( redis_instance ) hclcache_cache_remote_node_mapping{ redis_instance =~ \"$redis\"  }) by ( name, redis_instance )  ",
+              "expr": "max( (  hclcache_cache_size_current{ namespace=\"$namespace\", cachespace=\"$environment\", scope=\"remote\", result!=\"error\", name=~\"$cache\" } > 0 ) * on ( pod, namespace, cachespace, name) group_left( redis_instance ) hclcache_cache_remote_node_mapping{ redis_instance =~ \"$redis\"  }) by ( name, redis_instance )  ",
               "interval": "",
               "legendFormat": "{{redis_instance}} - {{name}}",
               "refId": "A"
