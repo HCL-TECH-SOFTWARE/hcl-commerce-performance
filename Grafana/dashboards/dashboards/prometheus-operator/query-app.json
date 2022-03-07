@@ -3008,6 +3008,6 @@
   },
   "timezone": "",
   "title": "QueryApp Servers",
-  "uid": "query-app",
+  "uid": "hcl_query_app",
   "version": 919
 }
