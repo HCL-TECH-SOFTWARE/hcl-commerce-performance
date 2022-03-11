@@ -2775,7 +2775,7 @@
           "value": "c8braucjf2nnsdd85h10"
         },
         "datasource": "${DS_PROMETHEUS}",
-        "definition": "label_values(kube_pod_container_info{container=\"ts-app\"}, kubernetes_namespace)",
+        "definition": "label_values(kube_pod_container_info{container=\"query-app\"}, kubernetes_namespace)",
         "description": null,
         "error": null,
         "hide": 0,
@@ -2785,7 +2785,7 @@
         "name": "namespace",
         "options": [],
         "query": {
-          "query": "label_values(kube_pod_container_info{container=\"ts-app\"}, kubernetes_namespace)",
+          "query": "label_values(kube_pod_container_info{container=\"query-app\"}, kubernetes_namespace)",
           "refId": "StandardVariableQuery"
         },
         "refresh": 2,
