@@ -386,7 +386,7 @@
       ],
       "timeFrom": null,
       "timeShift": null,
-      "title": "ts-app pods",
+      "title": "query-app pods",
       "type": "stat"
     },
     {
@@ -593,7 +593,7 @@
               "step": 10
             },
             {
-              "expr": "max( kube_pod_container_resource_requests_cpu_cores{namespace=\"$namespace\", container=\"ts-app\"}* on(pod) group_left(workload) namespace_workload_pod:kube_pod_owner:relabel{ namespace=\"$namespace\", workload_type=\"deployment\", workload=\"$job\" })",
+              "expr": "max( kube_pod_container_resource_requests_cpu_cores{namespace=\"$namespace\", container=\"query-app\"}* on(pod) group_left(workload) namespace_workload_pod:kube_pod_owner:relabel{ namespace=\"$namespace\", workload_type=\"deployment\", workload=\"$job\" })",
               "format": "time_series",
               "interval": "",
               "intervalFactor": 2,
@@ -603,7 +603,7 @@
               "step": 10
             },
             {
-              "expr": "max( kube_pod_container_resource_limits_cpu_cores{namespace=\"$namespace\", container=\"ts-app\"}* on(pod) group_left(workload) namespace_workload_pod:kube_pod_owner:relabel{ namespace=\"$namespace\", workload_type=\"deployment\", workload=\"$job\" })",
+              "expr": "max( kube_pod_container_resource_limits_cpu_cores{namespace=\"$namespace\", container=\"query-app\"}* on(pod) group_left(workload) namespace_workload_pod:kube_pod_owner:relabel{ namespace=\"$namespace\", workload_type=\"deployment\", workload=\"$job\" })",
               "format": "time_series",
               "interval": "",
               "intervalFactor": 2,
@@ -2795,7 +2795,7 @@
           "value": "commerce"
         },
         "datasource": "${DS_PROMETHEUS}",
-        "definition": "label_values(kube_pod_container_info{container=\"ts-app\"}, namespace)",
+        "definition": "label_values(kube_pod_container_info{container=\"query-app\"}, namespace)",
         "description": null,
         "error": null,
         "hide": 0,
@@ -2805,7 +2805,7 @@
         "name": "namespace",
         "options": [],
         "query": {
-          "query": "label_values(kube_pod_container_info{container=\"ts-app\"}, namespace)",
+          "query": "label_values(kube_pod_container_info{container=\"query-app\"}, namespace)",
           "refId": "Prometheus-namespace-Variable-Query"
         },
         "refresh": 2,
