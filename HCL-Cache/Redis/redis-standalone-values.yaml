@@ -22,7 +22,7 @@ master:
   configuration: |-
     appendonly no
     save ""
-    maxmemory 10000mb
+    maxmemory 8000mb
     maxmemory-policy volatile-lru
 # Disable is Prometheus is not installed
 metrics:
