@@ -1,0 +1,45 @@
+clusterName: "elasticsearch"
+nodeGroup: "livepod"
+masterService: "elasticsearch-masterpod"
+replicas: 3
+esJavaOpts: "-Xmx16g -Xms16g"
+roles:
+   master: "false"
+   ingest: "true"
+   data: "true"
+   remote_cluster_client: "true"
+   ml: "false"
+esConfig: 
+  elasticsearch.yml: |
+      indices.fielddata.cache.size: "10%"
+      indices.queries.cache.size: "10%"
+      indices.query.bool.max_clause_count: 10000
+      indices.memory.index_buffer_size: 20%
+      thread_pool.search.queue_size: 10000
+      thread_pool.search.min_queue_size: 100
+      thread_pool.search.max_queue_size: 10000
+      thread_pool.search.auto_queue_frame_size: 10000
+      thread_pool.search.target_response_time: 30s
+      thread_pool.write.queue_size: 10000
+      node.attr.env: live
+imagePullSecrets:
+  - name: comdeploydockerio
+imageTag: "7.12.1"
+ingress: 
+  enabled: false
+nodeSelector: 
+  cloud.google.com/gke-nodepool: elasticpool-live
+resources: 
+  limits: 
+    cpu: 7
+    memory: 21.5Gi
+  requests: 
+    cpu: 7
+    memory: 21.5Gi
+volumeClaimTemplate: 
+  accessModes: 
+    - ReadWriteOnce
+  resources: 
+    requests: 
+      storage: 100Gi
+  storageClassName: ssd

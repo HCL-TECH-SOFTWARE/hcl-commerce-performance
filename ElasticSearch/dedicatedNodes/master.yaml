@@ -1,0 +1,33 @@
+clusterName: "elasticsearch"
+nodeGroup: "masterpod"
+masterService: "elasticsearch-masterpod"
+replicas: 3
+minimumMasterNodes: 2 
+esJavaOpts: "-Xmx3g -Xms3g"
+roles:
+   master: "true"
+   ingest: "false"
+   data: "false"
+   remote_cluster_client: "false"
+   ml: "false"
+imagePullSecrets:
+  - name: comdeploydockerio
+imageTag: "7.12.1"
+ingress: 
+  enabled: false
+nodeSelector: 
+  cloud.google.com/gke-nodepool: elasticpool-live2
+resources:
+  requests:
+    cpu: 2
+    memory: "4Gi"
+  limits:
+    cpu: 2
+    memory: "4Gi"
+volumeClaimTemplate: 
+  accessModes: 
+    - ReadWriteOnce
+  resources: 
+    requests: 
+      storage: 20Gi
+  storageClassName: ssd
