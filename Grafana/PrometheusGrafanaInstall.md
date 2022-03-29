@@ -14,7 +14,7 @@ helm repo update
 helm install [RELEASE_NAME] prometheus-community/kube-prometheus-stack
 ```
 
-See [Kube-prometheus-stack-step-by-step](Kube-prometheus-stack-step-by-step.md) for additional details.
+See [Kube-prometheus-stack step-by-step](KubePrometheusStackStepByStep.md) for additional details.
 
 ##### ServiceMonitor selectors
 
