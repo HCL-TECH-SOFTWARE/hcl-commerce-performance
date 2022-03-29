@@ -17,8 +17,14 @@ Redis cluster requires a minimum of 3 master servers. If replicas are used, 6 co
 ### Persistence
 
 Redis offers [persistence](https://redis.io/topics/persistence) (AOF/RDB) options that save the memory contents to disk. This allows Redis to recover the memory contents (cache) in case of a crash. 
-During a restart, Redis finds the latest persisted copy of the memory and loads it. This can add a delay as Redis must finish loading the memory backup before it is operational. 
-Redis persistence requires matching Kubernetes persistence. Persistance can add a slight overhead on Redis.
+
+With standalone Redis, the use of Persistence is optional but with Redis cluster is recommended. The use of persistence can add a small overhead to runtime operations.
+There can also be a delay during Redis startup as it loads the persisted cache into memory. This delay varies depending on the size of the file.
+For use with HCL Cache, use of RDB only (not AOF) can be sufficient.
+
+When configuring Kubernetes peristent volumes for Redis, ensure to select a storageClass with fast/SSD storage. By default, the PV only requests 8GB of storage.
+This might not be enough, especially if AOF persistence is enabled. Request a larger size (e.g. 30GB) and monitor usage to get a better understanding for how much
+storage is required.
 
 ## Redis Bitnami Charts
 
