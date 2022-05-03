@@ -1,0 +1,31 @@
+ onlineInactiveEntriesMaintenance:
+    enabled: true
+    inactivityMins: 0
+    nextRunDelayWhenErrorMs: 30000
+    inactivityExtensionPercent: 15
+    disableAfterMins: 0
+    cleanupRate:
+    - oldestInactiveEntryNewerThanSecs: 180
+      numCacheIdPerLUACall: 1
+      numLUACallsInPipeline: 1
+      nextRunDelayMs: 60000
+    - oldestInactiveEntryNewerThanSecs: 300
+      numCacheIdPerLUACall: 2
+      numLUACallsInPipeline: 5
+      nextRunDelayMs: 500
+    - oldestInactiveEntryNewerThanSecs: 480
+      numCacheIdPerLUACall: 3
+      numLUACallsInPipeline: 10
+      nextRunDelayMs: 250
+    - oldestInactiveEntryNewerThanSecs: 900
+      numCacheIdPerLUACall: 5
+      numLUACallsInPipeline: 10
+      nextRunDelayMs: 200
+    - oldestInactiveEntryNewerThanSecs: 1800
+      numCacheIdPerLUACall: 5
+      numLUACallsInPipeline: 10
+      nextRunDelayMs: 100
+    - oldestInactiveEntryNewerThanSecs: 2147483647
+      numCacheIdPerLUACall: 5
+      numLUACallsInPipeline: 10
+      nextRunDelayMs: 50

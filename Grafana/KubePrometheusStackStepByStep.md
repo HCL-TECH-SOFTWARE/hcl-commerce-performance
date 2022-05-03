@@ -14,6 +14,8 @@ helm repo update
 3. Review the sample values.yaml provided. Persistence is required for both Prometheus and Grafana
 ```
 grafana:
+  plugins:
+  - redis-datasource
   persistence:
     type: pvc
     enabled: true

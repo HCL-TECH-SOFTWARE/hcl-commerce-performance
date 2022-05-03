@@ -1,0 +1,20 @@
+# Invalidation Support
+
+Local caches require a mechanism for replication of invalidation messages to ensure that local cache entries associated to an invalidation id are removed from all  containers.
+
+In Commerce V8, the IBM Data Replication Service (DRS) is integrated with WebSphere DynaCache and performs the job of replicating invalidation messages. In V9.0, Kafka is used to send invalidation messages. With HCL Cache with Redis in Commerce 9.1, replication of invalidation messages is handled within DynaCache by the HCL Cache Provider. HCL Cache automatically issues invalidation messages when `clear` and `invalidate` operations are issued for a cache that enables local caching. The same cache on other containers implement a listener, and when the invalidation messages are received, the indicated invalidate and clear operations are performed on the local cache.
+
+HCL Cache relies on [Redis PUBSUB](https://redis.io/docs/manual/pubsub/) technology to replicate invalidation messages. Each cache defines a topic, with format `{cache-namespace-cacheName}-invalidation` where invalidation messages are issued and received.
+
+The Redis database provides [commands](https://redis.io/commands/), that allow you to list listeners ([PUBSUB CHANNELS](https://redis.io/commands/pubsub-channels/)), 
+publish ([PUBLISH](https://redis.io/commands/PUBLISH)) and subscribe to messages ([SUBSCRIBE](https://redis.io/commands/subscribe)). See [Invalidations in Redis](HCLCacheInRedis.md#invalidations) for details.
+
+## Timing Considerations
+
+Sending and receiving invalidation messages using Redis is fast, but not instantaneous.  Consider an HCL Commerce request that executes in the ts-app server and makes a change to data in the database.  Immediately after the database transaction commits, the local cache is invalidated and invalidation messages are sent to peer application servers.  Meanwhile, the application may execute a subsequent request that expects to use the updated data.  When the messages are received by the peer servers, they are immediately processed and local cache is invalidated according to the messages received.  But between the time that the messages are sent and the time that the local caches are invalidated, the data in the local caches is "stale".  If the subsequent request is received in a peer server before the cache invalidation has completed, it will see the stale data, perhaps causing incorrect processing to occur.
+
+To help avoid accessing stale data due to this situation, the HCL Commerce data cache provides optional configurations to introduce a short delay in the original ts-app request, just after the invalidation messages are sent, and before the request returns.  If the delay is long enough to allow the invalidation messages to be completely processed in peer application servers, the timing problem can be avoided.
+
+The delayAfterInvalidationMilliseconds data cache configuration can be used to specify how long a delay should be introduced.  But it may be difficult to estimate how much delay should be introduced.  The additional delayAfterInvalidationPercentBuffer configuration can be used to add an additional delay that is based on how long it typically takes to send and receive an invalidation message.  This setting only has effect when the delayAfterInvalidationMilliseconds is greater than zero.  These settings can be specified on a global level, or can be specified for only certain logical caches.  For more information about these settings, see: [HCL Commerce 9.1 Help - Additional HCL Commerce data cache configuration](https://help.hcltechsw.com/commerce/9.1.0/admin/concepts/cdcaddcomdatcacheconfig.html).
+
+For example, if occasionally accessing stale data is unacceptable, specifying delayAfterInvalidationMilliseconds="1" and delayAfterInvalidationPercentBuffer="100" would insert a delay of 1 millisecond plus twice the length of time it typically takes to send and receive a message.  That should be more than enough time to avoid the possibility of accessing stale data.

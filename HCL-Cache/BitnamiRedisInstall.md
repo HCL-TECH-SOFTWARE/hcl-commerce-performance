@@ -1,29 +1,29 @@
-# Redis Installation
+# Bitnami Redis Installation
 
-Although Redis is installed automatically as a sub-chart of HCL Commerce, it can also be installed separatedly, or with different configurations. This document describes the recommended deployments options and the use of Bitnami charts.
+Although Redis is installed automatically as a sub-chart of HCL Commerce, it can also be installed separately, or with different configurations. This document describes the recommended deployment options and the use of Bitnami charts.
 
-## Install Considerations:
+## Installation Considerations:
 
 ### Topology
 Redis can be installed with different topologies, including standalone, master/slave, sentinel or cluster. Most cloud providers also offer managed versions of Redis that 'hide' some of the high-availability and replication complexities.
 The following are recommended configurations using the Bitnami charts:
 - *standalone:* A single master with no replicas can work well in many scenarios. As the HCL Cache is a multi-tiered framework, the most frequently-accessed content is served from local caches, reducing the load on Redis and its capacity requirements (the load will vary from site to site depending on the amount of caching and hit ratios). 
-The HCL Cache is also designed with high availabiltiy features, and implements circuit breakers that block Redis access until the server recovers. During that time, the local caches remain available.
+The HCL Cache is also designed with high availability features, and implements circuit breakers that block Redis access until the server recovers. During that time, the local caches remain available.
 The Redis deployment defines probes, and Kubernetes will detect hang or crash situations and quickly re-spawn the master container.  Note that if replicas/slaves were defined (without Sentinel), the replicas are for ready-only access and are not promoted to master. The system still needs to wait for the master to be re-spawned.
 See [topologies](https://github.com/bitnami/charts/tree/master/bitnami/redis#cluster-topologies) for more details.
 - *cluster:* Clustering can be used to scale Redis. Although each HCL Cache can only exist on a single node (each cache is tied to a single slot), HCL Commerce defines multiple caches (+50) that can be distributed across the Redis cluster nodes. With slot migration, it's possible to select what caches land on each server.
-Redis cluster requires a minimum of 3 master servers. If replicas are used, 6 containers need to be deployed. See the [Redis Custer tutorial](https://redis.io/topics/cluster-tutorial) for more details.
+Redis cluster requires a minimum of 3 master servers. If replicas are used, 6 containers need to be deployed. See the [Redis Cluster tutorial](https://redis.io/topics/cluster-tutorial) for more details.
 
 ### Persistence
 
 Redis offers [persistence](https://redis.io/topics/persistence) (AOF/RDB) options that save the memory contents to disk. This allows Redis to recover the memory contents (cache) in case of a crash. 
 
-With standalone Redis, the use of Persistence is optional but with Redis cluster is recommended. The use of persistence can add a small overhead to runtime operations.
+With standalone Redis, the use of Persistence is optional but with Redis cluster it is recommended. The use of persistence can add a small overhead to runtime operations.
 There can also be a delay during Redis startup as it loads the persisted cache into memory. This delay varies depending on the size of the file.
 For use with HCL Cache, use of RDB only (not AOF) can be sufficient.
 
-When configuring Kubernetes peristent volumes for Redis, ensure to select a storageClass with fast/SSD storage. By default, the PV only requests 8GB of storage.
-This might not be enough, especially if AOF persistence is enabled. Request a larger size (e.g. 30GB) and monitor usage to get a better understanding for how much
+When configuring Kubernetes persistent volumes for Redis, select a storageClass with fast/SSD storage. By default, Redis requests only 8GB of storage for a persistant volume.
+That may not be enough, especially if AOF persistence is enabled. Request a larger size (e.g. 30GB) and monitor usage to get a better understanding for how much
 storage is required.
 
 ## Redis Bitnami Charts
@@ -84,12 +84,12 @@ latency-monitor-threshold 100
 ```
 ### Persistence
 
-Kubernetes persistence (PVC) must be enabled if Redis persistence (AOF/RDB) is used, or with Redis clustering. If Redis persistence is used, the PVC must be large enough to accomodate the Redis memory dumps.
-With Redis Cluster, the cluster maintains a _nodes.conf_ file that must persist, as otherwise nodes that restart are unable to re-join the cluter. This file requires
+Kubernetes persistence (PVC) must be enabled if Redis persistence (AOF/RDB) is used, or with Redis clustering. If Redis persistence is used, the PVC must be large enough to accommodate the Redis memory dumps.
+With Redis Cluster, the cluster maintains a _nodes.conf_ file that must persist, as otherwise nodes that restart are unable to re-join the cluster. This file requires
 minimal storage.
 
 ### Resources
-Redis is single-threaded (for the most part), so it benefits more from having faster processors, vs. having multiple processors. 2 CPUs can work well in many scenarios. It's key to monitor for Kubernetes CPU resource throttling and ensure that is is not happening, as throttling can 'hang' the Redis main thread. The memory assigned should be larger than the memory allocated for the Redis cache memory (see above)
+Redis is single-threaded (for the most part), so it benefits more from having faster processors, as opposed to having multiple processors. Two CPUs can work well in many scenarios. It's important to monitor for Kubernetes CPU resource throttling and ensure that is not happening, as throttling can 'hang' the Redis main thread. The memory assigned should be larger than the memory allocated for the Redis cache memory (see above)
 
 ```
  resources:
@@ -112,7 +112,7 @@ metrics:
     namespace: redis
 ``` 
 ### Additional OS configurations (sysctl)
-Redis requires certain host level configurations to perform well. These might or might not be required depending on the node configurations.
+Redis requires certain host level configurations to perform well. These may or may not be required depending on the node configurations.
 See [Configure Host Kernel Settings](https://docs.bitnami.com/kubernetes/infrastructure/redis/administration/configure-kernel-settings/) for more details.
 
 *Transparent huge pages:* If enabled, you will see this warning in the Redis log:

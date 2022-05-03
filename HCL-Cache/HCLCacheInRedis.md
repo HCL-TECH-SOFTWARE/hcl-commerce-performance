@@ -57,7 +57,7 @@ I have no name!@redis-master-0:/$ redis-cli --scan --pattern "{cache-demoqalive-
 
 Cache keys (-data) are stored as HASH objects and contain the cached value along with metadata. 
 
-The [HGETALL](https://redis.io/commands/hgetall) command can be used to retrieve the contents:
+The [HGETALL](https://redis.io/commands/hgetall) command can be used to retrieve the contents of a cache entry:
 
 For example:
 ```
@@ -80,6 +80,9 @@ The [TTL](https://redis.io/commands/ttl) command shows the time-to-live remainin
 127.0.0.1:6379> TTL "{cache-demoqalive-baseCache}-data-/search/resources/org.springframework.web.servlet.DispatcherServlet.class:DC_Envtype:DC_PathToken_1=api:DC_PathToken_2=v2:DC_PathToken_3=categories:storeId=11:langId=-1:contractId=-11005:id=10501,10516:UTF-8:requestType=GET"
 (integer) 13609
 ```
+
+#### Dependency id information
+
 Dependency information is stored in sets that link to cache-ids. Redis has multiple commands to operate on sets. [SCARD](https://redis.io/commands/scard) shows the size of the set (number of cache ids linked to the dependency id.
 
 ```
@@ -101,11 +104,11 @@ Dependency information is stored in sets that link to cache-ids. Redis has multi
 8) "/search/resources/org.springframework.web.servlet.DispatcherServlet.class:DC_Envtype:DC_PathToken_1=api:DC_PathToken_2=v2:DC_PathToken_3=urls:storeId=11:identifier=beds:langId=-1:UTF-8:requestType=GET"
 9) "/search/resources/org.springframework.web.servlet.DispatcherServlet.class:DC_Envtype:DC_PathToken_1=api:DC_PathToken_2=v2:DC_PathToken_3=urls:storeId=11:identifier=luncheon-table-dr-tbls-0001:langId=-1:UTF-8:requestType=GET"
 ```
-Dependency IDs do not set an expire, and as per the _volatile-ttl_ memory management rule, they cannot be evicted, as this would result in missing invalidations.
+Dependency IDs do not set an expire, and as per the _volatile-lru_ memory management rule, they cannot be evicted, as this would result in missing invalidations.
 
 The HCL Cache also maintains other objects such as the cache registry, "{cache_registry-_namespace_}", and "{cache-_namespace_-cachename}-maintenance" which contains information used for maintenance.
 
-#### Deletions
+### Deletions
 Manually deleting cache objects is not recommended as it can create inconsistencies. The Cache APIs ensure that the metadata and dependencies are correctly updated after an operation.
 The [FLUSHALL AYSNC](https://redis.io/commands/flushall) command is often used to clear a Redis database. This clears the Redis cache, but it does not issue the necessary PUBSUB messages for the local caches. 
 Use the CacheManager App to issue invalidations and clears.
@@ -159,7 +162,7 @@ The Cache APIs add optional metadata information that help identify the source o
 
 ## HCL Cache with Redis Clustering
 
-The HCL Cache supports Redis clusters. Thru the use of hash keys, all the objects that belong to the same cache are assigned the same slot. Slots are assigned to unique master servers.
+The HCL Cache supports Redis clusters. Through the use of hash keys, all the objects that belong to the same cache are assigned the same slot. Slots are assigned to unique master servers.
 
 The [CLUSTER KEYSLOT](https://redis.io/commands/cluster-keyslot) command can be used to retrieve the slot for a cache. The hash tags ({ ..}) include both the namespace and the cache name:
 

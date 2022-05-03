@@ -1,0 +1,27 @@
+  onlineExpiredEntriesMaintenance:
+    enabled: true
+    cleanupRate:
+    - oldestExpiredEntryNewerThanSecs: 180
+      numCacheIdPerLUACall: 1
+      numLUACallsInPipeline: 1
+      nextRunDelayMs: 60000
+    - oldestExpiredEntryNewerThanSecs: 300
+      numCacheIdPerLUACall: 2
+      numLUACallsInPipeline: 5
+      nextRunDelayMs: 500
+    - oldestExpiredEntryNewerThanSecs: 480
+      numCacheIdPerLUACall: 3
+      numLUACallsInPipeline: 10
+      nextRunDelayMs: 250
+    - oldestExpiredEntryNewerThanSecs: 900
+      numCacheIdPerLUACall: 5
+      numLUACallsInPipeline: 10
+      nextRunDelayMs: 200
+    - oldestExpiredEntryNewerThanSecs: 1800
+      numCacheIdPerLUACall: 5
+      numLUACallsInPipeline: 10
+      nextRunDelayMs: 100
+    - oldestExpiredEntryNewerThanSecs: 2147483647
+      numCacheIdPerLUACall: 5
+      numLUACallsInPipeline: 10
+      nextRunDelayMs: 50

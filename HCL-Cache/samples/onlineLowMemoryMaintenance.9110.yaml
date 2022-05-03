@@ -1,0 +1,29 @@
+  onlineLowMemoryMaintenance:
+    enabled: true
+    intervalSecs: 120
+    maxMemoryPercentage: 93
+    maintenancePercentageBuffer: 5
+    putOperationPausePercentage: 5
+    softMaxSize: -1
+    softMaxSizeAsPercentFull: 93
+    cleanupRate:
+    - percentageUsedEqualOrLargerThan: 99
+      numCacheIdPerLUACall: 5
+      numLUACallsInPipeline: 20
+      nextRunDelayMs: 25
+    - percentageUsedEqualOrLargerThan: 97
+      numCacheIdPerLUACall: 5
+      numLUACallsInPipeline: 10
+      nextRunDelayMs: 25
+    - percentageUsedEqualOrLargerThan: 96
+      numCacheIdPerLUACall: 5
+      numLUACallsInPipeline: 10
+      nextRunDelayMs: 50
+    - percentageUsedEqualOrLargerThan: 95
+      numCacheIdPerLUACall: 5
+      numLUACallsInPipeline: 10
+      nextRunDelayMs: 65
+    - percentageUsedEqualOrLargerThan: 0
+      numCacheIdPerLUACall: 5
+      numLUACallsInPipeline: 5
+      nextRunDelayMs: 50

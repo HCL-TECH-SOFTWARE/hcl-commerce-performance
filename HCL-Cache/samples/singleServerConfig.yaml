@@ -18,7 +18,7 @@ singleServerConfig:
   connectionPoolSize: 64
   database: 0
   dnsMonitoringInterval: 5000
-  password: "${JNDI/ENCRYPTED:REDIS_PASSWORD_ENCRYPT:-}"
+  password: "${ENCRYPTED:REDIS_PASSWORD_ENCRYPT:-}"
 threads: 16
 nettyThreads: 32
 referenceEnabled: true
