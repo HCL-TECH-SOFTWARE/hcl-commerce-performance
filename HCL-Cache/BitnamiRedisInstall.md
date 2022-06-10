@@ -37,7 +37,7 @@ helm repo update
 
 ### Redis Standalone
 
-Use this [Redis chart](https://github.com/bitnami/charts/tree/master/bitnami/redis) to install Redis standalone, with no persistence. Review [redis-standalone-values.yaml](redis-standalone-values.yaml) for details.
+Use this [Redis chart](https://github.com/bitnami/charts/tree/master/bitnami/redis) to install Redis standalone, with no persistence. Review [redis-standalone-values.yaml](samples/redis-standalone-values.yaml) for details.
 
 ```
 helm install hcl-commerce-redis bitnami/redis -n redis -f redis-standalone-values.yaml
@@ -47,7 +47,7 @@ _Note: If Prometheus is not setup, disable the metrics section prior to install_
 
 ### Redis Cluster
 
-These steps install a [Redis Cluster](https://github.com/bitnami/charts/tree/master/bitnami/redis-cluster) with three masters. Review [redis-cluster-values.yaml](redis-cluster-values.yaml) For details.
+These steps install a [Redis Cluster](https://github.com/bitnami/charts/tree/master/bitnami/redis-cluster) with three masters. Review [redis-cluster-values.yaml](samples/redis-cluster-values.yaml) For details.
 
 ```
 helm install hcl-commerce-redis bitnami/redis-cluster -n redis -f redis-cluster-values.yaml
