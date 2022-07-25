@@ -16,8 +16,8 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 24,
-  "iteration": 1646053989577,
+  "id": 14,
+  "iteration": 1652828084616,
   "links": [
     {
       "asDropdown": false,
@@ -192,7 +192,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "sum( hclcache_cache_size_current{ kubernetes_namespace=~\"$namespace\", kubernetes_pod_name=\"$pod\", scope=\"local\" }) by (name)",
+          "expr": "sum( hclcache_cache_size_current{ kubernetes_namespace=\"$namespace\", cachespace=\"$cachespace\", kubernetes_pod_name=\"$pod\", scope=\"local\" }) by (name)",
           "format": "table",
           "instant": true,
           "interval": "",
@@ -201,7 +201,7 @@
         },
         {
           "exemplar": true,
-          "expr": "sum( hclcache_cache_size_max{ kubernetes_namespace=~\"$namespace\", kubernetes_pod_name=\"$pod\", scope=\"local\" }) by (name)",
+          "expr": "sum( hclcache_cache_size_max{ kubernetes_namespace=\"$namespace\", cachespace=\"$cachespace\", kubernetes_pod_name=\"$pod\", scope=\"local\" }) by (name)",
           "format": "table",
           "instant": true,
           "interval": "",
@@ -210,7 +210,7 @@
         },
         {
           "exemplar": true,
-          "expr": "sum( hclcache_cache_size_current{ kubernetes_namespace=~\"$namespace\", kubernetes_pod_name=\"$pod\", scope=\"local\" }) by (name) / sum( hclcache_cache_size_max{ kubernetes_namespace=~\"$namespace\", kubernetes_pod_name=\"$pod\", scope=\"local\" }) by (name)",
+          "expr": "(sum( hclcache_cache_size_current{ kubernetes_namespace=\"$namespace\", cachespace=\"$cachespace\", kubernetes_pod_name=\"$pod\", scope=\"local\" }) by (name) / sum( hclcache_cache_size_max{ kubernetes_namespace=\"$namespace\", cachespace=\"$cachespace\", kubernetes_pod_name=\"$pod\", scope=\"local\" }) by (name)) AND (sum( hclcache_cache_size_max{ kubernetes_namespace=\"$namespace\", cachespace=\"$cachespace\", kubernetes_pod_name=\"$pod\", scope=\"local\" }) by (name) > 0)",
           "format": "table",
           "instant": true,
           "interval": "",
@@ -219,7 +219,7 @@
         },
         {
           "exemplar": true,
-          "expr": "sum( hclcache_cache_size_mb_current{ kubernetes_namespace=~\"$namespace\", kubernetes_pod_name=\"$pod\", scope=\"local\" }) by (name)",
+          "expr": "sum( hclcache_cache_size_mb_current{ kubernetes_namespace=\"$namespace\", cachespace=\"$cachespace\", kubernetes_pod_name=\"$pod\", scope=\"local\" }) by (name)",
           "format": "table",
           "instant": true,
           "interval": "",
@@ -228,7 +228,7 @@
         },
         {
           "exemplar": true,
-          "expr": "sum( hclcache_cache_size_mb_max{ kubernetes_namespace=~\"$namespace\", kubernetes_pod_name=\"$pod\", scope=\"local\" }) by (name)",
+          "expr": "sum( hclcache_cache_size_mb_max{ kubernetes_namespace=\"$namespace\", cachespace=\"$cachespace\", kubernetes_pod_name=\"$pod\", scope=\"local\" }) by (name)",
           "format": "table",
           "instant": true,
           "interval": "",
@@ -237,7 +237,7 @@
         },
         {
           "exemplar": true,
-          "expr": "sum( hclcache_cache_size_mb_current{ kubernetes_namespace=~\"$namespace\", kubernetes_pod_name=\"$pod\", scope=\"local\" }) by (name) / sum( hclcache_cache_size_mb_max{ kubernetes_namespace=~\"$namespace\", kubernetes_pod_name=\"$pod\", scope=\"local\" }) by (name)",
+          "expr": "(sum( hclcache_cache_size_mb_current{ kubernetes_namespace=\"$namespace\", cachespace=\"$cachespace\", kubernetes_pod_name=\"$pod\", scope=\"local\" }) by (name) / sum( hclcache_cache_size_mb_max{ kubernetes_namespace=\"$namespace\", cachespace=\"$cachespace\", kubernetes_pod_name=\"$pod\", scope=\"local\" }) by (name)) AND (sum( hclcache_cache_size_mb_max{ kubernetes_namespace=\"$namespace\", cachespace=\"$cachespace\", kubernetes_pod_name=\"$pod\", scope=\"local\" }) by (name) > 0)",
           "format": "table",
           "instant": true,
           "interval": "",
@@ -285,8 +285,8 @@
         "allValue": null,
         "current": {
           "selected": false,
-          "text": "c8braucjf2nnsdd85h10",
-          "value": "c8braucjf2nnsdd85h10"
+          "text": "ca1umq4jf2ns87861cng",
+          "value": "ca1umq4jf2ns87861cng"
         },
         "datasource": "${DS_PROMETHEUS}",
         "definition": "label_values(hclcache_cache_size_max, kubernetes_namespace)",
@@ -315,26 +315,53 @@
       {
         "allValue": ".*",
         "current": {
-          "selected": true,
-          "text": [
-            "All"
-          ],
-          "value": [
-            "$__all"
-          ]
+          "selected": false,
+          "text": "comdemoauthcache-app",
+          "value": "comdemoauthcache-app"
         },
         "datasource": "${DS_PROMETHEUS}",
-        "definition": "label_values(hclcache_cache_size_max{kubernetes_namespace=~\"$namespace\"}, component)",
+        "definition": "label_values(hclcache_cache_size_max{kubernetes_namespace=\"$namespace\"}, component)",
         "description": null,
         "error": null,
         "hide": 0,
-        "includeAll": true,
+        "includeAll": false,
         "label": "deployment",
-        "multi": true,
+        "multi": false,
         "name": "job",
         "options": [],
         "query": {
-          "query": "label_values(hclcache_cache_size_max{kubernetes_namespace=~\"$namespace\"}, component)",
+          "query": "label_values(hclcache_cache_size_max{kubernetes_namespace=\"$namespace\"}, component)",
+          "refId": "StandardVariableQuery"
+        },
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      },
+      {
+        "allValue": null,
+        "current": {
+          "selected": false,
+          "text": "comdemoauth",
+          "value": "comdemoauth"
+        },
+        "datasource": "${DS_PROMETHEUS}",
+        "definition": "label_values(hclcache_cache_size_max{kubernetes_namespace=\"$namespace\", component=\"$job\"}, cachespace)",
+        "description": null,
+        "error": null,
+        "hide": 0,
+        "includeAll": false,
+        "label": null,
+        "multi": false,
+        "name": "cachespace",
+        "options": [],
+        "query": {
+          "query": "label_values(hclcache_cache_size_max{kubernetes_namespace=\"$namespace\", component=\"$job\"}, cachespace)",
           "refId": "StandardVariableQuery"
         },
         "refresh": 2,
@@ -351,11 +378,11 @@
         "allValue": ".*",
         "current": {
           "selected": false,
-          "text": "comdemoauthcache-app-6f8c8568df-78wnd",
-          "value": "comdemoauthcache-app-6f8c8568df-78wnd"
+          "text": "comdemoauthcache-app-bd6647d7c-ldrlj",
+          "value": "comdemoauthcache-app-bd6647d7c-ldrlj"
         },
         "datasource": "${DS_PROMETHEUS}",
-        "definition": "label_values(hclcache_cache_size_max{kubernetes_namespace=~\"$namespace\",component=~\"$job\"}, kubernetes_pod_name)",
+        "definition": "label_values(hclcache_cache_size_max{kubernetes_namespace=\"$namespace\",component=\"$job\", cachespace=\"$cachespace\"}, kubernetes_pod_name)",
         "description": null,
         "error": null,
         "hide": 0,
@@ -365,7 +392,7 @@
         "name": "pod",
         "options": [],
         "query": {
-          "query": "label_values(hclcache_cache_size_max{kubernetes_namespace=~\"$namespace\",component=~\"$job\"}, kubernetes_pod_name)",
+          "query": "label_values(hclcache_cache_size_max{kubernetes_namespace=\"$namespace\",component=\"$job\", cachespace=\"$cachespace\"}, kubernetes_pod_name)",
           "refId": "StandardVariableQuery"
         },
         "refresh": 2,
@@ -381,7 +408,7 @@
     ]
   },
   "time": {
-    "from": "now-5m",
+    "from": "now-1h",
     "to": "now"
   },
   "timepicker": {
@@ -401,5 +428,5 @@
   "timezone": "",
   "title": "HCL Cache - Local Cache Summary",
   "uid": "hcl_cache_local_summary",
-  "version": 9110
+  "version": 9111
 }

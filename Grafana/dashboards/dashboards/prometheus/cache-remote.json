@@ -15,8 +15,8 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 67,
-  "iteration": 1646325525179,
+  "id": 15,
+  "iteration": 1652828251203,
   "links": [
     {
       "asDropdown": false,
@@ -2035,7 +2035,7 @@
       "type": "row"
     },
     {
-      "collapsed": true,
+      "collapsed": false,
       "datasource": "${DS_PROMETHEUS}",
       "gridPos": {
         "h": 1,
@@ -2044,518 +2044,520 @@
         "y": 11
       },
       "id": 392,
-      "panels": [
-        {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": "${DS_PROMETHEUS}",
-          "decimals": 0,
-          "description": "This chart shows the number of keys  that have expired and are pending to be removed by the maintenance processes. Large numbers could indicate maintenance is failing or behind\nCache Manager pod must be enabled\n",
-          "fieldConfig": {
-            "defaults": {
-              "links": []
-            },
-            "overrides": []
-          },
-          "fill": 1,
-          "fillGradient": 0,
-          "gridPos": {
-            "h": 10,
-            "w": 12,
-            "x": 0,
-            "y": 7
-          },
-          "hiddenSeries": false,
-          "id": 400,
-          "legend": {
-            "alignAsTable": true,
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "rightSide": true,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "nullPointMode": "null",
-          "options": {
-            "alertThreshold": true
-          },
-          "percentage": false,
-          "pluginVersion": "7.5.5",
-          "pointradius": 2,
-          "points": false,
-          "renderer": "flot",
-          "repeatDirection": "v",
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "exemplar": true,
-              "expr": "sum( hclcache_cache_size_maintenance{ kubernetes_namespace=\"$namespace\", cachespace=\"$environment\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", cachespace=~\"$environment\",  scope=\"remote\", name=~\"$cache\" } ) by ( name )  > 0",
-              "interval": "",
-              "legendFormat": "{{name}}",
-              "refId": "A"
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeRegions": [],
-          "timeShift": null,
-          "title": "Number of Expired Keys Pending Maintenance",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "decimals": 0,
-              "format": "short",
-              "label": "",
-              "logBase": 1,
-              "max": null,
-              "min": "0",
-              "show": true
-            },
-            {
-              "decimals": null,
-              "format": "short",
-              "label": "",
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            }
-          ],
-          "yaxis": {
-            "align": false,
-            "alignLevel": null
-          }
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": "${DS_PROMETHEUS}",
-          "description": "",
-          "fieldConfig": {
-            "defaults": {
-              "links": []
-            },
-            "overrides": []
-          },
-          "fill": 1,
-          "fillGradient": 0,
-          "gridPos": {
-            "h": 10,
-            "w": 12,
-            "x": 12,
-            "y": 7
-          },
-          "hiddenSeries": false,
-          "id": 394,
-          "legend": {
-            "alignAsTable": true,
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "rightSide": true,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "nullPointMode": "null",
-          "options": {
-            "alertThreshold": true
-          },
-          "percentage": false,
-          "pluginVersion": "7.5.5",
-          "pointradius": 2,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "exemplar": true,
-              "expr": "sum( rate( hclcache_cache_maintenance_online_keys_total{ kubernetes_namespace=\"$namespace\", cachespace=\"$environment\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", cachespace=~\"$environment\", scope=\"remote\", result!=\"error\", name=~\"$cache\", scope=\"remote\", type=\"expired\" }[5m]) > 0 ) by  (name) ",
-              "interval": "",
-              "legendFormat": "{{type}}",
-              "refId": "A"
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeRegions": [],
-          "timeShift": null,
-          "title": "Rate of Expired Keys Removed by Cache",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            }
-          ],
-          "yaxis": {
-            "align": false,
-            "alignLevel": null
-          }
-        },
-        {
-          "aliasColors": {},
-          "bars": true,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": "${DS_PROMETHEUS}",
-          "description": "When the HCL Cache detects that the memory in Redis is almost full, it can temporarily stop PUT operations while Low-Memory maintenance is running ",
-          "fieldConfig": {
-            "defaults": {
-              "links": []
-            },
-            "overrides": []
-          },
-          "fill": 1,
-          "fillGradient": 0,
-          "gridPos": {
-            "h": 10,
-            "w": 8,
-            "x": 0,
-            "y": 17
-          },
-          "hiddenSeries": false,
-          "id": 396,
-          "legend": {
-            "alignAsTable": true,
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "rightSide": true,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": false,
-          "linewidth": 1,
-          "nullPointMode": "null",
-          "options": {
-            "alertThreshold": true
-          },
-          "percentage": false,
-          "pluginVersion": "7.5.5",
-          "pointradius": 2,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "exemplar": true,
-              "expr": "sum( hclcache_cache_remote_put_paused{ kubernetes_namespace=\"$namespace\", cachespace=\"$environment\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", cachespace=~\"$environment\", name=~\"$cache\" } ) by (name)  > 0",
-              "interval": "",
-              "legendFormat": "{{name}}",
-              "refId": "A"
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeRegions": [],
-          "timeShift": null,
-          "title": "Low-Memory Maintenance - Paused PUT Operations by Cache",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "decimals": 0,
-              "format": "short",
-              "label": "",
-              "logBase": 1,
-              "max": null,
-              "min": "0",
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            }
-          ],
-          "yaxis": {
-            "align": false,
-            "alignLevel": null
-          }
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": "${DS_PROMETHEUS}",
-          "description": "",
-          "fieldConfig": {
-            "defaults": {
-              "links": []
-            },
-            "overrides": []
-          },
-          "fill": 1,
-          "fillGradient": 0,
-          "gridPos": {
-            "h": 10,
-            "w": 7,
-            "x": 8,
-            "y": 17
-          },
-          "hiddenSeries": false,
-          "id": 397,
-          "legend": {
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "nullPointMode": "null",
-          "options": {
-            "alertThreshold": true
-          },
-          "percentage": false,
-          "pluginVersion": "7.5.5",
-          "pointradius": 2,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "exemplar": true,
-              "expr": "sum( rate( hclcache_cache_maintenance_online_keys_total{ kubernetes_namespace=\"$namespace\", cachespace=\"$environment\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", cachespace=~\"$environment\",  scope=\"remote\", result!=\"error\", name=~\"$cache\", scope=\"remote\" }[5m]  ) ) by  ( type )",
-              "interval": "",
-              "legendFormat": "{{type}}",
-              "refId": "A"
-            },
-            {
-              "expr": "sum( rate( hclcache_cache_maintenance_online_keys_total{ kubernetes_namespace=\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", result=\"error\", name=~\"$cache\", scope=\"remote\" }[5m]  ) ) by  ( type )",
-              "interval": "",
-              "legendFormat": "{{type}}-error",
-              "refId": "B"
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeRegions": [],
-          "timeShift": null,
-          "title": "Rate of Keys Maintained by Type",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": "0",
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            }
-          ],
-          "yaxis": {
-            "align": false,
-            "alignLevel": null
-          }
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": "${DS_PROMETHEUS}",
-          "description": "",
-          "fieldConfig": {
-            "defaults": {
-              "links": []
-            },
-            "overrides": []
-          },
-          "fill": 1,
-          "fillGradient": 0,
-          "gridPos": {
-            "h": 10,
-            "w": 9,
-            "x": 15,
-            "y": 17
-          },
-          "hiddenSeries": false,
-          "id": 399,
-          "legend": {
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "nullPointMode": "null",
-          "options": {
-            "alertThreshold": true
-          },
-          "percentage": false,
-          "pluginVersion": "7.5.5",
-          "pointradius": 2,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "exemplar": true,
-              "expr": "sum(rate(hclcache_cache_maintenance_online_duration_seconds_sum{ kubernetes_namespace=\"$namespace\", cachespace=\"$environment\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", cachespace=\"$environment\",  scope=\"remote\", name=~\"$cache\", type=\"expired\" }[2m]) ) \r\n / sum(rate(hclcache_cache_maintenance_online_duration_seconds_count{ kubernetes_namespace=\"$namespace\", cachespace=\"$environment\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", cachespace=\"$environment\",  scope=\"remote\", name=~\"$cache\", type=\"expired\"}[2m]))\r",
-              "interval": "",
-              "legendFormat": "expired",
-              "refId": "A"
-            },
-            {
-              "expr": "sum(rate(hclcache_cache_maintenance_online_duration_seconds_sum{ kubernetes_namespace=\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\", type=\"emergency\" }[2m]) ) \r\n / sum(rate(hclcache_cache_maintenance_online__duration_seconds_count{ kubernetes_namespace=\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\", type=\"emergency\"}[2m]))\r",
-              "interval": "",
-              "legendFormat": "emergency",
-              "refId": "C"
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeRegions": [],
-          "timeShift": null,
-          "title": "Maintenance Average Durations",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "s",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            }
-          ],
-          "yaxis": {
-            "align": false,
-            "alignLevel": null
-          }
-        }
-      ],
+      "panels": [],
       "title": "Maintenance",
       "type": "row"
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "${DS_PROMETHEUS}",
+      "decimals": 0,
+      "description": "This chart shows the number of keys  that have expired and are pending to be removed by the maintenance processes. Large numbers could indicate maintenance is failing or behind\nCache Manager pod must be enabled\n",
+      "fieldConfig": {
+        "defaults": {
+          "links": []
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 10,
+        "w": 12,
+        "x": 0,
+        "y": 12
+      },
+      "hiddenSeries": false,
+      "id": 400,
+      "legend": {
+        "alignAsTable": true,
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "rightSide": true,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "7.5.5",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "repeatDirection": "v",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "sum( hclcache_cache_size_maintenance{ kubernetes_namespace=\"$namespace\", cachespace=\"$environment\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", cachespace=~\"$environment\",  scope=\"remote\", name=~\"$cache\" } ) by ( name )  > 0",
+          "interval": "",
+          "legendFormat": "{{name}}",
+          "refId": "A"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Number of Expired Keys Pending Maintenance",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "decimals": 0,
+          "format": "short",
+          "label": "",
+          "logBase": 1,
+          "max": null,
+          "min": "0",
+          "show": true
+        },
+        {
+          "decimals": null,
+          "format": "short",
+          "label": "",
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "${DS_PROMETHEUS}",
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "links": []
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 10,
+        "w": 12,
+        "x": 12,
+        "y": 12
+      },
+      "hiddenSeries": false,
+      "id": 394,
+      "legend": {
+        "alignAsTable": true,
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "rightSide": true,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "7.5.5",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "sum( rate( hclcache_cache_maintenance_online_keys_total{ kubernetes_namespace=\"$namespace\", cachespace=\"$environment\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", cachespace=~\"$environment\", scope=\"remote\", result!=\"error\", name=~\"$cache\", scope=\"remote\", type=\"expired\" }[5m]) > 0 ) by  (name) ",
+          "interval": "",
+          "legendFormat": "{{type}}",
+          "refId": "A"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Rate of Expired Keys Removed by Cache",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": true,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "${DS_PROMETHEUS}",
+      "description": "When the HCL Cache detects that the memory in Redis is almost full, it can temporarily stop PUT operations while Low-Memory maintenance is running ",
+      "fieldConfig": {
+        "defaults": {
+          "links": []
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 10,
+        "w": 8,
+        "x": 0,
+        "y": 22
+      },
+      "hiddenSeries": false,
+      "id": 396,
+      "legend": {
+        "alignAsTable": true,
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "rightSide": true,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": false,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "7.5.5",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "sum( hclcache_cache_remote_put_paused{ kubernetes_namespace=\"$namespace\", cachespace=\"$environment\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", cachespace=~\"$environment\", name=~\"$cache\" } ) by (name)  > 0",
+          "interval": "",
+          "legendFormat": "{{name}}",
+          "refId": "A"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Low-Memory Maintenance - Paused PUT Operations by Cache",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "decimals": 0,
+          "format": "short",
+          "label": "",
+          "logBase": 1,
+          "max": null,
+          "min": "0",
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "${DS_PROMETHEUS}",
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "links": []
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 10,
+        "w": 7,
+        "x": 8,
+        "y": 22
+      },
+      "hiddenSeries": false,
+      "id": 397,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "7.5.5",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "sum( rate( hclcache_cache_maintenance_online_keys_total{ kubernetes_namespace=\"$namespace\", cachespace=\"$environment\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", scope=\"remote\", result!=\"error\", name=~\"$cache\", scope=\"remote\" }[5m]  ) ) by  ( type )",
+          "interval": "",
+          "legendFormat": "{{type}}",
+          "refId": "A"
+        },
+        {
+          "expr": "sum( rate( hclcache_cache_maintenance_online_keys_total{ kubernetes_namespace=\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", result=\"error\", name=~\"$cache\", scope=\"remote\" }[5m]  ) ) by  ( type )",
+          "interval": "",
+          "legendFormat": "{{type}}-error",
+          "refId": "B"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Rate of Keys Maintained by Type",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": "0",
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "${DS_PROMETHEUS}",
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "links": []
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 10,
+        "w": 9,
+        "x": 15,
+        "y": 22
+      },
+      "hiddenSeries": false,
+      "id": 399,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "7.5.5",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "sum(rate(hclcache_cache_maintenance_online_duration_seconds_sum{ kubernetes_namespace=\"$namespace\", cachespace=\"$environment\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", cachespace=\"$environment\",  scope=\"remote\", name=~\"$cache\" }[2m]) ) by (type)\r\n / sum(rate(hclcache_cache_maintenance_online_duration_seconds_count{ kubernetes_namespace=\"$namespace\", cachespace=\"$environment\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", cachespace=\"$environment\",  scope=\"remote\", name=~\"$cache\" }[2m])) by (type)\r",
+          "interval": "",
+          "legendFormat": "expired",
+          "refId": "A"
+        },
+        {
+          "expr": "sum(rate(hclcache_cache_maintenance_online_duration_seconds_sum{ kubernetes_namespace=\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\", type=\"emergency\" }[2m]) ) \r\n / sum(rate(hclcache_cache_maintenance_online__duration_seconds_count{ kubernetes_namespace=\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\", type=\"emergency\"}[2m]))\r",
+          "hide": true,
+          "interval": "",
+          "legendFormat": "emergency",
+          "refId": "C"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Maintenance Average Durations",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "$$hashKey": "object:539",
+          "format": "s",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": "0",
+          "show": true
+        },
+        {
+          "$$hashKey": "object:540",
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
     }
   ],
   "refresh": false,
@@ -2591,8 +2593,8 @@
         "allValue": null,
         "current": {
           "selected": false,
-          "text": "c8braucjf2nnsdd85h10",
-          "value": "c8braucjf2nnsdd85h10"
+          "text": "ca1umq4jf2ns87861cng",
+          "value": "ca1umq4jf2ns87861cng"
         },
         "datasource": "${DS_PROMETHEUS}",
         "definition": "label_values(hclcache_cache_size_max, kubernetes_namespace)",
@@ -2776,7 +2778,7 @@
     ]
   },
   "time": {
-    "from": "now-30m",
+    "from": "now-1h",
     "to": "now"
   },
   "timepicker": {
@@ -2795,5 +2797,5 @@
   "timezone": "",
   "title": "HCL Cache - Remote",
   "uid": "hcl_cache_remote",
-  "version": 9110
+  "version": 9111
 }

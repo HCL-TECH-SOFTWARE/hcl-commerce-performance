@@ -27,6 +27,7 @@ redis:
     maxmemory 10000mb
     maxmemory-policy volatile-lru
     cluster-require-full-coverage no
+    cluster-replica-validity-factor 0
 #sysctlImage:
 #  enabled: true
 #  mountHostSys: true

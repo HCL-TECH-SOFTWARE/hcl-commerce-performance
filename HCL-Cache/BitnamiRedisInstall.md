@@ -2,6 +2,14 @@
 
 Although Redis is installed automatically as a sub-chart of HCL Commerce, it can also be installed separately, or with different configurations. This document describes the recommended deployment options and the use of Bitnami charts.
 
+## Bitnami Redis install in HCL Commerce Helm Chart
+
+The [HCL Commerce chart](https://github02.hclpnp.com/commerce-dev/commerce-helmchart/blob/master/hcl-commerce-helmchart/stable/hcl-commerce/values.yaml) can automatically setup Redis during install using the Bitnami Redis charts.
+
+The default values for the Bitnami Redis chart are a minimal configuration for non-production use. For production environments, you should consider increasing the Redis memory ([maxmemory](#redis-configurations)) and matching Redis pod memory and CPU limits, and review if changes for *Transparent huge pages* or *Socket Max Connections* are required (see [Additional OS Configurations](#additional-os-configurations-sysctl)).
+
+Additional considerations include more advanced tologies, such as Cluster, use of replicas, persistence, and monitoring.
+
 ## Installation Considerations:
 
 ### Topology
@@ -11,8 +19,10 @@ The following are recommended configurations using the Bitnami charts:
 The HCL Cache is also designed with high availability features, and implements circuit breakers that block Redis access until the server recovers. During that time, the local caches remain available.
 The Redis deployment defines probes, and Kubernetes will detect hang or crash situations and quickly re-spawn the master container.  Note that if replicas/slaves were defined (without Sentinel), the replicas are for ready-only access and are not promoted to master. The system still needs to wait for the master to be re-spawned.
 See [topologies](https://github.com/bitnami/charts/tree/master/bitnami/redis#cluster-topologies) for more details.
-- *cluster:* Clustering can be used to scale Redis. Although each HCL Cache can only exist on a single node (each cache is tied to a single slot), HCL Commerce defines multiple caches (+50) that can be distributed across the Redis cluster nodes. With slot migration, it's possible to select what caches land on each server.
-Redis cluster requires a minimum of 3 master servers. If replicas are used, 6 containers need to be deployed. See the [Redis Cluster tutorial](https://redis.io/topics/cluster-tutorial) for more details.
+- *cluster:*  Redis cluster requires a minimum of 3 master servers. HCL Caches are distributed across the different master nodes.
+[Sharding](RemoteCacheTuningConfigurations.md#sharding) can also be used to partition a cache across nodes. If replicas are used, 6 containers need to be deployed. Replicas can be used for failover and to handle read traffi. See [Redis Replicas](RedisReplicas.md) for details.
+
+See the [Redis Cluster tutorial](https://redis.io/topics/cluster-tutorial) for more details.
 
 ### Persistence
 
@@ -55,13 +65,10 @@ helm install hcl-commerce-redis bitnami/redis-cluster -n redis -f redis-cluster-
 
 _Note: If Prometheus is not setup, disable the metrics section prior to install_
 
-## Common configurations and settings
-
-The following configurations are common for the standalone and cluster charts:
+## Configurations and settings
 
 ### Redis Configurations
-
-The following section is to customize Redis default configurations (see [redis.conf](https://raw.githubusercontent.com/antirez/redis/6.2/redis.conf)).
+The `configuration` section of the chart allow to pass configuration options to [redis.conf](https://raw.githubusercontent.com/antirez/redis/6.2/redis.conf). This file is self-documented and you should review it to get familiar with the different configurations.
 
 ```
   configuration: |-
@@ -70,6 +77,7 @@ The following section is to customize Redis default configurations (see [redis.c
     maxmemory 10000mb
     maxmemory-policy volatile-lru
 ```
+
 *maxmemory*: Determines the size of the memory available to store Redis objects. The amount of cache will vary from site to site. 10GB is a good starting configuration. The pod memory limit must be higher. 
 
 *maxmemory-policy*: Using _volatile-lru_ is required for the HCL Cache. This allows Redis to evict cache entries but not dependency ids.
@@ -82,14 +90,20 @@ slowlog-log-slower-than 10000
 slowlog-max-len 512    
 latency-monitor-threshold 100
 ```
-### Persistence
+Redis Cluster only:
+- *cluster-require-full-coverage: no*: When not all of the slots are covered (e.g. due to master down), the CLUSTERDOWN error is issued. Configuring *cluster-require-full-coverage* to *no* enables the subset of nodes that remain available to continue to serve requests.
 
+If you plan to enable replicas, see [Use of Redis Replicas](RedisReplicas.md) for additional configurations.
+
+### Persistence
 Kubernetes persistence (PVC) must be enabled if Redis persistence (AOF/RDB) is used, or with Redis clustering. If Redis persistence is used, the PVC must be large enough to accommodate the Redis memory dumps.
 With Redis Cluster, the cluster maintains a _nodes.conf_ file that must persist, as otherwise nodes that restart are unable to re-join the cluster. This file requires
 minimal storage.
 
 ### Resources
-Redis is single-threaded (for the most part), so it benefits more from having faster processors, as opposed to having multiple processors. Two CPUs can work well in many scenarios. It's important to monitor for Kubernetes CPU resource throttling and ensure that is not happening, as throttling can 'hang' the Redis main thread. The memory assigned should be larger than the memory allocated for the Redis cache memory (see above)
+Redis is single-threaded (for the most part) and it benefits from faster processors. Two CPUs can work well in many scenarios. It's important to monitor for Kubernetes CPU  throttling and ensure it is not happening, as throttling can 'hang' the Redis main thread. 
+
+Configuring the memory limit so that `maxmemory` is 50-70% of the container limit is a good starting point. Memory utilization for the pod should be monitored. For example, usage can peak when replicas are used and during replication, and if the memory limit is exceeded, Kubernetes might kill the Redis container (OOMKill). See [Redis Replicas](RedisReplicas.md#redis-configurations) for details.
 
 ```
  resources:
@@ -119,7 +133,7 @@ See [Configure Host Kernel Settings](https://docs.bitnami.com/kubernetes/infrast
 ```
 WARNING you have Transparent Huge Pages (THP) support enabled in your kernel. This will create latency and memory usage issues with Redis. To fix this issue run the command 'echo madvise > /sys/kernel/mm/transparent_hugepage/enabled' as root, and add it to your /etc/rc.local in order to retain the setting after a reboot. Redis must be restarted after THP is disabled (set to 'madvise' or 'never').
 ```
-The configuration can be checked with this command:
+The configuration can be checked from within the Redis container with this command:
 ```
 cat /sys/kernel/mm/transparent_hugepage/enabled
 ```

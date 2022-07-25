@@ -1,5 +1,16 @@
 # Change Log
 
+## HCL Commerce 9.1.11
+
+
+- *Fix*: HC-17014 - Prometheus metrics for maintenance tasks not working
+- *Improvement*: HC-16863 - Redisson Maintenance Upgrade 3.17.4
+- *Improvement*: HC-17139 - Enable inactivity for user related caches by default
+- *Improvement*: HC-17180 - Adjusted maintenance tuning configurations
+- *Improvement*: HC-18966 - syncReplicas (WAIT command) enabled by default when reads are from replicas (see [Replicas](RedisReplicas.md#hcl-cache-configurations))
+- *Improvement*: HC-18491 - Support Timers with no buckets for percentiles (see [Metrics configuration](MetricsConfiguration.md))
+
+
 ## HCL Commerce 9.1.10
 
 - *Fix*: HC-14694 - Improve hcl-cache-benchmark messages when Redis is down (avoid NPE)

@@ -15,8 +15,8 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 26,
-  "iteration": 1646054345819,
+  "id": 13,
+  "iteration": 1652828001837,
   "links": [
     {
       "asDropdown": false,
@@ -133,7 +133,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "hclcache_cache_size_max{ kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", scope=\"local\", name=\"$cache\" }",
+          "expr": "hclcache_cache_size_max{ kubernetes_namespace=\"$namespace\", component=\"$job\", cachespace=\"$cachespace\", kubernetes_pod_name=\"$pod\", scope=\"local\", name=\"$cache\" }",
           "hide": false,
           "interval": "",
           "legendFormat": "max",
@@ -141,14 +141,14 @@
         },
         {
           "exemplar": true,
-          "expr": "hclcache_cache_size_current{ kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", scope=\"local\", name=\"$cache\" }",
+          "expr": "hclcache_cache_size_current{ kubernetes_namespace=\"$namespace\", component=\"$job\", cachespace=\"$cachespace\", kubernetes_pod_name=\"$pod\", scope=\"local\", name=\"$cache\" }",
           "interval": "",
           "legendFormat": "current",
           "refId": "B"
         },
         {
           "exemplar": true,
-          "expr": "hclcache_cache_size_current_max{ kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", scope=\"local\", name=\"$cache\" }",
+          "expr": "hclcache_cache_size_current_max{ kubernetes_namespace=\"$namespace\", component=\"$job\", cachespace=\"$cachespace\", kubernetes_pod_name=\"$pod\", scope=\"local\", name=\"$cache\" }",
           "interval": "",
           "legendFormat": "scaled_max",
           "refId": "C"
@@ -251,7 +251,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "hclcache_cache_size_current{ kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", scope=\"local\", name=\"$cache\" } / hclcache_cache_size_max{ kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", scope=\"local\", name=\"$cache\" }",
+          "expr": "(hclcache_cache_size_current{ kubernetes_namespace=\"$namespace\", component=\"$job\", cachespace=\"$cachespace\", kubernetes_pod_name=\"$pod\", scope=\"local\", name=\"$cache\" } / hclcache_cache_size_max{ kubernetes_namespace=\"$namespace\", component=\"$job\", cachespace=\"$cachespace\", kubernetes_pod_name=\"$pod\", scope=\"local\", name=\"$cache\" }) AND (hclcache_cache_size_max{ kubernetes_namespace=\"$namespace\", component=\"$job\", cachespace=\"$cachespace\", kubernetes_pod_name=\"$pod\", scope=\"local\", name=\"$cache\" } > 0)",
           "interval": "",
           "legendFormat": "",
           "refId": "A"
@@ -319,7 +319,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "hclcache_cache_size_mb_max{ kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", scope=\"local\", name=\"$cache\" }",
+          "expr": "hclcache_cache_size_mb_max{ kubernetes_namespace=\"$namespace\", component=\"$job\", cachespace=\"$cachespace\", kubernetes_pod_name=\"$pod\", scope=\"local\", name=\"$cache\" }",
           "hide": false,
           "interval": "",
           "legendFormat": "max",
@@ -327,14 +327,14 @@
         },
         {
           "exemplar": true,
-          "expr": "hclcache_cache_size_mb_current{ kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", scope=\"local\", name=\"$cache\" }",
+          "expr": "hclcache_cache_size_mb_current{ kubernetes_namespace=\"$namespace\", component=\"$job\", cachespace=\"$cachespace\", kubernetes_pod_name=\"$pod\", scope=\"local\", name=\"$cache\" }",
           "interval": "",
           "legendFormat": "current",
           "refId": "B"
         },
         {
           "exemplar": true,
-          "expr": "hclcache_cache_size_mb_current_max{ kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", scope=\"local\", name=\"$cache\" }",
+          "expr": "hclcache_cache_size_mb_current_max{ kubernetes_namespace=\"$namespace\", component=\"$job\", cachespace=\"$cachespace\", kubernetes_pod_name=\"$pod\", scope=\"local\", name=\"$cache\" }",
           "interval": "",
           "legendFormat": "scaled_max",
           "refId": "C"
@@ -437,7 +437,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "hclcache_cache_size_mb_current{ kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", scope=\"local\", name=\"$cache\" } / hclcache_cache_size_mb_max{ kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", scope=\"local\", name=\"$cache\" }",
+          "expr": "(hclcache_cache_size_mb_current{ kubernetes_namespace=\"$namespace\", component=\"$job\", cachespace=\"$cachespace\", kubernetes_pod_name=\"$pod\", scope=\"local\", name=\"$cache\" } / hclcache_cache_size_mb_max{ kubernetes_namespace=\"$namespace\", component=\"$job\", cachespace=\"$cachespace\", kubernetes_pod_name=\"$pod\", scope=\"local\", name=\"$cache\" }) AND (hclcache_cache_size_mb_max{ kubernetes_namespace=\"$namespace\", component=\"$job\", cachespace=\"$cachespace\", kubernetes_pod_name=\"$pod\", scope=\"local\", name=\"$cache\" } > 0)",
           "interval": "",
           "legendFormat": "",
           "refId": "A"
@@ -505,7 +505,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "sum by (result) (rate(hclcache_cache_gets_total{ kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", scope=\"local\", name=\"$cache\"}[5m]))",
+          "expr": "sum by (result) (rate(hclcache_cache_gets_total{ kubernetes_namespace=\"$namespace\", component=\"$job\", cachespace=\"$cachespace\", kubernetes_pod_name=\"$pod\", scope=\"local\", name=\"$cache\"}[5m]))",
           "hide": false,
           "interval": "",
           "legendFormat": "{{result}}",
@@ -563,12 +563,12 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "dark-red",
+                "color": "dark-green",
                 "value": null
               },
               {
-                "color": "semi-dark-green",
-                "value": 0.7
+                "color": "dark-red",
+                "value": 0.9
               }
             ]
           },
@@ -610,7 +610,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "sum(rate(hclcache_cache_gets_total{ kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", scope=\"local\", name=\"$cache\", result=\"hit\"}[2m])) / (sum(rate(hclcache_cache_gets_total{ kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", scope=\"local\", name=\"$cache\"}[2m])))",
+          "expr": "(sum(rate(hclcache_cache_gets_total{ kubernetes_namespace=\"$namespace\", component=\"$job\", cachespace=\"$cachespace\", kubernetes_pod_name=\"$pod\", scope=\"local\", name=\"$cache\", result=\"hit\"}[2m])) / sum(rate(hclcache_cache_gets_total{ kubernetes_namespace=\"$namespace\", component=\"$job\", cachespace=\"$cachespace\", kubernetes_pod_name=\"$pod\", scope=\"local\", name=\"$cache\"}[2m]))) AND (sum(rate(hclcache_cache_gets_total{ kubernetes_namespace=\"$namespace\", component=\"$job\", cachespace=\"$cachespace\", kubernetes_pod_name=\"$pod\", scope=\"local\", name=\"$cache\"}[2m])) > 0)",
           "hide": false,
           "instant": false,
           "interval": "",
@@ -680,7 +680,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "sum(rate(hclcache_cache_removes_total{ kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", scope=\"local\", name=\"$cache\" }[5m]))",
+          "expr": "sum(rate(hclcache_cache_removes_total{ kubernetes_namespace=\"$namespace\", component=\"$job\", cachespace=\"$cachespace\", kubernetes_pod_name=\"$pod\", scope=\"local\", name=\"$cache\" }[5m]))",
           "hide": false,
           "interval": "",
           "legendFormat": "removes",
@@ -688,28 +688,28 @@
         },
         {
           "exemplar": true,
-          "expr": "rate(hclcache_cache_clears_total{ kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", scope=\"local\", name=\"$cache\" }[5m])",
+          "expr": "rate(hclcache_cache_clears_total{ kubernetes_namespace=\"$namespace\", component=\"$job\", cachespace=\"$cachespace\", kubernetes_pod_name=\"$pod\", scope=\"local\", name=\"$cache\" }[5m])",
           "interval": "",
           "legendFormat": "clear",
           "refId": "C"
         },
         {
           "exemplar": true,
-          "expr": "sum(rate(hclcache_cache_gets_total{ kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", scope=\"local\", name=\"$cache\" }[5m]))",
+          "expr": "sum(rate(hclcache_cache_gets_total{ kubernetes_namespace=\"$namespace\", component=\"$job\", cachespace=\"$cachespace\", kubernetes_pod_name=\"$pod\", scope=\"local\", name=\"$cache\" }[5m]))",
           "interval": "",
           "legendFormat": "get",
           "refId": "D"
         },
         {
           "exemplar": true,
-          "expr": "rate(hclcache_cache_invalidates_total{ kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", scope=\"local\", name=\"$cache\" }[5m])",
+          "expr": "rate(hclcache_cache_invalidates_total{ kubernetes_namespace=\"$namespace\", component=\"$job\", cachespace=\"$cachespace\", kubernetes_pod_name=\"$pod\", scope=\"local\", name=\"$cache\" }[5m])",
           "interval": "",
           "legendFormat": "invalidate",
           "refId": "E"
         },
         {
           "exemplar": true,
-          "expr": "sum(rate(hclcache_cache_puts_total{ kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", scope=\"local\", name=\"$cache\" }[5m])) ",
+          "expr": "sum(rate(hclcache_cache_puts_total{ kubernetes_namespace=\"$namespace\", component=\"$job\", cachespace=\"$cachespace\", kubernetes_pod_name=\"$pod\", scope=\"local\", name=\"$cache\" }[5m])) ",
           "interval": "",
           "legendFormat": "put",
           "refId": "F"
@@ -813,7 +813,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "sum(rate(hclcache_cache_removals_expiry_total{ kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", scope=\"local\", name=\"$cache\" }[5m]))",
+          "expr": "sum(rate(hclcache_cache_removals_expiry_total{ kubernetes_namespace=\"$namespace\", component=\"$job\", cachespace=\"$cachespace\", kubernetes_pod_name=\"$pod\", scope=\"local\", name=\"$cache\" }[5m]))",
           "hide": false,
           "interval": "",
           "legendFormat": "expiry",
@@ -821,21 +821,21 @@
         },
         {
           "exemplar": true,
-          "expr": "rate(hclcache_cache_removals_explicit_total{ kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", scope=\"local\", name=\"$cache\" }[5m])",
+          "expr": "rate(hclcache_cache_removals_explicit_total{ kubernetes_namespace=\"$namespace\", component=\"$job\", cachespace=\"$cachespace\", kubernetes_pod_name=\"$pod\", scope=\"local\", name=\"$cache\" }[5m])",
           "interval": "",
           "legendFormat": "explicit",
           "refId": "C"
         },
         {
           "exemplar": true,
-          "expr": "sum(rate(hclcache_cache_removals_inactivity_total{ kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", scope=\"local\", name=\"$cache\" }[5m]))",
+          "expr": "sum(rate(hclcache_cache_removals_inactivity_total{ kubernetes_namespace=\"$namespace\", component=\"$job\", cachespace=\"$cachespace\", kubernetes_pod_name=\"$pod\", scope=\"local\", name=\"$cache\" }[5m]))",
           "interval": "",
           "legendFormat": "inactivity",
           "refId": "D"
         },
         {
           "exemplar": true,
-          "expr": "rate(hclcache_cache_removals_lru_total{ kubernetes_namespace=~\"$namespace\", component=~\"$job\", kubernetes_pod_name=~\"$pod\", scope=\"local\", name=\"$cache\" }[5m])",
+          "expr": "rate(hclcache_cache_removals_lru_total{ kubernetes_namespace=\"$namespace\", component=\"$job\", cachespace=\"$cachespace\", kubernetes_pod_name=\"$pod\", scope=\"local\", name=\"$cache\" }[5m])",
           "interval": "",
           "legendFormat": "lru",
           "refId": "E"
@@ -916,8 +916,8 @@
         "allValue": null,
         "current": {
           "selected": false,
-          "text": "c8braucjf2nnsdd85h10",
-          "value": "c8braucjf2nnsdd85h10"
+          "text": "ca1umq4jf2ns87861cng",
+          "value": "ca1umq4jf2ns87861cng"
         },
         "datasource": "${DS_PROMETHEUS}",
         "definition": "label_values(hclcache_cache_size_max, kubernetes_namespace)",
@@ -946,26 +946,53 @@
       {
         "allValue": ".*",
         "current": {
-          "selected": true,
-          "text": [
-            "All"
-          ],
-          "value": [
-            "$__all"
-          ]
+          "selected": false,
+          "text": "comdemoauthcache-app",
+          "value": "comdemoauthcache-app"
         },
         "datasource": "${DS_PROMETHEUS}",
-        "definition": "label_values(hclcache_cache_size_max{kubernetes_namespace=~\"$namespace\"}, component)",
+        "definition": "label_values(hclcache_cache_size_max{kubernetes_namespace=\"$namespace\"}, component)",
         "description": null,
         "error": null,
         "hide": 0,
-        "includeAll": true,
+        "includeAll": false,
         "label": "deployment",
-        "multi": true,
+        "multi": false,
         "name": "job",
         "options": [],
         "query": {
-          "query": "label_values(hclcache_cache_size_max{kubernetes_namespace=~\"$namespace\"}, component)",
+          "query": "label_values(hclcache_cache_size_max{kubernetes_namespace=\"$namespace\"}, component)",
+          "refId": "StandardVariableQuery"
+        },
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      },
+      {
+        "allValue": null,
+        "current": {
+          "selected": false,
+          "text": "comdemoauth",
+          "value": "comdemoauth"
+        },
+        "datasource": "${DS_PROMETHEUS}",
+        "definition": "label_values(hclcache_cache_size_max{ kubernetes_namespace=\"$namespace\", component=\"$job\"}, cachespace)",
+        "description": null,
+        "error": null,
+        "hide": 0,
+        "includeAll": false,
+        "label": null,
+        "multi": false,
+        "name": "cachespace",
+        "options": [],
+        "query": {
+          "query": "label_values(hclcache_cache_size_max{ kubernetes_namespace=\"$namespace\", component=\"$job\"}, cachespace)",
           "refId": "StandardVariableQuery"
         },
         "refresh": 2,
@@ -982,11 +1009,11 @@
         "allValue": ".*",
         "current": {
           "selected": false,
-          "text": "comdemoauthcache-app-6f8c8568df-78wnd",
-          "value": "comdemoauthcache-app-6f8c8568df-78wnd"
+          "text": "comdemoauthcache-app-bd6647d7c-ldrlj",
+          "value": "comdemoauthcache-app-bd6647d7c-ldrlj"
         },
         "datasource": "${DS_PROMETHEUS}",
-        "definition": "label_values(hclcache_cache_size_max{kubernetes_namespace=~\"$namespace\",component=~\"$job\"}, kubernetes_pod_name)",
+        "definition": "label_values(hclcache_cache_size_max{kubernetes_namespace=\"$namespace\",component=\"$job\", cachespace=\"$cachespace\"}, kubernetes_pod_name)",
         "description": null,
         "error": null,
         "hide": 0,
@@ -996,7 +1023,7 @@
         "name": "pod",
         "options": [],
         "query": {
-          "query": "label_values(hclcache_cache_size_max{kubernetes_namespace=~\"$namespace\",component=~\"$job\"}, kubernetes_pod_name)",
+          "query": "label_values(hclcache_cache_size_max{kubernetes_namespace=\"$namespace\",component=\"$job\", cachespace=\"$cachespace\"}, kubernetes_pod_name)",
           "refId": "StandardVariableQuery"
         },
         "refresh": 2,
@@ -1021,7 +1048,7 @@
           ]
         },
         "datasource": "${DS_PROMETHEUS}",
-        "definition": "label_values(hclcache_cache_size_max{ kubernetes_namespace=~\"$namespace\", component=~\"$job\",kubernetes_pod_name=\"$pod\"},name)",
+        "definition": "label_values(hclcache_cache_size_max{ kubernetes_namespace=\"$namespace\", component=\"$job\",cachespace=\"$cachespace\",kubernetes_pod_name=\"$pod\"},name)",
         "description": null,
         "error": null,
         "hide": 0,
@@ -1031,7 +1058,7 @@
         "name": "cache",
         "options": [],
         "query": {
-          "query": "label_values(hclcache_cache_size_max{ kubernetes_namespace=~\"$namespace\", component=~\"$job\",kubernetes_pod_name=\"$pod\"},name)",
+          "query": "label_values(hclcache_cache_size_max{ kubernetes_namespace=\"$namespace\", component=\"$job\",cachespace=\"$cachespace\",kubernetes_pod_name=\"$pod\"},name)",
           "refId": "StandardVariableQuery"
         },
         "refresh": 2,
@@ -1047,7 +1074,7 @@
     ]
   },
   "time": {
-    "from": "now-5m",
+    "from": "now-1h",
     "to": "now"
   },
   "timepicker": {
@@ -1067,5 +1094,5 @@
   "timezone": "",
   "title": "HCL Cache - Local Cache Details",
   "uid": "hcl_cache_local_details",
-  "version": 9110
+  "version": 9111
 }

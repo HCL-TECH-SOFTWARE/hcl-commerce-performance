@@ -1,4 +1,4 @@
-# HCL Cache Maintenance (9.1.10)
+# HCL Cache Maintenance (9.1.11+)
 
 HCL Cache implements a number of required maintenance processes. 
 
@@ -37,12 +37,13 @@ While Redis automatically removes expired cached values from memory, the Expired
 The speed of maintenance adjusts depending on the age of the oldest expired entry. For example, if the maintenance process finds cache entries that have been expired for 7 minutes, it will use the maintenance configuration for objects from 5-8 minutes, which cleans at a rate of 20/second.
 
 ```
-newerThan:  180 secs (  3 mins) inLUA:  1 pipeline:  1 delayMs:  60000 -- speed:   0.02/sec,       1/min
-newerThan:  300 secs (  5 mins) inLUA:  2 pipeline:  5 delayMs:    500 -- speed:     20/sec,   1,200/min
-newerThan:  480 secs (  8 mins) inLUA:  3 pipeline: 10 delayMs:    250 -- speed:    120/sec,   7,200/min
-newerThan:  900 secs ( 15 mins) inLUA:  5 pipeline: 10 delayMs:    200 -- speed:    250/sec,  15,000/min
-newerThan: 1800 secs ( 30 mins) inLUA:  5 pipeline: 10 delayMs:    100 -- speed:    500/sec,  30,000/min
-newerThan: ~ ALL ~              inLUA:  5 pipeline: 10 delayMs:     50 -- speed:  1,000/sec,  60,000/min
+newerThan:  180 secs (  3 mins) inLUA:  1 pipeline:  1 delayMs:  60000 -- speed:     0/sec,       1/min
+newerThan:  300 secs (  5 mins) inLUA:  2 pipeline:  5 delayMs:    500 -- speed:    20/sec,   1,200/min
+newerThan:  420 secs (  7 mins) inLUA:  3 pipeline:  5 delayMs:    125 -- speed:   120/sec,   7,200/min
+newerThan:  540 secs (  9 mins) inLUA:  5 pipeline:  5 delayMs:    100 -- speed:   250/sec,  15,000/min
+newerThan:  720 secs ( 12 mins) inLUA:  5 pipeline:  5 delayMs:     50 -- speed:   500/sec,  30,000/min
+newerThan:  960 secs ( 16 mins) inLUA:  5 pipeline:  5 delayMs:     25 -- speed: 1,000/sec,  60,000/min
+newerThan: ~ ALL ~              inLUA:  5 pipeline:  5 delayMs:     12 -- speed: 2,083/sec, 125,000/min
 ```
 
 For details on updating the configuration see [Updating the default maintenance values](#Ipdating-the-default-maintenance-values).
@@ -77,11 +78,15 @@ softMaxSizeAsPercentFull|  93 | Used to map the current cache size in entries fo
 The speed of maintenance adjusts depending on the percentage of memory free. Maintenance starts at 500/sec. If memory reaches 100%, maintenance could run as fast as 4,000/sec.
 
 ```
-used: >= 99%  inLUA:  5 pipeline: 20 delayMs: 25 -- speed: 4,000/sec, 240,000/min
-used: >= 97%  inLUA:  5 pipeline: 10 delayMs: 25 -- speed: 2,000/sec, 120,000/min
-used: >= 96%  inLUA:  5 pipeline: 10 delayMs: 50 -- speed: 1,000/sec,  60,000/min
-used: >= 95%  inLUA:  5 pipeline: 10 delayMs: 65 -- speed:   769/sec,  46,154/min
-used: >=  0%  inLUA:  5 pipeline:  5 delayMs: 50 -- speed:   500/sec,  30,000/min
+used: >= 100%  inLUA:  5 pipeline: 10 delayMs:  5 -- speed: 10,000/sec,   600,000/min
+used: >=  99%  inLUA:  5 pipeline: 10 delayMs:  7 -- speed:  7,143/sec,   430,000/min
+used: >=  98%  inLUA:  5 pipeline: 10 delayMs: 10 -- speed:  5,000/sec,   300,000/min
+used: >=  97%  inLUA:  5 pipeline:  5 delayMs: 10 -- speed:  2,500/sec,   150,000/min
+used: >=  96%  inLUA:  5 pipeline:  5 delayMs: 20 -- speed:  1,250/sec,    75,000/min
+used: >=  95%  inLUA:  5 pipeline:  5 delayMs: 25 -- speed:  1,000/sec,    60,000/min
+used: >=  94%  inLUA:  4 pipeline:  5 delayMs: 25 -- speed:    800/sec,    48,000/min
+used: >=  93%  inLUA:  4 pipeline:  5 delayMs: 40 -- speed:    500/sec,    30,000/min
+used: >=   0%  inLUA:  3 pipeline:  5 delayMs: 40 -- speed:    375/sec,    22,500/min
 ```
 
 ## Inactivity Maintenance (onlineInactiveEntriesMaintenance)
@@ -93,12 +98,13 @@ Inactivity Maintenance is disabled by default. It must be enabled by specifying 
 Inactivity Maintenance runs from all containers (concurrently). The [default](samples/onlineInactiveEntriesMaintenance.9110.yaml) rate of clean up is defined as follows: 
 
 ```
-newerThan:  180 secs (  3 mins) inLUA:  1 pipeline:  1 delayMs:  60000 -- speed:   0.02/sec,       1/min
-newerThan:  300 secs (  5 mins) inLUA:  2 pipeline:  5 delayMs:    500 -- speed:     20/sec,   1,200/min
-newerThan:  480 secs (  8 mins) inLUA:  3 pipeline: 10 delayMs:    250 -- speed:    120/sec,   7,200/min
-newerThan:  900 secs ( 15 mins) inLUA:  5 pipeline: 10 delayMs:    200 -- speed:    250/sec,  15,000/min
-newerThan: 1800 secs ( 30 mins) inLUA:  5 pipeline: 10 delayMs:    100 -- speed:    500/sec,  30,000/min
-newerThan: ~ ALL ~              inLUA:  5 pipeline: 10 delayMs:     50 -- speed:  1,000/sec,  60,000/min
+newerThan:  180 secs (  3 mins) inLUA:  1 pipeline:  1 delayMs:  60000 -- speed:     0/sec,       1/min
+newerThan:  300 secs (  5 mins) inLUA:  2 pipeline:  5 delayMs:    500 -- speed:    20/sec,   1,200/min
+newerThan:  420 secs (  7 mins) inLUA:  3 pipeline:  5 delayMs:    125 -- speed:   120/sec,   7,200/min
+newerThan:  540 secs (  9 mins) inLUA:  5 pipeline:  5 delayMs:    100 -- speed:   250/sec,  15,000/min
+newerThan:  720 secs ( 12 mins) inLUA:  5 pipeline:  5 delayMs:     50 -- speed:   500/sec,  30,000/min
+newerThan:  960 secs ( 16 mins) inLUA:  5 pipeline:  5 delayMs:     25 -- speed: 1,000/sec,  60,000/min
+newerThan: ~ ALL ~              inLUA:  5 pipeline:  5 delayMs:     12 -- speed: 2,083/sec, 125,000/min
 ```
 
 ## Updating the Default Maintenance Values
@@ -116,10 +122,7 @@ cacheConfigs:
        onlineInactiveEntriesMaintenance:
 ```
 
-The following links include YAML snippets for the default (starting) configurations:
-- [onlineExpiredEntriesMaintenance](samples/onlineExpiredEntriesMaintenance.9110.yaml)
-- [onlineLowMemoryMaintenance](samples/onlineLowMemoryMaintenance.9110.yaml)
-- [onlineInactiveEntriesMaintenance](samples/onlineInactiveEntriesMaintenance.9110.yaml)
+Use the out-of-the-box configuration in `/SETUP/hcl-cache/cache_cfg.yaml` as a starting point.
 
 > For list configuration such as `cleanupRate`, customizations must re-define the whole list instead of individual elements
 
