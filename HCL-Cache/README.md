@@ -12,11 +12,13 @@ The HCL Cache integrates with DynaCache and improves performance and scalability
 - [Monitoring](Monitoring.md) 
   - [WebSphere Cache Monitor](WebSphereCacheMonitor.md)
   - [Metrics Logging](logMetricsFrequency.md)
+  - [Configurable Prometheus Metrics](MetricsConfiguration.md)
 
 - [Redis Servers](RedisServer.md)
   - [Memory Management in Redis](RedisMemoryManagement.md)
-  - [Bitnami Redis Installation](BitnamiRedisInstall.md)
+  - [Bitnami Redis Installation](BitnamiRedisInstall.md)  
   - [HCL Cache in Redis](HCLCacheInRedis.md)  
+  - [Use of Redis Replicas](RedisReplicas.md)
 
 - [Configuration](Configuration.md)
   - [Redis Client Configuration](RedisClientConfig.md)

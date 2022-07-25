@@ -69,7 +69,7 @@ cacheConfig:
 
 `numAsyncCacheOperationThreads` defaults to `-1`, which translates to the maximum number of shards configured for any cache. 
 
-When an *invalidate* or *clear* operation is executed on a sharded cache, the HCL Cache attempts to use the threadpool to execute in parallel. If the thread pool has no queued threads, all shards will be executed concurrently. If the thread pool is in used, and there are queued tasks, the threadpool is not used and each shard is processed sequentially. This is to manage a potential case where multiple *invalidate* operations are executed concurrently on a sharded cache, which might require a large number of threads to be active. 
+When an *invalidate* or *clear* operation is executed on a sharded cache, the HCL Cache attempts to use the threadpool to execute in parallel. If the thread pool has no queued threads, all shards will be executed concurrently. If the thread pool is in use, and there are queued tasks, the threadpool is not used and each shard is processed sequentially. This is to manage a potential case where multiple *invalidate* operations are executed concurrently on a sharded cache, which might require a large number of threads to be active. 
 
 ## Inactivity
 

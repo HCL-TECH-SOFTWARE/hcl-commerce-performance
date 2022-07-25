@@ -15,8 +15,8 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 349,
-  "iteration": 1646324403658,
+  "id": 56,
+  "iteration": 1652828575493,
   "links": [
     {
       "asDropdown": false,
@@ -91,7 +91,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.5",
+      "pluginVersion": "7.5.3",
       "targets": [
         {
           "expr": "sum(hclcache_remoteclient_outage{ namespace=\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\"})",
@@ -147,7 +147,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.5.5",
+      "pluginVersion": "7.5.3",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -251,7 +251,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.5",
+      "pluginVersion": "7.5.3",
       "targets": [
         {
           "expr": "sum(hclcache_cache_outage{namespace=\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\"})",
@@ -307,7 +307,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.5.5",
+      "pluginVersion": "7.5.3",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -2071,7 +2071,7 @@
             "alertThreshold": true
           },
           "percentage": false,
-          "pluginVersion": "7.5.5",
+          "pluginVersion": "7.5.3",
           "pointradius": 2,
           "points": false,
           "renderer": "flot",
@@ -2172,7 +2172,7 @@
             "alertThreshold": true
           },
           "percentage": false,
-          "pluginVersion": "7.5.5",
+          "pluginVersion": "7.5.3",
           "pointradius": 2,
           "points": false,
           "renderer": "flot",
@@ -2246,7 +2246,7 @@
           "fillGradient": 0,
           "gridPos": {
             "h": 10,
-            "w": 8,
+            "w": 12,
             "x": 0,
             "y": 22
           },
@@ -2270,7 +2270,7 @@
             "alertThreshold": true
           },
           "percentage": false,
-          "pluginVersion": "7.5.5",
+          "pluginVersion": "7.5.3",
           "pointradius": 2,
           "points": false,
           "renderer": "flot",
@@ -2345,8 +2345,8 @@
           "fillGradient": 0,
           "gridPos": {
             "h": 10,
-            "w": 7,
-            "x": 8,
+            "w": 12,
+            "x": 12,
             "y": 22
           },
           "hiddenSeries": false,
@@ -2367,7 +2367,7 @@
             "alertThreshold": true
           },
           "percentage": false,
-          "pluginVersion": "7.5.5",
+          "pluginVersion": "7.5.3",
           "pointradius": 2,
           "points": false,
           "renderer": "flot",
@@ -2447,9 +2447,9 @@
           "fillGradient": 0,
           "gridPos": {
             "h": 10,
-            "w": 9,
-            "x": 15,
-            "y": 22
+            "w": 12,
+            "x": 0,
+            "y": 32
           },
           "hiddenSeries": false,
           "id": 399,
@@ -2469,7 +2469,7 @@
             "alertThreshold": true
           },
           "percentage": false,
-          "pluginVersion": "7.5.5",
+          "pluginVersion": "7.5.3",
           "pointradius": 2,
           "points": false,
           "renderer": "flot",
@@ -2479,13 +2479,16 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum(rate(hclcache_cache_maintenance_online_duration_seconds_sum{ namespace=\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\", type=\"expired\" }[2m]) ) \r\n / sum(rate(hclcache_cache_maintenance_online_duration_seconds_count{ namespace=\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\", type=\"expired\"}[2m]))\r",
+              "exemplar": true,
+              "expr": "sum(rate(hclcache_cache_maintenance_online_duration_seconds_sum{ namespace=\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\"}[2m])) by (type)\r\n / sum(rate(hclcache_cache_maintenance_online_duration_seconds_count{ namespace=\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\"}[2m])) by (type)\r",
+              "hide": false,
               "interval": "",
               "legendFormat": "expired",
               "refId": "A"
             },
             {
               "expr": "sum(rate(hclcache_cache_maintenance_online_duration_seconds_sum{ namespace=\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\", type=\"emergency\" }[2m]) ) \r\n / sum(rate(hclcache_cache_maintenance_online__duration_seconds_count{ namespace=\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\", type=\"emergency\"}[2m]))\r",
+              "hide": true,
               "interval": "",
               "legendFormat": "emergency",
               "refId": "C"
@@ -2511,14 +2514,16 @@
           },
           "yaxes": [
             {
+              "$$hashKey": "object:1896",
               "format": "s",
               "label": null,
               "logBase": 1,
               "max": null,
-              "min": null,
+              "min": "0",
               "show": true
             },
             {
+              "$$hashKey": "object:1897",
               "format": "short",
               "label": null,
               "logBase": 1,
@@ -2601,8 +2606,8 @@
         "allValue": null,
         "current": {
           "selected": false,
-          "text": "demoqalive",
-          "value": "demoqalive"
+          "text": "demodb2auth",
+          "value": "demodb2auth"
         },
         "datasource": "${DS_PROMETHEUS}",
         "definition": "label_values(hclcache_cache_size_max{ namespace=\"$namespace\"}, cachespace)",
@@ -2755,7 +2760,7 @@
     ]
   },
   "time": {
-    "from": "now-15m",
+    "from": "now-1h",
     "to": "now"
   },
   "timepicker": {
@@ -2774,5 +2779,5 @@
   "timezone": "",
   "title": "HCL Cache - Remote",
   "uid": "hcl_cache_remote",
-  "version": 9110
+  "version": 9111
 }

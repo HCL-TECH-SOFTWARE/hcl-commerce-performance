@@ -15,40 +15,95 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 219,
-  "iteration": 1646056484767,
+  "id": 46,
+  "iteration": 1652467275256,
   "links": [],
   "panels": [
     {
-      "datasource": "${DS_PROMETHEUS}",
-      "description": "",
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 12,
-        "x": 0,
-        "y": 0
-      },
-      "id": 35,
-      "options": {
-        "content": "After the first ingest is done, an elasticsearch index \"run\" would be created.\nPlease do the following setup after your first ingest is done to view nifi statistics.\n\nAdd an elasticsearch datasource\n   1) Click on the configuration icon (with a wheel picture) on the side \n   2) Choose \"Data Sources\"\n   3) Click on \"Add data source\"\n   4) Type in \"Elasticsearch\" in the search field\n   5) Click on the returned \"Elasticsearch\" icon\n   6) Fill in the name of index (e.g. Elasticsearch)\n   7) Under section \"HTTP\", fill in the field \"URL\" with your elasticsearch domain and port              \n      something like http://elasticsearch-master.es.svc.cluster.local:9200/)      \n\t  The domain and port number could be changed based on the user deployment.\n   8) Under section \"Elastic details\", fill in the fields/choose the options as follows:                      \n\t\t(a) Index name : run   \n\t\t(b) Pattern : No pattern   \n\t\t(c) Time field name : date   \n\t\t(d) Version : 7.0+\n   9)Click on \"Save & Test\" button at the end of the page.          \n     Ensure the connection succeeds before the dashboard would work properly.",
-        "mode": "markdown"
-      },
-      "pluginVersion": "7.5.5",
-      "title": "Setup for Elasticsearch datasource to access the ingest data",
-      "type": "text"
-    },
-    {
-      "collapsed": false,
-      "datasource": "${DS_PROMETHEUS}",
+      "collapsed": true,
+      "datasource": null,
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 8
+        "y": 0
+      },
+      "id": 45,
+      "panels": [
+        {
+          "datasource": null,
+          "fieldConfig": {
+            "defaults": {},
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 5,
+            "w": 24,
+            "x": 0,
+            "y": 1
+          },
+          "id": 43,
+          "options": {
+            "content": "There are 3 types of metric data in this Nifi Dashboard.\n\n(1)Ingest Metrics is based on the Elasticsearch datasource to get ingest metrics based on connector type and runId. \n\n(2)Nifi metrics pulls out the metrics data based on the specified time range.\n\n(3)System Metrics pulls out the system metrics based on the specified time range.",
+            "mode": "markdown"
+          },
+          "pluginVersion": "7.5.3",
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Dashboard Explanation",
+          "type": "text"
+        }
+      ],
+      "title": "Dashboard Explanation",
+      "type": "row"
+    },
+    {
+      "collapsed": true,
+      "datasource": null,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 1
+      },
+      "id": 39,
+      "panels": [
+        {
+          "datasource": null,
+          "description": "",
+          "fieldConfig": {
+            "defaults": {},
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 7,
+            "w": 24,
+            "x": 0,
+            "y": 2
+          },
+          "id": 35,
+          "options": {
+            "content": "After the first ingest is done, an elasticsearch index \"run\" would be created.\nPlease do the following setup after your first ingest is done to view nifi statistics.\n\nAdd an elasticsearch datasource\n   1) Click on the configuration icon (with a wheel picture) on the side \n   2) Choose \"Data Sources\"\n   3) Click on \"Add data source\"\n   4) Type in \"Elasticsearch\" in the search field\n   5) Click on the returned \"Elasticsearch\" icon\n   6) Fill in the name of index (e.g. Elasticsearch)\n   7) Under section \"HTTP\", fill in the field \"URL\" with your elasticsearch domain and port              \n      something like http://elasticsearch-master.es.svc.cluster.local:9200/)      \n\t  The domain and port number could be changed based on the user deployment.\n   8) Under section \"Elastic details\", fill in the fields/choose the options as follows:                      \n\t\t(a) Index name : run   \n\t\t(b) Pattern : No pattern   \n\t\t(c) Time field name : date   \n\t\t(d) Version : 7.0+\n   9)Click on \"Save & Test\" button at the end of the page.          \n     Ensure the connection succeeds before the dashboard would work properly.",
+            "mode": "markdown"
+          },
+          "pluginVersion": "7.5.3",
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Setup for Elasticsearch datasource to access the ingest data",
+          "type": "text"
+        }
+      ],
+      "title": "Setup Instructions for Elasticsearch Datasource",
+      "type": "row"
+    },
+    {
+      "collapsed": false,
+      "datasource": null,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 2
       },
       "id": 26,
       "panels": [],
@@ -61,7 +116,6 @@
         "defaults": {
           "custom": {
             "align": null,
-            "displayMode": "auto",
             "filterable": false
           },
           "mappings": [],
@@ -118,7 +172,7 @@
         "h": 7,
         "w": 24,
         "x": 0,
-        "y": 9
+        "y": 3
       },
       "id": 31,
       "options": {
@@ -126,12 +180,12 @@
         "showHeader": true,
         "sortBy": [
           {
-            "desc": true,
-            "displayName": "Write Success"
+            "desc": false,
+            "displayName": "stage"
           }
         ]
       },
-      "pluginVersion": "7.5.5",
+      "pluginVersion": "7.5.3",
       "targets": [
         {
           "alias": "Write Success",
@@ -217,7 +271,7 @@
       ],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Created Document Counters",
+      "title": "Created Document Counters (only valid for reindex connector)",
       "transformations": [
         {
           "id": "merge",
@@ -244,7 +298,6 @@
         "defaults": {
           "custom": {
             "align": null,
-            "displayMode": "auto",
             "filterable": false
           },
           "mappings": [],
@@ -294,6 +347,18 @@
                 "value": "color-text"
               }
             ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Write Success"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 232
+              }
+            ]
           }
         ]
       },
@@ -301,7 +366,7 @@
         "h": 7,
         "w": 24,
         "x": 0,
-        "y": 16
+        "y": 10
       },
       "id": 33,
       "options": {
@@ -309,12 +374,12 @@
         "showHeader": true,
         "sortBy": [
           {
-            "desc": true,
-            "displayName": "Write Success"
+            "desc": false,
+            "displayName": "stage"
           }
         ]
       },
-      "pluginVersion": "7.5.5",
+      "pluginVersion": "7.5.3",
       "targets": [
         {
           "alias": "Write Success",
@@ -427,7 +492,6 @@
         "defaults": {
           "custom": {
             "align": null,
-            "displayMode": "auto",
             "filterable": false
           },
           "mappings": [],
@@ -476,7 +540,7 @@
         "h": 7,
         "w": 24,
         "x": 0,
-        "y": 23
+        "y": 17
       },
       "id": 30,
       "options": {
@@ -489,7 +553,7 @@
           }
         ]
       },
-      "pluginVersion": "7.5.5",
+      "pluginVersion": "7.5.3",
       "targets": [
         {
           "alias": "Created Document Counter",
@@ -518,7 +582,7 @@
               "type": "terms"
             }
           ],
-          "hide": false,
+          "hide": true,
           "metrics": [
             {
               "field": "value.numeric",
@@ -528,7 +592,7 @@
               "type": "avg"
             }
           ],
-          "query": "connector: $connector AND  run: $runId AND name: \"Cumulative Elapsed Time\"",
+          "query": "connector: $connector AND  run: $runId AND name: \"Absolute Elapsed Time\"",
           "refId": "A",
           "timeField": "date"
         },
@@ -558,6 +622,7 @@
               "type": "terms"
             }
           ],
+          "hide": true,
           "metrics": [
             {
               "field": "value.numeric",
@@ -598,6 +663,7 @@
               "type": "terms"
             }
           ],
+          "hide": true,
           "metrics": [
             {
               "field": "value.numeric",
@@ -610,11 +676,49 @@
           "query": "connector: $connector AND  run: $runId AND name: \"Absolute End Time\"",
           "refId": "C",
           "timeField": "date"
+        },
+        {
+          "bucketAggs": [
+            {
+              "fake": true,
+              "field": "stage",
+              "id": "3",
+              "settings": {
+                "min_doc_count": "1",
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "0"
+              },
+              "type": "terms"
+            },
+            {
+              "field": "group",
+              "id": "2",
+              "settings": {
+                "min_doc_count": "1",
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "0"
+              },
+              "type": "terms"
+            }
+          ],
+          "hide": false,
+          "metrics": [
+            {
+              "field": "value.numeric",
+              "id": "1",
+              "type": "avg"
+            }
+          ],
+          "query": "connector: $connector AND  run: $runId AND name: \"Cumulative Elapsed Time\"",
+          "refId": "D",
+          "timeField": "date"
         }
       ],
       "timeFrom": null,
       "timeShift": null,
-      "title": " Elapsed Time",
+      "title": "Absolute Elapsed Time",
       "transformations": [
         {
           "id": "merge",
@@ -636,13 +740,502 @@
       "type": "table"
     },
     {
+      "datasource": "$es_datasource",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "align": null,
+            "filterable": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Start Time"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "dateTimeAsUS"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "End Time"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "dateTimeAsUS"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Cumulative Elapsed Time (ms)"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 215
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Data Transform Time (ms)"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 184
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 24,
+        "x": 0,
+        "y": 24
+      },
+      "id": 36,
+      "options": {
+        "frameIndex": 1,
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": false,
+            "displayName": "stage"
+          }
+        ]
+      },
+      "pluginVersion": "7.5.3",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "fake": true,
+              "field": "stage",
+              "id": "4",
+              "settings": {
+                "min_doc_count": "1",
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "0"
+              },
+              "type": "terms"
+            },
+            {
+              "field": "group",
+              "id": "2",
+              "settings": {
+                "min_doc_count": "1",
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "0"
+              },
+              "type": "terms"
+            }
+          ],
+          "hide": true,
+          "metrics": [
+            {
+              "field": "value.numeric",
+              "id": "1",
+              "meta": {},
+              "settings": {},
+              "type": "avg"
+            }
+          ],
+          "query": "connector: $connector AND  run: $runId AND name: \"Cumulative Elapsed Time\"",
+          "refId": "A",
+          "timeField": "date"
+        },
+        {
+          "bucketAggs": [
+            {
+              "fake": true,
+              "field": "stage",
+              "id": "3",
+              "settings": {
+                "min_doc_count": "1",
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "0"
+              },
+              "type": "terms"
+            },
+            {
+              "field": "group",
+              "id": "2",
+              "settings": {
+                "min_doc_count": "1",
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "0"
+              },
+              "type": "terms"
+            }
+          ],
+          "hide": false,
+          "metrics": [
+            {
+              "field": "value.numeric",
+              "id": "1",
+              "inlineScript": null,
+              "meta": {},
+              "settings": {},
+              "type": "min"
+            }
+          ],
+          "query": "connector: $connector AND  run: $runId AND name: \"Cumulative Data Transformation Time\"",
+          "refId": "B",
+          "timeField": "date"
+        },
+        {
+          "bucketAggs": [
+            {
+              "fake": true,
+              "field": "stage",
+              "id": "3",
+              "settings": {
+                "min_doc_count": "1",
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "0"
+              },
+              "type": "terms"
+            },
+            {
+              "field": "group",
+              "id": "2",
+              "settings": {
+                "min_doc_count": "1",
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "0"
+              },
+              "type": "terms"
+            }
+          ],
+          "hide": false,
+          "metrics": [
+            {
+              "field": "value.numeric",
+              "id": "1",
+              "meta": {},
+              "settings": {},
+              "type": "max"
+            }
+          ],
+          "query": "connector: $connector AND  run: $runId AND name: \"Cumulative Bulk Time\"",
+          "refId": "C",
+          "timeField": "date"
+        },
+        {
+          "bucketAggs": [
+            {
+              "fake": true,
+              "field": "stage",
+              "id": "3",
+              "settings": {
+                "min_doc_count": "1",
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "0"
+              },
+              "type": "terms"
+            },
+            {
+              "field": "group",
+              "id": "2",
+              "settings": {
+                "min_doc_count": "1",
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "0"
+              },
+              "type": "terms"
+            }
+          ],
+          "hide": false,
+          "metrics": [
+            {
+              "field": "value.numeric",
+              "id": "1",
+              "type": "sum"
+            }
+          ],
+          "query": "connector: $connector AND  run: $runId AND name: \"Cumulative Wait Time\"",
+          "refId": "D",
+          "timeField": "date"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Cumulative Time",
+      "transformations": [
+        {
+          "id": "merge",
+          "options": {}
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {},
+            "indexByName": {},
+            "renameByName": {
+              "Average": "Elapsed Time (ms)",
+              "Count": "Wait Time",
+              "Max": "Bulk Time (ms)",
+              "Min": "Data Transform Time (ms)",
+              "Sum": "Wait Link Time (ms)"
+            }
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "datasource": "$es_datasource",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "align": null,
+            "filterable": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Start Time"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "dateTimeAsUS"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "End Time"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "dateTimeAsUS"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Cumulative Elapsed Time (ms)"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 215
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Execution Time (nano sec)"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 217
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Fetch Time (nano sec)"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 218
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 24,
+        "x": 0,
+        "y": 31
+      },
+      "id": 37,
+      "options": {
+        "frameIndex": 1,
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": false,
+            "displayName": "stage"
+          }
+        ]
+      },
+      "pluginVersion": "7.5.3",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "fake": true,
+              "field": "stage",
+              "id": "4",
+              "settings": {
+                "min_doc_count": "1",
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "0"
+              },
+              "type": "terms"
+            },
+            {
+              "field": "group",
+              "id": "2",
+              "settings": {
+                "min_doc_count": "1",
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "0"
+              },
+              "type": "terms"
+            }
+          ],
+          "hide": false,
+          "metrics": [
+            {
+              "field": "value.numeric",
+              "id": "1",
+              "meta": {},
+              "settings": {},
+              "type": "avg"
+            }
+          ],
+          "query": "connector: $connector AND  run: $runId AND name: \"Cumulative SQL Execution Time\"",
+          "refId": "A",
+          "timeField": "date"
+        },
+        {
+          "bucketAggs": [
+            {
+              "fake": true,
+              "field": "stage",
+              "id": "3",
+              "settings": {
+                "min_doc_count": "1",
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "0"
+              },
+              "type": "terms"
+            },
+            {
+              "field": "group",
+              "id": "2",
+              "settings": {
+                "min_doc_count": "1",
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "0"
+              },
+              "type": "terms"
+            }
+          ],
+          "hide": false,
+          "metrics": [
+            {
+              "field": "value.numeric",
+              "id": "1",
+              "inlineScript": null,
+              "meta": {},
+              "settings": {},
+              "type": "min"
+            }
+          ],
+          "query": "connector: $connector AND  run: $runId AND name: \"Cumulative SQL Fetch Time\"",
+          "refId": "B",
+          "timeField": "date"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Cumulative SQL Time",
+      "transformations": [
+        {
+          "id": "merge",
+          "options": {}
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {},
+            "indexByName": {},
+            "renameByName": {
+              "Average": "Execution Time (ms)",
+              "Min": "Fetch Time (ms)"
+            }
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
       "collapsed": false,
-      "datasource": "${DS_PROMETHEUS}",
+      "datasource": null,
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 30
+        "y": 38
       },
       "id": 24,
       "panels": [],
@@ -654,7 +1247,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "${DS_PROMETHEUS}",
+      "datasource": "Prometheus",
       "fieldConfig": {
         "defaults": {
           "links": []
@@ -667,7 +1260,7 @@
         "h": 12,
         "w": 24,
         "x": 0,
-        "y": 31
+        "y": 39
       },
       "hiddenSeries": false,
       "id": 12,
@@ -690,7 +1283,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.5.5",
+      "pluginVersion": "7.5.3",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -755,7 +1348,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "${DS_PROMETHEUS}",
+      "datasource": "Prometheus",
       "fieldConfig": {
         "defaults": {
           "links": []
@@ -768,7 +1361,7 @@
         "h": 12,
         "w": 24,
         "x": 0,
-        "y": 43
+        "y": 51
       },
       "hiddenSeries": false,
       "id": 21,
@@ -791,7 +1384,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.5.5",
+      "pluginVersion": "7.5.3",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -853,21 +1446,22 @@
     },
     {
       "collapsed": false,
-      "datasource": "${DS_PROMETHEUS}",
+      "datasource": null,
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 55
+        "y": 63
       },
       "id": 9,
       "panels": [],
       "repeat": "nifipod",
       "scopedVars": {
         "nifipod": {
+          "isNone": true,
           "selected": true,
-          "text": "demoqanifi-app-6794f46f56-qdj75",
-          "value": "demoqanifi-app-6794f46f56-qdj75"
+          "text": "None",
+          "value": ""
         }
       },
       "title": "Container - $nifipod  System Metrics",
@@ -878,7 +1472,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "${DS_PROMETHEUS}",
+      "datasource": null,
       "fieldConfig": {
         "defaults": {
           "links": []
@@ -891,7 +1485,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 56
+        "y": 64
       },
       "hiddenSeries": false,
       "id": 4,
@@ -911,15 +1505,16 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.5.5",
+      "pluginVersion": "7.5.3",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
       "scopedVars": {
         "nifipod": {
+          "isNone": true,
           "selected": true,
-          "text": "demoqanifi-app-6794f46f56-qdj75",
-          "value": "demoqanifi-app-6794f46f56-qdj75"
+          "text": "None",
+          "value": ""
         }
       },
       "seriesOverrides": [],
@@ -928,7 +1523,6 @@
       "steppedLine": false,
       "targets": [
         {
-          "exemplar": true,
           "expr": "sum(nifi_jvm_heap_usage{pod=\"$nifipod\"}) by (pod)",
           "interval": "",
           "legendFormat": "{{pod}}",
@@ -982,7 +1576,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "${DS_PROMETHEUS}",
+      "datasource": null,
       "fieldConfig": {
         "defaults": {
           "links": []
@@ -995,7 +1589,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 56
+        "y": 64
       },
       "hiddenSeries": false,
       "id": 5,
@@ -1015,15 +1609,16 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.5.5",
+      "pluginVersion": "7.5.3",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
       "scopedVars": {
         "nifipod": {
+          "isNone": true,
           "selected": true,
-          "text": "demoqanifi-app-6794f46f56-qdj75",
-          "value": "demoqanifi-app-6794f46f56-qdj75"
+          "text": "None",
+          "value": ""
         }
       },
       "seriesOverrides": [],
@@ -1085,7 +1680,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "${DS_PROMETHEUS}",
+      "datasource": "Prometheus",
       "fieldConfig": {
         "defaults": {
           "links": []
@@ -1098,7 +1693,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 64
+        "y": 72
       },
       "hiddenSeries": false,
       "id": 11,
@@ -1120,15 +1715,16 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.5.5",
+      "pluginVersion": "7.5.3",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
       "scopedVars": {
         "nifipod": {
+          "isNone": true,
           "selected": true,
-          "text": "demoqanifi-app-6794f46f56-qdj75",
-          "value": "demoqanifi-app-6794f46f56-qdj75"
+          "text": "None",
+          "value": ""
         }
       },
       "seriesOverrides": [
@@ -1235,7 +1831,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "${DS_PROMETHEUS}",
+      "datasource": "Prometheus",
       "fieldConfig": {
         "defaults": {
           "links": []
@@ -1248,7 +1844,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 64
+        "y": 72
       },
       "hiddenSeries": false,
       "id": 13,
@@ -1270,15 +1866,16 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.5.5",
+      "pluginVersion": "7.5.3",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
       "scopedVars": {
         "nifipod": {
+          "isNone": true,
           "selected": true,
-          "text": "demoqanifi-app-6794f46f56-qdj75",
-          "value": "demoqanifi-app-6794f46f56-qdj75"
+          "text": "None",
+          "value": ""
         }
       },
       "seriesOverrides": [],
@@ -1353,7 +1950,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "${DS_PROMETHEUS}",
+      "datasource": null,
       "fieldConfig": {
         "defaults": {
           "links": []
@@ -1366,7 +1963,7 @@
         "h": 7,
         "w": 24,
         "x": 0,
-        "y": 72
+        "y": 80
       },
       "hiddenSeries": false,
       "id": 15,
@@ -1386,15 +1983,16 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.5.5",
+      "pluginVersion": "7.5.3",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
       "scopedVars": {
         "nifipod": {
+          "isNone": true,
           "selected": true,
-          "text": "demoqanifi-app-6794f46f56-qdj75",
-          "value": "demoqanifi-app-6794f46f56-qdj75"
+          "text": "None",
+          "value": ""
         }
       },
       "seriesOverrides": [
@@ -1501,7 +2099,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "${DS_PROMETHEUS}",
+      "datasource": null,
       "fieldConfig": {
         "defaults": {
           "links": []
@@ -1514,7 +2112,7 @@
         "h": 10,
         "w": 12,
         "x": 0,
-        "y": 79
+        "y": 87
       },
       "hiddenSeries": false,
       "id": 19,
@@ -1536,15 +2134,16 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.5.5",
+      "pluginVersion": "7.5.3",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
       "scopedVars": {
         "nifipod": {
+          "isNone": true,
           "selected": true,
-          "text": "demoqanifi-app-6794f46f56-qdj75",
-          "value": "demoqanifi-app-6794f46f56-qdj75"
+          "text": "None",
+          "value": ""
         }
       },
       "seriesOverrides": [],
@@ -1607,7 +2206,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "${DS_PROMETHEUS}",
+      "datasource": null,
       "fieldConfig": {
         "defaults": {
           "links": []
@@ -1620,7 +2219,7 @@
         "h": 10,
         "w": 12,
         "x": 12,
-        "y": 79
+        "y": 87
       },
       "hiddenSeries": false,
       "id": 20,
@@ -1642,15 +2241,16 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.5.5",
+      "pluginVersion": "7.5.3",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
       "scopedVars": {
         "nifipod": {
+          "isNone": true,
           "selected": true,
-          "text": "demoqanifi-app-6794f46f56-qdj75",
-          "value": "demoqanifi-app-6794f46f56-qdj75"
+          "text": "None",
+          "value": ""
         }
       },
       "seriesOverrides": [],
@@ -1717,35 +2317,15 @@
   "templating": {
     "list": [
       {
-        "current": {
-          "selected": false,
-          "text": "Prometheus",
-          "value": "Prometheus"
-        },
-        "description": null,
-        "error": null,
-        "hide": 0,
-        "includeAll": false,
-        "label": "Prometheus",
-        "multi": false,
-        "name": "DS_PROMETHEUS",
-        "options": [],
-        "query": "prometheus",
-        "queryValue": "",
-        "refresh": 1,
-        "regex": "",
-        "skipUrlSync": false,
-        "type": "datasource"
-      },
-      {
         "allValue": null,
         "current": {
+          "isNone": true,
           "selected": false,
-          "text": "demoqanifi-app-6794f46f56-qdj75",
-          "value": "demoqanifi-app-6794f46f56-qdj75"
+          "text": "None",
+          "value": ""
         },
-        "datasource": "${DS_PROMETHEUS}",
-        "definition": "label_values(kube_pod_container_resource_requests{container=\"nifi-app\"},pod)",
+        "datasource": "Prometheus",
+        "definition": "label_values(kube_pod_container_resource_requests_cpu_cores{container=\"nifi-app\"},pod)",
         "description": null,
         "error": null,
         "hide": 2,
@@ -1755,10 +2335,10 @@
         "name": "nifipod",
         "options": [],
         "query": {
-          "query": "label_values(kube_pod_container_resource_requests{container=\"nifi-app\"},pod)",
-          "refId": "StandardVariableQuery"
+          "query": "label_values(kube_pod_container_resource_requests_cpu_cores{container=\"nifi-app\"},pod)",
+          "refId": "Prometheus-nifipod-Variable-Query"
         },
-        "refresh": 1,
+        "refresh": 2,
         "regex": "",
         "skipUrlSync": false,
         "sort": 0,
@@ -1783,6 +2363,27 @@
         "name": "es_datasource",
         "options": [],
         "query": "elasticsearch",
+        "queryValue": "",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "type": "datasource"
+      },
+      {
+        "current": {
+          "selected": false,
+          "text": "Prometheus",
+          "value": "Prometheus"
+        },
+        "description": null,
+        "error": null,
+        "hide": 0,
+        "includeAll": false,
+        "label": "prometheus_datasource",
+        "multi": false,
+        "name": "prometheus_datasource",
+        "options": [],
+        "query": "prometheus",
         "queryValue": "",
         "refresh": 1,
         "regex": "",
@@ -1846,11 +2447,22 @@
         "tagsQuery": "",
         "type": "query",
         "useTags": false
+      },
+      {
+        "datasource": "$es_datasource",
+        "description": null,
+        "error": null,
+        "filters": [],
+        "hide": 0,
+        "label": null,
+        "name": "Filters",
+        "skipUrlSync": false,
+        "type": "adhoc"
       }
     ]
   },
   "time": {
-    "from": "now-24h",
+    "from": "now-1h",
     "to": "now"
   },
   "timepicker": {
@@ -1869,5 +2481,5 @@
   "timezone": "",
   "title": "NiFi Performance",
   "uid": "hcl_ingest_performance",
-  "version": 9110
+  "version": 9111
 }

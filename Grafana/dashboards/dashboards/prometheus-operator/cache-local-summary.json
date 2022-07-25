@@ -16,8 +16,8 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 216,
-  "iteration": 1646056011375,
+  "id": 55,
+  "iteration": 1652828471144,
   "links": [
     {
       "asDropdown": false,
@@ -52,8 +52,8 @@
       "pageSize": null,
       "showHeader": true,
       "sort": {
-        "col": 4,
-        "desc": true
+        "col": 1,
+        "desc": false
       },
       "styles": [
         {
@@ -191,39 +191,57 @@
       ],
       "targets": [
         {
-          "expr": "sum( hclcache_cache_size_current{ namespace=\"$namespace\", pod=\"$pod\", scope=\"local\" }) by (name)",
+          "exemplar": true,
+          "expr": "sum( hclcache_cache_size_current{ namespace=\"$namespace\", pod=\"$pod\",cachespace=\"$cachespace\",scope=\"local\" }) by (name)",
           "format": "table",
           "instant": true,
+          "interval": "",
+          "legendFormat": "",
           "refId": "A"
         },
         {
-          "expr": "sum( hclcache_cache_size_max{ namespace=\"$namespace\", pod=\"$pod\", scope=\"local\" }) by (name)",
+          "exemplar": true,
+          "expr": "sum( hclcache_cache_size_max{ namespace=\"$namespace\", pod=\"$pod\", cachespace=\"$cachespace\", scope=\"local\" }) by (name)",
           "format": "table",
           "instant": true,
+          "interval": "",
+          "legendFormat": "",
           "refId": "B"
         },
         {
-          "expr": "sum( hclcache_cache_size_current{ namespace=\"$namespace\", pod=\"$pod\", scope=\"local\" }) by (name) / sum( hclcache_cache_size_max{ namespace=\"$namespace\", pod=\"$pod\", scope=\"local\" }) by (name)",
+          "exemplar": true,
+          "expr": "(sum( hclcache_cache_size_current{ namespace=\"$namespace\", pod=\"$pod\", cachespace=\"$cachespace\", scope=\"local\" }) by (name) / sum( hclcache_cache_size_max{ namespace=\"$namespace\", pod=\"$pod\", cachespace=\"$cachespace\", scope=\"local\" }) by (name)) AND (sum( hclcache_cache_size_max{ namespace=\"$namespace\", pod=\"$pod\", cachespace=\"$cachespace\", scope=\"local\" }) by (name) > 0)",
           "format": "table",
           "instant": true,
+          "interval": "",
+          "legendFormat": "",
           "refId": "C"
         },
         {
-          "expr": "sum( hclcache_cache_size_mb_current{ namespace=\"$namespace\", pod=\"$pod\", scope=\"local\" }) by (name)",
+          "exemplar": true,
+          "expr": "sum( hclcache_cache_size_mb_current{ namespace=\"$namespace\", pod=\"$pod\", cachespace=\"$cachespace\", scope=\"local\" }) by (name)",
           "format": "table",
           "instant": true,
+          "interval": "",
+          "legendFormat": "",
           "refId": "D"
         },
         {
-          "expr": "sum( hclcache_cache_size_mb_max{ namespace=\"$namespace\", pod=\"$pod\", scope=\"local\" }) by (name)",
+          "exemplar": true,
+          "expr": "sum( hclcache_cache_size_mb_max{ namespace=\"$namespace\", pod=\"$pod\", cachespace=\"$cachespace\", scope=\"local\" }) by (name)",
           "format": "table",
           "instant": true,
+          "interval": "",
+          "legendFormat": "",
           "refId": "E"
         },
         {
-          "expr": "sum( hclcache_cache_size_mb_current{ namespace=\"$namespace\", pod=\"$pod\", scope=\"local\" }) by (name) / sum( hclcache_cache_size_mb_max{ namespace=\"$namespace\", pod=\"$pod\", scope=\"local\" }) by (name)",
+          "exemplar": true,
+          "expr": "(sum( hclcache_cache_size_mb_current{ namespace=\"$namespace\", pod=\"$pod\", cachespace=\"$cachespace\", scope=\"local\" }) by (name) / sum( hclcache_cache_size_mb_max{ namespace=\"$namespace\", pod=\"$pod\", cachespace=\"$cachespace\", scope=\"local\" }) by (name)) AND (sum( hclcache_cache_size_mb_max{ namespace=\"$namespace\", pod=\"$pod\", cachespace=\"$cachespace\", scope=\"local\" }) by (name) > 0)",
           "format": "table",
           "instant": true,
+          "interval": "",
+          "legendFormat": "",
           "refId": "F"
         }
       ],
@@ -297,27 +315,54 @@
       {
         "allValue": ".*",
         "current": {
-          "selected": true,
-          "text": [
-            "All"
-          ],
-          "value": [
-            "$__all"
-          ]
+          "selected": false,
+          "text": "demodb2nifi-app",
+          "value": "demodb2nifi-app"
         },
         "datasource": "${DS_PROMETHEUS}",
-        "definition": "label_values(hclcache_cache_size_max{namespace=~\"$namespace\"}, job)",
+        "definition": "label_values(hclcache_cache_size_max{namespace=\"$namespace\"}, job)",
         "description": null,
         "error": null,
         "hide": 0,
-        "includeAll": true,
+        "includeAll": false,
         "label": "deployment",
-        "multi": true,
+        "multi": false,
         "name": "job",
         "options": [],
         "query": {
-          "query": "label_values(hclcache_cache_size_max{namespace=~\"$namespace\"}, job)",
-          "refId": "Prometheus-job-Variable-Query"
+          "query": "label_values(hclcache_cache_size_max{namespace=\"$namespace\"}, job)",
+          "refId": "StandardVariableQuery"
+        },
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      },
+      {
+        "allValue": null,
+        "current": {
+          "selected": false,
+          "text": "demodb2auth",
+          "value": "demodb2auth"
+        },
+        "datasource": "${DS_PROMETHEUS}",
+        "definition": "label_values(hclcache_cache_size_max{namespace=\"$namespace\",job=\"$job\"}, cachespace)",
+        "description": null,
+        "error": null,
+        "hide": 0,
+        "includeAll": false,
+        "label": null,
+        "multi": false,
+        "name": "cachespace",
+        "options": [],
+        "query": {
+          "query": "label_values(hclcache_cache_size_max{namespace=\"$namespace\",job=\"$job\"}, cachespace)",
+          "refId": "StandardVariableQuery"
         },
         "refresh": 2,
         "regex": "",
@@ -332,12 +377,12 @@
       {
         "allValue": ".*",
         "current": {
-          "selected": true,
-          "text": "demoqalivequery-app-65f847fdff-lr45k",
-          "value": "demoqalivequery-app-65f847fdff-lr45k"
+          "selected": false,
+          "text": "demodb2nifi-app-5cb67d9d85-pgrdl",
+          "value": "demodb2nifi-app-5cb67d9d85-pgrdl"
         },
         "datasource": "${DS_PROMETHEUS}",
-        "definition": "label_values(hclcache_cache_size_max{namespace=~\"$namespace\",job=~\"$job\"}, pod)",
+        "definition": "label_values(hclcache_cache_size_max{namespace=\"$namespace\",job=\"$job\",cachespace=\"$cachespace\"}, pod)",
         "description": null,
         "error": null,
         "hide": 0,
@@ -347,8 +392,8 @@
         "name": "pod",
         "options": [],
         "query": {
-          "query": "label_values(hclcache_cache_size_max{namespace=~\"$namespace\",job=~\"$job\"}, pod)",
-          "refId": "Prometheus-pod-Variable-Query"
+          "query": "label_values(hclcache_cache_size_max{namespace=\"$namespace\",job=\"$job\",cachespace=\"$cachespace\"}, pod)",
+          "refId": "StandardVariableQuery"
         },
         "refresh": 2,
         "regex": "",
@@ -363,7 +408,7 @@
     ]
   },
   "time": {
-    "from": "now-5m",
+    "from": "now-1h",
     "to": "now"
   },
   "timepicker": {
@@ -383,5 +428,5 @@
   "timezone": "",
   "title": "HCL Cache - Local Cache Summary",
   "uid": "hcl_cache_local_summary",
-  "version": 9110
+  "version": 9111
 }
