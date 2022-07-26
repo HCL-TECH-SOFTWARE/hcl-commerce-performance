@@ -14,7 +14,7 @@ The Redis client connection information is stored in redis_cfg.yaml. This file c
 
 ### Cache configurations
 
-Caches are configured in two main files: `cache_cfg.yaml` exists on all contains and defines default values, and specific values for out of the box caches, and `cache_cfg-ext.yaml` can be used to update defaults or set new configurations for custom caches.  See: [Cache Configuration](CacheConfiguration.md).
+Caches are configured in two main files: `cache_cfg.yaml` contains default configurations, and specific values for out-of-the-box caches, and `cache_cfg-ext.yaml` can be used to update defaults or set new configurations for custom caches.  See: [Cache Configuration](CacheConfiguration.md).
 
 ## Configurations in Kubernetes 
 
