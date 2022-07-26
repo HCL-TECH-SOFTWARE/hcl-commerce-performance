@@ -40,7 +40,7 @@ hclCache:
 
 To update the configuration, the recommended approach is to update the chart, and perform `Helm Update`. If the configmap is updated directly, pods must be manually restarted to load the updated values.
 
-*Important:* Change to one release (auth/share/live) might need to be repicated to the others.  
+*Important:* Change to one release (auth/share/live) might need to be replicated to the others.  
 
 ### Validating the current client configuration
 
