@@ -19,6 +19,8 @@ By default, HCL local caches automatically increase or decrease their memory foo
 The automatic memory footprint feature provides configurations that can be used for advanced troubleshooting or tuning scenarios.
 See [Cache Configuration](CacheConfiguration.md) for details of updating the HCL Cache configuration.
 
+`globalLocalCache` is a top level element. 
+
 - [Configuring used memory thresholds](#Configuring-used-memory-thresholds)
 - [Configuring minimum and maximum scale factors](#Configuring-minimum-and-maximum-scale-factors)
 - [Disabling automatic memory footprint tuning](#Disabling-automatic-memory-footprint-tuning)
@@ -29,11 +31,10 @@ See [Cache Configuration](CacheConfiguration.md) for details of updating the HCL
 By default, caches can increase their maximum sizes when used JVM memory is less than 65% of the maximum heap size, and will decrease their maximum sizes when used JVM memory is more than 75% of the maximum heap size.
 
 ```
-cacheConfigs:
-  globalLocalCacheConfiguration:
-    localCacheTuningConfiguration:
-      tightMemoryPercentUsedThreshold: 75
-      normalMemoryPercentUsedThreshold: 65
+globalLocalCache:
+  localCacheTuning:
+    tightMemoryPercentUsedThreshold: 75
+    normalMemoryPercentUsedThreshold: 65
 ```
 
 #### Configuring minimum and maximum scale factors
@@ -41,11 +42,10 @@ cacheConfigs:
 By default, caches will not increase their maximum sizes to more than 400% of their configured maximum sizes, and will not decrease their maximum sizes to less than 10% of their configured maximum sizes.
 
 ```
-cacheConfigs:
-  globalLocalCacheConfiguration:
-    localCacheTuningConfiguration:
-      maxScaleFactor: 400
-      minScaleFactor: 10
+globalLocalCache:
+  localCacheTuning:
+    maxScaleFactor: 400
+    minScaleFactor: 10
 ```
 
 #### Disabling automatic memory footprint tuning
@@ -53,10 +53,9 @@ cacheConfigs:
 By default, automatic memory footprint tuning is enabled.  You can disable it by specifying `false`.
 
 ```
-cacheConfigs:
-  globalLocalCacheConfiguration:
-    localCacheTuningConfiguration:
-      enabled: true
+globalLocalCache:
+  localCacheTuning:
+    enabled: true
 ```
 
 #### Reporting unsizeable cache values
@@ -64,8 +63,6 @@ cacheConfigs:
 HCL local cache can calculate the memory footprint of cache entries when they contain values composed of typical java objects.  When other objects are encountered, the calculated memory footprint may be inaccurate.  Specify `reportUnsizeable: true` to log an information message when HCL cache is unable to calculate an accurate object memory footprint.  The default value of this configuration setting is `false`.
 
 ```
-cacheConfigs:
-  globalLocalCacheConfiguration:
-    reportUnsizeable: false
+globalLocalCache:
+  reportUnsizeable: false
 ```
-
