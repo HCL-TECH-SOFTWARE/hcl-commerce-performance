@@ -7,7 +7,7 @@
 - *Improvement*: HC-22481 - Remote cache is disabled by default in auth
 - *Improvement*: HC-17013 - Circuit Breakers use Resilience4j
 - *Improvement*: HC-21375 - Redisson maintenance upgrade - 3.19.0
-- *Improvement*: HC-20580 - LowMemoryMaintenance configuration tuning\
+- *Improvement*: HC-20580 - LowMemoryMaintenance configuration tuning
 - *Improvement*: HC-22795 - Improvements for exception management and timeToLive options
 
 
