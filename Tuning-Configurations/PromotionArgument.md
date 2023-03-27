@@ -8,7 +8,7 @@ This configuration requires both a database and a configuration update:
 
 - Database update:
 ```
-`INSERT INTO CMDREG (STOREENT_ID, INTERFACENAME, CLASSNAME) VALUES (0,'com.ibm.commerce.order.calculation.FinalizeDiscountCalculationUsageCmd', 'com.ibm.commerce.order.calculation.FinalizeDiscountCalculationUsageNoPromoargCmdImpl'); `
+INSERT INTO CMDREG (STOREENT_ID, INTERFACENAME, CLASSNAME) VALUES (0,'com.ibm.commerce.order.calculation.FinalizeDiscountCalculationUsageCmd', 'com.ibm.commerce.order.calculation.FinalizeDiscountCalculationUsageNoPromoargCmdImpl'); 
 ```
 - Configuration update:
 ```

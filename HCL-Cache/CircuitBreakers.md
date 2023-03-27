@@ -22,7 +22,62 @@ Slow Redis requests are not considered failures unless they time out. The [Redis
 
 Considering retries, with the configuration above a request will need 16.5 seconds before returning in failure (3000+3*(3000+1500)). Timeouts can be made more aggresive but that could lead to sporadic errors in the logs. 
 
-### Circuit breaker configurations
+### Circuit breaker configurations (9.1.12+)
+
+HCL Commerce 9.1.12 introduces new circuit breaker logic based on the [Resilience4j](https://resilience4j.readme.io/docs/circuitbreaker) library. This library has the advantage that besides tracking success and failure conditions (e.g. if the request ended in error), it can also trigger based on increased response times.
+
+9.1.12+ environments automatically use the new implementation unless the original circuit breaker configurations in the YAML file has been customized.
+If the original circuit breaker configuration is using non-default values, the original implementation will be used instead. To use the new implementation,
+remove the circuit breaker configurations from the YAML configuration.
+
+Circuit breaker configurations can be adjusted using the [Cache YAML](CacheConfiguration.md) configuration. The new format allows defining of multiple circuit breaker configurations. The default configuration must always exist.
+
+```
+redis:
+  enabled: true  
+  yamlConfig: "C:/dev/projects/redis/maven/workspace/redis-cache/config/redis_cfg.yaml"
+  circuitBreakerV2:
+     enabled: true
+     scope: auto
+     configurations:
+     - name: default
+       waitDurationInOpenStateSeconds: 60
+       failureRateThreshold: 50
+       minimumNumberOfCalls: 20
+       slidingWindowType: COUNT_BASED
+       permittedNumberOfCallsInHalfOpenState: 2
+       slowCallRateThreshold: 100
+       slowCallDurationThresholdMs: 500
+       slidingWindowSize: 50
+```
+
+Besides the configurations at the Redis client level, it's also possible to configure circuit breakers at the cache level. Use *false* to disable the circuit breaker
+for a particular cache, or specify the name of a circuit breaker configuration as defined under the `redis.circuitBreakerV2.configurations` element. If a non-default
+configuration is specified, the cache will use a cache level circuit breaker regarless of the scope defined in the Redis client.
+
+```
+ "services/cache/MyCustomCache":
+    remoteCache:
+      enabled: true
+      useCircuitBreaker: agressive_timeout
+```
+
+#### Resilience4j Configurations
+
+The configurations under the `redis.circuitBreakerV2.configurations` element are standard from the [resilience4j-circuitbreaker](https://resilience4j.readme.io/docs/circuitbreaker#create-and-configure-a-circuitbreaker) library. Their usage is as follows:
+ 
+Setting | Default | Use
+--- | --- | ---
+waitDurationInOpenStateSeconds | 60 | Configures an interval function with a fixed wait duration which controls how long the CircuitBreaker should stay open, before it switches to half open. |
+failureRateThreshold | 50 | Configures the failure rate threshold in percentage. If the failure rate is equal to or greater than the threshold, the CircuitBreaker transitions to open and startshort-circuiting calls. The threshold must be greater than 0 and not greater than 100.
+minimumNumberOfCalls | 20 | Configures the minimum number of calls which are required (per sliding window period) before the CircuitBreaker can calculate the error rate.  For example, if minimumNumberOfCalls is 10, then at least 10 calls must be recorded, before the failure rate can be calculated. If only 9 calls have been recorded,  the CircuitBreaker will not transition to open, even if all 9 calls have failed.
+slidingWindowType | COUNT_BASED | Configures the type of the sliding window which is used to record the outcome of callswhen the CircuitBreaker is closed. Sliding window can either be count-based or time-based.
+permittedNumberOfCallsInHalfOpenState | 2 | Configures the number of permitted calls when the CircuitBreaker is half open. The size must be greater than 0. 
+slowCallRateThreshold | 100 | Configures a threshold in percentage. The CircuitBreaker considers a call as slow when the call duration is greater than slowCallDurationThresholdMs. When the percentage of slow calls is equal to or greater than the threshold, the CircuitBreaker transitions to open and starts short-circuiting calls.  The threshold must be greater than 0 and not greater than 100. Default value is 100 percentage which means that all recorded calls must be slower than  slowCallDurationThresholdMs.
+slowCallDurationThresholdMs | 500 | Configures the duration threshold above which calls are considered as slow and increases the slow calls percentage. 
+slidingWindowSize | 50 |  Configures the size of the sliding window which is used to record the outcome of calls when the CircuitBreaker is closed.
+
+### Circuit breaker configurations (9.1.11 and earlier)
 
 Circuit breaker configurations can be adjusted using the [Cache YAML](CacheConfiguration.md) configuration. 
 

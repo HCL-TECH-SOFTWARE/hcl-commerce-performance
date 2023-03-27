@@ -9,3 +9,7 @@ For more details, visit the [HCL Commerce 9.1 Help Center](https://help.hcltechs
 - [Inventory locking](InventoryLocking.md)
 - [Extended caching configurations](TransactionServer-ExtendedCaching.md)
 
+
+## Solr Server
+- [Extended caching configurations](SolrSearch-ExtendedCaching.md)
+

@@ -1,4 +1,4 @@
-# HCL Cache Maintenance (9.1.11)
+# HCL Cache Maintenance (9.1.12+)
 
 HCL Cache implements a number of required maintenance processes. 
 
@@ -53,7 +53,7 @@ Expired maintenance details from the [HCL Cache - Remote](Monitoring.md) dashboa
 
 ## Low Memory Maintenance (onlineLowMemoryEntriesMaintenance)
 
-HCL Cache with Redis does not perform well when memory is full.  Processes, including maintenance processes, can fail with memory errors (*"command not allowed when used memory > 'maxmemory'"*). To prevent this situation, HCL Cache monitors the percentage of memory used and triggers Low Memory Maintenance processing to reduce the size of each cache. The processing removes both cached values and their associated cache entry metadata. The keys selected for removal are those sooner to expire.
+HCL Cache with Redis does not perform well when memory is full.  Processes, including maintenance processes, can fail with memory errors (*"command not allowed when used memory > 'maxmemory'"*). To prevent this situation, HCL Cache monitors the percentage of memory used and triggers Low Memory Maintenance processing to reduce the size of each cache. The processing removes both cached values and their associated cache entry metadata. The keys selected for removal are ones which are set to expire the soonest.
 The Low Memory Maintenance job is scheduled from all the pods, but it can only be active from a single container at any one time.
 
 ### Low Memory Maintenance in Redis Enterprise
@@ -66,16 +66,16 @@ The default configurations are as follows. For details on updating the configura
 
 Configuration | Default | Use
 --- | --- | --- |
-intervalSecs | 120 | Interval at which the Low-Memory maintenance job runs on each pod to check for memory conditions. |
+intervalSecs | 30 | Interval at which the Low-Memory maintenance job runs on each pod to check for memory conditions. |
 maxMemoryPercentage | 93 | If the percentage of memory used is at or above this configuration, the maintenace process must execute.  | 
 maintenancePercentageBuffer | 5 | The percentage of the cache that is removed. For example, if *maxMemoryPercentage* is 93% and *maintenancePercentageBuffer* is 5%, the target memory used after maintenance is 88%.
-putOperationPausePercentage | 5 | This percentage is added to the maxMemoryPercentage. For example, if *maxMemoryPercentage* is 93% and *putOperationPausePercentage* is 5%, when used memory reaches 98%, caches stop inserting to the remote cache to allow maintenance to catch up.
+putOperationPauseThresholdPercentage | 99 | Percentage of the cache at which put operations are paused. This is a last resort operation as lowMemory maintenance should maintain the used memory percentage under the maxMemoryPercentage limit. If pauses are detected, tuning might be required such as increasing the size of the memory in Redis, or more frequent maintenance.
 softMaxSize | -1 | Used to set a maximum size in entries. It can be used in combination with *maxMemoryPercentage*.
 softMaxSizeAsPercentFull|  93 | Used to map the current cache size in entries for *softMaxSize* to a cleanupRate that is specified as a cache percentage. In this case, when the cache size is equal to *softMaxSize*, the used % is asumed to be 93%. This makes the calculations equivalent to *maxMemoryPercentage*.
 
 #### Low Memory Maintenance cleanup rates
 
-The speed of maintenance adjusts depending on the percentage of memory free. Maintenance starts at 500/sec. If memory reaches 100%, maintenance could run as fast as 4,000/sec.
+The speed of maintenance is adjusted depending on the percentage of memory free. Maintenance starts at 500/sec. If memory reaches 100%, maintenance could run as fast as 4,000/sec.
 
 ```
 used: >= 100%  inLUA:  5 pipeline: 10 delayMs:  5 -- speed: 10,000/sec,   600,000/min
@@ -109,7 +109,7 @@ newerThan: ~ ALL ~              inLUA:  5 pipeline:  5 delayMs:     12 -- speed:
 
 ## Updating the Default Maintenance Values
 
-Although due to the self-adjusting nature of the scripts, tuning may not be required, configurations can be changed by updating the  [Cache YAML configuration files](CacheConfiguration.md). Configurations can be changed at the cache level, or for all caches by using `defaultCacheConfig`:
+Due to the self-adjusting nature of the scripts, tuning may not be required. However, configurations can be changed by updating the  [Cache YAML configuration files](CacheConfiguration.md). Configurations can be changed at the cache level, or for all caches by using `defaultCacheConfig`:
 
 ```
 cacheConfigs:
@@ -122,7 +122,6 @@ cacheConfigs:
        onlineInactiveEntriesMaintenance:
 ```
 
-Use the out-of-the-box configuration in `/SETUP/hcl-cache/cache_cfg.yaml` as a starting point.
+As a starting point, it is recommended that the out-of-the-box configuration in `/SETUP/hcl-cache/cache_cfg.yaml` be used.
 
-> For list configuration such as `cleanupRate`, customizations must re-define the whole list instead of individual elements
-
+> For list configurations such as `cleanupRate`, customizations must re-define the whole list instead of individual elements

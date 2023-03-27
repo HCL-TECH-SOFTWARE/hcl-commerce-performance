@@ -103,6 +103,8 @@ The information in the report include:
 - Top cache entries by size
 - Top dependencies by Size
 
+> Due to library limitations, this utility does not currently support Redis 7 (version 10) RDB files.
+
 ### Obtaining an RDB file
 
 If your Redis server is already configured with RDB persistence (CONFIG SAVE GET),
