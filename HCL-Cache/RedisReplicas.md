@@ -72,7 +72,7 @@ cacheConfigs:
       forceReadFromMaster: false
 ```
 
-- `syncReplicas`: If enabled, the HCL Cache invokes the [WAIT](https://redis.io/commands/wait/) command after a `PUT` operation. The `WAIT` command introduces a delay until the configured number of replicas have processed the change, or the timeout is reached. Instead of specifiying a fixed number of replicas, it is possible to use `all` which translates to the number of replicas currently known by the Redis client. In 9.1.111+, Use `none` to disable.
+- `syncReplicas`: If enabled, the HCL Cache invokes the [WAIT](https://redis.io/commands/wait/) command after a `PUT` operation. The `WAIT` command introduces a delay until the configured number of replicas have processed the change, or the timeout is reached. Instead of specifiying a fixed number of replicas, it is possible to use `all` which translates to the number of replicas currently known by the Redis client. In 9.1.11+, Use `none` to disable.
 *Example:* With the following configuration, the HCL Cache will wait until the change is replicated to all the available replicas, but will not wait more than the specified 250 milliseconds:
 ```
   syncReplicas: all:250

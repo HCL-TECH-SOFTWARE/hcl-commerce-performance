@@ -1,7 +1,17 @@
 # Change Log
 
-## HCL Commerce 9.1.11
+## HCL Commerce 9.1.12
 
+- *Fix:* HC-23306 - The schedule of cache maintenance and registry refreshes might stop running after errors
+- *Fix:* HC-23436 - HCL Cache utilities are unable to connect to Redis when password is on Vault
+- *Improvement*: HC-22481 - Remote cache is disabled by default in auth
+- *Improvement*: HC-17013 - Circuit Breakers use Resilience4j
+- *Improvement*: HC-21375 - Redisson maintenance upgrade - 3.19.0
+- *Improvement*: HC-20580 - LowMemoryMaintenance configuration tuning
+- *Improvement*: HC-22795 - Improvements for exception management and timeToLive options
+
+
+## HCL Commerce 9.1.11
 
 - *Fix*: HC-17014 - Prometheus metrics for maintenance tasks not working
 - *Improvement*: HC-16863 - Redisson Maintenance Upgrade 3.17.4

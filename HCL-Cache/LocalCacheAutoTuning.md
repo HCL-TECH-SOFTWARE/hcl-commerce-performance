@@ -66,3 +66,4 @@ HCL local cache can calculate the memory footprint of cache entries when they co
 globalLocalCache:
   reportUnsizeable: false
 ```
+

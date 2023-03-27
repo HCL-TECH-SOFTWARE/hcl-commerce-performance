@@ -5,7 +5,12 @@ The script includes common search, browse, and checkout scenarios. The functiona
 The following steps will guide on how to import the script, set it up and start using it 
 
 ## Setting up the script  
-The package comes in a zip file that contains 2 files. One file in the word document and the other one is the OneTest Performance script file 
+The package comes in a zip file that contains the OneTest Performance script file  
+
+The script was written with HCL Onetest Performance Version 10.2  
+![i1-OneTestVersion](images/i1-OneTestVersion.JPG)  
+
+
 You would need 3 steps to setup the OneTest performance script. 
 - A. Import the script  
 - B. Import the libraries  
@@ -17,7 +22,7 @@ The details on these steps one by one will be found below:
 1. Download the package file (zip file) to your machine and save it under a new folder 
 2. Open OneTest and choose a new workspace, choose a location and an appropriate workspace name  
    ![i1-eclipse-launcher](images/i1-eclipse-launcher.jpg)  
-3. Close the tab  
+3. Close the Welcome tab  
 4. Right click in the Test Navigator and select Import  
    ![i2-test-navigator](images/i2-test-navigator.jpg)  
 5. Select Test > Test Asset with Dependencies and click Next. Select the file you downloaded in step 1 and then click Finish.  
@@ -76,7 +81,11 @@ No need to set or update the other variables. They’re just global variables.
 **B – Update Datapools**  
    1. In the Test Navigator, open Datapools folder.
    2. Open searchterm_oob datapool (Right click it > Open with > Text Editor) and change the content to put search terms related to your catalogue.
-   3. Open userids datapool and update it with the userids that you previously prepared and loaded to the database. Users with the format “hcluser%” are pre-added in the datapool. <br>The registered users need to be loaded to your database ahead of starting the performance test.  
+   3. Open userids datapool and update it with the userids that you previously prepared and loaded to the database. Users with the format “hcluser%” are pre-added in the datapool. <br>The registered users need to be loaded to your database ahead of starting the performance test. The users' passwords need also to be set for these new registered users as set by the variable users_password shown above.<br>    
+This page gives an example on how to load registered users:  
+[Sample: Loading registered users](https://help.hcltechsw.com/commerce/9.1.0/data/refs/rmlsamplepeople.html)  
+And this page gives a general overview or the dataload utility:  
+[Overview of the Data Load utility](https://help.hcltechsw.com/commerce/9.1.0/data/concepts/cmlbatchoverview.html)
 
 **C – Update Schedules**
   1. There are 4 schedules in this project:

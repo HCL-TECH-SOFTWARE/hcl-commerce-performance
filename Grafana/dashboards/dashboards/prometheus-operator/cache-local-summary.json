@@ -3,43 +3,66 @@
     "list": [
       {
         "builtIn": 1,
-        "datasource": "-- Grafana --",
+        "datasource": {
+          "type": "datasource",
+          "uid": "grafana"
+        },
         "enable": true,
         "hide": true,
         "iconColor": "rgba(0, 211, 255, 1)",
         "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
         "type": "dashboard"
       }
     ]
   },
   "description": "",
   "editable": true,
-  "gnetId": null,
+  "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 55,
-  "iteration": 1652828471144,
+  "id": 298,
+  "iteration": 1678205071626,
   "links": [
     {
-      "asDropdown": false,
+      "asDropdown": true,
+      "icon": "external link",
+      "includeVars": false,
+      "keepTime": true,
+      "tags": [
+        "hcl"
+      ],
+      "targetBlank": true,
+      "title": "HCL Dashboards",
+      "type": "dashboards"
+    },
+    {
+      "asDropdown": true,
       "icon": "external link",
       "includeVars": true,
       "keepTime": true,
       "tags": [
         "hcl-cache"
       ],
+      "targetBlank": true,
       "title": "Cache",
-      "type": "dashboards"
+      "tooltip": "",
+      "type": "dashboards",
+      "url": ""
     }
   ],
+  "liveNow": false,
   "panels": [
     {
       "columns": [],
-      "datasource": "${DS_PROMETHEUS}",
-      "description": "",
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
+      "datasource": {
+        "uid": "${DS_PROMETHEUS}"
       },
+      "description": "",
       "fontSize": "100%",
       "gridPos": {
         "h": 18,
@@ -49,7 +72,6 @@
       },
       "id": 422,
       "interval": "",
-      "pageSize": null,
       "showHeader": true,
       "sort": {
         "col": 1,
@@ -66,7 +88,6 @@
         {
           "alias": "cache",
           "align": "auto",
-          "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
             "rgba(237, 129, 40, 0.89)",
@@ -83,7 +104,6 @@
         {
           "alias": "entries",
           "align": "auto",
-          "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
             "rgba(237, 129, 40, 0.89)",
@@ -100,7 +120,6 @@
         {
           "alias": "max entries",
           "align": "auto",
-          "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
             "rgba(237, 129, 40, 0.89)",
@@ -137,7 +156,6 @@
         {
           "alias": "mb",
           "align": "auto",
-          "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
             "rgba(237, 129, 40, 0.89)",
@@ -154,7 +172,6 @@
         {
           "alias": "max mb",
           "align": "auto",
-          "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
             "rgba(237, 129, 40, 0.89)",
@@ -245,15 +262,13 @@
           "refId": "F"
         }
       ],
-      "timeFrom": null,
-      "timeShift": null,
       "title": "Cache Usage for $pod ",
       "transform": "table",
       "type": "table-old"
     }
   ],
   "refresh": false,
-  "schemaVersion": 27,
+  "schemaVersion": 36,
   "style": "dark",
   "tags": [
     "hcl-cache",
@@ -267,8 +282,6 @@
           "text": "Prometheus",
           "value": "Prometheus"
         },
-        "description": null,
-        "error": null,
         "hide": 0,
         "includeAll": false,
         "label": "Prometheus",
@@ -282,16 +295,16 @@
         "type": "datasource"
       },
       {
-        "allValue": null,
         "current": {
           "selected": false,
           "text": "commerce",
           "value": "commerce"
         },
-        "datasource": "${DS_PROMETHEUS}",
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_PROMETHEUS}"
+        },
         "definition": "label_values(hclcache_cache_size_max, namespace)",
-        "description": null,
-        "error": null,
         "hide": 0,
         "includeAll": false,
         "label": "namespace",
@@ -307,7 +320,6 @@
         "skipUrlSync": false,
         "sort": 1,
         "tagValuesQuery": "",
-        "tags": [],
         "tagsQuery": "",
         "type": "query",
         "useTags": false
@@ -316,13 +328,14 @@
         "allValue": ".*",
         "current": {
           "selected": false,
-          "text": "demodb2nifi-app",
-          "value": "demodb2nifi-app"
+          "text": "demo9111db2esnifi-app",
+          "value": "demo9111db2esnifi-app"
         },
-        "datasource": "${DS_PROMETHEUS}",
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_PROMETHEUS}"
+        },
         "definition": "label_values(hclcache_cache_size_max{namespace=\"$namespace\"}, job)",
-        "description": null,
-        "error": null,
         "hide": 0,
         "includeAll": false,
         "label": "deployment",
@@ -338,25 +351,23 @@
         "skipUrlSync": false,
         "sort": 0,
         "tagValuesQuery": "",
-        "tags": [],
         "tagsQuery": "",
         "type": "query",
         "useTags": false
       },
       {
-        "allValue": null,
         "current": {
           "selected": false,
-          "text": "demodb2auth",
-          "value": "demodb2auth"
+          "text": "demo9111db2esauth",
+          "value": "demo9111db2esauth"
         },
-        "datasource": "${DS_PROMETHEUS}",
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_PROMETHEUS}"
+        },
         "definition": "label_values(hclcache_cache_size_max{namespace=\"$namespace\",job=\"$job\"}, cachespace)",
-        "description": null,
-        "error": null,
         "hide": 0,
         "includeAll": false,
-        "label": null,
         "multi": false,
         "name": "cachespace",
         "options": [],
@@ -369,7 +380,6 @@
         "skipUrlSync": false,
         "sort": 0,
         "tagValuesQuery": "",
-        "tags": [],
         "tagsQuery": "",
         "type": "query",
         "useTags": false
@@ -378,13 +388,14 @@
         "allValue": ".*",
         "current": {
           "selected": false,
-          "text": "demodb2nifi-app-5cb67d9d85-pgrdl",
-          "value": "demodb2nifi-app-5cb67d9d85-pgrdl"
+          "text": "demo9111db2esnifi-app-dbd7b4bb-gpm2d",
+          "value": "demo9111db2esnifi-app-dbd7b4bb-gpm2d"
         },
-        "datasource": "${DS_PROMETHEUS}",
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_PROMETHEUS}"
+        },
         "definition": "label_values(hclcache_cache_size_max{namespace=\"$namespace\",job=\"$job\",cachespace=\"$cachespace\"}, pod)",
-        "description": null,
-        "error": null,
         "hide": 0,
         "includeAll": false,
         "label": "pod",
@@ -400,7 +411,6 @@
         "skipUrlSync": false,
         "sort": 0,
         "tagValuesQuery": "",
-        "tags": [],
         "tagsQuery": "",
         "type": "query",
         "useTags": false
@@ -428,5 +438,6 @@
   "timezone": "",
   "title": "HCL Cache - Local Cache Summary",
   "uid": "hcl_cache_local_summary",
-  "version": 9111
+  "version": 9112,
+  "weekStart": ""
 }
