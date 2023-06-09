@@ -13,6 +13,8 @@ RUN run merge-cachespec /opt/WebSphere/AppServer/profiles/default/installedApps/
 
 ## Command Caching for Marketing
 
+*This function is enabled by default since 9.1.13*
+
 Enabling [Command caching for marketing](https://help.hcltechsw.com/commerce/9.1.0/admin/concepts/cdcmarcaccomcac.html) can improve performance and reduce the number of query executions.
 
 To enable, merge the configurations in the sample file 

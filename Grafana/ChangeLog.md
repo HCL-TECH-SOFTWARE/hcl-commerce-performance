@@ -1,5 +1,9 @@
 # Change Log
 
+## HCL Commerce 9.1.13
+
+- *Improvement*: HC-26312 - Concurrency Limiters panels in Query-app dashboard
+
 ## HCL Commerce 9.1.12
 
 - *Improvement*: HC-20121 - New timer for cached JPA operations: access_bean_cache and updated Transaction Servers dashboard
@@ -13,3 +17,4 @@
 ## HCL Commerce 9.1.11
 
 - *Improvement*: HC-16663 - Implement new Solr Search dashboard and metrics for Solr processors and backend requests
+
