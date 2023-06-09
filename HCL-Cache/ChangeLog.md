@@ -1,5 +1,11 @@
 # Change Log
 
+## HCL Commerce 9.1.13
+
+- *Improvement*: HC-26579 - Redisson Upgrade 3.21.3
+- *Improvement*: HC-26560 - Circuit Breakers implement validateConnection(). Updated defaults: *waitDurationInOpenStateSeconds: 30, slowCallDurationThresholdMs: 250*
+- *Fix:* HC-25363 - Lowered *tightMemoryPercentUsedThreshold* default from 75 to 70 to avoid high garbage collection activity
+
 ## HCL Commerce 9.1.12
 
 - *Fix:* HC-23306 - The schedule of cache maintenance and registry refreshes might stop running after errors
@@ -7,7 +13,7 @@
 - *Improvement*: HC-22481 - Remote cache is disabled by default in auth
 - *Improvement*: HC-17013 - Circuit Breakers use Resilience4j
 - *Improvement*: HC-21375 - Redisson maintenance upgrade - 3.19.0
-- *Improvement*: HC-20580 - LowMemoryMaintenance configuration tuning
+- *Improvement*: HC-20580 - LowMemoryMaintenance configuration tuning\
 - *Improvement*: HC-22795 - Improvements for exception management and timeToLive options
 
 

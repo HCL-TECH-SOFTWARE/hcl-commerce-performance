@@ -28,12 +28,12 @@ See [Cache Configuration](CacheConfiguration.md) for details of updating the HCL
 
 #### Configuring used memory thresholds
 
-By default, caches can increase their maximum sizes when used JVM memory is less than 65% of the maximum heap size, and will decrease their maximum sizes when used JVM memory is more than 75% of the maximum heap size.
+By default, caches can increase their maximum sizes when used JVM memory is less than 65% of the maximum heap size, and will decrease their maximum sizes when used JVM memory is more than 70% (prior to version 9.1.13 the default was 75%) of the maximum heap size.
 
 ```
 globalLocalCache:
   localCacheTuning:
-    tightMemoryPercentUsedThreshold: 75
+    tightMemoryPercentUsedThreshold: 70
     normalMemoryPercentUsedThreshold: 65
 ```
 

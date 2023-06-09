@@ -21,11 +21,12 @@
       }
     ]
   },
+  "description": "",
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
   "id": 153,
-  "iteration": 1678205310036,
+  "iteration": 1683154505051,
   "links": [
     {
       "asDropdown": true,
@@ -74,6 +75,7 @@
     },
     {
       "datasource": {
+        "type": "prometheus",
         "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
@@ -122,7 +124,11 @@
       "pluginVersion": "8.5.0",
       "targets": [
         {
-          "expr": "sum(hclcache_remoteclient_outage{ namespace=\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\"})",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "expr": "sum(hclcache_remoteclient_outage{ namespace=\"$namespace\", cachespace=\"$env\", job=~\"$job\", pod=~\"$pod\"})",
           "format": "time_series",
           "instant": true,
           "interval": "",
@@ -139,6 +145,7 @@
       "dashLength": 10,
       "dashes": false,
       "datasource": {
+        "type": "prometheus",
         "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
@@ -185,7 +192,11 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(hclcache_remoteclient_outage{namespace=\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\"}) by (pod) > 0",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "expr": "sum(hclcache_remoteclient_outage{namespace=\"$namespace\", cachespace=\"$env\", job=~\"$job\", pod=~\"$pod\"}) by (pod) > 0",
           "interval": "",
           "legendFormat": "{{pod}}",
           "refId": "A"
@@ -207,6 +218,7 @@
       },
       "yaxes": [
         {
+          "$$hashKey": "object:69",
           "decimals": 0,
           "format": "short",
           "logBase": 1,
@@ -214,6 +226,7 @@
           "show": true
         },
         {
+          "$$hashKey": "object:70",
           "format": "short",
           "logBase": 1,
           "min": "0",
@@ -226,6 +239,7 @@
     },
     {
       "datasource": {
+        "type": "prometheus",
         "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
@@ -274,7 +288,11 @@
       "pluginVersion": "8.5.0",
       "targets": [
         {
-          "expr": "sum(hclcache_cache_outage{namespace=\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\"})",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "expr": "sum(hclcache_cache_outage{namespace=\"$namespace\", cachespace=\"$env\", job=~\"$job\", pod=~\"$pod\"})",
           "format": "time_series",
           "instant": true,
           "interval": "",
@@ -291,6 +309,7 @@
       "dashLength": 10,
       "dashes": false,
       "datasource": {
+        "type": "prometheus",
         "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
@@ -337,7 +356,11 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(hclcache_cache_outage{namespace=\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\"}) by (name) > 0",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "expr": "sum(hclcache_cache_outage{namespace=\"$namespace\", cachespace=\"$env\", job=~\"$job\", pod=~\"$pod\"}) by (name) > 0",
           "interval": "",
           "legendFormat": "{{name}}",
           "refId": "A"
@@ -359,6 +382,7 @@
       },
       "yaxes": [
         {
+          "$$hashKey": "object:173",
           "decimals": 0,
           "format": "short",
           "label": "",
@@ -367,6 +391,7 @@
           "show": true
         },
         {
+          "$$hashKey": "object:174",
           "format": "short",
           "logBase": 1,
           "min": "0",
@@ -396,6 +421,7 @@
           "dashLength": 10,
           "dashes": false,
           "datasource": {
+            "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
           "decimals": 0,
@@ -445,7 +471,11 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "max( (  hclcache_cache_size_current{ namespace=\"$namespace\", cachespace=\"$environment\", scope=\"remote\", result!=\"error\", name=~\"$cache\" } > 0 ) * on ( pod, namespace, cachespace, name) group_left( redis_instance ) hclcache_cache_remote_node_mapping{ redis_instance =~ \"$redis\"  }) by ( name, redis_instance )  ",
+              "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus"
+              },
+              "expr": "max( (  hclcache_cache_size_current{ namespace=\"$namespace\", cachespace=\"$env\", scope=\"remote\", result!=\"error\", name=~\"$cache\" } > 0 ) * on ( pod, namespace, cachespace, name) group_left( redis_instance ) hclcache_cache_remote_node_mapping{ redis_instance =~ \"$redis\"  }) by ( name, redis_instance )  ",
               "interval": "",
               "legendFormat": "{{redis_instance}} - {{name}}",
               "refId": "A"
@@ -467,6 +497,7 @@
           },
           "yaxes": [
             {
+              "$$hashKey": "object:234",
               "decimals": 0,
               "format": "short",
               "label": "",
@@ -475,6 +506,7 @@
               "show": true
             },
             {
+              "$$hashKey": "object:235",
               "format": "short",
               "label": "",
               "logBase": 1,
@@ -564,12 +596,14 @@
           },
           "yaxes": [
             {
+              "$$hashKey": "object:287",
               "format": "decbytes",
               "logBase": 1,
               "min": "0",
               "show": true
             },
             {
+              "$$hashKey": "object:288",
               "format": "decbytes",
               "logBase": 1,
               "show": true
@@ -602,6 +636,7 @@
           "dashLength": 10,
           "dashes": false,
           "datasource": {
+            "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
           "fieldConfig": {
@@ -647,26 +682,42 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum(rate(hclcache_cache_puts_duration_seconds_count{ namespace=\"$namespace\", cachespace=\"$environment\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", result!=\"error\", name=~\"$cache\"}[2m]))",
+              "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus"
+              },
+              "expr": "sum(rate(hclcache_cache_puts_duration_seconds_count{ namespace=\"$namespace\", cachespace=\"$env\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", result!=\"error\", name=~\"$cache\"}[2m]))",
               "hide": false,
               "interval": "",
               "legendFormat": "put",
               "refId": "A"
             },
             {
-              "expr": "sum(rate(hclcache_cache_gets_duration_seconds_count{ namespace=\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", result!=\"error\", name=~\"$cache\"}[2m]))",
+              "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus"
+              },
+              "expr": "sum(rate(hclcache_cache_gets_duration_seconds_count{ namespace=\"$namespace\", cachespace=\"$env\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", result!=\"error\", name=~\"$cache\"}[2m]))",
               "interval": "",
               "legendFormat": "get",
               "refId": "B"
             },
             {
-              "expr": "sum(rate(hclcache_cache_clears_duration_seconds_count{ namespace=\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", result!=\"error\", name=~\"$cache\"}[2m]))",
+              "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus"
+              },
+              "expr": "sum(rate(hclcache_cache_clears_duration_seconds_count{ namespace=\"$namespace\", cachespace=\"$env\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", result!=\"error\", name=~\"$cache\"}[2m]))",
               "interval": "",
               "legendFormat": "clear",
               "refId": "C"
             },
             {
-              "expr": "sum(rate(hclcache_cache_invalidates_duration_seconds_count{ namespace=\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", result!=\"error\", name=~\"$cache\"}[2m]))",
+              "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus"
+              },
+              "expr": "sum(rate(hclcache_cache_invalidates_duration_seconds_count{ namespace=\"$namespace\", cachespace=\"$env\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", result!=\"error\", name=~\"$cache\"}[2m]))",
               "interval": "",
               "legendFormat": "invalidate",
               "refId": "D"
@@ -711,6 +762,7 @@
           "dashLength": 10,
           "dashes": false,
           "datasource": {
+            "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
           "fieldConfig": {
@@ -756,26 +808,42 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum(increase(hclcache_cache_puts_duration_seconds_count{ namespace=\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", result=\"error\", name=~\"$cache\"}[2m]))",
+              "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus"
+              },
+              "expr": "sum(rate(hclcache_cache_puts_duration_seconds_count{ namespace=\"$namespace\", cachespace=\"$env\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", result=\"error\", name=~\"$cache\"}[2m]))",
               "hide": false,
               "interval": "",
               "legendFormat": "put",
               "refId": "A"
             },
             {
-              "expr": "sum(increase(hclcache_cache_gets_duration_seconds_count{ namespace=\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", result=\"error\", name=~\"$cache\"}[2m]))",
+              "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus"
+              },
+              "expr": "sum(rate(hclcache_cache_gets_duration_seconds_count{ namespace=\"$namespace\", cachespace=\"$env\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", result=\"error\", name=~\"$cache\"}[2m]))",
               "interval": "",
               "legendFormat": "get",
               "refId": "B"
             },
             {
-              "expr": "sum(increase(hclcache_cache_clears_duration_seconds_count{ namespace=\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", result=\"error\", name=~\"$cache\"}[2m]))",
+              "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus"
+              },
+              "expr": "sum(rate(hclcache_cache_clears_duration_seconds_count{ namespace=\"$namespace\", cachespace=\"$env\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", result=\"error\", name=~\"$cache\"}[2m]))",
               "interval": "",
               "legendFormat": "clear",
               "refId": "C"
             },
             {
-              "expr": "sum(increase(hclcache_cache_invalidates_duration_seconds_count{ namespace=\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", result=\"error\", name=~\"$cache\"}[2m]))",
+              "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus"
+              },
+              "expr": "sum(rate(hclcache_cache_invalidates_duration_seconds_count{ namespace=\"$namespace\", cachespace=\"$env\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", result=\"error\", name=~\"$cache\"}[2m]))",
               "interval": "",
               "legendFormat": "invalidate",
               "refId": "D"
@@ -797,12 +865,14 @@
           },
           "yaxes": [
             {
+              "$$hashKey": "object:91",
               "format": "short",
               "logBase": 1,
               "min": "0",
               "show": true
             },
             {
+              "$$hashKey": "object:92",
               "format": "short",
               "logBase": 1,
               "show": true
@@ -818,6 +888,7 @@
           "dashLength": 10,
           "dashes": false,
           "datasource": {
+            "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
           "fieldConfig": {
@@ -866,8 +937,12 @@
           "steppedLine": false,
           "targets": [
             {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus"
+              },
               "exemplar": true,
-              "expr": "\r\nsum(rate(hclcache_cache_gets_duration_seconds_count{ namespace=\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[2m])) by (name) > 0\r\r",
+              "expr": "\r\nsum(rate(hclcache_cache_gets_duration_seconds_count{ namespace=\"$namespace\", cachespace=\"$env\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[2m])) by (name) > 0\r\n\r\n",
               "hide": false,
               "interval": "",
               "legendFormat": "{{name}}",
@@ -914,6 +989,7 @@
           "dashLength": 10,
           "dashes": false,
           "datasource": {
+            "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
           "fieldConfig": {
@@ -962,8 +1038,12 @@
           "steppedLine": false,
           "targets": [
             {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus"
+              },
               "exemplar": true,
-              "expr": "sum(rate(hclcache_cache_puts_duration_seconds_count{ namespace=\"$namespace\",cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[2m]) ) by (name) ",
+              "expr": "sum(rate(hclcache_cache_puts_duration_seconds_count{ namespace=\"$namespace\",cachespace=\"$env\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[2m]) ) by (name) ",
               "interval": "",
               "legendFormat": "{{ name }}",
               "refId": "A"
@@ -1009,6 +1089,7 @@
           "dashLength": 10,
           "dashes": false,
           "datasource": {
+            "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
           "fieldConfig": {
@@ -1057,8 +1138,12 @@
           "steppedLine": false,
           "targets": [
             {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus"
+              },
               "exemplar": true,
-              "expr": "sum(rate(hclcache_cache_clears_duration_seconds_count{ namespace=\"$namespace\",cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[2m]) ) by (name) ",
+              "expr": "sum(rate(hclcache_cache_clears_duration_seconds_count{ namespace=\"$namespace\",cachespace=\"$env\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[2m]) ) by (name) ",
               "interval": "",
               "legendFormat": "{{ name }}",
               "refId": "A"
@@ -1104,6 +1189,7 @@
           "dashLength": 10,
           "dashes": false,
           "datasource": {
+            "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
           "fieldConfig": {
@@ -1152,8 +1238,12 @@
           "steppedLine": false,
           "targets": [
             {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus"
+              },
               "exemplar": true,
-              "expr": "sum(rate(hclcache_cache_invalidates_duration_seconds_count{ namespace=\"$namespace\",cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[2m]) ) by (name) ",
+              "expr": "sum(rate(hclcache_cache_invalidates_duration_seconds_count{ namespace=\"$namespace\",cachespace=\"$env\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[2m]) ) by (name) ",
               "interval": "",
               "legendFormat": "{{ name }}",
               "refId": "A"
@@ -1216,6 +1306,7 @@
           "dashLength": 10,
           "dashes": false,
           "datasource": {
+            "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
           "fieldConfig": {
@@ -1230,7 +1321,7 @@
             "h": 6,
             "w": 24,
             "x": 0,
-            "y": 28
+            "y": 9
           },
           "hiddenSeries": false,
           "id": 361,
@@ -1262,25 +1353,43 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum(rate(hclcache_cache_gets_duration_seconds_sum{ namespace=\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[2m])) / sum(rate(hclcache_cache_gets_duration_seconds_count{ namespace=\"$namespace\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[2m]))",
+              "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus"
+              },
+              "expr": "sum(rate(hclcache_cache_gets_duration_seconds_sum{ namespace=\"$namespace\", cachespace=\"$env\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[2m])) / sum(rate(hclcache_cache_gets_duration_seconds_count{ namespace=\"$namespace\",  cachespace=\"$env\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[2m]))",
               "interval": "",
               "legendFormat": "get",
               "refId": "A"
             },
             {
-              "expr": "sum(rate(hclcache_cache_puts_duration_seconds_sum{ namespace=\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[2m])) / sum(rate(hclcache_cache_puts_duration_seconds_count{ namespace=\"$namespace\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[2m]))",
+              "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus"
+              },
+              "expr": "sum(rate(hclcache_cache_puts_duration_seconds_sum{ namespace=\"$namespace\", cachespace=\"$env\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[2m])) / sum(rate(hclcache_cache_puts_duration_seconds_count{ namespace=\"$namespace\", cachespace=\"$env\",job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[2m]))",
               "interval": "",
               "legendFormat": "put",
               "refId": "B"
             },
             {
-              "expr": "sum(rate(hclcache_cache_removes_duration_seconds_sum{ namespace=\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[2m])) / sum(rate(hclcache_cache_puts_duration_seconds_count{ namespace=\"$namespace\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[2m]))",
+              "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus"
+              },
+              "editorMode": "code",
+              "expr": "sum(rate(hclcache_cache_clears_duration_seconds_sum{ namespace=\"$namespace\", cachespace=\"$env\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[2m])) / sum(rate(hclcache_cache_puts_duration_seconds_count{ namespace=\"$namespace\", cachespace=\"$env\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[2m]))",
               "interval": "",
-              "legendFormat": "remove",
+              "legendFormat": "clear",
+              "range": true,
               "refId": "C"
             },
             {
-              "expr": "sum(rate(hclcache_cache_invalidates_duration_seconds_sum{ namespace=\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[2m])) / sum(rate(hclcache_cache_puts_duration_seconds_count{ namespace=\"$namespace\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[2m]))",
+              "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus"
+              },
+              "expr": "sum(rate(hclcache_cache_invalidates_duration_seconds_sum{ namespace=\"$namespace\", cachespace=\"$env\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[2m])) / sum(rate(hclcache_cache_puts_duration_seconds_count{ namespace=\"$namespace\", cachespace=\"$env\",job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[2m]))",
               "interval": "",
               "legendFormat": "invalidate",
               "refId": "D"
@@ -1325,6 +1434,7 @@
           "dashLength": 10,
           "dashes": false,
           "datasource": {
+            "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
           "fieldConfig": {
@@ -1339,7 +1449,7 @@
             "h": 6,
             "w": 24,
             "x": 0,
-            "y": 34
+            "y": 15
           },
           "hiddenSeries": false,
           "id": 360,
@@ -1371,36 +1481,56 @@
           "steppedLine": false,
           "targets": [
             {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus"
+              },
               "exemplar": true,
-              "expr": "histogram_quantile(0.95, sum(rate(hclcache_cache_gets_duration_seconds_bucket{ namespace=\"$namespace\", cachespace=\"$environment\", cachespace=\"$environment\",job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[5m])) by (le))",
+              "expr": "histogram_quantile(0.95, sum(rate(hclcache_cache_gets_duration_seconds_bucket{ namespace=\"$namespace\", cachespace=\"$env\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[5m])) by (le))",
               "interval": "",
               "legendFormat": "get",
               "refId": "A"
             },
             {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus"
+              },
               "exemplar": true,
-              "expr": "histogram_quantile(0.95, sum(rate(hclcache_cache_puts_duration_seconds_bucket{ namespace=\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\"}[5m])) by (le))",
+              "expr": "histogram_quantile(0.95, sum(rate(hclcache_cache_puts_duration_seconds_bucket{ namespace=\"$namespace\", cachespace=\"$env\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\"}[5m])) by (le))",
               "interval": "",
               "legendFormat": "put ",
               "refId": "C"
             },
             {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus"
+              },
               "exemplar": true,
-              "expr": "histogram_quantile(0.95, sum(rate(hclcache_cache_clears_duration_seconds_bucket{ namespace=\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\"}[5m])) by (le))",
+              "expr": "histogram_quantile(0.95, sum(rate(hclcache_cache_clears_duration_seconds_bucket{ namespace=\"$namespace\", cachespace=\"$env\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\"}[5m])) by (le))",
               "interval": "",
               "legendFormat": "clear",
               "refId": "B"
             },
             {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus"
+              },
               "exemplar": true,
-              "expr": "histogram_quantile(0.95, sum(rate(hclcache_cache_invalidates_duration_seconds_bucket{ namespace=\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[5m])) by (le))",
+              "expr": "histogram_quantile(0.95, sum(rate(hclcache_cache_invalidates_duration_seconds_bucket{ namespace=\"$namespace\", cachespace=\"$env\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[5m])) by (le))",
               "interval": "",
               "legendFormat": "invalidate",
               "refId": "D"
             },
             {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus"
+              },
               "exemplar": true,
-              "expr": "histogram_quantile(0.95, sum(rate(hclcache_cache_removes_duration_seconds_bucket{ namespace=\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[5m])) by (le))",
+              "expr": "histogram_quantile(0.95, sum(rate(hclcache_cache_removes_duration_seconds_bucket{ namespace=\"$namespace\", cachespace=\"$env\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[5m])) by (le))",
               "interval": "",
               "legendFormat": "remove",
               "refId": "E"
@@ -1445,6 +1575,7 @@
           "dashLength": 10,
           "dashes": false,
           "datasource": {
+            "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
           "fieldConfig": {
@@ -1459,7 +1590,7 @@
             "h": 6,
             "w": 24,
             "x": 0,
-            "y": 40
+            "y": 21
           },
           "hiddenSeries": false,
           "id": 369,
@@ -1491,36 +1622,56 @@
           "steppedLine": false,
           "targets": [
             {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus"
+              },
               "exemplar": true,
-              "expr": "histogram_quantile(0.99, sum(rate(hclcache_cache_gets_duration_seconds_bucket{ namespace=\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\"  }[5m])) by (le))",
+              "expr": "histogram_quantile(0.99, sum(rate(hclcache_cache_gets_duration_seconds_bucket{ namespace=\"$namespace\", cachespace=\"$env\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\"  }[5m])) by (le))",
               "interval": "",
               "legendFormat": "get",
               "refId": "A"
             },
             {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus"
+              },
               "exemplar": true,
-              "expr": "histogram_quantile(0.99, sum(rate(hclcache_cache_puts_duration_seconds_bucket{ namespace=\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\"}[5m])) by (le))",
+              "expr": "histogram_quantile(0.99, sum(rate(hclcache_cache_puts_duration_seconds_bucket{ namespace=\"$namespace\", cachespace=\"$env\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\"}[5m])) by (le))",
               "interval": "",
               "legendFormat": "put ",
               "refId": "C"
             },
             {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus"
+              },
               "exemplar": true,
-              "expr": "histogram_quantile(0.99, sum(rate(hclcache_cache_clears_duration_seconds_bucket{ namespace=\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[5m])) by (le))",
+              "expr": "histogram_quantile(0.99, sum(rate(hclcache_cache_clears_duration_seconds_bucket{ namespace=\"$namespace\", cachespace=\"$env\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[5m])) by (le))",
               "interval": "",
               "legendFormat": "clear",
               "refId": "B"
             },
             {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus"
+              },
               "exemplar": true,
-              "expr": "histogram_quantile(0.99, sum(rate(hclcache_cache_invalidates_duration_seconds_bucket{ namespace=\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[5m])) by (le))",
+              "expr": "histogram_quantile(0.99, sum(rate(hclcache_cache_invalidates_duration_seconds_bucket{ namespace=\"$namespace\", cachespace=\"$env\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[5m])) by (le))",
               "interval": "",
               "legendFormat": "invalidate",
               "refId": "D"
             },
             {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus"
+              },
               "exemplar": true,
-              "expr": "histogram_quantile(0.99, sum(rate(hclcache_cache_removes_duration_seconds_bucket{ namespace=\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[5m])) by (le))",
+              "expr": "histogram_quantile(0.99, sum(rate(hclcache_cache_removes_duration_seconds_bucket{ namespace=\"$namespace\", cachespace=\"$env\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\" }[5m])) by (le))",
               "interval": "",
               "legendFormat": "remove",
               "refId": "E"
@@ -1583,6 +1734,7 @@
           "dashLength": 10,
           "dashes": false,
           "datasource": {
+            "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
           "fieldConfig": {
@@ -1628,7 +1780,11 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum by (result) (rate(hclcache_cache_gets_duration_seconds_count{ namespace=\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", result !=\"error\", name=~\"$cache\"}[2m]))",
+              "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus"
+              },
+              "expr": "sum by (result) (rate(hclcache_cache_gets_duration_seconds_count{ namespace=\"$namespace\", cachespace=\"$env\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", result !=\"error\", name=~\"$cache\"}[2m]))",
               "hide": false,
               "interval": "",
               "legendFormat": "{{result}}",
@@ -1651,12 +1807,14 @@
           },
           "yaxes": [
             {
+              "$$hashKey": "object:897",
               "format": "short",
               "logBase": 1,
               "min": "0",
               "show": true
             },
             {
+              "$$hashKey": "object:898",
               "format": "short",
               "logBase": 1,
               "show": true
@@ -1668,6 +1826,7 @@
         },
         {
           "datasource": {
+            "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
           "fieldConfig": {
@@ -1677,14 +1836,11 @@
               "max": 1,
               "min": 0,
               "thresholds": {
-                "mode": "absolute",
+                "mode": "percentage",
                 "steps": [
                   {
-                    "color": "green"
-                  },
-                  {
-                    "color": "red",
-                    "value": 80
+                    "color": "green",
+                    "value": null
                   }
                 ]
               },
@@ -1717,7 +1873,11 @@
           "pluginVersion": "8.5.0",
           "targets": [
             {
-              "expr": "sum(rate(hclcache_cache_gets_duration_seconds_count{ namespace=\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", result =\"hit\", name=~\"$cache\"}[2m])) / sum(rate(hclcache_cache_gets_duration_seconds_count{ namespace=\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", result !=\"error\", name=~\"$cache\"}[2m]))",
+              "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus"
+              },
+              "expr": "sum(rate(hclcache_cache_gets_duration_seconds_count{ namespace=\"$namespace\", cachespace=\"$env\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", result =\"hit\", name=~\"$cache\"}[2m])) / sum(rate(hclcache_cache_gets_duration_seconds_count{ namespace=\"$namespace\", cachespace=\"$env\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", result !=\"error\", name=~\"$cache\"}[2m]))",
               "hide": false,
               "instant": false,
               "interval": "",
@@ -1751,6 +1911,7 @@
           "dashLength": 10,
           "dashes": false,
           "datasource": {
+            "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
           "description": "",
@@ -1766,7 +1927,7 @@
             "h": 11,
             "w": 11,
             "x": 0,
-            "y": 18
+            "y": 11
           },
           "hiddenSeries": false,
           "id": 381,
@@ -1798,7 +1959,11 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum(rate(hclcache_cache_invalidation_messages_total{ namespace=\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", type=\"dependency\", name=~\"$cache\"} [2m] ) ) by (name) > 0",
+              "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus"
+              },
+              "expr": "sum(rate(hclcache_cache_invalidation_messages_total{ namespace=\"$namespace\", cachespace=\"$env\", job=~\"$job\", pod=~\"$pod\", type=\"dependency\", name=~\"$cache\"} [2m] ) ) by (name) > 0",
               "interval": "",
               "legendFormat": "{{name}}",
               "refId": "A"
@@ -1820,12 +1985,14 @@
           },
           "yaxes": [
             {
+              "$$hashKey": "object:958",
               "format": "short",
               "logBase": 1,
               "min": "0",
               "show": true
             },
             {
+              "$$hashKey": "object:959",
               "format": "short",
               "logBase": 1,
               "show": true
@@ -1841,6 +2008,7 @@
           "dashLength": 10,
           "dashes": false,
           "datasource": {
+            "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
           "description": "",
@@ -1856,7 +2024,7 @@
             "h": 11,
             "w": 13,
             "x": 11,
-            "y": 18
+            "y": 11
           },
           "hiddenSeries": false,
           "id": 382,
@@ -1888,7 +2056,11 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum(rate(hclcache_cache_invalidation_messages_total{ namespace=\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", type=\"clear\", name=~\"$cache\"}[2m])) by (name) > 0",
+              "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus"
+              },
+              "expr": "sum(rate(hclcache_cache_invalidation_messages_total{ namespace=\"$namespace\", cachespace=\"$env\", job=~\"$job\", pod=~\"$pod\", type=\"clear\", name=~\"$cache\"}[2m])) by (name) > 0",
               "interval": "",
               "legendFormat": "{{name}}",
               "refId": "A"
@@ -1910,12 +2082,14 @@
           },
           "yaxes": [
             {
+              "$$hashKey": "object:1015",
               "format": "short",
               "logBase": 1,
               "min": "0",
               "show": true
             },
             {
+              "$$hashKey": "object:1016",
               "format": "short",
               "logBase": 1,
               "show": true
@@ -1948,6 +2122,7 @@
           "dashLength": 10,
           "dashes": false,
           "datasource": {
+            "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
           "decimals": 0,
@@ -1997,7 +2172,11 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum( hclcache_cache_size_maintenance{ namespace=\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\" } ) by ( name )  > 0",
+              "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus"
+              },
+              "expr": "sum( hclcache_cache_size_maintenance{ namespace=\"$namespace\", cachespace=\"$env\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\" } ) by ( name )  > 0",
               "interval": "",
               "legendFormat": "{{name}}",
               "refId": "A"
@@ -2019,6 +2198,7 @@
           },
           "yaxes": [
             {
+              "$$hashKey": "object:1143",
               "decimals": 0,
               "format": "short",
               "label": "",
@@ -2027,6 +2207,7 @@
               "show": true
             },
             {
+              "$$hashKey": "object:1144",
               "format": "short",
               "label": "",
               "logBase": 1,
@@ -2096,7 +2277,7 @@
                 "uid": "prometheus"
               },
               "editorMode": "code",
-              "expr": "sum( rate( hclcache_cache_maintenance_online_keys_total{ namespace=\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", result!=\"error\", name=~\"$cache\", scope=\"remote\", type=\"expired\" }[5m]) > 0 ) by  (name) ",
+              "expr": "sum( rate( hclcache_cache_maintenance_online_keys_total{ namespace=\"$namespace\", cachespace=\"$env\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", result!=\"error\", name=~\"$cache\", scope=\"remote\", type=\"expired\" }[5m]) > 0 ) by  (name) ",
               "interval": "",
               "legendFormat": "{{name}}",
               "range": true,
@@ -2142,6 +2323,7 @@
           "dashLength": 10,
           "dashes": false,
           "datasource": {
+            "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
           "description": "When the HCL Cache detects that the memory in Redis is almost full, it can temporarily stop PUT operations while Low-Memory maintenance is running ",
@@ -2189,7 +2371,11 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum( hclcache_cache_remote_put_paused{ namespace=\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", name=~\"$cache\" } ) by (name)  > 0",
+              "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus"
+              },
+              "expr": "sum( hclcache_cache_remote_put_paused{ namespace=\"$namespace\", cachespace=\"$env\", job=~\"$job\", pod=~\"$pod\", name=~\"$cache\" } ) by (name)  > 0",
               "interval": "",
               "legendFormat": "{{name}}",
               "refId": "A"
@@ -2211,6 +2397,7 @@
           },
           "yaxes": [
             {
+              "$$hashKey": "object:1244",
               "decimals": 0,
               "format": "short",
               "label": "",
@@ -2219,6 +2406,7 @@
               "show": true
             },
             {
+              "$$hashKey": "object:1245",
               "format": "short",
               "logBase": 1,
               "show": true
@@ -2285,7 +2473,7 @@
                 "uid": "prometheus"
               },
               "editorMode": "code",
-              "expr": "sum( rate( hclcache_cache_maintenance_online_keys_total{ namespace=\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", result!=\"error\", name=~\"$cache\", scope=\"remote\", type=\"inactive\" }[5m]) ) by  ( name )",
+              "expr": "sum( rate( hclcache_cache_maintenance_online_keys_total{ namespace=\"$namespace\", cachespace=\"$env\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", result!=\"error\", name=~\"$cache\", scope=\"remote\", type=\"inactive\" }[5m]) ) by  ( name )",
               "interval": "",
               "legendFormat": "{{name}}",
               "range": true,
@@ -2296,7 +2484,7 @@
                 "type": "prometheus",
                 "uid": "prometheus"
               },
-              "expr": "sum( rate( hclcache_cache_maintenance_online_keys_total{ namespace=\"$namespace\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", result=\"error\", name=~\"$cache\", scope=\"remote\" }[5m]  ) ) by  ( type )",
+              "expr": "sum( rate( hclcache_cache_maintenance_online_keys_total{ namespace=\"$namespace\", cachespace=\"$env\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", result=\"error\", name=~\"$cache\", scope=\"remote\" }[5m]  ) ) by  ( type )",
               "hide": true,
               "interval": "",
               "legendFormat": "{{type}}-error",
@@ -2394,7 +2582,7 @@
               },
               "editorMode": "code",
               "exemplar": true,
-              "expr": "sum(rate(hclcache_cache_maintenance_online_duration_seconds_sum{ namespace=\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\"}[2m])) by (type)\r\n / sum(rate(hclcache_cache_maintenance_online_duration_seconds_count{ namespace=\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\"}[2m])) by (type)\r",
+              "expr": "sum(rate(hclcache_cache_maintenance_online_duration_seconds_sum{ namespace=\"$namespace\", cachespace=\"$env\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\"}[2m])) by (type)\r\n / sum(rate(hclcache_cache_maintenance_online_duration_seconds_count{ namespace=\"$namespace\", cachespace=\"$env\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\"}[2m])) by (type)\r\n",
               "hide": false,
               "interval": "",
               "legendFormat": "{{type}}",
@@ -2406,7 +2594,7 @@
                 "type": "prometheus",
                 "uid": "prometheus"
               },
-              "expr": "sum(rate(hclcache_cache_maintenance_online_duration_seconds_sum{ namespace=\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\", type=\"emergency\" }[2m]) ) \r\n / sum(rate(hclcache_cache_maintenance_online__duration_seconds_count{ namespace=\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\", type=\"emergency\"}[2m]))\r",
+              "expr": "sum(rate(hclcache_cache_maintenance_online_duration_seconds_sum{ namespace=\"$namespace\", cachespace=\"$env\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\", type=\"emergency\" }[2m]) ) \r\n / sum(rate(hclcache_cache_maintenance_online__duration_seconds_count{ namespace=\"$namespace\", cachespace=\"$env\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", name=~\"$cache\", type=\"emergency\"}[2m]))\r\n",
               "hide": true,
               "interval": "",
               "legendFormat": "emergency",
@@ -2452,6 +2640,7 @@
           "dashLength": 10,
           "dashes": false,
           "datasource": {
+            "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
           "description": "",
@@ -2497,13 +2686,21 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum( rate( hclcache_cache_maintenance_online_keys_total{ namespace=\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", result!=\"error\", name=~\"$cache\", scope=\"remote\" }[5m]  ) ) by  ( type )",
+              "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus"
+              },
+              "expr": "sum( rate( hclcache_cache_maintenance_online_keys_total{ namespace=\"$namespace\", cachespace=\"$env\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", result!=\"error\", name=~\"$cache\", scope=\"remote\" }[5m]  ) ) by  ( type )",
               "interval": "",
               "legendFormat": "{{type}}",
               "refId": "A"
             },
             {
-              "expr": "sum( rate( hclcache_cache_maintenance_online_keys_total{ namespace=\"$namespace\", job=~\"$job\", pod=~\"$pod\", scope=\"remote\", result=\"error\", name=~\"$cache\", scope=\"remote\" }[5m]  ) ) by  ( type )",
+              "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus"
+              },
+              "expr": "sum( rate( hclcache_cache_maintenance_online_keys_total{ namespace=\"$namespace\", cachespace=\"$env\",job=~\"$job\", pod=~\"$pod\", scope=\"remote\", result=\"error\", name=~\"$cache\", scope=\"remote\" }[5m]  ) ) by  ( type )",
               "interval": "",
               "legendFormat": "{{type}}-error",
               "refId": "B"
@@ -2525,12 +2722,14 @@
           },
           "yaxes": [
             {
+              "$$hashKey": "object:1549",
               "format": "short",
               "logBase": 1,
               "min": "0",
               "show": true
             },
             {
+              "$$hashKey": "object:1550",
               "format": "short",
               "logBase": 1,
               "show": true
@@ -2602,8 +2801,8 @@
       {
         "current": {
           "selected": false,
-          "text": "demo9111db2esauth",
-          "value": "demo9111db2esauth"
+          "text": "demo9111db2eslive",
+          "value": "demo9111db2eslive"
         },
         "datasource": {
           "type": "prometheus",
@@ -2612,9 +2811,9 @@
         "definition": "label_values(hclcache_cache_size_max{ namespace=\"$namespace\"}, cachespace)",
         "hide": 0,
         "includeAll": false,
-        "label": "environment",
+        "label": "env",
         "multi": false,
-        "name": "environment",
+        "name": "env",
         "options": [],
         "query": {
           "query": "label_values(hclcache_cache_size_max{ namespace=\"$namespace\"}, cachespace)",
@@ -2632,19 +2831,19 @@
       {
         "allValue": ".*",
         "current": {
-          "selected": true,
+          "selected": false,
           "text": [
-            "demo9111db2esauthts-app"
+            "All"
           ],
           "value": [
-            "demo9111db2esauthts-app"
+            "$__all"
           ]
         },
         "datasource": {
           "type": "prometheus",
           "uid": "${DS_PROMETHEUS}"
         },
-        "definition": "label_values(hclcache_cache_size_max{ namespace=\"$namespace\", cachespace=\"$environment\"}, job)",
+        "definition": "label_values(hclcache_cache_size_max{ namespace=\"$namespace\", cachespace=\"$env\"}, job)",
         "hide": 0,
         "includeAll": true,
         "label": "deployment",
@@ -2652,7 +2851,7 @@
         "name": "job",
         "options": [],
         "query": {
-          "query": "label_values(hclcache_cache_size_max{ namespace=\"$namespace\", cachespace=\"$environment\"}, job)",
+          "query": "label_values(hclcache_cache_size_max{ namespace=\"$namespace\", cachespace=\"$env\"}, job)",
           "refId": "Prometheus-job-Variable-Query"
         },
         "refresh": 2,
@@ -2667,7 +2866,7 @@
       {
         "allValue": ".*",
         "current": {
-          "selected": true,
+          "selected": false,
           "text": [
             "All"
           ],
@@ -2679,7 +2878,7 @@
           "type": "prometheus",
           "uid": "${DS_PROMETHEUS}"
         },
-        "definition": "label_values(hclcache_cache_size_max{ namespace=\"$namespace\", cachespace=\"$environment\", job=~\"$job\"}, pod)",
+        "definition": "label_values(hclcache_cache_size_max{ namespace=\"$namespace\", cachespace=\"$env\", job=~\"$job\"}, pod)",
         "hide": 0,
         "includeAll": true,
         "label": "pod",
@@ -2687,7 +2886,7 @@
         "name": "pod",
         "options": [],
         "query": {
-          "query": "label_values(hclcache_cache_size_max{ namespace=\"$namespace\", cachespace=\"$environment\", job=~\"$job\"}, pod)",
+          "query": "label_values(hclcache_cache_size_max{ namespace=\"$namespace\", cachespace=\"$env\", job=~\"$job\"}, pod)",
           "refId": "Prometheus-pod-Variable-Query"
         },
         "refresh": 2,
@@ -2703,14 +2902,18 @@
         "allValue": ".*",
         "current": {
           "selected": false,
-          "text": "All",
-          "value": "$__all"
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
         },
         "datasource": {
           "type": "prometheus",
           "uid": "${DS_PROMETHEUS}"
         },
-        "definition": "label_values(hclcache_cache_size_max{ namespace=\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\"},name)",
+        "definition": "label_values(hclcache_cache_size_max{ namespace=\"$namespace\", cachespace=\"$env\", job=~\"$job\", pod=~\"$pod\"},name)",
         "hide": 0,
         "includeAll": true,
         "label": "cache",
@@ -2718,7 +2921,7 @@
         "name": "cache",
         "options": [],
         "query": {
-          "query": "label_values(hclcache_cache_size_max{ namespace=\"$namespace\", cachespace=\"$environment\", job=~\"$job\", pod=~\"$pod\"},name)",
+          "query": "label_values(hclcache_cache_size_max{ namespace=\"$namespace\", cachespace=\"$env\", job=~\"$job\", pod=~\"$pod\"},name)",
           "refId": "Prometheus-cache-Variable-Query"
         },
         "refresh": 2,
@@ -2734,14 +2937,18 @@
         "allValue": ".*",
         "current": {
           "selected": false,
-          "text": "All",
-          "value": "$__all"
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
         },
         "datasource": {
           "type": "prometheus",
           "uid": "${DS_PROMETHEUS}"
         },
-        "definition": "label_values(hclcache_cache_remote_node_mapping{ cachespace=\"$environment\" },redis_instance)",
+        "definition": "label_values(hclcache_cache_remote_node_mapping{ cachespace=\"$env\" },redis_instance)",
         "hide": 0,
         "includeAll": true,
         "label": "",
@@ -2749,7 +2956,7 @@
         "name": "redis",
         "options": [],
         "query": {
-          "query": "label_values(hclcache_cache_remote_node_mapping{ cachespace=\"$environment\" },redis_instance)",
+          "query": "label_values(hclcache_cache_remote_node_mapping{ cachespace=\"$env\" },redis_instance)",
           "refId": "Prometheus-redis-Variable-Query"
         },
         "refresh": 2,
@@ -2783,6 +2990,6 @@
   "timezone": "",
   "title": "HCL Cache - Remote",
   "uid": "hcl_cache_remote",
-  "version": 9112,
+  "version": 9113,
   "weekStart": ""
 }

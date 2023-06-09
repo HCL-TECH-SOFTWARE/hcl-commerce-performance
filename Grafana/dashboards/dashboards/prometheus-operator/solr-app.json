@@ -3303,6 +3303,6 @@
   "timezone": "",
   "title": "Solr Search Servers",
   "uid": "hcl_solr_app",
-  "version": 9112,
+  "version": 9113,
   "weekStart": ""
 }

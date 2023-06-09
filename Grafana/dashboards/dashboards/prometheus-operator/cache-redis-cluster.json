@@ -2820,6 +2820,6 @@
   "timezone": "browser",
   "title": "HCL Cache - Redis Cluster Dashboard",
   "uid": "hcl_cache_redis_cluster",
-  "version": 9112,
+  "version": 9113,
   "weekStart": ""
 }

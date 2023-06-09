@@ -10,3 +10,4 @@ Topics:
 
 - [Installing and Configuring Prometheus and Grafana](PrometheusGrafanaInstall.md)
 - [HCL Commerce Dashboards dashboards](dashboards/README.md)
+- [Third party dashboards](ThirdPartyDashboards.md)
