@@ -14,9 +14,9 @@ By default, HCL local caches automatically increase or decrease their memory foo
 ![image](images/local_cache_auto_tuning.jpg)
 
 
-## Automatic Memory Footprint Configurations
+## Automatic Memory Footprint Tuning Configurations
 
-The automatic memory footprint feature provides configurations that can be used for advanced troubleshooting or tuning scenarios.
+The automatic memory footprint tuning feature provides configurations that can be used for advanced troubleshooting or tuning scenarios.
 See [Cache Configuration](CacheConfiguration.md) for details of updating the HCL Cache configuration.
 
 `globalLocalCache` is a top level element. 

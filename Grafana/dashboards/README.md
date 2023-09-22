@@ -25,7 +25,7 @@ namespace (on which Grafana is install in this system)
 
 ```
 git clone https://github.com/HCL-TECH-SOFTWARE/hcl-commerce-performance.git
-helm install hc-dashboards ./hcl-commerce-performance/Grafana/dashboards -n monitoring --set folder=dashboards/prometheus-operator
+helm install hc-dashboards ./hcl-commerce-performance/Grafana/dashboards/chart -n monitoring --set folder=dashboards/prometheus-operator
 ```
 
 * Use --set folder=dashboards/prometheus if your Prometheus version is not Operator

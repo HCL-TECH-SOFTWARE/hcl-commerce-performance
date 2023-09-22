@@ -73,4 +73,3 @@ If your system uses Prometheus and not Prometheus Operator, then the scraping co
   prometheus.io/path: /monitor/metrics
   prometheus.io/port: "8280"
 ```
-

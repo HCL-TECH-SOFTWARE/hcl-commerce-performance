@@ -1,8 +1,14 @@
 # Change Log
 
+## HCL Commerce 9.1.14
+
+- *Improvement*: minor dashboard updates
+
+
 ## HCL Commerce 9.1.13
 
 - *Improvement*: HC-26312 - Concurrency Limiters panels in Query-app dashboard
+
 
 ## HCL Commerce 9.1.12
 

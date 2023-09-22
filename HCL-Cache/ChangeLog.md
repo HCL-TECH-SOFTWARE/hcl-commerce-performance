@@ -1,10 +1,17 @@
 # Change Log
 
+## HCL Commerce 9.1.14
+
+- *Fix*: HC-32480 - HCL Cache: Automatic memory footprint tuning not scaling down due to minSize setting
+- *Improvement*: HC-26579 - Redisson maintenance upgrade - 3.23.2
+- *Feature*: HC-27078 - [Gradual Local Cache Invalidation](Invalidations.md#gradual-local-cache-invalidation)
+- *Feature*: HC-25363 - [Local Cache Least Recently Used Eviction](Invalidations.md#local-cache-least-recently-used-eviction)
+
 ## HCL Commerce 9.1.13
 
+- *Fix:* HC-25363 - Lowered *tightMemoryPercentUsedThreshold* default from 75 to 70 to avoid high garbage collection activity
 - *Improvement*: HC-26579 - Redisson Upgrade 3.21.3
 - *Improvement*: HC-26560 - Circuit Breakers implement validateConnection(). Updated defaults: *waitDurationInOpenStateSeconds: 30, slowCallDurationThresholdMs: 250*
-- *Fix:* HC-25363 - Lowered *tightMemoryPercentUsedThreshold* default from 75 to 70 to avoid high garbage collection activity
 
 ## HCL Commerce 9.1.12
 
