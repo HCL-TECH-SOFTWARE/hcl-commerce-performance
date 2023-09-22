@@ -21,12 +21,11 @@
       }
     ]
   },
-  "description": "",
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 110,
-  "iteration": 1678203945018,
+  "id": 1029,
+  "iteration": 1687210068157,
   "links": [
     {
       "asDropdown": true,
@@ -117,7 +116,8 @@
           "datasource": {
             "uid": "${DS_PROMETHEUS}"
           },
-          "expr": "kube_pod_container_info{ namespace=\"$namespace\", pod=~\"$pod\", container=\"ts-app\" }\r\n* on(pod)\r\ngroup_left(workload) namespace_workload_pod:kube_pod_owner:relabel{ namespace=\"$namespace\", workload_type=\"deployment\", workload=\"$job\" } \r",
+          "exemplar": true,
+          "expr": "kube_pod_container_info{ namespace=\"$namespace\", pod=~\"$pod\", container=\"$container\"}\r\n* on(pod)\r\ngroup_left(workload) namespace_workload_pod:kube_pod_owner:relabel{ namespace=\"$namespace\", workload_type=\"deployment\", workload=\"$job\" } \r",
           "format": "table",
           "instant": false,
           "interval": "",
@@ -156,15 +156,15 @@
       "id": 394,
       "interval": "",
       "legend": {
-        "alignAsTable": false,
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
+        "alignAsTable": true,
+        "avg": true,
+        "current": true,
+        "max": true,
+        "min": true,
         "rightSide": false,
         "show": true,
         "total": false,
-        "values": false
+        "values": true
       },
       "lines": true,
       "linewidth": 1,
@@ -186,34 +186,10 @@
           "datasource": {
             "uid": "${DS_PROMETHEUS}"
           },
-          "exemplar": true,
-          "expr": "sum(rate(request_rest_status_total{ namespace=~\"$namespace\", job=~\"$job\", pod=~\"$pod\", resource=~\"$resource\", http_status=~\"$http_status\" }[2m]))  by (http_status)",
-          "hide": true,
-          "interval": "",
-          "legendFormat": "{{http_status}}-rest",
-          "refId": "A"
-        },
-        {
-          "datasource": {
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "exemplar": true,
-          "expr": "sum(rate(request_store_status_total{ namespace=~\"$namespace\",  pod=~\"$env.*ts-app.*\", resource=~\"$resource\", http_status=~\"$http_status\" }[2m]))  by (http_status)",
-          "hide": true,
-          "interval": "",
-          "legendFormat": "{{http_status}}-store",
-          "refId": "B"
-        },
-        {
-          "datasource": {
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "exemplar": true,
-          "expr": "sum( sum(rate(request_rest_status_total{ namespace=~\"$namespace\", job=~\"$job\", pod=~\"$pod\", resource=~\"$resource\", http_status=~\"$http_status\" }[2m]))  by (http_status) or sum(rate(request_store_status_total{ namespace=~\"$namespace\",  pod=~\"$env.*ts-app.*\", resource=~\"$resource\", http_status=~\"$http_status\" }[2m]))  by (http_status) )  by (http_status)",
+          "expr": "sum(rate(request_rest_status_total{ namespace=\"$namespace\", job=\"$job\", pod=~\"$pod\", resource=~\"$resource\", http_status=~\"$http_status\" }[2m]))  by (http_status)",
           "hide": false,
-          "interval": "",
           "legendFormat": "{{http_status}}",
-          "refId": "C"
+          "refId": "A"
         }
       ],
       "thresholds": [],
@@ -224,7 +200,6 @@
         "sort": 2,
         "value_type": "individual"
       },
-      "transformations": [],
       "type": "graph",
       "xaxis": {
         "mode": "time",
@@ -233,14 +208,14 @@
       },
       "yaxes": [
         {
-          "$$hashKey": "object:1611",
+          "$$hashKey": "object:81",
           "format": "short",
           "logBase": 1,
           "min": "0",
           "show": true
         },
         {
-          "$$hashKey": "object:1612",
+          "$$hashKey": "object:82",
           "format": "short",
           "logBase": 1,
           "show": true
@@ -276,15 +251,15 @@
       "hiddenSeries": false,
       "id": 371,
       "legend": {
-        "alignAsTable": false,
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
+        "alignAsTable": true,
+        "avg": true,
+        "current": true,
+        "max": true,
+        "min": true,
         "rightSide": false,
         "show": true,
         "total": false,
-        "values": false
+        "values": true
       },
       "lines": true,
       "linewidth": 1,
@@ -306,34 +281,9 @@
           "datasource": {
             "uid": "${DS_PROMETHEUS}"
           },
-          "exemplar": true,
-          "expr": "sum(rate(request_rest_seconds_sum{ namespace=~\"$namespace\", job=~\"$job\", pod=~\"$pod\", resource=~\"$resource\"} [2m])) by (job) / sum(rate(request_rest_seconds_count{ namespace=~\"$namespace\", job=~\"$job\", pod=~\"$pod\", resource=~\"$resource\"} [2m])) by (job)",
-          "hide": true,
-          "interval": "",
-          "legendFormat": "{{job}}-rest",
-          "refId": "A"
-        },
-        {
-          "datasource": {
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "exemplar": true,
-          "expr": "sum(rate(request_store_seconds_sum{ namespace=~\"$namespace\", job=~\"$job\", pod=~\"$pod\", resource=~\"$crsresource\"} [2m])) by (job) / sum(rate(request_store_seconds_count{ namespace=~\"$namespace\", job=~\"$job\", pod=~\"$pod\", resource=~\"$crsresource\"} [2m])) by (job)",
-          "hide": true,
-          "interval": "",
-          "legendFormat": "{{job}-store",
-          "refId": "B"
-        },
-        {
-          "datasource": {
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "exemplar": true,
-          "expr": "sum( sum(rate(request_rest_seconds_sum{ namespace=~\"$namespace\", job=~\"$job\", pod=~\"$pod\", resource=~\"$resource\"} [2m])) by (job) / sum(rate(request_rest_seconds_count{ namespace=~\"$namespace\", job=~\"$job\", pod=~\"$pod\", resource=~\"$resource\"} [2m])) by (job) or sum(rate(request_store_seconds_sum{ namespace=~\"$namespace\", job=~\"$job\", pod=~\"$pod\", resource=~\"$crsresource\"} [2m])) by (job) / sum(rate(request_store_seconds_count{ namespace=~\"$namespace\", job=~\"$job\", pod=~\"$pod\", resource=~\"$crsresource\"} [2m])) by (job) ) by (job)",
-          "hide": false,
-          "interval": "",
+          "expr": "sum(rate(request_rest_seconds_sum{ namespace=\"$namespace\", job=\"$job\", pod=~\"$pod\", resource=~\"$resource\"} [2m])) by (job) / sum(rate(request_rest_seconds_count{ namespace=\"$namespace\", job=\"$job\", pod=~\"$pod\", resource=~\"$resource\"} [2m])) by (job)",
           "legendFormat": "{{job}}",
-          "refId": "C"
+          "refId": "A"
         }
       ],
       "thresholds": [],
@@ -352,14 +302,14 @@
       },
       "yaxes": [
         {
-          "$$hashKey": "object:1667",
+          "$$hashKey": "object:137",
           "format": "s",
           "logBase": 1,
           "min": "0",
           "show": true
         },
         {
-          "$$hashKey": "object:1668",
+          "$$hashKey": "object:138",
           "format": "short",
           "logBase": 1,
           "show": true
@@ -464,7 +414,7 @@
           "refId": "B"
         }
       ],
-      "title": "ts-app pods",
+      "title": "solr-app pods",
       "type": "stat"
     },
     {
@@ -497,7 +447,7 @@
           "fill": 0,
           "fillGradient": 0,
           "gridPos": {
-            "h": 7,
+            "h": 8,
             "w": 8,
             "x": 0,
             "y": 11
@@ -506,14 +456,14 @@
           "id": 380,
           "legend": {
             "alignAsTable": true,
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
+            "avg": true,
+            "current": true,
+            "max": true,
+            "min": true,
             "rightSide": false,
             "show": true,
             "total": false,
-            "values": false
+            "values": true
           },
           "lines": true,
           "linewidth": 1,
@@ -535,9 +485,7 @@
               "datasource": {
                 "uid": "${DS_PROMETHEUS}"
               },
-              "exemplar": true,
               "expr": "sum(jvm_memory_used_bytes{namespace=\"$namespace\", job=\"$job\", pod=~\"$pod\", area=\"heap\"}) by (pod)",
-              "hide": false,
               "interval": "",
               "intervalFactor": 2,
               "legendFormat": "{{pod}}",
@@ -560,7 +508,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
-              "expr": "max(sum(jvm_memory_max_bytes{namespace=\"$namespace\", job=\"$job\", pod=~\"$pod\", area=\"heap\"}) by (pod))",
+              "expr": "max (sum(jvm_memory_max_bytes{namespace=\"$namespace\", job=\"$job\", pod=~\"$pod\", area=\"heap\"}) by (pod))",
               "hide": false,
               "instant": false,
               "interval": "",
@@ -585,14 +533,14 @@
           },
           "yaxes": [
             {
-              "$$hashKey": "object:515",
+              "$$hashKey": "object:10140",
               "format": "decbytes",
               "logBase": 1,
               "min": "0",
               "show": true
             },
             {
-              "$$hashKey": "object:516",
+              "$$hashKey": "object:10141",
               "format": "short",
               "logBase": 1,
               "show": true
@@ -614,7 +562,7 @@
           "fill": 0,
           "fillGradient": 0,
           "gridPos": {
-            "h": 7,
+            "h": 8,
             "w": 8,
             "x": 8,
             "y": 11
@@ -623,17 +571,16 @@
           "id": 377,
           "legend": {
             "alignAsTable": true,
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "rightSide": false,
+            "avg": true,
+            "current": true,
+            "max": true,
+            "min": true,
             "show": true,
             "total": false,
-            "values": false
+            "values": true
           },
           "lines": true,
-          "linewidth": 2,
+          "linewidth": 1,
           "links": [],
           "nullPointMode": "null as zero",
           "options": {
@@ -646,6 +593,7 @@
           "renderer": "flot",
           "seriesOverrides": [
             {
+              "$$hashKey": "object:234",
               "alias": "quota - requests",
               "color": "#F2495C",
               "dashes": true,
@@ -656,6 +604,7 @@
               "stack": false
             },
             {
+              "$$hashKey": "object:235",
               "alias": "quota - limits",
               "color": "#FF9830",
               "dashes": true,
@@ -675,9 +624,8 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
-              "expr": "sum(\n    node_namespace_pod_container:container_cpu_usage_seconds_total:sum_irate{namespace=\"$namespace\", pod=~\"$pod\", container=\"ts-app\" }\n  * on(pod)\n    group_left(workload) namespace_workload_pod:kube_pod_owner:relabel{ namespace=\"$namespace\", workload_type=\"deployment\", workload=\"$job\" }\n) by (pod)\n",
+              "expr": "sum(\n    node_namespace_pod_container:container_cpu_usage_seconds_total:sum_irate{namespace=\"$namespace\", pod=~\"$pod\", container=\"$container\" }\n  * on(pod)\n    group_left(workload) namespace_workload_pod:kube_pod_owner:relabel{ namespace=\"$namespace\", workload_type=\"deployment\", workload=\"$job\" }\n) by (pod)\n",
               "format": "time_series",
-              "hide": false,
               "interval": "",
               "intervalFactor": 2,
               "legendFormat": "{{pod}}",
@@ -691,10 +639,9 @@
               "exemplar": true,
               "expr": "max( cluster:namespace:pod_cpu:active:kube_pod_container_resource_requests {namespace=\"commerce\", pod=~\"$pod\"})",
               "format": "time_series",
-              "hide": false,
               "interval": "",
               "intervalFactor": 2,
-              "legendFormat": "quota-requests",
+              "legendFormat": "quota - requests",
               "refId": "B",
               "step": 10
             },
@@ -705,10 +652,9 @@
               "exemplar": true,
               "expr": "max( cluster:namespace:pod_cpu:active:kube_pod_container_resource_limits {namespace=\"commerce\", pod=~\"$pod\"})",
               "format": "time_series",
-              "hide": false,
               "interval": "",
               "intervalFactor": 2,
-              "legendFormat": "quota-limits",
+              "legendFormat": "quota - limits",
               "refId": "C",
               "step": 10
             }
@@ -729,14 +675,14 @@
           },
           "yaxes": [
             {
-              "$$hashKey": "object:461",
+              "$$hashKey": "object:317",
               "format": "short",
               "logBase": 1,
               "min": 0,
               "show": true
             },
             {
-              "$$hashKey": "object:462",
+              "$$hashKey": "object:318",
               "format": "short",
               "logBase": 1,
               "show": false
@@ -754,30 +700,25 @@
           "datasource": {
             "uid": "${DS_PROMETHEUS}"
           },
-          "fieldConfig": {
-            "defaults": {
-              "unit": "percentunit"
-            },
-            "overrides": []
-          },
           "fill": 0,
           "fillGradient": 0,
           "gridPos": {
-            "h": 7,
+            "h": 8,
             "w": 8,
             "x": 16,
             "y": 11
           },
           "hiddenSeries": false,
-          "id": 407,
+          "id": 410,
           "legend": {
-            "avg": false,
+            "alignAsTable": true,
+            "avg": true,
             "current": true,
             "max": true,
-            "min": false,
+            "min": true,
             "show": true,
             "total": false,
-            "values": false
+            "values": true
           },
           "lines": true,
           "linewidth": 1,
@@ -793,7 +734,7 @@
           "renderer": "flot",
           "seriesOverrides": [],
           "spaceLength": 10,
-          "stack": true,
+          "stack": false,
           "steppedLine": false,
           "targets": [
             {
@@ -801,9 +742,8 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
-              "expr": "sum(increase(container_cpu_cfs_throttled_periods_total{namespace=\"$namespace\", pod=~\"$pod\", container=\"ts-app\"}[5m])) by (pod) /sum(increase(container_cpu_cfs_periods_total{namespace=\"$namespace\", pod=~\"$pod\", container=\"ts-app\"}[5m])) by (pod)",
+              "expr": "sum(increase(container_cpu_cfs_throttled_periods_total{namespace=\"$namespace\", pod=~\"$pod\", container=\"$container\"}[5m])) by (pod) /sum(increase(container_cpu_cfs_periods_total{namespace=\"$namespace\", pod=~\"$pod\", container=\"$container\"}[5m])) by (pod)",
               "format": "time_series",
-              "hide": false,
               "interval": "",
               "intervalFactor": 2,
               "legendFormat": "{{pod}}",
@@ -813,7 +753,7 @@
           ],
           "thresholds": [
             {
-              "$$hashKey": "object:404",
+              "$$hashKey": "object:10562",
               "colorMode": "critical",
               "fill": true,
               "line": true,
@@ -837,15 +777,14 @@
           },
           "yaxes": [
             {
-              "$$hashKey": "object:97",
+              "$$hashKey": "object:10538",
               "format": "percentunit",
               "logBase": 1,
-              "max": 1,
               "min": 0,
               "show": true
             },
             {
-              "$$hashKey": "object:98",
+              "$$hashKey": "object:10539",
               "format": "short",
               "logBase": 1,
               "show": false
@@ -876,20 +815,20 @@
             "h": 8,
             "w": 8,
             "x": 0,
-            "y": 18
+            "y": 19
           },
           "hiddenSeries": false,
           "id": 395,
           "legend": {
             "alignAsTable": true,
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
+            "avg": true,
+            "current": true,
+            "max": true,
+            "min": true,
             "rightSide": false,
             "show": true,
             "total": false,
-            "values": false
+            "values": true
           },
           "lines": true,
           "linewidth": 1,
@@ -911,7 +850,8 @@
               "datasource": {
                 "uid": "${DS_PROMETHEUS}"
               },
-              "expr": "max(threadpool_maximum_pool_size{ namespace=~\"$namespace\", job=~\"$job\", pod=~\"$pod\", pool=\"WebContainer\" })",
+              "exemplar": true,
+              "expr": "max(threadpool_maximum_pool_size{ namespace=\"$namespace\", job=\"$job\", pod=~\"$pod\", pool=\"Default_Executor\" })",
               "interval": "",
               "legendFormat": "max",
               "refId": "A"
@@ -920,7 +860,8 @@
               "datasource": {
                 "uid": "${DS_PROMETHEUS}"
               },
-              "expr": "sum( threadpool_active_pool_size{ namespace=~\"$namespace\", job=~\"$job\", pod=~\"$pod\",pool=\"WebContainer\"} ) by ( pod )",
+              "exemplar": true,
+              "expr": "sum( threadpool_active_pool_size{ namespace=\"$namespace\", job=\"$job\", pod=~\"$pod\",pool=\"Default_Executor\"} ) by ( pod )",
               "interval": "",
               "legendFormat": "{{pod}} -  active",
               "refId": "C"
@@ -928,9 +869,9 @@
           ],
           "thresholds": [],
           "timeRegions": [],
-          "title": "WebContainer Thread pool",
+          "title": "Default_Executor Thread pool",
           "tooltip": {
-            "shared": true,
+            "shared": false,
             "sort": 0,
             "value_type": "individual"
           },
@@ -942,126 +883,14 @@
           },
           "yaxes": [
             {
-              "$$hashKey": "object:140",
+              "$$hashKey": "object:82",
               "format": "short",
               "logBase": 1,
               "min": "0",
               "show": true
             },
             {
-              "$$hashKey": "object:141",
-              "format": "short",
-              "logBase": 1,
-              "show": true
-            }
-          ],
-          "yaxis": {
-            "align": false
-          }
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": {
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "fieldConfig": {
-            "defaults": {
-              "links": []
-            },
-            "overrides": []
-          },
-          "fill": 0,
-          "fillGradient": 0,
-          "gridPos": {
-            "h": 8,
-            "w": 8,
-            "x": 8,
-            "y": 18
-          },
-          "hiddenSeries": false,
-          "id": 392,
-          "legend": {
-            "alignAsTable": true,
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "rightSide": false,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "nullPointMode": "connected",
-          "options": {
-            "alertThreshold": true
-          },
-          "percentage": false,
-          "pluginVersion": "8.5.0",
-          "pointradius": 2,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "datasource": {
-                "uid": "${DS_PROMETHEUS}"
-              },
-              "expr": "max(datasource_maximum_pool_size{ namespace=~\"$namespace\", job=~\"$job\", pod=~\"$pod\" })",
-              "interval": "",
-              "legendFormat": "max",
-              "refId": "A"
-            },
-            {
-              "datasource": {
-                "uid": "${DS_PROMETHEUS}"
-              },
-              "expr": "sum(datasource_current_pool_size{ namespace=~\"$namespace\", job=~\"$job\", pod=~\"$pod\" }) by ( pod )",
-              "interval": "",
-              "legendFormat": "{{pod}} - allocated",
-              "refId": "B"
-            },
-            {
-              "datasource": {
-                "uid": "${DS_PROMETHEUS}"
-              },
-              "expr": "sum( datasource_current_pool_size{ namespace=~\"$namespace\", job=~\"$job\", pod=~\"$pod\" } - datasource_free_pool_size{ namespace=~\"$namespace\", job=~\"$job\", pod=~\"$pod\" }) by ( pod )",
-              "interval": "",
-              "legendFormat": "{{pod}} -  in-use",
-              "refId": "C"
-            }
-          ],
-          "thresholds": [],
-          "timeRegions": [],
-          "title": "WCDataSource",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "mode": "time",
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "$$hashKey": "object:282",
-              "format": "short",
-              "logBase": 1,
-              "min": "0",
-              "show": true
-            },
-            {
-              "$$hashKey": "object:283",
+              "$$hashKey": "object:83",
               "format": "short",
               "logBase": 1,
               "show": true
@@ -1111,18 +940,19 @@
             "h": 9,
             "w": 8,
             "x": 0,
-            "y": 3
+            "y": 12
           },
           "hiddenSeries": false,
           "id": 375,
           "legend": {
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
+            "alignAsTable": true,
+            "avg": true,
+            "current": true,
+            "max": true,
+            "min": true,
             "show": true,
             "total": false,
-            "values": false
+            "values": true
           },
           "lines": true,
           "linewidth": 1,
@@ -1145,7 +975,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
-              "expr": "sum( rate(java_logging_messages_total{ namespace=~\"$namespace\", job=~\"$job\", pod=~\"$pod\" }[2m]) ) by ( level )",
+              "expr": "sum( rate(java_logging_messages_total{ namespace=\"$namespace\", job=\"$job\", pod=~\"$pod\" }[2m]) ) by ( level )",
               "interval": "",
               "legendFormat": "{{ level }}",
               "refId": "A"
@@ -1167,14 +997,14 @@
           },
           "yaxes": [
             {
-              "$$hashKey": "object:6670",
+              "$$hashKey": "object:146",
               "format": "short",
               "logBase": 1,
               "min": "0",
               "show": true
             },
             {
-              "$$hashKey": "object:6671",
+              "$$hashKey": "object:147",
               "format": "short",
               "logBase": 1,
               "show": true
@@ -1199,18 +1029,19 @@
             "h": 9,
             "w": 8,
             "x": 8,
-            "y": 3
+            "y": 12
           },
           "hiddenSeries": false,
           "id": 384,
           "legend": {
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
+            "alignAsTable": true,
+            "avg": true,
+            "current": true,
+            "max": true,
+            "min": true,
             "show": true,
             "total": false,
-            "values": false
+            "values": true
           },
           "lines": true,
           "linewidth": 1,
@@ -1232,8 +1063,7 @@
               "datasource": {
                 "uid": "${DS_PROMETHEUS}"
               },
-              "exemplar": true,
-              "expr": "sum( rate(java_logging_messages_total{ namespace=~\"$namespace\", job=~\"$job\", pod=~\"$pod\", level=~\"SEVERE|WARNING\"}[2m]) ) by ( pod ) ",
+              "expr": "sum( rate(java_logging_messages_total{ namespace=\"$namespace\", job=\"$job\", pod=~\"$pod\", level=~\"SEVERE|WARNING\"}[2m]) ) by ( pod ) ",
               "interval": "",
               "legendFormat": " {{pod}} ",
               "refId": "A"
@@ -1255,14 +1085,14 @@
           },
           "yaxes": [
             {
-              "$$hashKey": "object:6746",
+              "$$hashKey": "object:10877",
               "format": "short",
               "logBase": 1,
               "min": "0",
               "show": true
             },
             {
-              "$$hashKey": "object:6747",
+              "$$hashKey": "object:10878",
               "format": "short",
               "logBase": 1,
               "show": true
@@ -1287,18 +1117,19 @@
             "h": 9,
             "w": 8,
             "x": 16,
-            "y": 3
+            "y": 12
           },
           "hiddenSeries": false,
           "id": 385,
           "legend": {
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
+            "alignAsTable": true,
+            "avg": true,
+            "current": true,
+            "max": true,
+            "min": true,
             "show": true,
             "total": false,
-            "values": false
+            "values": true
           },
           "lines": true,
           "linewidth": 1,
@@ -1320,8 +1151,7 @@
               "datasource": {
                 "uid": "${DS_PROMETHEUS}"
               },
-              "exemplar": true,
-              "expr": "sum( rate(java_logging_messages_total{ namespace=~\"$namespace\", job=~\"$job\", pod=~\"$pod\", level=\"TRACE\"}[2m]) ) by ( pod ) ",
+              "expr": "sum( rate(java_logging_messages_total{ namespace=\"$namespace\", job=\"$job\", pod=~\"$pod\", level=\"TRACE\"}[2m]) ) by ( pod ) ",
               "interval": "",
               "legendFormat": " {{pod}} ",
               "refId": "A"
@@ -1343,14 +1173,14 @@
           },
           "yaxes": [
             {
-              "$$hashKey": "object:6822",
+              "$$hashKey": "object:10960",
               "format": "short",
               "logBase": 1,
               "min": "0",
               "show": true
             },
             {
-              "$$hashKey": "object:6823",
+              "$$hashKey": "object:10961",
               "format": "short",
               "logBase": 1,
               "show": true
@@ -1375,541 +1205,13 @@
     {
       "collapsed": true,
       "datasource": {
-        "type": "prometheus",
-        "uid": "prometheus"
-      },
-      "gridPos": {
-        "h": 1,
-        "w": 24,
-        "x": 0,
-        "y": 12
-      },
-      "id": 431,
-      "panels": [
-        {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "description": "",
-          "fieldConfig": {
-            "defaults": {
-              "links": []
-            },
-            "overrides": []
-          },
-          "fill": 0,
-          "fillGradient": 0,
-          "gridPos": {
-            "h": 8,
-            "w": 12,
-            "x": 0,
-            "y": 4
-          },
-          "hiddenSeries": false,
-          "id": 432,
-          "legend": {
-            "alignAsTable": false,
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "rightSide": false,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "nullPointMode": "null",
-          "options": {
-            "alertThreshold": true
-          },
-          "percentage": false,
-          "pluginVersion": "8.5.0",
-          "pointradius": 2,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "datasource": {
-                "uid": "${DS_PROMETHEUS}"
-              },
-              "editorMode": "code",
-              "exemplar": true,
-              "expr": "sum(rate(access_bean_cache_seconds_count{ namespace=~\"$namespace\", pod=~\"$job.*\", cache =\"hit\" }[2m])) by (bean,finder)> 0\r",
-              "interval": "",
-              "legendFormat": "{{bean}}.{{finder}}",
-              "range": true,
-              "refId": "A"
-            }
-          ],
-          "thresholds": [],
-          "timeRegions": [],
-          "title": "Bean Method Executions (per second) - Cache Hits ",
-          "tooltip": {
-            "shared": false,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "mode": "time",
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "$$hashKey": "object:755",
-              "format": "none",
-              "logBase": 1,
-              "min": "0",
-              "show": true
-            },
-            {
-              "$$hashKey": "object:756",
-              "format": "short",
-              "label": "",
-              "logBase": 1,
-              "show": true
-            }
-          ],
-          "yaxis": {
-            "align": false
-          }
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "description": "",
-          "fieldConfig": {
-            "defaults": {
-              "links": []
-            },
-            "overrides": []
-          },
-          "fill": 0,
-          "fillGradient": 0,
-          "gridPos": {
-            "h": 8,
-            "w": 12,
-            "x": 12,
-            "y": 4
-          },
-          "hiddenSeries": false,
-          "id": 433,
-          "legend": {
-            "alignAsTable": false,
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "rightSide": false,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "nullPointMode": "null",
-          "options": {
-            "alertThreshold": true
-          },
-          "percentage": false,
-          "pluginVersion": "8.5.0",
-          "pointradius": 2,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "datasource": {
-                "uid": "${DS_PROMETHEUS}"
-              },
-              "editorMode": "code",
-              "exemplar": true,
-              "expr": "sum(rate(access_bean_cache_seconds_count{ namespace=~\"$namespace\", pod=~\"$job.*\", cache =\"miss\" }[2m])) by (bean,finder)  > 0\r",
-              "interval": "",
-              "legendFormat": "{{bean}}.{{finder}}",
-              "range": true,
-              "refId": "A"
-            }
-          ],
-          "thresholds": [],
-          "timeRegions": [],
-          "title": "Bean Method Executions (per second) - Cache Misses",
-          "tooltip": {
-            "shared": false,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "mode": "time",
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "$$hashKey": "object:755",
-              "format": "none",
-              "logBase": 1,
-              "min": "0",
-              "show": true
-            },
-            {
-              "$$hashKey": "object:756",
-              "format": "short",
-              "label": "",
-              "logBase": 1,
-              "show": true
-            }
-          ],
-          "yaxis": {
-            "align": false
-          }
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "description": "",
-          "fieldConfig": {
-            "defaults": {
-              "links": []
-            },
-            "overrides": []
-          },
-          "fill": 0,
-          "fillGradient": 0,
-          "gridPos": {
-            "h": 7,
-            "w": 24,
-            "x": 0,
-            "y": 12
-          },
-          "hiddenSeries": false,
-          "id": 434,
-          "legend": {
-            "alignAsTable": true,
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "rightSide": true,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 2,
-          "nullPointMode": "null",
-          "options": {
-            "alertThreshold": true
-          },
-          "percentage": false,
-          "pluginVersion": "8.5.0",
-          "pointradius": 2,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "datasource": {
-                "uid": "${DS_PROMETHEUS}"
-              },
-              "editorMode": "code",
-              "exemplar": true,
-              "expr": "sum(rate(access_bean_cache_seconds_count{ namespace=~\"$namespace\",  pod=~\"$job.*\", cache =\"hit\" }[2m]))  by ( bean,finder) / sum(rate(access_bean_cache_seconds_count{ namespace=~\"$namespace\", pod=~\"$job.*\"}[2m]))  by (bean,finder)  > 0\r",
-              "interval": "",
-              "legendFormat": "{{bean}}.{{finder}}",
-              "range": true,
-              "refId": "A"
-            }
-          ],
-          "thresholds": [],
-          "timeRegions": [],
-          "title": "Bean Cache Hit Ratios by Method",
-          "tooltip": {
-            "shared": false,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "mode": "time",
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "$$hashKey": "object:755",
-              "format": "percentunit",
-              "logBase": 1,
-              "max": "1",
-              "min": "0",
-              "show": true
-            },
-            {
-              "$$hashKey": "object:756",
-              "format": "short",
-              "label": "",
-              "logBase": 1,
-              "show": true
-            }
-          ],
-          "yaxis": {
-            "align": false
-          }
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "description": "",
-          "fieldConfig": {
-            "defaults": {
-              "links": []
-            },
-            "overrides": []
-          },
-          "fill": 0,
-          "fillGradient": 0,
-          "gridPos": {
-            "h": 10,
-            "w": 12,
-            "x": 0,
-            "y": 19
-          },
-          "hiddenSeries": false,
-          "id": 435,
-          "legend": {
-            "alignAsTable": false,
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "rightSide": false,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "nullPointMode": "null",
-          "options": {
-            "alertThreshold": true
-          },
-          "percentage": false,
-          "pluginVersion": "8.5.0",
-          "pointradius": 2,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "datasource": {
-                "uid": "${DS_PROMETHEUS}"
-              },
-              "editorMode": "code",
-              "exemplar": true,
-              "expr": "sum(rate(access_bean_cache_seconds_sum{ namespace=\"$namespace\", pod=~\"$job.*\", cache =\"hit\" }[2m])) by (bean,finder) / sum(rate(access_bean_cache_seconds_count {namespace=\"$namespace\", pod=~\"$job.*\", cache=\"hit\"} [2m])) by (bean,finder) > 0\r",
-              "interval": "",
-              "legendFormat": "{{bean}}.{{finder}}",
-              "range": true,
-              "refId": "A"
-            }
-          ],
-          "thresholds": [],
-          "timeRegions": [],
-          "title": "Average Execution Time - Bean Cache Hits",
-          "tooltip": {
-            "shared": false,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "mode": "time",
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "$$hashKey": "object:755",
-              "format": "s",
-              "logBase": 1,
-              "min": "0",
-              "show": true
-            },
-            {
-              "$$hashKey": "object:756",
-              "format": "short",
-              "label": "",
-              "logBase": 1,
-              "show": true
-            }
-          ],
-          "yaxis": {
-            "align": false
-          }
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "description": "",
-          "fieldConfig": {
-            "defaults": {
-              "links": []
-            },
-            "overrides": []
-          },
-          "fill": 0,
-          "fillGradient": 0,
-          "gridPos": {
-            "h": 10,
-            "w": 12,
-            "x": 12,
-            "y": 19
-          },
-          "hiddenSeries": false,
-          "id": 436,
-          "legend": {
-            "alignAsTable": false,
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "rightSide": false,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "nullPointMode": "null",
-          "options": {
-            "alertThreshold": true
-          },
-          "percentage": false,
-          "pluginVersion": "8.5.0",
-          "pointradius": 2,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "datasource": {
-                "uid": "${DS_PROMETHEUS}"
-              },
-              "editorMode": "code",
-              "exemplar": true,
-              "expr": "sum(rate(access_bean_cache_seconds_sum{ namespace=\"$namespace\", pod=~\"$job.*\", cache =\"miss\" }[2m])) by (bean,finder) / sum(rate(access_bean_cache_seconds_count {namespace=\"$namespace\", pod=~\"$job.*\", cache=\"miss\"} [2m])) by (bean,finder) > 0\r\n",
-              "interval": "",
-              "legendFormat": "{{bean}}.{{finder}}",
-              "range": true,
-              "refId": "A"
-            }
-          ],
-          "thresholds": [],
-          "timeRegions": [],
-          "title": "Average Execution Time - Bean Cache Misses",
-          "tooltip": {
-            "shared": false,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "mode": "time",
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "$$hashKey": "object:755",
-              "format": "s",
-              "logBase": 1,
-              "min": "0",
-              "show": true
-            },
-            {
-              "$$hashKey": "object:756",
-              "format": "short",
-              "label": "",
-              "logBase": 1,
-              "show": true
-            }
-          ],
-          "yaxis": {
-            "align": false
-          }
-        }
-      ],
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "prometheus"
-          },
-          "refId": "A"
-        }
-      ],
-      "title": "Access Bean (Database) Cache",
-      "type": "row"
-    },
-    {
-      "collapsed": true,
-      "datasource": {
         "uid": "${DS_PROMETHEUS}"
       },
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 13
+        "y": 12
       },
       "id": 369,
       "panels": [
@@ -1919,7 +1221,6 @@
           "dashLength": 10,
           "dashes": false,
           "datasource": {
-            "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
           "description": "",
@@ -1932,24 +1233,24 @@
           "fill": 0,
           "fillGradient": 0,
           "gridPos": {
-            "h": 7,
-            "w": 13,
+            "h": 8,
+            "w": 12,
             "x": 0,
-            "y": 14
+            "y": 13
           },
           "hiddenSeries": false,
-          "id": 414,
+          "id": 370,
           "interval": "",
           "legend": {
-            "alignAsTable": false,
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
+            "alignAsTable": true,
+            "avg": true,
+            "current": true,
+            "max": true,
+            "min": true,
             "rightSide": false,
-            "show": false,
+            "show": true,
             "total": false,
-            "values": false
+            "values": true
           },
           "lines": true,
           "linewidth": 1,
@@ -1964,20 +1265,18 @@
           "renderer": "flot",
           "seriesOverrides": [],
           "spaceLength": 10,
-          "stack": true,
+          "stack": false,
           "steppedLine": false,
           "targets": [
             {
               "datasource": {
                 "uid": "${DS_PROMETHEUS}"
               },
-              "editorMode": "code",
               "exemplar": true,
-              "expr": "sum(rate(request_rest_status_total{ namespace=~\"$namespace\", job=~\"$job\", pod=~\"$pod\", resource=~\"$resource\", http_status=~\"$http_status\"}[2m]))",
+              "expr": "sum(rate(request_rest_status_total{ namespace=\"$namespace\", job=\"$job\", pod=~\"$pod\", resource=~\"$resource\", http_status=~\"$http_status\"}[2m]))",
               "hide": false,
               "interval": "",
-              "legendFormat": "Total Calls",
-              "range": true,
+              "legendFormat": "}",
               "refId": "A"
             }
           ],
@@ -1997,14 +1296,14 @@
           },
           "yaxes": [
             {
-              "$$hashKey": "object:60",
+              "$$hashKey": "object:1959",
               "format": "short",
               "logBase": 1,
               "min": "0",
               "show": true
             },
             {
-              "$$hashKey": "object:61",
+              "$$hashKey": "object:1960",
               "format": "short",
               "logBase": 1,
               "show": true
@@ -2032,24 +1331,24 @@
           "fill": 0,
           "fillGradient": 0,
           "gridPos": {
-            "h": 7,
-            "w": 11,
-            "x": 13,
-            "y": 14
+            "h": 8,
+            "w": 12,
+            "x": 12,
+            "y": 13
           },
           "hiddenSeries": false,
-          "id": 415,
+          "id": 363,
           "interval": "",
           "legend": {
-            "alignAsTable": false,
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
+            "alignAsTable": true,
+            "avg": true,
+            "current": true,
+            "max": true,
+            "min": true,
             "rightSide": false,
             "show": true,
             "total": false,
-            "values": false
+            "values": true
           },
           "lines": true,
           "linewidth": 1,
@@ -2071,8 +1370,10 @@
               "datasource": {
                 "uid": "${DS_PROMETHEUS}"
               },
-              "expr": "sum(rate(request_rest_status_total{ namespace=~\"$namespace\", job=~\"$job\", pod=~\"$pod\", resource=~\"$resource\", http_status=~\"$http_status\" }[2m]))  by (http_status)",
+              "exemplar": true,
+              "expr": "sum(rate(request_rest_status_total{ namespace=\"$namespace\", job=\"$job\", pod=~\"$pod\", resource=~\"$resource\", http_status=~\"$http_status\" }[2m]))  by (http_status)",
               "hide": false,
+              "interval": "",
               "legendFormat": "{{http_status}}",
               "refId": "A"
             }
@@ -2093,14 +1394,14 @@
           },
           "yaxes": [
             {
-              "$$hashKey": "object:1801",
+              "$$hashKey": "object:269",
               "format": "short",
               "logBase": 1,
               "min": "0",
               "show": true
             },
             {
-              "$$hashKey": "object:1802",
+              "$$hashKey": "object:270",
               "format": "short",
               "logBase": 1,
               "show": true
@@ -2127,7 +1428,7 @@
           "fill": 0,
           "fillGradient": 0,
           "gridPos": {
-            "h": 8,
+            "h": 9,
             "w": 24,
             "x": 0,
             "y": 21
@@ -2137,17 +1438,17 @@
           "interval": "",
           "legend": {
             "alignAsTable": true,
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "rightSide": true,
+            "avg": true,
+            "current": true,
+            "max": true,
+            "min": true,
+            "rightSide": false,
             "show": true,
             "total": false,
-            "values": false
+            "values": true
           },
           "lines": true,
-          "linewidth": 2,
+          "linewidth": 1,
           "nullPointMode": "null",
           "options": {
             "alertThreshold": true
@@ -2166,7 +1467,7 @@
               "datasource": {
                 "uid": "${DS_PROMETHEUS}"
               },
-              "expr": "sum(rate(request_rest_status_total{ namespace=~\"$namespace\", job=~\"$job\", pod=~\"$pod\", resource=~\"$resource\", http_status=~\"$http_status\"}[2m]))  by (resource)",
+              "expr": "sum(rate(request_rest_status_total{ namespace=\"$namespace\", job=\"$job\", pod=~\"$pod\", resource=~\"$resource\", http_status=~\"$http_status\"}[2m]))  by (resource)",
               "hide": false,
               "interval": "",
               "legendFormat": "{{resource}}",
@@ -2189,17 +1490,17 @@
           },
           "yaxes": [
             {
-              "$$hashKey": "object:7527",
+              "$$hashKey": "object:348",
               "format": "short",
               "logBase": 1,
               "min": "0",
               "show": true
             },
             {
-              "$$hashKey": "object:7528",
+              "$$hashKey": "object:349",
               "format": "short",
               "logBase": 1,
-              "show": false
+              "show": true
             }
           ],
           "yaxis": {
@@ -2215,7 +1516,7 @@
           "refId": "A"
         }
       ],
-      "title": "REST Calls  - Executions",
+      "title": "REST Calls - Executions",
       "type": "row"
     },
     {
@@ -2227,7 +1528,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 14
+        "y": 13
       },
       "id": 365,
       "panels": [
@@ -2246,7 +1547,8 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green"
+                    "color": "green",
+                    "value": null
                   },
                   {
                     "color": "red",
@@ -2259,12 +1561,12 @@
             "overrides": []
           },
           "gridPos": {
-            "h": 7,
+            "h": 8,
             "w": 8,
             "x": 0,
-            "y": 6
+            "y": 31
           },
-          "id": 404,
+          "id": 412,
           "options": {
             "colorMode": "value",
             "graphMode": "area",
@@ -2287,7 +1589,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
-              "expr": "sum(rate(request_rest_seconds_sum{ namespace=~\"$namespace\", job=~\"$job\", pod=~\"$pod\", resource=~\"$resource\"} [2m]))  by (pod)  / sum(rate(request_rest_seconds_count{ namespace=~\"$namespace\", job=~\"$job\", pod=~\"$pod\", resource=~\"$resource\"} [2m])) by (pod)",
+              "expr": "sum(rate(request_rest_seconds_sum{ namespace=\"$namespace\", job=\"$job\", pod=~\"$pod\", resource=~\"$resource\"} [2m]))  by (pod)  / sum(rate(request_rest_seconds_count{ namespace=\"$namespace\", job=\"$job\", pod=~\"$pod\", resource=~\"$resource\"} [2m])) by (pod)",
               "interval": "",
               "legendFormat": "{{pod}}",
               "refId": "A"
@@ -2311,7 +1613,8 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green"
+                    "color": "green",
+                    "value": null
                   },
                   {
                     "color": "red",
@@ -2324,12 +1627,12 @@
             "overrides": []
           },
           "gridPos": {
-            "h": 7,
+            "h": 8,
             "w": 16,
             "x": 8,
-            "y": 6
+            "y": 31
           },
-          "id": 403,
+          "id": 414,
           "options": {
             "displayMode": "gradient",
             "minVizHeight": 10,
@@ -2354,7 +1657,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
-              "expr": "sum(rate(request_rest_seconds_sum{ namespace=~\"$namespace\", job=~\"$job\", pod=~\"$pod\", resource=~\"$resource\"} [2m])) by (resource)   / sum(rate(request_rest_seconds_count{ namespace=~\"$namespace\", job=~\"$job\", pod=~\"$pod\", resource=~\"$resource\"} [2m])) by (resource)",
+              "expr": "sum(rate(request_rest_seconds_sum{ namespace=\"$namespace\", job=\"$job\", pod=~\"$pod\", resource=~\"$resource\"} [2m])) by (resource)   / sum(rate(request_rest_seconds_count{ namespace=\"$namespace\", job=\"$job\", pod=~\"$pod\", resource=~\"$resource\"} [2m])) by (resource)",
               "interval": "",
               "legendFormat": "{{resource}}",
               "refId": "A"
@@ -2383,23 +1686,23 @@
             "h": 8,
             "w": 24,
             "x": 0,
-            "y": 13
+            "y": 39
           },
           "hiddenSeries": false,
           "id": 378,
           "legend": {
             "alignAsTable": true,
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "rightSide": true,
+            "avg": true,
+            "current": true,
+            "max": true,
+            "min": true,
+            "rightSide": false,
             "show": true,
             "total": false,
-            "values": false
+            "values": true
           },
           "lines": true,
-          "linewidth": 2,
+          "linewidth": 1,
           "nullPointMode": "null",
           "options": {
             "alertThreshold": true
@@ -2418,9 +1721,7 @@
               "datasource": {
                 "uid": "${DS_PROMETHEUS}"
               },
-              "exemplar": true,
-              "expr": "sum(rate(request_rest_seconds_sum{ namespace=~\"$namespace\", job=~\"$job\", pod=~\"$pod\", resource=~\"$resource\"} [2m]))  by (resource) / sum(rate(request_rest_seconds_count{ namespace=~\"$namespace\", job=~\"$job\", pod=~\"$pod\", resource=~\"$resource\"} [2m])) by (resource) ",
-              "interval": "",
+              "expr": "sum(rate(request_rest_seconds_sum{ namespace=\"$namespace\", job=\"$job\", pod=~\"$pod\", resource=~\"$resource\"} [2m]))  by (resource) / sum(rate(request_rest_seconds_count{ namespace=\"$namespace\", job=\"$job\", pod=~\"$pod\", resource=~\"$resource\"} [2m])) by (resource) ",
               "legendFormat": "{{resource}}",
               "refId": "A"
             }
@@ -2441,14 +1742,14 @@
           },
           "yaxes": [
             {
-              "$$hashKey": "object:279",
+              "$$hashKey": "object:571",
               "format": "s",
               "logBase": 1,
               "min": "0",
               "show": true
             },
             {
-              "$$hashKey": "object:280",
+              "$$hashKey": "object:572",
               "format": "short",
               "logBase": 1,
               "show": true
@@ -2457,987 +1758,6 @@
           "yaxis": {
             "align": false
           }
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": {
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "fieldConfig": {
-            "defaults": {
-              "links": []
-            },
-            "overrides": []
-          },
-          "fill": 0,
-          "fillGradient": 0,
-          "gridPos": {
-            "h": 8,
-            "w": 24,
-            "x": 0,
-            "y": 21
-          },
-          "hiddenSeries": false,
-          "id": 360,
-          "legend": {
-            "alignAsTable": true,
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "rightSide": true,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 2,
-          "nullPointMode": "null",
-          "options": {
-            "alertThreshold": true
-          },
-          "percentage": false,
-          "pluginVersion": "8.5.0",
-          "pointradius": 2,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "datasource": {
-                "uid": "${DS_PROMETHEUS}"
-              },
-              "expr": "histogram_quantile(0.95, sum(rate(request_rest_seconds_bucket{ namespace=~\"$namespace\", job=~\"$job\", pod=~\"$pod\", resource=~\"$resource\" }[2m])) by (resource,le))",
-              "legendFormat": "{{resource}}",
-              "refId": "A"
-            }
-          ],
-          "thresholds": [],
-          "timeRegions": [],
-          "title": "95 Percentile Analysis",
-          "tooltip": {
-            "shared": false,
-            "sort": 2,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "mode": "time",
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "$$hashKey": "object:8199",
-              "format": "s",
-              "logBase": 1,
-              "min": "0",
-              "show": true
-            },
-            {
-              "$$hashKey": "object:8200",
-              "format": "short",
-              "logBase": 1,
-              "show": true
-            }
-          ],
-          "yaxis": {
-            "align": false
-          }
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": {
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "fieldConfig": {
-            "defaults": {
-              "links": []
-            },
-            "overrides": []
-          },
-          "fill": 0,
-          "fillGradient": 0,
-          "gridPos": {
-            "h": 7,
-            "w": 24,
-            "x": 0,
-            "y": 29
-          },
-          "hiddenSeries": false,
-          "id": 366,
-          "legend": {
-            "alignAsTable": true,
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "rightSide": true,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 2,
-          "nullPointMode": "null",
-          "options": {
-            "alertThreshold": true
-          },
-          "percentage": false,
-          "pluginVersion": "8.5.0",
-          "pointradius": 2,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "datasource": {
-                "uid": "${DS_PROMETHEUS}"
-              },
-              "expr": "histogram_quantile(0.99, sum(rate(request_rest_seconds_bucket{ namespace=~\"$namespace\", job=~\"$job\", pod=~\"$pod\", resource=~\"$resource\" }[2m])) by (resource,le))",
-              "legendFormat": "{{resource}}",
-              "refId": "A"
-            }
-          ],
-          "thresholds": [],
-          "timeRegions": [],
-          "title": "99 Percentile Analysis",
-          "tooltip": {
-            "shared": false,
-            "sort": 2,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "mode": "time",
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "$$hashKey": "object:8284",
-              "format": "s",
-              "logBase": 1,
-              "min": "0",
-              "show": true
-            },
-            {
-              "$$hashKey": "object:8285",
-              "format": "short",
-              "logBase": 1,
-              "show": true
-            }
-          ],
-          "yaxis": {
-            "align": false
-          }
-        }
-      ],
-      "targets": [
-        {
-          "datasource": {
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "refId": "A"
-        }
-      ],
-      "title": "REST Calls - Response Times",
-      "type": "row"
-    },
-    {
-      "collapsed": true,
-      "datasource": {
-        "uid": "${DS_PROMETHEUS}"
-      },
-      "gridPos": {
-        "h": 1,
-        "w": 24,
-        "x": 0,
-        "y": 15
-      },
-      "id": 397,
-      "panels": [
-        {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": {
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "description": "",
-          "fieldConfig": {
-            "defaults": {
-              "links": []
-            },
-            "overrides": []
-          },
-          "fill": 0,
-          "fillGradient": 0,
-          "gridPos": {
-            "h": 8,
-            "w": 12,
-            "x": 0,
-            "y": 7
-          },
-          "hiddenSeries": false,
-          "id": 400,
-          "legend": {
-            "alignAsTable": true,
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "rightSide": true,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "nullPointMode": "null",
-          "options": {
-            "alertThreshold": true
-          },
-          "percentage": false,
-          "pluginVersion": "8.5.0",
-          "pointradius": 2,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "datasource": {
-                "uid": "${DS_PROMETHEUS}"
-              },
-              "exemplar": true,
-              "expr": "sum(rate(request_rest_status_total{ namespace=~\"$namespace\", job=~\"$job\", pod=~\"$pod\", resource=~\"$resource\", cache =\"hit\" }[2m]))  by ( resource) > 0\r",
-              "interval": "",
-              "legendFormat": "{{resource}}",
-              "refId": "A"
-            }
-          ],
-          "thresholds": [],
-          "timeRegions": [],
-          "title": "Requests (per second) - Cache Hits",
-          "tooltip": {
-            "shared": false,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "mode": "time",
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "$$hashKey": "object:755",
-              "format": "none",
-              "logBase": 1,
-              "min": "0",
-              "show": true
-            },
-            {
-              "$$hashKey": "object:756",
-              "format": "short",
-              "label": "",
-              "logBase": 1,
-              "show": true
-            }
-          ],
-          "yaxis": {
-            "align": false
-          }
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": {
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "description": "",
-          "fieldConfig": {
-            "defaults": {
-              "links": []
-            },
-            "overrides": []
-          },
-          "fill": 0,
-          "fillGradient": 0,
-          "gridPos": {
-            "h": 8,
-            "w": 12,
-            "x": 12,
-            "y": 7
-          },
-          "hiddenSeries": false,
-          "id": 399,
-          "legend": {
-            "alignAsTable": true,
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "rightSide": true,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "nullPointMode": "null",
-          "options": {
-            "alertThreshold": true
-          },
-          "percentage": false,
-          "pluginVersion": "8.5.0",
-          "pointradius": 2,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "datasource": {
-                "uid": "${DS_PROMETHEUS}"
-              },
-              "exemplar": true,
-              "expr": "sum(rate(request_rest_status_total{ namespace=~\"$namespace\", job=~\"$job\", pod=~\"$pod\", resource=~\"$resource\", cache =\"miss\" }[2m]))  by ( resource) > 0\r",
-              "interval": "",
-              "legendFormat": "{{resource}}",
-              "refId": "A"
-            }
-          ],
-          "thresholds": [],
-          "timeRegions": [],
-          "title": "Requests (per second) - Cache Misses",
-          "tooltip": {
-            "shared": false,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "mode": "time",
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "$$hashKey": "object:755",
-              "format": "none",
-              "logBase": 1,
-              "min": "0",
-              "show": true
-            },
-            {
-              "$$hashKey": "object:756",
-              "format": "short",
-              "label": "",
-              "logBase": 1,
-              "show": true
-            }
-          ],
-          "yaxis": {
-            "align": false
-          }
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": {
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "description": "",
-          "fieldConfig": {
-            "defaults": {
-              "links": []
-            },
-            "overrides": []
-          },
-          "fill": 0,
-          "fillGradient": 0,
-          "gridPos": {
-            "h": 7,
-            "w": 24,
-            "x": 0,
-            "y": 15
-          },
-          "hiddenSeries": false,
-          "id": 405,
-          "legend": {
-            "alignAsTable": true,
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "rightSide": true,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 2,
-          "nullPointMode": "null",
-          "options": {
-            "alertThreshold": true
-          },
-          "percentage": false,
-          "pluginVersion": "8.5.0",
-          "pointradius": 2,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "datasource": {
-                "uid": "${DS_PROMETHEUS}"
-              },
-              "exemplar": true,
-              "expr": "sum(rate(request_rest_status_total{ namespace=~\"$namespace\", job=~\"$job\", pod=~\"$pod\", resource=~\"$resource\", cache =\"hit\" }[2m]))  by ( resource) / sum(rate(request_rest_status_total{ namespace=~\"$namespace\", job=~\"$job\", pod=~\"$pod\", resource=~\"$resource\"}[2m]))  by ( resource)  \r",
-              "interval": "",
-              "legendFormat": "{{resource}}",
-              "refId": "A"
-            }
-          ],
-          "thresholds": [],
-          "timeRegions": [],
-          "title": "Cache Hit Ratios by Request",
-          "tooltip": {
-            "shared": false,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "mode": "time",
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "$$hashKey": "object:755",
-              "format": "percentunit",
-              "logBase": 1,
-              "max": "1",
-              "min": "0",
-              "show": true
-            },
-            {
-              "$$hashKey": "object:756",
-              "format": "short",
-              "label": "",
-              "logBase": 1,
-              "show": true
-            }
-          ],
-          "yaxis": {
-            "align": false
-          }
-        }
-      ],
-      "targets": [
-        {
-          "datasource": {
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "refId": "A"
-        }
-      ],
-      "title": "REST Calls - Caching",
-      "type": "row"
-    },
-    {
-      "collapsed": true,
-      "datasource": {
-        "type": "prometheus",
-        "uid": "prometheus"
-      },
-      "gridPos": {
-        "h": 1,
-        "w": 24,
-        "x": 0,
-        "y": 16
-      },
-      "id": 413,
-      "panels": [
-        {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": {
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "description": "",
-          "fieldConfig": {
-            "defaults": {
-              "links": []
-            },
-            "overrides": []
-          },
-          "fill": 0,
-          "fillGradient": 0,
-          "gridPos": {
-            "h": 8,
-            "w": 12,
-            "x": 0,
-            "y": 8
-          },
-          "hiddenSeries": false,
-          "id": 370,
-          "interval": "",
-          "legend": {
-            "alignAsTable": true,
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "rightSide": true,
-            "show": false,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "nullPointMode": "null",
-          "options": {
-            "alertThreshold": true
-          },
-          "percentage": false,
-          "pluginVersion": "8.5.0",
-          "pointradius": 2,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "datasource": {
-                "uid": "${DS_PROMETHEUS}"
-              },
-              "exemplar": true,
-              "expr": "sum(rate(request_store_status_total{ namespace=\"$namespace\", pod=~\"$env.*ts-app.*\", http_status=~\"$http_status\", resource=~\"$crsresource\"}[2m]))",
-              "hide": false,
-              "interval": "",
-              "legendFormat": "",
-              "refId": "A"
-            }
-          ],
-          "thresholds": [],
-          "timeRegions": [],
-          "title": "Total Calls (per second)",
-          "tooltip": {
-            "shared": false,
-            "sort": 2,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "mode": "time",
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "$$hashKey": "object:60",
-              "format": "short",
-              "logBase": 1,
-              "min": "0",
-              "show": true
-            },
-            {
-              "$$hashKey": "object:61",
-              "format": "short",
-              "logBase": 1,
-              "show": true
-            }
-          ],
-          "yaxis": {
-            "align": false
-          }
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": {
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "description": "",
-          "fieldConfig": {
-            "defaults": {
-              "links": []
-            },
-            "overrides": []
-          },
-          "fill": 0,
-          "fillGradient": 0,
-          "gridPos": {
-            "h": 8,
-            "w": 12,
-            "x": 12,
-            "y": 8
-          },
-          "hiddenSeries": false,
-          "id": 363,
-          "interval": "",
-          "legend": {
-            "alignAsTable": false,
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "rightSide": false,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "nullPointMode": "null",
-          "options": {
-            "alertThreshold": true
-          },
-          "percentage": false,
-          "pluginVersion": "8.5.0",
-          "pointradius": 2,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "datasource": {
-                "uid": "${DS_PROMETHEUS}"
-              },
-              "exemplar": true,
-              "expr": "sum(rate(request_store_status_total{ namespace=~\"$namespace\", pod=~\"$env.*ts-app.*\", resource=~\"$crsresource\",  http_status=~\"$http_status\"}[2m]))  by (http_status)",
-              "hide": false,
-              "interval": "",
-              "legendFormat": "{{http_status}} ",
-              "refId": "A"
-            }
-          ],
-          "thresholds": [],
-          "timeRegions": [],
-          "title": "Call Status (per second)",
-          "tooltip": {
-            "shared": true,
-            "sort": 2,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "mode": "time",
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "$$hashKey": "object:1801",
-              "format": "short",
-              "logBase": 1,
-              "min": "0",
-              "show": true
-            },
-            {
-              "$$hashKey": "object:1802",
-              "format": "short",
-              "logBase": 1,
-              "show": true
-            }
-          ],
-          "yaxis": {
-            "align": false
-          }
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": {
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "fieldConfig": {
-            "defaults": {
-              "links": []
-            },
-            "overrides": []
-          },
-          "fill": 0,
-          "fillGradient": 0,
-          "gridPos": {
-            "h": 7,
-            "w": 24,
-            "x": 0,
-            "y": 16
-          },
-          "hiddenSeries": false,
-          "id": 416,
-          "interval": "",
-          "legend": {
-            "alignAsTable": true,
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "rightSide": true,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "nullPointMode": "null",
-          "options": {
-            "alertThreshold": true
-          },
-          "percentage": false,
-          "pluginVersion": "8.5.0",
-          "pointradius": 2,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "datasource": {
-                "uid": "${DS_PROMETHEUS}"
-              },
-              "exemplar": true,
-              "expr": "sum(rate(request_store_status_total{ namespace=~\"$namespace\", pod=~\"$env.*ts-app.*\", resource=~\"$crsresource\", http_status=~\"$http_status\"}[2m]))  by (resource)",
-              "hide": false,
-              "interval": "",
-              "legendFormat": "{{resource}}",
-              "refId": "A"
-            }
-          ],
-          "thresholds": [],
-          "timeRegions": [],
-          "title": " Total Calls by Resource (per second)",
-          "tooltip": {
-            "shared": false,
-            "sort": 2,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "mode": "time",
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "$$hashKey": "object:1405",
-              "format": "short",
-              "logBase": 1,
-              "min": "0",
-              "show": true
-            },
-            {
-              "$$hashKey": "object:1406",
-              "format": "short",
-              "logBase": 1,
-              "show": true
-            }
-          ],
-          "yaxis": {
-            "align": false
-          }
-        }
-      ],
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "prometheus"
-          },
-          "refId": "A"
-        }
-      ],
-      "title": "Local Store Calls  - Executions",
-      "type": "row"
-    },
-    {
-      "collapsed": true,
-      "datasource": {
-        "type": "prometheus",
-        "uid": "prometheus"
-      },
-      "gridPos": {
-        "h": 1,
-        "w": 24,
-        "x": 0,
-        "y": 17
-      },
-      "id": 411,
-      "panels": [
-        {
-          "datasource": {
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "description": "",
-          "fieldConfig": {
-            "defaults": {
-              "color": {
-                "mode": "thresholds"
-              },
-              "mappings": [],
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "green"
-                  },
-                  {
-                    "color": "red",
-                    "value": 80
-                  }
-                ]
-              },
-              "unit": "s"
-            },
-            "overrides": []
-          },
-          "gridPos": {
-            "h": 7,
-            "w": 8,
-            "x": 0,
-            "y": 9
-          },
-          "id": 421,
-          "options": {
-            "colorMode": "value",
-            "graphMode": "area",
-            "justifyMode": "auto",
-            "orientation": "auto",
-            "reduceOptions": {
-              "calcs": [
-                "mean"
-              ],
-              "fields": "",
-              "values": false
-            },
-            "text": {},
-            "textMode": "auto"
-          },
-          "pluginVersion": "8.5.0",
-          "targets": [
-            {
-              "datasource": {
-                "uid": "${DS_PROMETHEUS}"
-              },
-              "exemplar": true,
-              "expr": "sum(rate(request_store_seconds_sum{ namespace=~\"$namespace\", pod=~\"$env.*ts-app.*\", resource=~\"$crsresource\"} [2m]))  by (pod)  / sum(rate(request_store_seconds_count{ namespace=~\"$namespace\", pod=~\"$env.*ts-app.*\", resource=~\"$crsresource\"} [2m])) by (pod)",
-              "interval": "",
-              "legendFormat": "{{pod}}",
-              "refId": "A"
-            }
-          ],
-          "title": "Total Average Response Time",
-          "type": "stat"
-        },
-        {
-          "datasource": {
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "description": "",
-          "fieldConfig": {
-            "defaults": {
-              "color": {
-                "mode": "thresholds"
-              },
-              "mappings": [],
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "green"
-                  },
-                  {
-                    "color": "red",
-                    "value": 80
-                  }
-                ]
-              },
-              "unit": "s"
-            },
-            "overrides": []
-          },
-          "gridPos": {
-            "h": 7,
-            "w": 16,
-            "x": 8,
-            "y": 9
-          },
-          "id": 422,
-          "options": {
-            "displayMode": "gradient",
-            "minVizHeight": 10,
-            "minVizWidth": 0,
-            "orientation": "horizontal",
-            "reduceOptions": {
-              "calcs": [
-                "mean"
-              ],
-              "fields": "",
-              "values": false
-            },
-            "showUnfilled": true,
-            "text": {
-              "valueSize": 14
-            }
-          },
-          "pluginVersion": "8.5.0",
-          "targets": [
-            {
-              "datasource": {
-                "uid": "${DS_PROMETHEUS}"
-              },
-              "exemplar": true,
-              "expr": "sum(rate(request_store_seconds_sum{ namespace=\"$namespace\", pod=~\"$env.*ts-app.*\", resource=~\"$crsresource\"} [2m])) by (resource)   / sum(rate(request_store_seconds_count{ namespace=\"$namespace\",  pod=~\"$env.*ts-app.*\", resource=~\"$crsresource\"} [2m])) by (resource) > 0",
-              "interval": "",
-              "legendFormat": "{{resource}}",
-              "refId": "A"
-            }
-          ],
-          "title": "Average Response Time",
-          "type": "bargauge"
         },
         {
           "aliasColors": {},
@@ -3459,23 +1779,23 @@
             "h": 9,
             "w": 24,
             "x": 0,
-            "y": 16
+            "y": 47
           },
           "hiddenSeries": false,
-          "id": 423,
+          "id": 360,
           "legend": {
             "alignAsTable": true,
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "rightSide": true,
+            "avg": true,
+            "current": true,
+            "max": true,
+            "min": true,
+            "rightSide": false,
             "show": true,
             "total": false,
-            "values": false
+            "values": true
           },
           "lines": true,
-          "linewidth": 2,
+          "linewidth": 1,
           "nullPointMode": "null",
           "options": {
             "alertThreshold": true
@@ -3494,104 +1814,7 @@
               "datasource": {
                 "uid": "${DS_PROMETHEUS}"
               },
-              "exemplar": true,
-              "expr": "sum(rate(request_store_seconds_sum{ namespace=\"$namespace\", pod=~\"$env.*ts-app.*\", resource=~\"$crsresource\"} [2m]))  by (resource) / sum(rate(request_store_seconds_count{ namespace=~\"$namespace\",  pod=~\"$env.*ts-app.*\", resource=~\"$crsresource\"} [2m])) by (resource) ",
-              "interval": "",
-              "legendFormat": "{{resource}}",
-              "refId": "A"
-            }
-          ],
-          "thresholds": [],
-          "timeRegions": [],
-          "title": "Average Response Times",
-          "tooltip": {
-            "shared": false,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "mode": "time",
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "$$hashKey": "object:279",
-              "format": "s",
-              "logBase": 1,
-              "min": "0",
-              "show": true
-            },
-            {
-              "$$hashKey": "object:280",
-              "format": "short",
-              "logBase": 1,
-              "show": true
-            }
-          ],
-          "yaxis": {
-            "align": false
-          }
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": {
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "fieldConfig": {
-            "defaults": {
-              "links": []
-            },
-            "overrides": []
-          },
-          "fill": 0,
-          "fillGradient": 0,
-          "gridPos": {
-            "h": 8,
-            "w": 24,
-            "x": 0,
-            "y": 25
-          },
-          "hiddenSeries": false,
-          "id": 424,
-          "legend": {
-            "alignAsTable": true,
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "rightSide": true,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 2,
-          "nullPointMode": "null",
-          "options": {
-            "alertThreshold": true
-          },
-          "percentage": false,
-          "pluginVersion": "8.5.0",
-          "pointradius": 2,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "datasource": {
-                "uid": "${DS_PROMETHEUS}"
-              },
-              "exemplar": true,
-              "expr": "histogram_quantile(0.95, sum(rate(request_store_seconds_bucket{ namespace=~\"$namespace\",  pod=~\"$env.*ts-app.*\", resource=~\"$resource\" }[2m])) by (resource,le))",
-              "interval": "",
+              "expr": "histogram_quantile(0.95, sum(rate(request_rest_seconds_bucket{ namespace=\"$namespace\", job=\"$job\", pod=~\"$pod\", resource=~\"$resource\" }[2m])) by (resource,le))",
               "legendFormat": "{{resource}}",
               "refId": "A"
             }
@@ -3612,14 +1835,14 @@
           },
           "yaxes": [
             {
-              "$$hashKey": "object:2149",
+              "$$hashKey": "object:629",
               "format": "s",
               "logBase": 1,
               "min": "0",
               "show": true
             },
             {
-              "$$hashKey": "object:2150",
+              "$$hashKey": "object:630",
               "format": "short",
               "logBase": 1,
               "show": true
@@ -3649,23 +1872,23 @@
             "h": 8,
             "w": 24,
             "x": 0,
-            "y": 33
+            "y": 56
           },
           "hiddenSeries": false,
-          "id": 425,
+          "id": 366,
           "legend": {
             "alignAsTable": true,
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "rightSide": true,
+            "avg": true,
+            "current": true,
+            "max": true,
+            "min": true,
+            "rightSide": false,
             "show": true,
             "total": false,
-            "values": false
+            "values": true
           },
           "lines": true,
-          "linewidth": 2,
+          "linewidth": 1,
           "nullPointMode": "null",
           "options": {
             "alertThreshold": true
@@ -3684,9 +1907,7 @@
               "datasource": {
                 "uid": "${DS_PROMETHEUS}"
               },
-              "exemplar": true,
-              "expr": "histogram_quantile(0.99, sum(rate(request_store_seconds_bucket{ namespace=~\"$namespace\",  pod=~\"$env.*ts-app.*\", resource=~\"$resource\" }[2m])) by (resource,le))",
-              "interval": "",
+              "expr": "histogram_quantile(0.99, sum(rate(request_rest_seconds_bucket{ namespace=\"$namespace\", job=\"$job\", pod=~\"$pod\", resource=~\"$resource\" }[2m])) by (resource,le))",
               "legendFormat": "{{resource}}",
               "refId": "A"
             }
@@ -3707,14 +1928,14 @@
           },
           "yaxes": [
             {
-              "$$hashKey": "object:2227",
+              "$$hashKey": "object:687",
               "format": "s",
               "logBase": 1,
               "min": "0",
               "show": true
             },
             {
-              "$$hashKey": "object:2228",
+              "$$hashKey": "object:688",
               "format": "short",
               "logBase": 1,
               "show": true
@@ -3728,28 +1949,23 @@
       "targets": [
         {
           "datasource": {
-            "type": "prometheus",
-            "uid": "prometheus"
+            "uid": "${DS_PROMETHEUS}"
           },
           "refId": "A"
         }
       ],
-      "title": "Local Store Calls - Response Times",
+      "title": "REST Calls  - Response Times",
       "type": "row"
     },
     {
       "collapsed": true,
-      "datasource": {
-        "type": "prometheus",
-        "uid": "prometheus"
-      },
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 18
+        "y": 14
       },
-      "id": 409,
+      "id": 432,
       "panels": [
         {
           "aliasColors": {},
@@ -3757,9 +1973,9 @@
           "dashLength": 10,
           "dashes": false,
           "datasource": {
+            "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "description": "",
           "fieldConfig": {
             "defaults": {
               "links": []
@@ -3769,23 +1985,23 @@
           "fill": 0,
           "fillGradient": 0,
           "gridPos": {
-            "h": 8,
+            "h": 9,
             "w": 12,
             "x": 0,
-            "y": 10
+            "y": 65
           },
           "hiddenSeries": false,
-          "id": 428,
+          "id": 433,
           "legend": {
-            "alignAsTable": false,
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
+            "alignAsTable": true,
+            "avg": true,
+            "current": true,
+            "max": true,
+            "min": true,
             "rightSide": false,
             "show": true,
             "total": false,
-            "values": false
+            "values": true
           },
           "lines": true,
           "linewidth": 1,
@@ -3807,9 +2023,7 @@
               "datasource": {
                 "uid": "${DS_PROMETHEUS}"
               },
-              "exemplar": true,
-              "expr": "sum(rate(request_store_status_total{ namespace=~\"$namespace\", pod=~\"$env.*ts-app.*\", resource=~\"$crsresource\", cache =\"hit\" }[2m]))  by ( resource) > 0\r",
-              "interval": "",
+              "expr": "sum(rate(request_rest_status_total{ namespace=~\"$namespace\", job=~\"$job\", pod=~\"$pod\", resource=~\"$resource\", cache =\"hit\" }[2m]))  by ( resource) > 0",
               "legendFormat": "{{resource}}",
               "refId": "A"
             }
@@ -3830,16 +2044,624 @@
           },
           "yaxes": [
             {
-              "$$hashKey": "object:755",
-              "format": "none",
+              "$$hashKey": "object:571",
+              "format": "short",
               "logBase": 1,
               "min": "0",
               "show": true
             },
             {
-              "$$hashKey": "object:756",
+              "$$hashKey": "object:572",
               "format": "short",
-              "label": "",
+              "logBase": 1,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "links": []
+            },
+            "overrides": []
+          },
+          "fill": 0,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 9,
+            "w": 12,
+            "x": 12,
+            "y": 65
+          },
+          "hiddenSeries": false,
+          "id": 434,
+          "legend": {
+            "alignAsTable": true,
+            "avg": true,
+            "current": true,
+            "max": true,
+            "min": true,
+            "rightSide": false,
+            "show": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "nullPointMode": "null",
+          "options": {
+            "alertThreshold": true
+          },
+          "percentage": false,
+          "pluginVersion": "8.5.0",
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "datasource": {
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "expr": "sum(rate(request_rest_status_total{ namespace=~\"$namespace\", job=~\"$job\", pod=~\"$pod\", resource=~\"$resource\", cache =\"miss\" }[2m]))  by ( resource) > 0",
+              "legendFormat": "{{resource}}",
+              "refId": "A"
+            }
+          ],
+          "thresholds": [],
+          "timeRegions": [],
+          "title": "Requests (per second) - Cache Misses",
+          "tooltip": {
+            "shared": false,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "mode": "time",
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "$$hashKey": "object:571",
+              "format": "short",
+              "logBase": 1,
+              "min": "0",
+              "show": true
+            },
+            {
+              "$$hashKey": "object:572",
+              "format": "short",
+              "logBase": 1,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "links": []
+            },
+            "overrides": []
+          },
+          "fill": 0,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 8,
+            "w": 24,
+            "x": 0,
+            "y": 74
+          },
+          "hiddenSeries": false,
+          "id": 435,
+          "legend": {
+            "alignAsTable": true,
+            "avg": true,
+            "current": true,
+            "max": true,
+            "min": true,
+            "rightSide": false,
+            "show": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "nullPointMode": "null",
+          "options": {
+            "alertThreshold": true
+          },
+          "percentage": false,
+          "pluginVersion": "8.5.0",
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "datasource": {
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "expr": "sum(rate(request_rest_status_total{ namespace=~\"$namespace\", job=~\"$job\", pod=~\"$pod\", resource=~\"$resource\", cache =\"hit\" }[2m]))  by ( resource) / sum(rate(request_rest_status_total{ namespace=~\"$namespace\", job=~\"$job\", pod=~\"$pod\", resource=~\"$resource\"}[2m]))  by ( resource) ",
+              "legendFormat": "{{resource}}",
+              "refId": "A"
+            }
+          ],
+          "thresholds": [],
+          "timeRegions": [],
+          "title": "Cache Hit Ratios by Request",
+          "tooltip": {
+            "shared": false,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "mode": "time",
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "$$hashKey": "object:571",
+              "format": "percentunit",
+              "logBase": 1,
+              "max": "1",
+              "min": "0",
+              "show": true
+            },
+            {
+              "$$hashKey": "object:572",
+              "format": "short",
+              "logBase": 1,
+              "show": false
+            }
+          ],
+          "yaxis": {
+            "align": false
+          }
+        }
+      ],
+      "title": "Rest Calls - Caching",
+      "type": "row"
+    },
+    {
+      "collapsed": true,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 15
+      },
+      "id": 416,
+      "panels": [
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": {
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "links": []
+            },
+            "overrides": []
+          },
+          "fill": 0,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 9,
+            "w": 12,
+            "x": 0,
+            "y": 83
+          },
+          "hiddenSeries": false,
+          "id": 420,
+          "legend": {
+            "alignAsTable": true,
+            "avg": true,
+            "current": true,
+            "max": true,
+            "min": true,
+            "rightSide": false,
+            "show": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "nullPointMode": "null",
+          "options": {
+            "alertThreshold": true
+          },
+          "percentage": false,
+          "pluginVersion": "8.5.0",
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "datasource": {
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "exemplar": true,
+              "expr": "sum(rate(request_solr_seconds_count{ namespace=\"$namespace\", job=\"$job\", pod=~\"$pod\"} [2m]))  by (processor) ",
+              "interval": "",
+              "legendFormat": "{{processor}}",
+              "refId": "A"
+            }
+          ],
+          "thresholds": [],
+          "timeRegions": [],
+          "title": "Total Calls (per second)",
+          "tooltip": {
+            "shared": false,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "mode": "time",
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "$$hashKey": "object:571",
+              "format": "short",
+              "logBase": 1,
+              "min": "0",
+              "show": true
+            },
+            {
+              "$$hashKey": "object:572",
+              "format": "short",
+              "logBase": 1,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": {
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "links": []
+            },
+            "overrides": []
+          },
+          "fill": 0,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 9,
+            "w": 12,
+            "x": 12,
+            "y": 83
+          },
+          "hiddenSeries": false,
+          "id": 427,
+          "legend": {
+            "alignAsTable": true,
+            "avg": true,
+            "current": true,
+            "max": true,
+            "min": true,
+            "rightSide": false,
+            "show": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "nullPointMode": "null",
+          "options": {
+            "alertThreshold": true
+          },
+          "percentage": false,
+          "pluginVersion": "8.5.0",
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "datasource": {
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "exemplar": true,
+              "expr": "sum(rate(request_solr_seconds_sum{ namespace=\"$namespace\", job=\"$job\", pod=~\"$pod\"} [2m]))  by (processor) / sum(rate(request_solr_seconds_count{ namespace=\"$namespace\", job=\"$job\", pod=~\"$pod\"} [2m])) by (processor)",
+              "interval": "",
+              "legendFormat": "{{processor}}",
+              "refId": "A"
+            }
+          ],
+          "thresholds": [],
+          "timeRegions": [],
+          "title": "Average Response Times",
+          "tooltip": {
+            "shared": false,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "mode": "time",
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "$$hashKey": "object:571",
+              "format": "s",
+              "logBase": 1,
+              "min": "0",
+              "show": true
+            },
+            {
+              "$$hashKey": "object:572",
+              "format": "short",
+              "logBase": 1,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "description": "",
+          "fill": 0,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 6,
+            "w": 24,
+            "x": 0,
+            "y": 92
+          },
+          "hiddenSeries": false,
+          "id": 429,
+          "legend": {
+            "alignAsTable": true,
+            "avg": true,
+            "current": true,
+            "hideEmpty": false,
+            "hideZero": true,
+            "max": true,
+            "min": true,
+            "rightSide": false,
+            "show": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "nullPointMode": "null",
+          "options": {
+            "alertThreshold": true
+          },
+          "percentage": false,
+          "pluginVersion": "8.5.0",
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus"
+              },
+              "exemplar": true,
+              "expr": "sum( service_active_count{ namespace=\"$namespace\", job=\"$job\", pod=~\"$pod\", exported_service=~\"solr:.*\" } ) by ( exported_service ) ",
+              "interval": "",
+              "legendFormat": "{{$exported_service }}",
+              "refId": "A"
+            }
+          ],
+          "thresholds": [],
+          "timeRegions": [],
+          "title": "Active Requests",
+          "tooltip": {
+            "shared": false,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "mode": "time",
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "$$hashKey": "object:613",
+              "format": "short",
+              "logBase": 1,
+              "min": "0",
+              "show": true
+            },
+            {
+              "$$hashKey": "object:614",
+              "format": "short",
+              "logBase": 1,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false
+          }
+        }
+      ],
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "refId": "A"
+        }
+      ],
+      "title": "Solr Queries",
+      "type": "row"
+    },
+    {
+      "collapsed": true,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 16
+      },
+      "id": 418,
+      "panels": [
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "description": "",
+          "fill": 0,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 8,
+            "w": 13,
+            "x": 0,
+            "y": 99
+          },
+          "hiddenSeries": false,
+          "id": 430,
+          "legend": {
+            "alignAsTable": true,
+            "avg": true,
+            "current": true,
+            "max": true,
+            "min": true,
+            "show": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "nullPointMode": "null",
+          "options": {
+            "alertThreshold": true
+          },
+          "percentage": false,
+          "pluginVersion": "8.5.0",
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus"
+              },
+              "exemplar": true,
+              "expr": "sum( service_active_count{ namespace=\"$namespace\", job=\"$job\", pod=~\"$pod\", exported_service !~\"solr:.*\" } ) by ( exported_service )",
+              "interval": "",
+              "legendFormat": "{{exported_service }}",
+              "refId": "A"
+            }
+          ],
+          "thresholds": [],
+          "timeRegions": [],
+          "title": "Active Requests ",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "mode": "time",
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "$$hashKey": "object:613",
+              "format": "short",
+              "logBase": 1,
+              "min": "0",
+              "show": true
+            },
+            {
+              "$$hashKey": "object:614",
+              "format": "short",
               "logBase": 1,
               "show": true
             }
@@ -3867,22 +2689,22 @@
           "fillGradient": 0,
           "gridPos": {
             "h": 8,
-            "w": 12,
-            "x": 12,
-            "y": 10
+            "w": 11,
+            "x": 13,
+            "y": 99
           },
           "hiddenSeries": false,
-          "id": 427,
+          "id": 423,
           "legend": {
-            "alignAsTable": false,
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
+            "alignAsTable": true,
+            "avg": true,
+            "current": true,
+            "max": true,
+            "min": true,
             "rightSide": false,
             "show": true,
             "total": false,
-            "values": false
+            "values": true
           },
           "lines": true,
           "linewidth": 1,
@@ -3905,15 +2727,15 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
-              "expr": "sum(rate(request_store_status_total{ namespace=~\"$namespace\", pod=~\"$env.*ts-app.*\", resource=~\"$crsresource\", cache =\"miss\" }[2m]))  by ( resource) > 0\r",
+              "expr": "sum(rate(request_backend_seconds_count{ namespace=\"$namespace\", job=\"$job\", pod=~\"$pod\"} [2m]))  by (host)",
               "interval": "",
-              "legendFormat": "{{resource}}",
+              "legendFormat": "{{host}}",
               "refId": "A"
             }
           ],
           "thresholds": [],
           "timeRegions": [],
-          "title": "Requests (per second) - Cache Misses",
+          "title": "Total Calls (per second)",
           "tooltip": {
             "shared": false,
             "sort": 0,
@@ -3927,16 +2749,15 @@
           },
           "yaxes": [
             {
-              "$$hashKey": "object:755",
-              "format": "none",
+              "$$hashKey": "object:571",
+              "format": "short",
               "logBase": 1,
               "min": "0",
               "show": true
             },
             {
-              "$$hashKey": "object:756",
+              "$$hashKey": "object:572",
               "format": "short",
-              "label": "",
               "logBase": 1,
               "show": true
             }
@@ -3953,7 +2774,6 @@
           "datasource": {
             "uid": "${DS_PROMETHEUS}"
           },
-          "description": "",
           "fieldConfig": {
             "defaults": {
               "links": []
@@ -3963,26 +2783,26 @@
           "fill": 0,
           "fillGradient": 0,
           "gridPos": {
-            "h": 7,
-            "w": 24,
+            "h": 9,
+            "w": 8,
             "x": 0,
-            "y": 18
+            "y": 107
           },
           "hiddenSeries": false,
-          "id": 429,
+          "id": 426,
           "legend": {
             "alignAsTable": true,
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "rightSide": true,
+            "avg": true,
+            "current": true,
+            "max": true,
+            "min": true,
+            "rightSide": false,
             "show": true,
             "total": false,
-            "values": false
+            "values": true
           },
           "lines": true,
-          "linewidth": 2,
+          "linewidth": 1,
           "nullPointMode": "null",
           "options": {
             "alertThreshold": true
@@ -4002,15 +2822,15 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
-              "expr": "sum(rate(request_store_status_total{ namespace=~\"$namespace\",  pod=~\"$env.*ts-app.*\", resource=~\"$crsresource\", cache =\"hit\" }[2m]))  by ( resource) / sum(rate(request_store_status_total{ namespace=~\"$namespace\", pod=~\"$env.*ts-app.*\", resource=~\"$crsresource\"}[2m]))  by ( resource)  \r",
+              "expr": "sum(rate(request_backend_seconds_sum{ namespace=\"$namespace\", job=\"$job\", pod=~\"$pod\"} [2m]))  by (type,host) / sum(rate(request_backend_seconds_count{ namespace=\"$namespace\", job=\"$job\", pod=~\"$pod\"} [2m])) by (type,host)  AND (sum(rate(request_backend_seconds_count{ namespace=\"$namespace\", job=\"$job\", pod=~\"$pod\"} [2m])) by (type,host) > 0)",
               "interval": "",
-              "legendFormat": "{{resource}}",
+              "legendFormat": "{{type}}-{{host}}",
               "refId": "A"
             }
           ],
           "thresholds": [],
           "timeRegions": [],
-          "title": "Cache Hit Ratios by Request",
+          "title": "Average Response Times",
           "tooltip": {
             "shared": false,
             "sort": 0,
@@ -4024,17 +2844,205 @@
           },
           "yaxes": [
             {
-              "$$hashKey": "object:755",
-              "format": "percentunit",
+              "$$hashKey": "object:571",
+              "format": "s",
               "logBase": 1,
-              "max": "1",
               "min": "0",
               "show": true
             },
             {
-              "$$hashKey": "object:756",
+              "$$hashKey": "object:572",
               "format": "short",
-              "label": "",
+              "logBase": 1,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": {
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "links": []
+            },
+            "overrides": []
+          },
+          "fill": 0,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 9,
+            "w": 8,
+            "x": 8,
+            "y": 107
+          },
+          "hiddenSeries": false,
+          "id": 424,
+          "legend": {
+            "alignAsTable": true,
+            "avg": true,
+            "current": true,
+            "max": true,
+            "min": true,
+            "rightSide": false,
+            "show": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "nullPointMode": "null",
+          "options": {
+            "alertThreshold": true
+          },
+          "percentage": false,
+          "pluginVersion": "8.5.0",
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "datasource": {
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "exemplar": true,
+              "expr": "histogram_quantile(0.95,sum(rate(request_backend_seconds_bucket{ namespace=\"$namespace\", job=\"$job\", pod=~\"$pod\" }[2m])) by (type,host,le))",
+              "interval": "",
+              "legendFormat": "{{type}}-{{host}}",
+              "refId": "A"
+            }
+          ],
+          "thresholds": [],
+          "timeRegions": [],
+          "title": "95th Percentile Analysis",
+          "tooltip": {
+            "shared": false,
+            "sort": 2,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "mode": "time",
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "$$hashKey": "object:629",
+              "format": "s",
+              "logBase": 1,
+              "min": "0",
+              "show": true
+            },
+            {
+              "$$hashKey": "object:630",
+              "format": "short",
+              "logBase": 1,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": {
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "links": []
+            },
+            "overrides": []
+          },
+          "fill": 0,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 9,
+            "w": 8,
+            "x": 16,
+            "y": 107
+          },
+          "hiddenSeries": false,
+          "id": 425,
+          "legend": {
+            "alignAsTable": true,
+            "avg": true,
+            "current": true,
+            "max": true,
+            "min": true,
+            "rightSide": false,
+            "show": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "nullPointMode": "null",
+          "options": {
+            "alertThreshold": true
+          },
+          "percentage": false,
+          "pluginVersion": "8.5.0",
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "datasource": {
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "exemplar": true,
+              "expr": "histogram_quantile(0.99,sum(rate(request_backend_seconds_bucket{ namespace=\"$namespace\", job=\"$job\", pod=~\"$pod\" }[2m])) by (type,host,le))",
+              "interval": "",
+              "legendFormat": "{{type}}-{{host}}",
+              "refId": "A"
+            }
+          ],
+          "thresholds": [],
+          "timeRegions": [],
+          "title": "99 Percentile Analysis",
+          "tooltip": {
+            "shared": false,
+            "sort": 2,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "mode": "time",
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "$$hashKey": "object:687",
+              "format": "s",
+              "logBase": 1,
+              "min": "0",
+              "show": true
+            },
+            {
+              "$$hashKey": "object:688",
+              "format": "short",
               "logBase": 1,
               "show": true
             }
@@ -4053,7 +3061,7 @@
           "refId": "A"
         }
       ],
-      "title": "Local Store Calls - Caching",
+      "title": "Backend Requests",
       "type": "row"
     }
   ],
@@ -4078,6 +3086,7 @@
         "name": "DS_PROMETHEUS",
         "options": [],
         "query": "prometheus",
+        "queryValue": "",
         "refresh": 1,
         "regex": "",
         "skipUrlSync": false,
@@ -4085,15 +3094,16 @@
       },
       {
         "current": {
+          "isNone": true,
           "selected": false,
-          "text": "commerce",
-          "value": "commerce"
+          "text": "None",
+          "value": ""
         },
         "datasource": {
           "type": "prometheus",
           "uid": "${DS_PROMETHEUS}"
         },
-        "definition": "label_values(kube_pod_container_info{container=\"ts-app\"}, namespace)",
+        "definition": "label_values(kube_pod_container_info{container=~\"search-app-slave|search-app-master|search-app-repeater\"}, namespace)",
         "hide": 0,
         "includeAll": false,
         "label": "namespace",
@@ -4101,8 +3111,8 @@
         "name": "namespace",
         "options": [],
         "query": {
-          "query": "label_values(kube_pod_container_info{container=\"ts-app\"}, namespace)",
-          "refId": "Prometheus-namespace-Variable-Query"
+          "query": "label_values(kube_pod_container_info{container=~\"search-app-slave|search-app-master|search-app-repeater\"}, namespace)",
+          "refId": "StandardVariableQuery"
         },
         "refresh": 2,
         "regex": "",
@@ -4115,45 +3125,16 @@
       },
       {
         "current": {
+          "isNone": true,
           "selected": false,
-          "text": "demo9111db2esauth",
-          "value": "demo9111db2esauth"
+          "text": "None",
+          "value": ""
         },
         "datasource": {
           "type": "prometheus",
           "uid": "${DS_PROMETHEUS}"
         },
-        "definition": "label_values(kube_deployment_status_replicas{namespace=\"$namespace\",deployment=~\".*ts-app.*\"} , deployment) ",
-        "hide": 0,
-        "includeAll": false,
-        "label": "env",
-        "multi": false,
-        "name": "env",
-        "options": [],
-        "query": {
-          "query": "label_values(kube_deployment_status_replicas{namespace=\"$namespace\",deployment=~\".*ts-app.*\"} , deployment) ",
-          "refId": "StandardVariableQuery"
-        },
-        "refresh": 2,
-        "regex": "/(.*live|.*auth)/",
-        "skipUrlSync": false,
-        "sort": 0,
-        "tagValuesQuery": "",
-        "tagsQuery": "",
-        "type": "query",
-        "useTags": false
-      },
-      {
-        "current": {
-          "selected": false,
-          "text": "demo9111db2esauthts-app",
-          "value": "demo9111db2esauthts-app"
-        },
-        "datasource": {
-          "type": "prometheus",
-          "uid": "${DS_PROMETHEUS}"
-        },
-        "definition": "label_values(kube_deployment_status_replicas{namespace=\"$namespace\",deployment=~\".*$env.*ts-app.*\"} , deployment) ",
+        "definition": "label_values(kube_deployment_status_replicas{namespace=\"$namespace\",deployment=~\".*livesearch-app.*\"} , deployment) ",
         "hide": 0,
         "includeAll": false,
         "label": "deployment",
@@ -4161,7 +3142,7 @@
         "name": "job",
         "options": [],
         "query": {
-          "query": "label_values(kube_deployment_status_replicas{namespace=\"$namespace\",deployment=~\".*$env.*ts-app.*\"} , deployment) ",
+          "query": "label_values(kube_deployment_status_replicas{namespace=\"$namespace\",deployment=~\".*livesearch-app.*\"} , deployment) ",
           "refId": "StandardVariableQuery"
         },
         "refresh": 2,
@@ -4223,50 +3204,15 @@
           "type": "prometheus",
           "uid": "${DS_PROMETHEUS}"
         },
-        "definition": "label_values(request_rest_seconds_count{namespace=~\"$namespace\",job=\"$job\",pod=~\"$pod\"}, resource)",
+        "definition": "label_values(request_rest_seconds_count{namespace=\"$namespace\",job=\"$job\",pod=~\"$pod\"}, resource)",
         "hide": 0,
         "includeAll": true,
-        "label": "ts-resource",
+        "label": "resource",
         "multi": true,
         "name": "resource",
         "options": [],
         "query": {
-          "query": "label_values(request_rest_seconds_count{namespace=~\"$namespace\",job=\"$job\",pod=~\"$pod\"}, resource)",
-          "refId": "Prometheus-resource-Variable-Query"
-        },
-        "refresh": 2,
-        "regex": "",
-        "skipUrlSync": false,
-        "sort": 0,
-        "tagValuesQuery": "",
-        "tagsQuery": "",
-        "type": "query",
-        "useTags": false
-      },
-      {
-        "allValue": ".*",
-        "current": {
-          "selected": true,
-          "text": [
-            "All"
-          ],
-          "value": [
-            "$__all"
-          ]
-        },
-        "datasource": {
-          "type": "prometheus",
-          "uid": "${DS_PROMETHEUS}"
-        },
-        "definition": "label_values(request_store_seconds_count{namespace=~\"$namespace\",pod=~\"$env.*ts-app.*\"}, resource)",
-        "hide": 0,
-        "includeAll": true,
-        "label": "crs-resource",
-        "multi": true,
-        "name": "crsresource",
-        "options": [],
-        "query": {
-          "query": "label_values(request_store_seconds_count{namespace=~\"$namespace\",pod=~\"$env.*ts-app.*\"}, resource)",
+          "query": "label_values(request_rest_seconds_count{namespace=\"$namespace\",job=\"$job\",pod=~\"$pod\"}, resource)",
           "refId": "StandardVariableQuery"
         },
         "refresh": 2,
@@ -4293,7 +3239,7 @@
           "type": "prometheus",
           "uid": "${DS_PROMETHEUS}"
         },
-        "definition": "label_values(request_rest_status_total{namespace=~\"$namespace\",job=\"$job\",pod=~\"$pod\",resource=~\"$resource\"}, http_status)",
+        "definition": "label_values(request_rest_status_total{namespace=\"$namespace\",job=\"$job\",pod=~\"$pod\",resource=~\"$resource\"}, http_status)",
         "hide": 0,
         "includeAll": true,
         "label": "http_status",
@@ -4301,7 +3247,7 @@
         "name": "http_status",
         "options": [],
         "query": {
-          "query": "label_values(request_rest_status_total{namespace=~\"$namespace\",job=\"$job\",pod=~\"$pod\",resource=~\"$resource\"}, http_status)",
+          "query": "label_values(request_rest_status_total{namespace=\"$namespace\",job=\"$job\",pod=~\"$pod\",resource=~\"$resource\"}, http_status)",
           "refId": "Prometheus-http_status-Variable-Query"
         },
         "refresh": 2,
@@ -4315,29 +3261,28 @@
       },
       {
         "current": {
-          "isNone": true,
           "selected": false,
-          "text": "None",
-          "value": ""
+          "text": "alertmanager",
+          "value": "alertmanager"
         },
         "datasource": {
           "type": "prometheus",
-          "uid": "${DS_PROMETHEUS}"
+          "uid": "prometheus"
         },
-        "definition": "label_values(kube_pod_info, cluster)",
+        "definition": "label_values(kube_pod_container_info{ pod=~\"$pod\" }, container)",
         "hide": 2,
         "includeAll": false,
         "multi": false,
-        "name": "cluster",
+        "name": "container",
         "options": [],
         "query": {
-          "query": "label_values(kube_pod_info, cluster)",
+          "query": "label_values(kube_pod_container_info{ pod=~\"$pod\" }, container)",
           "refId": "StandardVariableQuery"
         },
         "refresh": 2,
         "regex": "",
         "skipUrlSync": false,
-        "sort": 1,
+        "sort": 0,
         "tagValuesQuery": "",
         "tagsQuery": "",
         "type": "query",
@@ -4346,7 +3291,7 @@
     ]
   },
   "time": {
-    "from": "now-3h",
+    "from": "now-1h",
     "to": "now"
   },
   "timepicker": {
@@ -4364,8 +3309,8 @@
     ]
   },
   "timezone": "",
-  "title": "Transaction Servers",
-  "uid": "hcl_ts_app",
-  "version": 9113,
+  "title": "Solr Search Servers",
+  "uid": "hcl_solr_app",
+  "version": 9114,
   "weekStart": ""
 }
