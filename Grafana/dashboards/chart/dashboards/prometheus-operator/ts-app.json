@@ -1380,7 +1380,7 @@
       "collapsed": true,
       "datasource": {
         "type": "prometheus",
-        "uid": "prometheus"
+        "uid": "${DS_PROMETHEUS}"
       },
       "gridPos": {
         "h": 1,
@@ -1896,7 +1896,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "prometheus"
+            "uid": "${DS_PROMETHEUS}"
           },
           "refId": "A"
         }
@@ -2983,7 +2983,7 @@
       "collapsed": true,
       "datasource": {
         "type": "prometheus",
-        "uid": "prometheus"
+        "uid": "${DS_PROMETHEUS}"
       },
       "gridPos": {
         "h": 1,
@@ -3294,7 +3294,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "prometheus"
+            "uid": "${DS_PROMETHEUS}"
           },
           "refId": "A"
         }
@@ -3306,7 +3306,7 @@
       "collapsed": true,
       "datasource": {
         "type": "prometheus",
-        "uid": "prometheus"
+        "uid": "${DS_PROMETHEUS}"
       },
       "gridPos": {
         "h": 1,
@@ -3740,7 +3740,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "prometheus"
+            "uid": "${DS_PROMETHEUS}"
           },
           "refId": "A"
         }
@@ -3752,7 +3752,7 @@
       "collapsed": true,
       "datasource": {
         "type": "prometheus",
-        "uid": "prometheus"
+        "uid": "${DS_PROMETHEUS}"
       },
       "gridPos": {
         "h": 1,
@@ -4059,7 +4059,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "prometheus"
+            "uid": "${DS_PROMETHEUS}"
           },
           "refId": "A"
         }
@@ -4377,6 +4377,6 @@
   "timezone": "",
   "title": "Transaction Servers",
   "uid": "hcl_ts_app",
-  "version": 9114,
+  "version": 9115,
   "weekStart": ""
 }

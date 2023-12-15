@@ -1,33 +1,40 @@
 clusterName: "elasticsearch"
-nodeGroup: "masterpod"
-masterService: "elasticsearch-masterpod"
+nodeGroup: "master"
 replicas: 3
-minimumMasterNodes: 2 
-esJavaOpts: "-Xmx3g -Xms3g"
+image: "us.gcr.io/yourpath/elastic/elasticsearch"
+imageTag: "7.17.10"
 roles:
    master: "true"
    ingest: "false"
    data: "false"
    remote_cluster_client: "false"
    ml: "false"
-imagePullSecrets:
-  - name: comdeploydockerio
-imageTag: "7.12.1"
-ingress: 
-  enabled: false
-nodeSelector: 
-  cloud.google.com/gke-nodepool: elasticpool-live2
+esJavaOpts: "-Xms1536m -Xmx1536m"
 resources:
   requests:
-    cpu: 2
-    memory: "4Gi"
+    cpu: 1
+    memory: "2Gi"
   limits:
     cpu: 2
-    memory: "4Gi"
-volumeClaimTemplate: 
-  accessModes: 
-    - ReadWriteOnce
-  resources: 
-    requests: 
-      storage: 20Gi
-  storageClassName: ssd
+    memory: "2Gi"
+volumeClaimTemplate:
+  accessModes: [ "ReadWriteOnce" ]
+  storageClassName: premium-rwo
+  resources:
+    requests:
+      storage: 5Gi
+esConfig: 
+  elasticsearch.yml: |
+      node.attr.env: master
+      xpack.monitoring.collection.enabled: false
+      ingest.geoip.downloader.enabled: false
+      indices.recovery.max_bytes_per_sec: 192mb
+nodeAffinity:
+  requiredDuringSchedulingIgnoredDuringExecution:
+    nodeSelectorTerms:
+      - matchExpressions:
+        - key: cloud.google.com/gke-nodepool
+          operator: In
+          values:
+            - elastic-auth-pool
+            - elastic-live-pool

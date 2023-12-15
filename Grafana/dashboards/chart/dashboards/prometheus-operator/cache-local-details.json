@@ -24,8 +24,8 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 1021,
-  "iteration": 1687198909934,
+  "id": 403,
+  "iteration": 1695912158186,
   "links": [
     {
       "asDropdown": true,
@@ -213,7 +213,7 @@
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "hclcache_cache_size_current_max{ namespace=~\"$namespace\", job=\"$job\", cachespace=\"$cachespace\", pod=\"$pod\", scope=\"local\" }",
+          "expr": "hclcache_cache_size_mb_current{ namespace=~\"$namespace\", job=\"$job\", cachespace=\"$cachespace\", pod=\"$pod\", scope=\"local\" }",
           "hide": false,
           "interval": "",
           "legendFormat": "{{name}}",
@@ -223,7 +223,7 @@
       ],
       "thresholds": [],
       "timeRegions": [],
-      "title": "Scaled Max Cache Size in Entries (stacked)",
+      "title": "Local Cache Size in mb (stacked)",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -427,8 +427,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "semi-dark-green",
-                    "value": null
+                    "color": "semi-dark-green"
                   }
                 ]
               },
@@ -604,8 +603,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "semi-dark-green",
-                    "value": null
+                    "color": "semi-dark-green"
                   }
                 ]
               },
@@ -762,8 +760,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   }
                 ]
               },
@@ -1150,8 +1147,8 @@
         "allValue": ".*",
         "current": {
           "selected": false,
-          "text": "demoqanifi-app",
-          "value": "demoqanifi-app"
+          "text": "perf-cluster-8qanifi-app",
+          "value": "perf-cluster-8qanifi-app"
         },
         "datasource": {
           "type": "prometheus",
@@ -1180,8 +1177,8 @@
       {
         "current": {
           "selected": false,
-          "text": "demoqaauth",
-          "value": "demoqaauth"
+          "text": "perf_cluster_8qaauth",
+          "value": "perf_cluster_8qaauth"
         },
         "datasource": {
           "type": "prometheus",
@@ -1210,8 +1207,8 @@
         "allValue": ".*",
         "current": {
           "selected": false,
-          "text": "demoqanifi-app-6bd6c7c649-htr2p",
-          "value": "demoqanifi-app-6bd6c7c649-htr2p"
+          "text": "perf-cluster-8qanifi-app-58bf87cfc8-zhbff",
+          "value": "perf-cluster-8qanifi-app-58bf87cfc8-zhbff"
         },
         "datasource": {
           "type": "prometheus",
@@ -1294,6 +1291,6 @@
   "timezone": "",
   "title": "HCL Cache - Local Cache Details",
   "uid": "hcl_cache_local_details",
-  "version": 9114,
+  "version": 9115,
   "weekStart": ""
 }

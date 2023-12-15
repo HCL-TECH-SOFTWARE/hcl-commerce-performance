@@ -29,16 +29,16 @@ Since version 9.1.14 of the HCL Cache, invalidation ids can be prefixed with del
 
 Note that the delay information only applies to local cache entries--remote caches ignore the delay information, and their cache entries are invalidated immediately.
 
-To gradually invalidate all local cache entries with a dependency id of "product:1234" over the next 120 seconds (corresponding remote cache entries are invalidated immediately), specify a specially prefixed invalidation id like this:
+To gradually invalidate all local cache entries with a dependency id of "productId:1234" over the next 120 seconds (corresponding remote cache entries are invalidated immediately), specify a specially prefixed invalidation id like this:
 
 ```
-delay(120000)product:1234
+delay(120000)productId:1234
 ```
 
 Or, to first wait one minute and then gradually invalidate the local cache entries, specify:
 
 ```
-delay(60000,120000)product:1234
+delay(60000,120000)productId:1234
 ```
 
 To gradually invalidate all cache entries currently in the local cache, use the new cache clear invalidation message, like this:
@@ -63,7 +63,7 @@ Starting in version 9.1.14, most local caches can be configured with a new globa
 
 #### Configuring global LRU eviction
 
-> Global LRU eviction is available since 9.1.14. It is disabled by default.
+> Global LRU eviction is available since 9.1.14. Since 9.1.15 it is enabled by default except for specific caches mentioned in the cache_cfg.yaml cache configuration file.
 
 The globalLRUEviction configuration can be used to configure local caches that can tolerate LRU eviction even when they have not reached their maximum capacity.
 ```

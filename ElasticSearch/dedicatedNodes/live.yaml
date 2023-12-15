@@ -1,45 +1,50 @@
 clusterName: "elasticsearch"
-nodeGroup: "livepod"
-masterService: "elasticsearch-masterpod"
-replicas: 3
-esJavaOpts: "-Xmx16g -Xms16g"
+nodeGroup: "live"
+replicas: 2
+image: "us.gcr.io/yourpath/elastic/elasticsearch"
+imageTag: "7.17.10"
 roles:
    master: "false"
    ingest: "true"
    data: "true"
    remote_cluster_client: "true"
    ml: "false"
+esJavaOpts: "-Xmx6g -Xms6g"
+resources:
+  requests:
+    cpu: 4
+    memory: "10Gi"
+  limits:
+    cpu: 6
+    memory: "10Gi"
+volumeClaimTemplate:
+  accessModes: [ "ReadWriteOnce" ]
+  storageClassName: premium-rwo
+  resources:
+    requests:
+      storage: 40Gi
 esConfig: 
   elasticsearch.yml: |
-      indices.fielddata.cache.size: "10%"
-      indices.queries.cache.size: "10%"
-      indices.query.bool.max_clause_count: 10000
-      indices.memory.index_buffer_size: 20%
-      thread_pool.search.queue_size: 10000
-      thread_pool.search.min_queue_size: 100
-      thread_pool.search.max_queue_size: 10000
-      thread_pool.search.auto_queue_frame_size: 10000
-      thread_pool.search.target_response_time: 30s
-      thread_pool.write.queue_size: 10000
       node.attr.env: live
-imagePullSecrets:
-  - name: comdeploydockerio
-imageTag: "7.12.1"
-ingress: 
-  enabled: false
-nodeSelector: 
-  cloud.google.com/gke-nodepool: elasticpool-live
-resources: 
-  limits: 
-    cpu: 7
-    memory: 21.5Gi
-  requests: 
-    cpu: 7
-    memory: 21.5Gi
-volumeClaimTemplate: 
-  accessModes: 
-    - ReadWriteOnce
-  resources: 
-    requests: 
-      storage: 100Gi
-  storageClassName: ssd
+      xpack.monitoring.collection.enabled: false
+      ingest.geoip.downloader.enabled: false
+      indices.recovery.max_bytes_per_sec: 192mb
+      indices.query.bool.max_clause_count: 10000
+nodeAffinity:
+  requiredDuringSchedulingIgnoredDuringExecution:
+    nodeSelectorTerms:
+      - matchExpressions:
+        - key: cloud.google.com/gke-nodepool
+          operator: In
+          values:
+            - elastic-live-pool
+lifecycle:
+  postStart:
+    exec:
+      command:
+        - bash
+        - -c
+        - |
+          #!/bin/bash
+          while [[ "$(curl -s -o /dev/null -w '%{http_code}\n' http://localhost:9200)" != "200" ]]; do sleep 1; done
+          curl -XPUT -H "Content-Type: application/json" --data '{"index_patterns": [".live*"],"settings" : {"index.routing.allocation.require.env": "live","number_of_shards":1,"number_of_replicas":1}}' http://localhost:9200/_template/live-template
