@@ -1,6 +1,6 @@
 # WebSphere Cache Monitor
 
-Although the WebSphere Cache monitor is supported, the HCL Cache provides newer functions and tools that are more suitable for managing a distributed cache system in production.
+While the WebSphere Cache monitor is supported, the HCL Cache provides newer functions and tools that are more suitable for managing a distributed cache system in production.
 
 Consider the following use cases:
 1. *Cache Monitoring*: The HCL Cache integrates with [Prometheus and Grafana](Monitoring.md) for real-time monitoring and alerting. 
@@ -15,3 +15,18 @@ The WebSphere Cache Monitor only displays the contents and statistics of local c
 ![WebSphere Cache Monitor](images/websphere_cache_monitor.jpg)
 
 For installation steps see: [HCL Commerce 9.1 Help - Enabling cache monitoring](https://help.hcltechsw.com/commerce/9.1.0/admin/tasks/tdcenablecache.html).
+
+## Development Environment
+
+When using the Cache Monitor in the Development Environment (Toolkit) you might notice that cache statistics are missing. The Cache Monitor retrieves statistics
+from the HCL Cache, and these statistics are only created if enabled with the `expose_metrics` system property.
+
+To enable metrics collection in a WebSphere Liberty server, add the following line to the corresponding jvm.options file.
+For the Transaction Server, use [Setting generic JVM arguments](https://www.ibm.com/support/pages/setting-generic-jvm-arguments-websphere-application-server)
+documentation.
+
+```
+-Dexpose_metrics=true
+```
+
+

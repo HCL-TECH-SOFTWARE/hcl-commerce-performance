@@ -1,11 +1,16 @@
 # Change Log
 
+## HCL Commerce 9.1.15
+
+- *Improvement*: HC-35888 - Redisson Upgrade 3.24.3
+- *Feature*: HC-33698 - Enable globalLRUEviction by default
+
 ## HCL Commerce 9.1.14
 
 - *Fix*: HC-32480 - HCL Cache: Automatic memory footprint tuning not scaling down due to minSize setting
 - *Improvement*: HC-26579 - Redisson maintenance upgrade - 3.23.2
 - *Feature*: HC-27078 - [Gradual Local Cache Invalidation](Invalidations.md#gradual-local-cache-invalidation)
-- *Feature*: HC-25363 - [Local Cache Least Recently Used Eviction](Invalidations.md#local-cache-least-recently-used-eviction)
+- *Feature*: HC-25363 - [Local Cache Global LRU Eviction](Invalidations.md#local-cache-least-recently-used-eviction)
 
 ## HCL Commerce 9.1.13
 

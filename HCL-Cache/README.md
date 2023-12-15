@@ -23,6 +23,7 @@ The HCL Cache integrates with DynaCache and improves performance and scalability
 - [Configuration](Configuration.md)
   - [Redis Client Configuration](RedisClientConfig.md)
   - [Cache Configurations](CacheConfiguration.md)
+  - [Development Environment](DevelopmentEnvironment.md)
   
 - [Custom Caching](CustomCaching.md)
 

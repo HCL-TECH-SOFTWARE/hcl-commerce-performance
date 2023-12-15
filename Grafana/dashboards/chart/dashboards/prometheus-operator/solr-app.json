@@ -24,8 +24,8 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 1029,
-  "iteration": 1687210068157,
+  "id": 647,
+  "iteration": 1702493687537,
   "links": [
     {
       "asDropdown": true,
@@ -1236,7 +1236,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 13
+            "y": 38
           },
           "hiddenSeries": false,
           "id": 370,
@@ -1334,7 +1334,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 13
+            "y": 38
           },
           "hiddenSeries": false,
           "id": 363,
@@ -1431,7 +1431,7 @@
             "h": 9,
             "w": 24,
             "x": 0,
-            "y": 21
+            "y": 46
           },
           "hiddenSeries": false,
           "id": 362,
@@ -1564,7 +1564,7 @@
             "h": 8,
             "w": 8,
             "x": 0,
-            "y": 31
+            "y": 56
           },
           "id": 412,
           "options": {
@@ -1630,7 +1630,7 @@
             "h": 8,
             "w": 16,
             "x": 8,
-            "y": 31
+            "y": 56
           },
           "id": 414,
           "options": {
@@ -1686,7 +1686,7 @@
             "h": 8,
             "w": 24,
             "x": 0,
-            "y": 39
+            "y": 64
           },
           "hiddenSeries": false,
           "id": 378,
@@ -1779,7 +1779,7 @@
             "h": 9,
             "w": 24,
             "x": 0,
-            "y": 47
+            "y": 72
           },
           "hiddenSeries": false,
           "id": 360,
@@ -1872,7 +1872,7 @@
             "h": 8,
             "w": 24,
             "x": 0,
-            "y": 56
+            "y": 81
           },
           "hiddenSeries": false,
           "id": 366,
@@ -1988,7 +1988,7 @@
             "h": 9,
             "w": 12,
             "x": 0,
-            "y": 65
+            "y": 90
           },
           "hiddenSeries": false,
           "id": 433,
@@ -2082,7 +2082,7 @@
             "h": 9,
             "w": 12,
             "x": 12,
-            "y": 65
+            "y": 90
           },
           "hiddenSeries": false,
           "id": 434,
@@ -2176,7 +2176,7 @@
             "h": 8,
             "w": 24,
             "x": 0,
-            "y": 74
+            "y": 99
           },
           "hiddenSeries": false,
           "id": 435,
@@ -2258,7 +2258,7 @@
       "collapsed": true,
       "datasource": {
         "type": "prometheus",
-        "uid": "prometheus"
+        "uid": "${DS_PROMETHEUS}"
       },
       "gridPos": {
         "h": 1,
@@ -2288,7 +2288,7 @@
             "h": 9,
             "w": 12,
             "x": 0,
-            "y": 83
+            "y": 108
           },
           "hiddenSeries": false,
           "id": 420,
@@ -2383,7 +2383,7 @@
             "h": 9,
             "w": 12,
             "x": 12,
-            "y": 83
+            "y": 108
           },
           "hiddenSeries": false,
           "id": 427,
@@ -2465,7 +2465,7 @@
           "dashes": false,
           "datasource": {
             "type": "prometheus",
-            "uid": "prometheus"
+            "uid": "${DS_PROMETHEUS}"
           },
           "description": "",
           "fill": 0,
@@ -2474,7 +2474,7 @@
             "h": 6,
             "w": 24,
             "x": 0,
-            "y": 92
+            "y": 117
           },
           "hiddenSeries": false,
           "id": 429,
@@ -2510,7 +2510,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "prometheus"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
               "expr": "sum( service_active_count{ namespace=\"$namespace\", job=\"$job\", pod=~\"$pod\", exported_service=~\"solr:.*\" } ) by ( exported_service ) ",
@@ -2557,7 +2557,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "prometheus"
+            "uid": "${DS_PROMETHEUS}"
           },
           "refId": "A"
         }
@@ -2569,7 +2569,7 @@
       "collapsed": true,
       "datasource": {
         "type": "prometheus",
-        "uid": "prometheus"
+        "uid": "${DS_PROMETHEUS}"
       },
       "gridPos": {
         "h": 1,
@@ -2586,7 +2586,7 @@
           "dashes": false,
           "datasource": {
             "type": "prometheus",
-            "uid": "prometheus"
+            "uid": "${DS_PROMETHEUS}"
           },
           "description": "",
           "fill": 0,
@@ -2595,7 +2595,7 @@
             "h": 8,
             "w": 13,
             "x": 0,
-            "y": 99
+            "y": 124
           },
           "hiddenSeries": false,
           "id": 430,
@@ -2628,7 +2628,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "prometheus"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
               "expr": "sum( service_active_count{ namespace=\"$namespace\", job=\"$job\", pod=~\"$pod\", exported_service !~\"solr:.*\" } ) by ( exported_service )",
@@ -2691,7 +2691,7 @@
             "h": 8,
             "w": 11,
             "x": 13,
-            "y": 99
+            "y": 124
           },
           "hiddenSeries": false,
           "id": 423,
@@ -2786,7 +2786,7 @@
             "h": 9,
             "w": 8,
             "x": 0,
-            "y": 107
+            "y": 132
           },
           "hiddenSeries": false,
           "id": 426,
@@ -2881,7 +2881,7 @@
             "h": 9,
             "w": 8,
             "x": 8,
-            "y": 107
+            "y": 132
           },
           "hiddenSeries": false,
           "id": 424,
@@ -2976,7 +2976,7 @@
             "h": 9,
             "w": 8,
             "x": 16,
-            "y": 107
+            "y": 132
           },
           "hiddenSeries": false,
           "id": 425,
@@ -3056,7 +3056,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "prometheus"
+            "uid": "${DS_PROMETHEUS}"
           },
           "refId": "A"
         }
@@ -3267,7 +3267,7 @@
         },
         "datasource": {
           "type": "prometheus",
-          "uid": "prometheus"
+          "uid": "${DS_PROMETHEUS}"
         },
         "definition": "label_values(kube_pod_container_info{ pod=~\"$pod\" }, container)",
         "hide": 2,
@@ -3311,6 +3311,6 @@
   "timezone": "",
   "title": "Solr Search Servers",
   "uid": "hcl_solr_app",
-  "version": 9114,
+  "version": 9115,
   "weekStart": ""
 }

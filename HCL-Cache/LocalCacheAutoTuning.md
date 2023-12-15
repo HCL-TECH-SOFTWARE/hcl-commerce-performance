@@ -8,7 +8,7 @@ Each local cache has a configured maximum number of cache entries it can hold (m
 <distributedMap id="services/cache/SearchQueryDistributedMapCache" cacheProviderName="hcl-cache" memorySizeInEntries="30012" memorySizeInMB="400" lowThreshold="95" highThreshold="98"/>
 ```
 
-By default, HCL local caches automatically increase or decrease their memory footprint according to how much JVM heap is available.  When the JVM heap is less than 65% used, HCL local caches will increase their maximum sizes up to 400% of their configured sizes, and conversely when the JVM heap is more than 75% used, they will decrease their maximum sizes down to 10% of their configured sizes.  In this way, HCL local caches take advantage of available free memory, while helping to avoid low or out of memory conditions.
+By default, HCL local caches automatically increase or decrease their memory footprint according to how much JVM heap is available.  When the JVM heap is less than 65% used, HCL local caches will increase their maximum sizes up to 400% of their configured sizes, and conversely when the JVM heap is more than 70% used, they will decrease their maximum sizes down to 10% of their configured sizes.  In this way, HCL local caches take advantage of available free memory, while helping to avoid low or out of memory conditions.
 
 *Screen capture from the HCL Cache - Local Cache Details dashboard. For more details see [Monitoring](Monitoring.md).*
 ![image](images/local_cache_auto_tuning.jpg)

@@ -1,26 +1,29 @@
 # Change Log
 
+> Starting in 9.1.12, only the Prometheus-operator version of the dashboards is maintained. Updates might be required for use with other versions of prometheus
+
+> Dashboard are compatible with Grafana 8.5 or newer
+
+
+## HCL Commerce 9.1.15
+
+- Ruby: New nextjs-store dashboard
+- NiFi: New configuration and retries panels
+
 ## HCL Commerce 9.1.14
 
-- *Improvement*: minor dashboard updates
-
+- NiFi: Panel for Sum of SQL Execution and SQL Fetch Time Sum Per Minute
 
 ## HCL Commerce 9.1.13
 
-- *Improvement*: HC-26312 - Concurrency Limiters panels in Query-app dashboard
-
+- Query: Concurrency Limiters panels
 
 ## HCL Commerce 9.1.12
 
-- *Improvement*: HC-20121 - New timer for cached JPA operations: access_bean_cache and updated Transaction Servers dashboard
-- *Improvement*: HC-20573 - New timer (request_store) and counter (request_store_status_total) for Web request time. Updated Transaction Servers for local store and CRS dashboard
-- *Improvement*: All existing dashboards have been updated with incremental improvements
-
-#### Notes:
-- Starting in 9.1.12, only the Prometheus-operator version of the dashboards is maintained. Updates might be required for use with other versions of prometheus
-- Dashboards are tested with Grafana 8.5. This, or a higher version is required for use
+- Transaction: New timer for cached JPA operations: access_bean_cache and updated Transaction Servers dashboard
+- Transaction and Remote Store: New timer (request_store) and counter (request_store_status_total) for Web request time
 
 ## HCL Commerce 9.1.11
 
-- *Improvement*: HC-16663 - Implement new Solr Search dashboard and metrics for Solr processors and backend requests
+- Solr: Implement new Solr Search dashboard and metrics for Solr processors and backend requests
 

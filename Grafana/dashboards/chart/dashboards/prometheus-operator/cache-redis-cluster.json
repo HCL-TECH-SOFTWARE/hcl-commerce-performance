@@ -1235,7 +1235,7 @@
       "collapsed": true,
       "datasource": {
         "type": "prometheus",
-        "uid": "prometheus"
+        "uid": "${DS_PROMETHEUS}"
       },
       "gridPos": {
         "h": 1,
@@ -2727,7 +2727,7 @@
         },
         "datasource": {
           "type": "prometheus",
-          "uid": "prometheus"
+          "uid": "${DS_PROMETHEUS}"
         },
         "definition": "label_values(redis_instance_info{namespace=\"$namespace\",role=\"master\"}, pod)",
         "hide": 0,
@@ -2753,7 +2753,7 @@
         },
         "datasource": {
           "type": "prometheus",
-          "uid": "prometheus"
+          "uid": "${DS_PROMETHEUS}"
         },
         "definition": "label_values(redis_instance_info{namespace=\"$namespace\",pod=\"$pod\"}, instance)",
         "hide": 2,
@@ -2805,6 +2805,6 @@
   "timezone": "browser",
   "title": "HCL Cache - Redis Cluster Dashboard",
   "uid": "hcl_cache_redis_cluster",
-  "version": 9114,
+  "version": 9115,
   "weekStart": ""
 }

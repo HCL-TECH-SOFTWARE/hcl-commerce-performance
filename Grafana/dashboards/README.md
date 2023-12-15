@@ -12,7 +12,7 @@ For details on the provided dashboards see the [Commerce Dashboards](CommerceDas
 
 ## Compatibility:
 
-The provided dashboards are tested with Grafana 7.5.5 and 8.1.4
+The provided dashboards are tested with Grafana 8.5
 
 Prometheus v15 renamed the target_label *namespace* from *kubernetes_namespace* to *exported_namespace*.
 To use with Prometheus v15, manually replace *kubernetes_namespace* to *exported_namespace* in the Json files.

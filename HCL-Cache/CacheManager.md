@@ -31,7 +31,7 @@ APIs to clear and invalidate caches:
 | DELETE | /cache/clear | Clear the specified caches | 
 | DELETE | /cache/clearall | Clear all registered caches | 
 | DELETE | /cache/clearRegistry | Registry clear | 
-| DELETE | /cache/publishInvalidation | Issues a invalidation id (PUBSUB) to local caches but doesn't clear the remote cache (for debugging purposes) | 
+| DELETE | /cache/publishInvalidation | Issues an invalidation id (PUBSUB) to local caches but doesn't clear the remote cache (for debugging purposes) | 
 
 **Cache Information REST API:**
 

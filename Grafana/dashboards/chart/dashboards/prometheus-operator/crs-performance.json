@@ -48,7 +48,7 @@
       "collapsed": false,
       "datasource": {
         "type": "prometheus",
-        "uid": "prometheus"
+        "uid": "${DS_PROMETHEUS}"
       },
       "gridPos": {
         "h": 1,
@@ -62,7 +62,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "prometheus"
+            "uid": "${DS_PROMETHEUS}"
           },
           "refId": "A"
         }
@@ -73,7 +73,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "prometheus"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -124,7 +124,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "prometheus"
+            "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": true,
           "expr": "kube_pod_container_info{ namespace=\"$namespace\", pod=~\"$pod\", container=\"crs-app\" }\r\n* on (pod)\r\ngroup_left(workload) namespace_workload_pod:kube_pod_owner:relabel{ namespace=\"$namespace\", workload_type=\"deployment\", workload=\"$job\" } ",
@@ -340,7 +340,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "prometheus"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -391,7 +391,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "prometheus"
+            "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": true,
           "expr": "kube_deployment_status_replicas_available{ namespace=\"$namespace\", deployment=\"$job\"   }  ",
@@ -402,7 +402,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "prometheus"
+            "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": true,
           "expr": "kube_deployment_status_replicas_unavailable{ namespace=\"$namespace\", deployment=\"$job\" }",
@@ -419,7 +419,7 @@
       "collapsed": true,
       "datasource": {
         "type": "prometheus",
-        "uid": "prometheus"
+        "uid": "${DS_PROMETHEUS}"
       },
       "gridPos": {
         "h": 1,
@@ -436,7 +436,7 @@
           "dashes": false,
           "datasource": {
             "type": "prometheus",
-            "uid": "prometheus"
+            "uid": "${DS_PROMETHEUS}"
           },
           "fill": 0,
           "fillGradient": 0,
@@ -477,7 +477,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "prometheus"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
               "expr": "sum(jvm_memory_used_bytes{namespace=\"$namespace\", job=\"$job\", pod=~\"$pod\", area=\"heap\"}) by (pod)",
@@ -489,7 +489,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "prometheus"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
               "expr": "max(sum(jvm_memory_committed_bytes{namespace=\"$namespace\", job=\"$job\", pod=~\"$pod\", area=\"heap\"}) by (pod))",
@@ -502,7 +502,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "prometheus"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
               "expr": "max(sum(jvm_memory_max_bytes{namespace=\"$namespace\", job=\"$job\", pod=~\"$pod\", area=\"heap\"}) by (pod))",
@@ -554,7 +554,7 @@
           "dashes": false,
           "datasource": {
             "type": "prometheus",
-            "uid": "prometheus"
+            "uid": "${DS_PROMETHEUS}"
           },
           "description": "If the CPU Usage is not shown, please check the query in the panel \"CPU Usage\" in the dashboard \"General/Kubernetes/Compute Resources/Pod\" to see whether \"sum_rate\" is used instead of \"sum_irate\".  If it is the case, please update sum_irate in Query A in this panel to sum_rate.",
           "fill": 0,
@@ -596,7 +596,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "prometheus"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
               "expr": "sum(\n    node_namespace_pod_container:container_cpu_usage_seconds_total:sum_irate{namespace=\"$namespace\", pod=~\"$pod\" }\n  * on(pod)\n    group_left(workload) namespace_workload_pod:kube_pod_owner:relabel{ namespace=\"$namespace\", workload_type=\"deployment\", workload=\"$job\" }\n) by (pod)",
@@ -608,7 +608,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "prometheus"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
               "expr": "max( cluster:namespace:pod_cpu:active:kube_pod_container_resource_requests {namespace=\"$namespace\", pod=~\"$pod\"})",
@@ -620,7 +620,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "prometheus"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
               "expr": "max( cluster:namespace:pod_cpu:active:kube_pod_container_resource_limits {namespace=\"$namespace\", pod=~\"$pod\"})",
@@ -761,7 +761,7 @@
           "dashes": false,
           "datasource": {
             "type": "prometheus",
-            "uid": "prometheus"
+            "uid": "${DS_PROMETHEUS}"
           },
           "fill": 0,
           "fillGradient": 0,
@@ -802,7 +802,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "prometheus"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
               "expr": "max(threadpool_maximum_pool_size{ namespace=\"$namespace\", job=\"$job\", pod=~\"$pod\", pool=\"Default_Executor\" })",
@@ -813,7 +813,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "prometheus"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
               "expr": "sum( threadpool_active_pool_size{ namespace=\"$namespace\", job=\"$job\", pod=~\"$pod\",pool=\"Default_Executor\"} ) by ( pod )",
@@ -861,7 +861,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "prometheus"
+            "uid": "${DS_PROMETHEUS}"
           },
           "refId": "A"
         }
@@ -873,7 +873,7 @@
       "collapsed": true,
       "datasource": {
         "type": "prometheus",
-        "uid": "prometheus"
+        "uid": "${DS_PROMETHEUS}"
       },
       "gridPos": {
         "h": 1,
@@ -890,7 +890,7 @@
           "dashes": false,
           "datasource": {
             "type": "prometheus",
-            "uid": "prometheus"
+            "uid": "${DS_PROMETHEUS}"
           },
           "fill": 0,
           "fillGradient": 0,
@@ -931,7 +931,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "prometheus"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
               "expr": "sum( rate(java_logging_messages_total{ namespace=~\"$namespace\", job=~\"$job\", pod=~\"$pod\" }[2m]) ) by ( level )",
@@ -980,7 +980,7 @@
           "dashes": false,
           "datasource": {
             "type": "prometheus",
-            "uid": "prometheus"
+            "uid": "${DS_PROMETHEUS}"
           },
           "fill": 0,
           "fillGradient": 0,
@@ -1021,7 +1021,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "prometheus"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
               "expr": "sum( rate(java_logging_messages_total{ namespace=~\"$namespace\", job=~\"$job\", pod=~\"$pod\", level=~\"SEVERE|WARNING\"}[2m]) ) by ( pod ) ",
@@ -1070,7 +1070,7 @@
           "dashes": false,
           "datasource": {
             "type": "prometheus",
-            "uid": "prometheus"
+            "uid": "${DS_PROMETHEUS}"
           },
           "fill": 0,
           "fillGradient": 0,
@@ -1111,7 +1111,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "prometheus"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
               "expr": "sum( rate(java_logging_messages_total{ namespace=~\"$namespace\", job=~\"$job\", pod=~\"$pod\", level=\"TRACE\"}[2m]) ) by ( pod ) ",
@@ -1158,7 +1158,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "prometheus"
+            "uid": "${DS_PROMETHEUS}"
           },
           "refId": "A"
         }
@@ -1927,7 +1927,7 @@
       "collapsed": true,
       "datasource": {
         "type": "prometheus",
-        "uid": "prometheus"
+        "uid": "${DS_PROMETHEUS}"
       },
       "gridPos": {
         "h": 1,
@@ -1944,7 +1944,7 @@
           "dashes": false,
           "datasource": {
             "type": "prometheus",
-            "uid": "prometheus"
+            "uid": "${DS_PROMETHEUS}"
           },
           "fill": 0,
           "fillGradient": 0,
@@ -1986,7 +1986,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "prometheus"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
               "expr": "sum(rate(request_store_status_total{ namespace=~\"$namespace\", pod=~\"$job.*\", resource=~\"$resource\", cache =\"hit\" }[2m]))  by ( resource) > 0",
@@ -2035,7 +2035,7 @@
           "dashes": false,
           "datasource": {
             "type": "prometheus",
-            "uid": "prometheus"
+            "uid": "${DS_PROMETHEUS}"
           },
           "fill": 0,
           "fillGradient": 0,
@@ -2076,7 +2076,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "prometheus"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
               "expr": "sum(rate(request_store_status_total{ namespace=~\"$namespace\", pod=~\"$job.*\", resource=~\"$resource\", cache =\"miss\" }[2m]))  by ( resource) > 0",
@@ -2125,7 +2125,7 @@
           "dashes": false,
           "datasource": {
             "type": "prometheus",
-            "uid": "prometheus"
+            "uid": "${DS_PROMETHEUS}"
           },
           "fill": 0,
           "fillGradient": 0,
@@ -2167,7 +2167,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "prometheus"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
               "expr": "sum(rate(request_store_status_total{ namespace=~\"$namespace\",  pod=~\"$job.*\", resource=~\"$resource\", cache =\"hit\" }[2m]))  by ( resource) / sum(rate(request_store_status_total{ namespace=~\"$namespace\", pod=~\"$job.*\", resource=~\"$resource\"}[2m]))  by ( resource)  ",
@@ -2215,7 +2215,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "prometheus"
+            "uid": "${DS_PROMETHEUS}"
           },
           "refId": "A"
         }
@@ -2474,6 +2474,6 @@
   "timezone": "",
   "title": "CRS Performance",
   "uid": "hcl_crs_performance",
-  "version": 9114,
+  "version": 9115,
   "weekStart": ""
 }
