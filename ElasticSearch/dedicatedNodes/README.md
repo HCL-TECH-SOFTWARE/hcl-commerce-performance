@@ -29,9 +29,9 @@ The installation is done using Helm:
 ```
 helm repo add elastic https://helm.elastic.co
 kubectl create ns elastic
-helm install es-master elastic/elasticsearch -f master.yaml -n elastic
-helm install es-auth elastic/elasticsearch -f auth.yaml -n elastic
-helm install es-live elastic/elasticsearch -f live.yaml -n elastic
+helm install es-master elastic/elasticsearch -f master.yaml -n elastic --version 7.17.3
+helm install es-auth elastic/elasticsearch -f auth.yaml -n elastic --version 7.17.3
+helm install es-live elastic/elasticsearch -f live.yaml -n elastic --version 7.17.3
 ```
 
 ### Elastic pods
