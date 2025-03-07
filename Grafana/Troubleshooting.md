@@ -73,3 +73,33 @@ If your system uses Prometheus and not Prometheus Operator, then the scraping co
   prometheus.io/path: /monitor/metrics
   prometheus.io/port: "8280"
 ```
+
+
+## Work-Arounds for Known Issues
+
+### Unsupported Content Type
+
+Since Helm Release 0.79.0 / 2024-12-13, Prometheus-operator includes Prometheus v3. Prometheus v3 is more strict concerning the Content-Type header received when scraping, and fails with the following errors if the Content-Type is unrecognized:
+
+```
+Error scraping target: received unsupported Content-Type and no fallback_scrape_protocol specified for target
+Error scraping target: non-compliant scrape target sending blank Content-Type and no fallback_scrape_protocol specified for target
+```
+
+HCL Commerce versions 9.1.17.0 and prior do not correctly set the Content-Type response header on all containers. To avoid the error,
+configure `scrapeFallbackProtocol` with value `PrometheusText0.0.4`.
+
+```
+prometheus:
+  prometheusSpec:
+    ...
+    scrapeClasses:
+    - default: true
+      name: default
+      fallbackScrapeProtocol: PrometheusText0.0.4
+```
+
+If you upgraded from a previous version running Prometheus v2, keep in mind that the `helm upgrade` operation does not update the CRD definitions by default, and the `fallbackScrapeProtocol` will not 
+be available. Ensure the CRDs are up to date. See [Upgradind Chart](https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack#upgrading-chart)
+and [Upgrade](https://github.com/prometheus-community/helm-charts/blob/main/charts/kube-prometheus-stack/UPGRADE.md)
+for details.
